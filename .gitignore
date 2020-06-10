@@ -87,3 +87,10 @@ ExportedObj/
 # Other files to avoid pushing
 /Assets/FirstPersionAIOPack/DemoScene/
 /Assets/FirstPersionAIOPack/DemoScene/*
+/Assets/StoreAssets/FirstPersionAIOPack/DemoScene/*
+/Assets/StoreAssets/InputSystems/Samples/Input System/1.0.0/*
+/Assets/StoreAssets/Photon/PhotonChat/Demos/*
+/Assets/StoreAssets/Photon/PhotonRealtime/Demos/*
+/Assets/StoreAssets/Photon/PhotonRealtime/Demos/*/*
+/Assets/StoreAssets/Photon/PhotonUnityNetworking/Demos/*
+/Assets/StoreAssets/Photon/PhotonVoice/Demos/*

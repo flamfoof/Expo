@@ -56,6 +56,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -70,7 +72,14 @@ public class FirstPersonAIO : MonoBehaviour {
     #region Variables
 
     #region Input Settings
-    //PlayerI
+    PlayerInput playerInput;
+    InputAction actionMove;
+    InputAction actionLook;
+    InputAction actionJump;
+    InputAction actionCrouch;
+    InputAction actionSprint;
+
+    Vector2 XYInput = Vector2.zero;
     #endregion
 
     #region Look Settings
@@ -269,7 +278,19 @@ public class FirstPersonAIO : MonoBehaviour {
 
     }
 
+    
+/*
+
+        
+*/
     private void Start(){
+        playerInput = GetComponent<ExpoPlayerControls>().GetPlayerInput();
+        actionMove = GetComponent<ExpoPlayerControls>().GetActionMove();
+        actionLook = GetComponent<ExpoPlayerControls>().GetActionLook();
+        actionCrouch = playerInput.actions["Crouch"];
+        actionJump = playerInput.actions["Jump"];
+        actionSprint = playerInput.actions["Sprint"];
+
         #region Look Settings - Start
 
         if(autoCrosshair || drawStaminaMeter){
@@ -334,15 +355,17 @@ public class FirstPersonAIO : MonoBehaviour {
     }
 
     private void Update(){
-
         #region Look Settings - Update
 
-            if(enableCameraMovement){
+        if(enableCameraMovement){
+            
             float mouseYInput = 0;
             float mouseXInput = 0;
             float camFOV = playerCamera.fieldOfView;
-            mouseYInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.X ? Input.GetAxis("Mouse Y") : -Input.GetAxis("Mouse Y");
-            mouseXInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.Y ? Input.GetAxis("Mouse X") : -Input.GetAxis("Mouse X");
+            //mouseYInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.X ? Input.GetAxis("Mouse Y") : -Input.GetAxis("Mouse Y");
+            //mouseXInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.Y ? Input.GetAxis("Mouse X") : -Input.GetAxis("Mouse X");
+            mouseYInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.X ?  XYInput.y : -XYInput.y;
+            mouseXInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.Y ? XYInput.x : -XYInput.x;
             if(targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; } else if(targetAngles.y < -180) { targetAngles.y += 360; followAngles.y += 360; }
             if(targetAngles.x > 180) { targetAngles.x -= 360; followAngles.x -= 360; } else if(targetAngles.x < -180) { targetAngles.x += 360; followAngles.x += 360; }
             targetAngles.y += mouseXInput * (mouseSensitivity - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
@@ -356,20 +379,19 @@ public class FirstPersonAIO : MonoBehaviour {
     
         #endregion
 
+
+        #region Movement Settings - Update
         #region  Input Settings - Update
-        if(canHoldJump ? (canJump && Input.GetButton("Jump")) : (Input.GetButtonDown("Jump") && canJump) ){
+        if(canHoldJump ? (canJump && actionJump.triggered) : (actionJump.triggered && canJump) ){
             jumpInput = true;
-        }else if(Input.GetButtonUp("Jump")){jumpInput = false;}
+        }else if(actionJump.triggered){jumpInput = false;}
         
         
         if(_crouchModifiers.useCrouch){
-            if(!_crouchModifiers.toggleCrouch){ isCrouching = _crouchModifiers.crouchOverride || Input.GetKey(_crouchModifiers.crouchKey);}
-            else if(Input.GetKeyDown(_crouchModifiers.crouchKey)){isCrouching = !isCrouching || _crouchModifiers.crouchOverride;}
+            if(!_crouchModifiers.toggleCrouch){ isCrouching = _crouchModifiers.crouchOverride || actionCrouch.triggered;}
+            else if(actionCrouch.triggered){isCrouching = !isCrouching || _crouchModifiers.crouchOverride;}
             }
         #endregion
-
-        #region Movement Settings - Update
-        
         #endregion
 
         #region Headbobbing Settings - Update
@@ -381,12 +403,13 @@ public class FirstPersonAIO : MonoBehaviour {
     private void FixedUpdate(){
 
         #region Look Settings - FixedUpdate
-
+        XYInput = actionLook.ReadValue<Vector2>();
         #endregion
 
         #region Movement Settings - FixedUpdate
 
-        sprintKey = Input.GetButton("Run");
+        //sprintKey = Input.GetButton("Run");
+        sprintKey = actionSprint.triggered;
         if(sprintKey)
         {
             isSprinting = true;
@@ -453,9 +476,9 @@ public class FirstPersonAIO : MonoBehaviour {
                 Debug.DrawRay(transform.position, MoveDirection,Color.red,0,false);
             #endregion
             
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        inputXY = new Vector2(horizontalInput, verticalInput);
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        //float verticalInput = Input.GetAxis("Vertical");
+        inputXY = actionMove.ReadValue<Vector2>();
         if(inputXY.magnitude > 1) { inputXY.Normalize(); }
 
             #region Jump
@@ -797,7 +820,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
     }
 }
-
+#region###################### Editor GUI STUFF BELOW ##################################################
 #if UNITY_EDITOR
     [CustomEditor(typeof(FirstPersonAIO)),InitializeOnLoadAttribute]
     public class FPAIO_Editor : Editor{
@@ -884,6 +907,8 @@ public class FirstPersonAIO : MonoBehaviour {
             customPhysMat = SerT.FindProperty("dynamicFootstep.customPhysMat");
 
         }   
+
+
         public override void OnInspectorGUI(){
             if(t.transform.localScale!=Vector3.one){
                 t.transform.localScale = Vector3.one;
@@ -907,7 +932,7 @@ public class FirstPersonAIO : MonoBehaviour {
             GUI.enabled = t.enableCameraMovement;
             t.verticalRotationRange = EditorGUILayout.Slider(new GUIContent("Vertical Rotation Range","Determines how much range does the camera have to move vertically."),t.verticalRotationRange,90,180);
             t.mouseInputInversion = (FirstPersonAIO.InvertMouseInput)EditorGUILayout.EnumPopup(new GUIContent("Mouse Input Inversion","Determines if mouse input should be inverted, and along which axes"),t.mouseInputInversion);
-            t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 1,15);
+            t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 0.1f,5);
             t.fOVToMouseSensitivity = EditorGUILayout.Slider(new GUIContent("FOV to Mouse Sensitivity","Determines how much the camera's Field Of View will effect the mouse sensitivity. \n\n0 = no effect, 1 = full effect on sensitivity."),t.fOVToMouseSensitivity,0,1);
             t.cameraSmoothing = EditorGUILayout.Slider(new GUIContent("Camera Smoothing","Determines how smooth the camera movement is."),t.cameraSmoothing,1,25);
             t.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Player Camera", "Camera attached to this controller"),t.playerCamera,typeof(Camera),true);
@@ -930,7 +955,7 @@ public class FirstPersonAIO : MonoBehaviour {
             t.walkByDefault = EditorGUILayout.ToggleLeft(new GUIContent("Walk By Default","Determines if the default mode of movement is 'Walk' or 'Srpint'."),t.walkByDefault);
             t.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed","Determines how fast the player walks."),t.walkSpeed,0.1f,10);
             //t.sprintKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Sprint Key","Determines what key needs to be pressed to enter a sprint"));
-            GUILayout.Label("Sprint Key is set by the Input Manager (Run)");
+            GUILayout.Label("Sprint Key is set by the Input System (Sprint)");
             t.sprintSpeed = EditorGUILayout.Slider(new GUIContent("Sprint Speed","Determines how fast the player sprints."),t.sprintSpeed,0.1f,20);
             t.canJump = EditorGUILayout.ToggleLeft(new GUIContent("Can Player Jump?","Determines if the player is allowed to jump."),t.canJump);
             GUI.enabled = t.playerCanMove && t.canJump; EditorGUI.indentLevel++;
@@ -943,7 +968,8 @@ public class FirstPersonAIO : MonoBehaviour {
             if(showCrouchMods){
                 t._crouchModifiers.useCrouch = EditorGUILayout.ToggleLeft(new GUIContent("Enable Crouch","Determines if the player is allowed to crouch."),t._crouchModifiers.useCrouch);
                 GUI.enabled = t.playerCanMove && t._crouchModifiers.useCrouch;
-                t._crouchModifiers.crouchKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Crouch Key","Determines what key needs to be pressed to crouch"),t._crouchModifiers.crouchKey);
+                //t._crouchModifiers.crouchKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Crouch Key","Determines what key needs to be pressed to crouch"),t._crouchModifiers.crouchKey);
+                GUILayout.Label("Crouch Key is set by the Input System (Crouch)");
                 t._crouchModifiers.toggleCrouch = EditorGUILayout.ToggleLeft(new GUIContent("Toggle Crouch?","Determines if the crouching behaviour is on a toggle or momentary basis."),t._crouchModifiers.toggleCrouch);
                 t._crouchModifiers.crouchWalkSpeedMultiplier = EditorGUILayout.Slider(new GUIContent("Crouch Movement Speed Multiplier","Determines how fast the player can move while crouching."),t._crouchModifiers.crouchWalkSpeedMultiplier,0.01f,1.5f);
                 t._crouchModifiers.crouchJumpPowerMultiplier = EditorGUILayout.Slider(new GUIContent("Crouching Jump Power Mult.","Determines how much the player's jumping power is increased or reduced while crouching."),t._crouchModifiers.crouchJumpPowerMultiplier,0,1.5f);
@@ -1516,7 +1542,6 @@ public class FirstPersonAIO : MonoBehaviour {
          }
     }
 #endif
-
-
+#endregion
 
 

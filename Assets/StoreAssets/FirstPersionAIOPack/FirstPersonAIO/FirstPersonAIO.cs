@@ -77,7 +77,7 @@ public class FirstPersonAIO : MonoBehaviour {
     InputAction actionLook;
     InputAction actionJump;
     InputAction actionCrouch;
-    InputAction actionSprint;
+    //InputAction actionSprint;
 
     Vector2 XYInput = Vector2.zero;
     #endregion
@@ -289,7 +289,7 @@ public class FirstPersonAIO : MonoBehaviour {
         actionLook = GetComponent<ExpoPlayerControls>().GetActionLook();
         actionCrouch = playerInput.actions["Crouch"];
         actionJump = playerInput.actions["Jump"];
-        actionSprint = playerInput.actions["Sprint"];
+        //actionSprint = playerInput.actions["Sprint"];
 
         #region Look Settings - Start
 
@@ -409,7 +409,7 @@ public class FirstPersonAIO : MonoBehaviour {
         #region Movement Settings - FixedUpdate
 
         //sprintKey = Input.GetButton("Run");
-        sprintKey = actionSprint.triggered;
+        //sprintKey = actionSprint.triggered;
         if(sprintKey)
         {
             isSprinting = true;

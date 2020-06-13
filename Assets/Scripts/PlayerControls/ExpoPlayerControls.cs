@@ -13,21 +13,13 @@ public class ExpoPlayerControls : MonoBehaviour
     private InputAction actionMove;
     private InputAction actionPrimary;
     private InputAction actionSecondary;
+    private InputAction actionSprint;
     private InputAction.CallbackContext context;
 
     private bool isButtonHeld;
 
     private void Awake() {
-        if (playerInput == null)
-        {
-                 playerInput = GetComponent<PlayerInput>();
-                 actionPrimary = playerInput.actions["Primary"];
-                 actionSecondary = playerInput.actions["Secondary"];
-
-                 //these movement inputs will be referenced from the FirstPersonAIO.cs 
-                 actionLook = playerInput.actions["Look"];
-                 actionMove = playerInput.actions["Move"];
-        }
+        AttachControlsReference();
 
         //binds these buttons to the functions
         //i.e. the primary action button will activate the Interact function
@@ -37,6 +29,9 @@ public class ExpoPlayerControls : MonoBehaviour
         actionSecondary.started += context => CancelButton(context);
         actionSecondary.performed += context => CancelButton(context);
         actionSecondary.canceled += context => CancelButton(context);
+        actionSprint.started += context => SprintButton(context);
+        
+        actionSprint.canceled += context => SprintButton(context);
     }
 
     private void OnEnable() {
@@ -44,6 +39,7 @@ public class ExpoPlayerControls : MonoBehaviour
         actionSecondary.Enable();
         actionLook.Enable();
         actionMove.Enable();
+        actionSprint.Enable();
     }
 
     private void OnDisable() {
@@ -51,10 +47,17 @@ public class ExpoPlayerControls : MonoBehaviour
         actionSecondary.Disable();
         actionLook.Disable();
         actionMove.Disable();
+        actionSprint.Disable();
     }
 
 
     void Update()
+    {
+        AttachControlsReference();
+
+    }
+
+    private void AttachControlsReference()
     {
         // Fail safe, you don't want them losing controls for no reason
         if (playerInput == null)
@@ -66,18 +69,21 @@ public class ExpoPlayerControls : MonoBehaviour
                  //these movement inputs will be referenced from the FirstPersonAIO.cs 
                  actionLook = playerInput.actions["Look"];
                  actionMove = playerInput.actions["Move"];
+                 actionSprint = playerInput.actions["Sprint"];
+                 
         }
-
     }
 
     private void Interact(InputAction.CallbackContext ctx)
     {
-        switch (context.phase)
+        Debug.Log(ctx.phase);
+        switch (ctx.phase)
         {            
+            
             // For when button is held.
             // Time held to perform is managed by the ExpoControls in PlayerInputs folder
             case InputActionPhase.Performed:
-                if (context.interaction is SlowTapInteraction)
+                if (ctx.interaction is SlowTapInteraction)
                 {
                     //StartCoroutine(HoldButtonPress((int)(context.duration)));
                 }
@@ -90,30 +96,27 @@ public class ExpoPlayerControls : MonoBehaviour
                 break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
-                if (context.interaction is SlowTapInteraction)
+                if (ctx.interaction is SlowTapInteraction)
                     isButtonHeld = true;
                 break;
 
             // Checks if button has been let go before the held time (before it's fully performed)
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
-                Debug.Log("Interact button pressed");
-                if(false)
-                {
-
-                }
+                //Debug.Log("Interact button pressed");
+                
                 break;
         }
     }
 
     private void CancelButton(InputAction.CallbackContext ctx)
     {
-        switch (context.phase)
+        switch (ctx.phase)
         {            
             case InputActionPhase.Performed:
-                if (context.interaction is SlowTapInteraction)
+                if (ctx.interaction is SlowTapInteraction)
                 {
-                    //StartCoroutine(HoldButtonPress((int)(context.duration)));
+                    //StartCoroutine(HoldButtonPress((int)(ctx.duration)));
                 }
                 else
                 {
@@ -123,12 +126,31 @@ public class ExpoPlayerControls : MonoBehaviour
                 break;
 
             case InputActionPhase.Started:
-                if (context.interaction is SlowTapInteraction)
+                if (ctx.interaction is SlowTapInteraction)
                     isButtonHeld = true;
                 break;
 
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
+                break;
+        }
+    }
+
+    private void SprintButton(InputAction.CallbackContext ctx)
+    {
+        switch (ctx.phase)
+        {            
+            case InputActionPhase.Performed:
+                Debug.Log("Startiing");
+                break;
+
+            case InputActionPhase.Started:
+                GetComponent<FirstPersonAIO>().sprintKey = true;
+                Debug.Log("sprinting");
+                break;
+
+            case InputActionPhase.Canceled:
+                GetComponent<FirstPersonAIO>().sprintKey = false;
                 break;
         }
     }

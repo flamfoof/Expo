@@ -22,6 +22,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
     private LobbyLauncherUI lobbyUI;
     public string scene = "Exhibit";
     public string username;
+    public string nickname;
     public string password;
     public bool validUsername = false;
     public bool validPassword = false;
@@ -56,11 +57,11 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             "\n Your name must be between 3-12 characters in length";
             return;
         } else {
-            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, username);
-            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerUsername));
-            PhotonNetwork.NickName = username;
+            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, nickname);
+            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
+            PhotonNetwork.NickName = nickname;
         }
-
+        Debug.Log("You have signed in as: " + PhotonNetwork.NickName);
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
 

@@ -30,11 +30,13 @@ public class LobbyLauncherUI : MonoBehaviour
         //sets default previous username if available
         if(UIControls.usernameInput)
         {
-            if(PlayerPrefs.HasKey(playerNickname))
+            if(PlayerPrefs.HasKey(playerNickname) && PlayerPrefs.GetString(playerNickname) != "")
             {
                 defaultName = PlayerPrefs.GetString(playerNickname);
                 UIControls.usernameInput.text = defaultName;
                 lobbyLauncher.validUsername = true;
+                Debug.Log("PHOTON NICK NAME: " + PhotonNetwork.NickName);
+                Debug.Log("PREFS NICK NAME: " + defaultName);
             }
         }
 
@@ -66,7 +68,7 @@ public class LobbyLauncherUI : MonoBehaviour
         } else {
             UIControls.feedbackText.text = "Name is valid";        
             lobbyLauncher.validUsername = true;
-            lobbyLauncher.username = name;
+            lobbyLauncher.nickname = name;
         }
         
     }

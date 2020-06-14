@@ -66,7 +66,7 @@ public class ExpoPlayerControls : MonoBehaviour
                  actionPrimary = playerInput.actions["Primary"];
                  actionSecondary = playerInput.actions["Secondary"];
 
-                 //these movement inputs will be referenced from the FirstPersonAIO.cs 
+                 //some of these inputs will be referenced from the FirstPersonAIO.cs 
                  actionLook = playerInput.actions["Look"];
                  actionMove = playerInput.actions["Move"];
                  actionSprint = playerInput.actions["Sprint"];
@@ -141,12 +141,12 @@ public class ExpoPlayerControls : MonoBehaviour
         switch (ctx.phase)
         {            
             case InputActionPhase.Performed:
-                Debug.Log("Startiing");
+               // Debug.Log("Startiing");
                 break;
 
             case InputActionPhase.Started:
                 GetComponent<FirstPersonAIO>().sprintKey = true;
-                Debug.Log("sprinting");
+                //Debug.Log("sprinting");
                 break;
 
             case InputActionPhase.Canceled:

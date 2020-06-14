@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using YoutubeExtractor;
+//using YoutubeExtractor;
 
 public class YoutubeVidPlayer : MonoBehaviour
 {
     public string url;
     public int quality;
-
+/*
     public async void Run()
     {
         IEnumerable<VideoInfo> videoInfos = await DownloadUrlResolver.GetDownloadUrlsAsync(url);
@@ -21,5 +21,5 @@ public class YoutubeVidPlayer : MonoBehaviour
 
         //GetComponent<MediaPlayerCtrl>().m_strFileName = video.DownloadUrl;
         GetComponent<UnityEngine.Video.VideoPlayer>().url = video.DownloadUrl;
-    }
+    }*/
 }

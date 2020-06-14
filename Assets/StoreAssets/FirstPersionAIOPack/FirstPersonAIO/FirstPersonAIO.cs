@@ -114,7 +114,7 @@ public class FirstPersonAIO : MonoBehaviour {
     public bool playerCanMove = true;
     public bool walkByDefault = true;
     public float walkSpeed = 4f;
-    public bool sprintKey;
+    public bool sprintKey = false;
     public float sprintSpeed = 8f;
     public float jumpPower = 5f;
     public bool canJump = true;

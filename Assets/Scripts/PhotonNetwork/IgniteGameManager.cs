@@ -38,6 +38,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);
+                Debug.Log("local " + spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition);
+                spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
 
 
             } else {

@@ -92,6 +92,7 @@ public class FirstPersonAIO : MonoBehaviour {
     public float cameraSmoothing = 5f;
     public bool lockAndHideCursor = false;
     public Camera playerCamera;
+    public GameObject cameraOrigin;
     public bool enableCameraShake=false;
     internal Vector3 cameraStartingPosition;
     float baseCamFOV;
@@ -324,7 +325,7 @@ public class FirstPersonAIO : MonoBehaviour {
                 StaminaMeter.color = new Color(0,0,0,0);
             }
         }
-        
+
         cameraStartingPosition = playerCamera.transform.localPosition;
         if(lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
         baseCamFOV = playerCamera.fieldOfView;
@@ -937,6 +938,7 @@ public class FirstPersonAIO : MonoBehaviour {
             t.fOVToMouseSensitivity = EditorGUILayout.Slider(new GUIContent("FOV to Mouse Sensitivity","Determines how much the camera's Field Of View will effect the mouse sensitivity. \n\n0 = no effect, 1 = full effect on sensitivity."),t.fOVToMouseSensitivity,0,1);
             t.cameraSmoothing = EditorGUILayout.Slider(new GUIContent("Camera Smoothing","Determines how smooth the camera movement is."),t.cameraSmoothing,1,25);
             t.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Player Camera", "Camera attached to this controller"),t.playerCamera,typeof(Camera),true);
+            t.cameraOrigin = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Camera Origin", "Camera attached to this controller"),t.cameraOrigin,typeof(GameObject),true);
             if(!t.playerCamera){EditorGUILayout.HelpBox("A Camera is required for operation.",MessageType.Error);}
             t.enableCameraShake = EditorGUILayout.ToggleLeft(new GUIContent("Enable Camera Shake?", "Call this Coroutine externally with duration ranging from 0.01 to 1, and a magnitude of 0.01 to 0.5."), t.enableCameraShake);
             t.lockAndHideCursor = EditorGUILayout.ToggleLeft(new GUIContent("Lock and Hide Cursor","For debuging or if You don't plan on having a pause menu or quit button."),t.lockAndHideCursor);

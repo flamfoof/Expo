@@ -911,6 +911,11 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 82147416425015254, guid: bce0aea7c4265c24aad695ccac1c4eaf,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 114643942583524530, guid: bce0aea7c4265c24aad695ccac1c4eaf,
         type: 3}
       propertyPath: youtubeUrls.Array.size

@@ -324,6 +324,7 @@ public class FirstPersonAIO : MonoBehaviour {
                 StaminaMeter.color = new Color(0,0,0,0);
             }
         }
+        
         cameraStartingPosition = playerCamera.transform.localPosition;
         if(lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
         baseCamFOV = playerCamera.fieldOfView;

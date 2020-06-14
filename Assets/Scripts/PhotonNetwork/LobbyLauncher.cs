@@ -57,7 +57,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             return;
         } else {
             PlayerPrefs.SetString(LobbyLauncherUI.playerUsername, username);
-            Debug.Log(username);
+            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerUsername));
             PhotonNetwork.NickName = username;
         }
 

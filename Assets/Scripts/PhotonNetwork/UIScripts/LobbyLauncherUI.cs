@@ -34,6 +34,7 @@ public class LobbyLauncherUI : MonoBehaviour
             {
                 defaultName = PlayerPrefs.GetString(playerNickname);
                 UIControls.usernameInput.text = defaultName;
+                lobbyLauncher.validUsername = true;
             }
         }
 

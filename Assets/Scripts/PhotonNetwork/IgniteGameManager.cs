@@ -35,7 +35,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 
-                PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
+                GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
+                spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
+                spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);
+
+
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
@@ -60,7 +64,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
 
-            //LoadExpo();
+            LoadExpo();
         }
     }
 
@@ -72,7 +76,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
             
-            //LoadExpo();
+            LoadExpo();
         }
     }
 

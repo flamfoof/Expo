@@ -60,7 +60,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
 
-            LoadExpo();
+            //LoadExpo();
         }
     }
 
@@ -72,7 +72,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
             
-            LoadExpo();
+            //LoadExpo();
         }
     }
 

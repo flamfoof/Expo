@@ -56,7 +56,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             "\n Your name must be between 3-12 characters in length";
             return;
         } else {
-            PlayerPrefs.SetString(LobbyLauncherUI.playerUsername, username);
+            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, username);
             Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerUsername));
             PhotonNetwork.NickName = username;
         }

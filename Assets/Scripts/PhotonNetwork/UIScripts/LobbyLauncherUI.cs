@@ -36,6 +36,7 @@ public class LobbyLauncherUI : MonoBehaviour
                 UIControls.usernameInput.text = defaultName;
             }
         }
+
         PhotonNetwork.NickName = defaultName;
 
         //add listener to the username input field
@@ -62,10 +63,11 @@ public class LobbyLauncherUI : MonoBehaviour
             UIControls.feedbackText.text = "Name must be greater than 2 characters, and be 12 or less characters.";
             return;
         } else {
-            UIControls.feedbackText.text = "Name is valid";
+            UIControls.feedbackText.text = "Name is valid";        
             lobbyLauncher.validUsername = true;
             lobbyLauncher.username = name;
         }
+        
     }
 
     public void SubmitLogin()

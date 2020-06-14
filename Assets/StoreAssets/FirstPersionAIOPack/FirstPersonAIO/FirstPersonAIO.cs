@@ -290,7 +290,7 @@ public class FirstPersonAIO : MonoBehaviour {
         actionCrouch = playerInput.actions["Crouch"];
         actionJump = playerInput.actions["Jump"];
         //actionSprint = playerInput.actions["Sprint"];
-
+/*
         #region Look Settings - Start
 
         if(autoCrosshair || drawStaminaMeter){
@@ -343,7 +343,7 @@ public class FirstPersonAIO : MonoBehaviour {
         advanced.highFrictionMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
         advanced.highFrictionMaterial.bounceCombine = PhysicMaterialCombine.Average;
         #endregion
-
+*/
         #region Headbobbing Settings - Start
         
         originalLocalPosition = snapHeadjointToCapsul ? new Vector3(head.localPosition.x, (capsule.height/2)*head.localScale.y ,head.localPosition.z) : head.localPosition;

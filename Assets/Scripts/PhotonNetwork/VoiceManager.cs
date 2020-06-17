@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if !UNITY_WEBGL
 using Photon.Voice;
+#endif
 using Photon.Pun;
 using Photon.Realtime;
 

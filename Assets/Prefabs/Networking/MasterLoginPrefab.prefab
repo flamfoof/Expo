@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4755261321626027977, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
         type: 3}
-      propertyPath: m_SizeDelta.y
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5626946046964902233, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
@@ -273,6 +273,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2857749406423499572}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6076173221586932525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8357032377823449113, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749406423499572}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543fd7f00a9dd964fbf046aa7035751a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7499580031635830188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,6 +347,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5745220642172085151, guid: 3bffea09948a0c440a5ec311459cd658,
+        type: 3}
+      propertyPath: UIControls
+      value: 
+      objectReference: {fileID: 6076173221586932525}
     - target: {fileID: 5745220642172085217, guid: 3bffea09948a0c440a5ec311459cd658,
         type: 3}
       propertyPath: m_Name

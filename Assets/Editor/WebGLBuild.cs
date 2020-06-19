@@ -17,8 +17,10 @@ public class WebGLBuild : MonoBehaviour
     static string photonDir = "Assets/StoreAssets/Photon";
     static string photonVoiceDir = "PhotonVoice";
     static string unphotonVoiceDir = "Exclude~";
+    static string buildName = "WebGLBuild";
     static BuildTarget buildTarget = BuildTarget.WebGL;
     static BuildOptions buildOpt = BuildOptions.Development;
+    static string path;
 
     //Change the number of variables to anything, as long as it
     //increases the length to the scene count, which is currently 3 of them
@@ -40,9 +42,15 @@ public class WebGLBuild : MonoBehaviour
 
     static void CreateBuild()
     {
-        string excludeFolderPath = "";
         UsefulShortcuts.ClearConsole();
-
+        string excludeFolderPath = "";
+        path = EditorUtility.SaveFolderPanel("Choose Location of Built Game", "", "");
+        if(path =="")
+        {
+            Debug.LogError("Didn't select a proper directory");
+            return;
+        }
+/*
         //before build
         if(!Directory.Exists(photonDir + "/" + unphotonVoiceDir) || true)
         {
@@ -61,7 +69,7 @@ public class WebGLBuild : MonoBehaviour
             
         } else {
             Debug.Log("Unable to create folder directory");
-        }
+        }*/
 
         AssetDatabase.Refresh();
         
@@ -78,7 +86,7 @@ public class WebGLBuild : MonoBehaviour
             //undo asset changes            
             Debug.Log("Failed because something unexpected happened. Error: " + e);            
         }
-
+        /*
         //move files back
         Debug.Log("Moving files back");        
         AssetDatabase.Refresh();
@@ -86,7 +94,7 @@ public class WebGLBuild : MonoBehaviour
 
         AssetDatabase.Refresh();
 
-        Debug.Log("Task Finished");        
+        Debug.Log("Task Finished");    */    
     }
 
     static void StartBuild()
@@ -102,20 +110,25 @@ public class WebGLBuild : MonoBehaviour
         }
             
         // Get filename.
-        string path = EditorUtility.SaveFolderPanel("Choose Location of Built Game", "", "");
+        
+        if(path == "")
+        {
+            throw new Exception("Didn't select a correct directory");
+        }
 
         // Gather all the scenes
         for(int i = 0; i < CheckScenes.GetScenes().Count; i++)
         {
             levels[i] = CheckScenes.GetScenes()[i];
         }
-
+        
         // Build player.
-        BuildPipeline.BuildPlayer(levels, path + "/BuiltGame.exe", buildTarget, buildOpt);        
+        BuildPipeline.BuildPlayer(levels, path + "/" + buildName, buildTarget, buildOpt);        
 
         // Run the game (Process class from System.Diagnostics).
         System.Diagnostics.Process proc = new System.Diagnostics.Process();
-        proc.StartInfo.FileName = path + "/BuiltGameWebGL";
+        proc.StartInfo.FileName = path + "/" + buildName;
+        Debug.Log("Build Directory: " + path + "/" + buildName);
         proc.Start();
     }
 

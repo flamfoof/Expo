@@ -80,6 +80,31 @@ public class LobbyLauncherUI : MonoBehaviour
 
     }
 
+    public GenderList.genders CheckGender(Toggle[] genderList)
+    {
+        for(int i = 0; i < genderList.Length; i++)
+        {
+            if(genderList[i].isOn)
+            {
+                switch(genderList[i].GetComponent<GenderList>().gender)
+                {
+                    case GenderList.genders.Male: 
+                        Debug.Log("Male");
+                        return GenderList.genders.Male;
+                    case GenderList.genders.Female: 
+                        Debug.Log("Female");
+                        return GenderList.genders.Female;
+                    case GenderList.genders.NonBinary: 
+                        Debug.Log("Non-binary");
+                        return GenderList.genders.NonBinary;
+                    default: 
+                        break;
+                }
+            }            
+        }
+        return GenderList.genders.None;
+    }
+
     public void PlayLoadAnimation(bool isActive)
     {        
         if(UIControls.loadingIcon)

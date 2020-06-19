@@ -57,9 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adedaf7ca6776947baa32803f6cee4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1743903104223250, guid: 2e62f5703e5f8d2488a5e1bc8433be41,
-    type: 3}
+  scene: MainConference
   username: 
+  nickname: 
   password: 
   validUsername: 0
   validPassword: 0
+  maxPlayerCount: 10

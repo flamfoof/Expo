@@ -29,11 +29,15 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
     private bool isConnecting = false;
     private string gameVersion = "1.0";
     public byte maxPlayerCount = 10;
+    public GameObject playerInfo;
 
     private void Awake() 
     {
         lobbyUI = GetComponent<LobbyLauncherUI>();
-        
+        if(!playerInfo)
+        {
+            playerInfo = GameObject.FindObjectOfType<AssignPlayerAvatar>().gameObject;
+        }
         //syncs the scene when the player loads in to the master scene/room
         PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -67,6 +71,9 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
 
         //play the idle loading animation
         lobbyUI.PlayLoadAnimation(true);
+
+        //set the player info
+        playerInfo.GetComponent<AssignPlayerAvatar>().Gender = lobbyUI.CheckGender(lobbyUI.UIControls.genderList);
 
         if(PhotonNetwork.IsConnected)
         {

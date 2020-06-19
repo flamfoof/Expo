@@ -13,7 +13,7 @@ public class AssignPlayerAvatar : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        selectedPrefab = defaultPrefab;
+        this.selectedPrefab = defaultPrefab;
     }
     public GenderList.genders Gender {
         get{ 
@@ -24,10 +24,10 @@ public class AssignPlayerAvatar : MonoBehaviour
             switch(gender)
             {
                 case GenderList.genders.Male:
-                    selectedPrefab = malePrefab;
+                    this.selectedPrefab = malePrefab;
                     break;
                 case GenderList.genders.Female:
-                    selectedPrefab = femalePrefab;
+                    this.selectedPrefab = femalePrefab;
                     break;
                 case GenderList.genders.NonBinary:
                     break;

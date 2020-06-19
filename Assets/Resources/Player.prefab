@@ -694,6 +694,7 @@ MonoBehaviour:
     type: 3}
   playerCharacterPrefab: {fileID: 0}
   bodyOrigin: {fileID: 755395735079132553}
+  avatarFolder: Avatar/
 --- !u!1 &740732913567411867
 GameObject:
   m_ObjectHideFlags: 0

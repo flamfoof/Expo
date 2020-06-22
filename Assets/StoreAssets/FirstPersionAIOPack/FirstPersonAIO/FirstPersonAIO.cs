@@ -285,9 +285,9 @@ public class FirstPersonAIO : MonoBehaviour {
         
 */
     private void Start(){
-        playerInput = GetComponent<ExpoPlayerControls>().GetPlayerInput();
-        actionMove = GetComponent<ExpoPlayerControls>().GetActionMove();
-        actionLook = GetComponent<ExpoPlayerControls>().GetActionLook();
+        playerInput = GetComponent<UserActions>().GetPlayerInput();
+        actionMove = GetComponent<UserActions>().GetActionMove();
+        actionLook = GetComponent<UserActions>().GetActionLook();
         actionCrouch = playerInput.actions["Crouch"];
         actionJump = playerInput.actions["Jump"];
         //actionSprint = playerInput.actions["Sprint"];

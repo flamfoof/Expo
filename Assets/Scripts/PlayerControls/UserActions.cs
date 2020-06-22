@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-public class ExpoPlayerControls : MonoBehaviour
+public class UserActions : MonoBehaviour
 {
     //All movement, including camera, is in FirstPersionAIO.cs
     //
@@ -23,14 +23,17 @@ public class ExpoPlayerControls : MonoBehaviour
 
         //binds these buttons to the functions
         //i.e. the primary action button will activate the Interact function
+        // Started - When button is pushed
+        // Performed - When the button has been pushed and held for the corresponding amount of 
+        //             time in the controller configs
+        // Canceled - When button has been let go before it has been performed^
         actionPrimary.started += context => Interact(context);
         actionPrimary.performed += context => Interact(context);
         actionPrimary.canceled += context => Interact(context);
         actionSecondary.started += context => CancelButton(context);
         actionSecondary.performed += context => CancelButton(context);
         actionSecondary.canceled += context => CancelButton(context);
-        actionSprint.started += context => SprintButton(context);
-        
+        actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
     }
 
@@ -62,14 +65,14 @@ public class ExpoPlayerControls : MonoBehaviour
         // Fail safe, you don't want them losing controls for no reason
         if (playerInput == null)
         {
-                 playerInput = GetComponent<PlayerInput>();
-                 actionPrimary = playerInput.actions["Primary"];
-                 actionSecondary = playerInput.actions["Secondary"];
+            playerInput = GetComponent<PlayerInput>();
+            actionPrimary = playerInput.actions["Primary"];
+            actionSecondary = playerInput.actions["Secondary"];
 
-                 //some of these inputs will be referenced from the FirstPersonAIO.cs 
-                 actionLook = playerInput.actions["Look"];
-                 actionMove = playerInput.actions["Move"];
-                 actionSprint = playerInput.actions["Sprint"];
+            //some of these inputs will be referenced from the FirstPersonAIO.cs 
+            actionLook = playerInput.actions["Look"];
+            actionMove = playerInput.actions["Move"];
+            actionSprint = playerInput.actions["Sprint"];
                  
         }
     }

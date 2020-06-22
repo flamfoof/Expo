@@ -31,7 +31,7 @@ public class YTVidDistancePlay : MonoBehaviour
 
     void FindPlayer()
     {
-        player = GameObject.FindObjectOfType<ExpoPlayerControls>().gameObject;
+        player = GameObject.FindObjectOfType<UserActions>().gameObject;
     }
 
     #if !UNITY_WEBGL

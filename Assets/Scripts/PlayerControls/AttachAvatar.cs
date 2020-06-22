@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEditor;
 
 public class AttachAvatar : MonoBehaviour
 {
@@ -26,11 +25,13 @@ public class AttachAvatar : MonoBehaviour
 
     private void Start() {
         playerCharacterPrefab = playerInfo.GetComponent<AssignPlayerAvatar>().selectedPrefab;
-        GameObject prefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource<GameObject>(this.playerCharacterPrefab);
+        //Debug.Log(playerCharacterPrefab.name);
+        //GameObject prefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource<GameObject>(this.playerCharacterPrefab);
+        //GameObject prefab = Resources.Load("Avatar/");
         //Debug.Log("Path: " + prefab.name);
         //Debug.Log("Prefab Path: " + AssetDatabase.GetAssetPath(playerCharacterPrefab)); //works
         //Debug.Log("Name of prefab: " + playerCharacterPrefab.name);
-        GameObject playerCharacter = PhotonNetwork.Instantiate(avatarFolder + prefab.name , bodyOrigin.transform.position, Quaternion.identity);
+        GameObject playerCharacter = PhotonNetwork.Instantiate(avatarFolder + playerCharacterPrefab.name , bodyOrigin.transform.position, Quaternion.identity);
         playerCharacter.transform.parent = bodyOrigin.transform;
     }
 }

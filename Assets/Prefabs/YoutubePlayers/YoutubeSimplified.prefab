@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4271034587217290}
   - component: {fileID: 114654752377565014}
+  - component: {fileID: 53234879}
   m_Layer: 0
   m_Name: YoutubeSimplified
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1346264473260158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.13, y: 1.22, z: 13.757843}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4909347236525692}
   - {fileID: 4309986564952000}
@@ -46,9 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fc08d9533c69d4b94db5f4b9e2605b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: https://www.youtube.com/watch?v=iQZobAhgayA
+  url: https://www.youtube.com/watch?v=Fg0c55hiThg
   autoPlay: 1
   fullscreen: 0
+--- !u!114 &53234879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346264473260158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42332d3db5af34f48b509319a1f321cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1444950797781974
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +140,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -135,8 +148,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 0
   DopplerLevel: 1
-  MinDistance: 5
-  MaxDistance: 25
+  MinDistance: 3
+  MaxDistance: 12
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -348,11 +361,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7418089f4181645b5df8f90e317bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  youtubeUrl: https://www.youtube.com/watch?v=uy3KFOykGQc
+  youtubeUrl: 
   videoQuality: 0
   customPlaylist: 0
   autoPlayNextVideo: 0
-  youtubeUrls: []
+  youtubeUrls:
+  - 
+  - 
+  - 
+  - 
+  - 
   startFromSecond: 0
   startFromSecondTime: 20
   autoPlayOnStart: 0

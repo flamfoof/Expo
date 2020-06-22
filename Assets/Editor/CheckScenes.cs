@@ -19,6 +19,18 @@ public class CheckScenes : MonoBehaviour
             Debug.Log("scene " + counter + ": " + scene.path);
             counter++;
         }
+        
+        Debug.Log("The only scenes that are enabled are: ");
+        counter = 0;
+        foreach(UnityEditor.EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+        {
+            if(scene.enabled)
+            {
+                Debug.Log("scene " + counter + ": " + scene.path);
+                counter++;
+            }
+            
+        }
     }
 
     static public List<string> GetScenes()
@@ -27,7 +39,8 @@ public class CheckScenes : MonoBehaviour
 
         foreach(UnityEditor.EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
         {
-            scenes.Add(scene.path);
+            if(scene.enabled)
+                scenes.Add(scene.path);
         }
 
         return scenes;

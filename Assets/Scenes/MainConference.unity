@@ -1510,6 +1510,82 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &95679040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this) (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.8736515
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.720898
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.018604364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70686215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7068619
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.01860431
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 183.01498
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: youtubeUrl
+      value: https://www.youtube.com/watch?v=QCqTn3SbfA0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1001 &96161002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5873,6 +5949,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487625052}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &489830205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3693028
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5045559
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4954022
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.4954022
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.504556
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 88.951004
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: youtubeUrl
+      value: https://www.youtube.com/watch?v=QCqTn3SbfA0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1001 &508581928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7397,6 +7549,78 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &639332364
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.3619901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.60742337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.60742337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.36199024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 118.41501
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: YoutubeUrl
+      value: https://www.youtube.com/watch?v=QCqTn3SbfA0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1001 &659968967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15484,6 +15708,31 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1422133560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
+    type: 3}
+  m_PrefabInstance: {fileID: 968898929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1422133561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422133560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ecc87b000f4fc54e957635cfc87fb73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  distanceThreshold: 6
+  firstFocused: 0
+  isFocusedOnVid: 0
+  currentFocused: {fileID: 0}
+  prevFocused: {fileID: 0}
+  listYT: []
 --- !u!1 &1427601749
 GameObject:
   m_ObjectHideFlags: 0
@@ -16060,6 +16309,92 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44382e4751570ea45a1f2534b0f54906, type: 3}
+--- !u!1001 &1488849821
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this) (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.790476
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.58216053
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.40135896
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.40135893
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5821608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 69.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: youtubeUrl
+      value: https://www.youtube.com/watch?v=8lWpnvNxs8k
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: startFromSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: YoutubeUrl
+      value: https://www.youtube.com/watch?v=8lWpnvNxs8k
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1 &1495940160
 GameObject:
   m_ObjectHideFlags: 0
@@ -17778,6 +18113,77 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1001 &1710660970
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this) (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.332795
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.833447
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1977455
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.67889386
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6788937
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.1977454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 212.47899
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1001 &1714066962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18807,6 +19213,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823880990}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1833281046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_Name
+      value: YoutubeAdvanced(use this) (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.11929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.731083
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.10310466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6995496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6995493
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.10310483
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 163.231
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: youtubeUrl
+      value: https://www.youtube.com/watch?v=8lWpnvNxs8k
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
 --- !u!1 &1846447039
 GameObject:
   m_ObjectHideFlags: 0

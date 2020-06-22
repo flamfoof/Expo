@@ -50,7 +50,7 @@ public class WebGLBuild : MonoBehaviour
             Debug.LogError("Didn't select a proper directory");
             return;
         }
-/*
+
         //before build
         if(!Directory.Exists(photonDir + "/" + unphotonVoiceDir) || true)
         {
@@ -69,7 +69,7 @@ public class WebGLBuild : MonoBehaviour
             
         } else {
             Debug.Log("Unable to create folder directory");
-        }*/
+        }
 
         AssetDatabase.Refresh();
         
@@ -86,7 +86,7 @@ public class WebGLBuild : MonoBehaviour
             //undo asset changes            
             Debug.Log("Failed because something unexpected happened. Error: " + e);            
         }
-        /*
+        
         //move files back
         Debug.Log("Moving files back");        
         AssetDatabase.Refresh();
@@ -94,7 +94,7 @@ public class WebGLBuild : MonoBehaviour
 
         AssetDatabase.Refresh();
 
-        Debug.Log("Task Finished");    */    
+        Debug.Log("Task Finished");    
     }
 
     static void StartBuild()
@@ -123,6 +123,7 @@ public class WebGLBuild : MonoBehaviour
         }
         
         // Build player.
+        PlayerSettings.SetIncrementalIl2CppBuild(BuildTargetGroup.WebGL, true);
         BuildPipeline.BuildPlayer(levels, path + "/" + buildName, buildTarget, buildOpt);        
 
         // Run the game (Process class from System.Diagnostics).

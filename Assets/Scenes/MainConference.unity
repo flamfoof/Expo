@@ -18113,6 +18113,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Voice
       objectReference: {fileID: 0}
+    - target: {fileID: 6776445252089647778, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
 --- !u!1 &1700397760
@@ -19214,6 +19219,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800882335}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1806312737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6715458132555031630, guid: 7173d53e845a5cd45820172cc0777f90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1681540964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1806312738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806312737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3986deb98168394684c41606a9495af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logLevel: 1
+  boostValue: 100
+  amplificationFactor: 100
 --- !u!1 &1823880990
 GameObject:
   m_ObjectHideFlags: 0

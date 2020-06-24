@@ -25,12 +25,14 @@ namespace FrostweepGames.WebGLPUNVoice
 		/// <summary>
 		/// Returns key - value pair : id of a speaker and its object instance
 		/// </summary>
-		public Dictionary<int, Speaker> Speakers { get; private set; }
+		public Dictionary<int, Speaker> speakers;
+		public Dictionary<int, Speaker> Speakers { get{return this.speakers;} private set{speakers = value;} }
 
 		/// <summary>
 		/// Returns info about does speakers muted or not
 		/// </summary>
-		public bool IsSpeakersMuted { get; private set; } = false;
+		public bool isSpeakersMuted = false;
+		public bool IsSpeakersMuted { get{return this.isSpeakersMuted;} private set{isSpeakersMuted = value;} }
 
 		private void Awake()
 		{
@@ -128,7 +130,7 @@ namespace FrostweepGames.WebGLPUNVoice
 					speaker.IsMute = IsSpeakersMuted;
 
 					Speakers.Add(id, speaker);
-
+					Debug.Log("Speaker: " + speaker + "    id: " + id);
 					SpeakersUpdatedEvent?.Invoke();
 				}
 				else

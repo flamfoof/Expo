@@ -182,9 +182,21 @@ public class UIControllerDEMO : MonoBehaviour
     public void PlayAnim()
     {
         walk_active = !walk_active;
+        
 
         foreach(Animator a in CharacterCustomization.animators)
+        {
             a.SetBool("walk", walk_active);
+            if(a.GetFloat("speed") != 5.0f)
+            {
+                a.SetFloat("speed", 5.0f);
+            } else {
+                a.SetFloat("speed", 0f);
+            }
+            
+        }
+            
+
 
         playbutton_text.text = (walk_active) ? "STOP" : "PLAY";
     }

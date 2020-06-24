@@ -61,6 +61,8 @@ namespace FrostweepGames.WebGLPUNVoice
 		/// </summary>
 		public bool recording = false;
 
+		public bool micFound = false;
+
 		/// <summary>
 		/// Initializes buffer, refreshes microphones list and selects first microphone device if exists
 		/// </summary>
@@ -72,7 +74,13 @@ namespace FrostweepGames.WebGLPUNVoice
 
 			if (CustomMicrophone.HasConnectedMicrophoneDevices())
 			{
-				_microphoneDevice = CustomMicrophone.devices[0];
+				Debug.Log("Found microphone");
+				SetMicrophone();
+				
+			} else if(!CustomMicrophone.HasConnectedMicrophoneDevices())
+			{
+				Debug.Log("No microphone found");
+
 			}
 		}
 
@@ -81,7 +89,8 @@ namespace FrostweepGames.WebGLPUNVoice
 		/// </summary>
 		private void Update()
 		{
-			ProcessRecording();
+			if(micFound)
+				ProcessRecording();
 		}
 
 		/// <summary>
@@ -90,7 +99,7 @@ namespace FrostweepGames.WebGLPUNVoice
 		private void ProcessRecording()
 		{
 			int currentPosition = CustomMicrophone.GetPosition(_microphoneDevice);
-
+			
 			if (recording || currentPosition != _lastPosition)
 			{
 				float[] array = new float[Constants.RecordingTime * Constants.SampleRate];
@@ -190,6 +199,11 @@ namespace FrostweepGames.WebGLPUNVoice
 			}
 
 			RecordEndedEvent?.Invoke();
+		}
+		private void SetMicrophone()
+		{
+			_microphoneDevice = CustomMicrophone.devices[0];
+			micFound = true;
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class YTVidDistancePlay : MonoBehaviour
             listYT.Add(vid);
         }
         Invoke("FindPlayer", 1);
-        Debug.Log("started");
+        Debug.Log("started youtube videos");
         #if UNITY_WEBGL
         //Calls an update every 0.5 seconds to this function
         InvokeRepeating("CheckPlayerDistance", 2.0f, 0.8f);
@@ -47,7 +47,7 @@ public class YTVidDistancePlay : MonoBehaviour
     {
         for(int i = 0; i < listYT.Count; i++)
         {
-            Debug.Log("Distance: " + listYT[i].name + Vector3.Distance(listYT[i].transform.position, player.transform.position));
+            //Debug.Log("Distance: " + listYT[i].name + Vector3.Distance(listYT[i].transform.position, player.transform.position));
             if(!currentFocused)
             {
                 if(Vector3.Distance(listYT[i].transform.position, player.transform.position) < distanceThreshold && !firstFocused)
@@ -57,9 +57,9 @@ public class YTVidDistancePlay : MonoBehaviour
                         firstFocused = true;
                         prevFocused = listYT[i].gameObject.GetComponent<YoutubePlayer>();
                         currentFocused = listYT[i].gameObject.GetComponent<YoutubePlayer>();
-                        Debug.Log("Found first video");
+                        //Debug.Log("Found first video");
                     }
-                    Debug.Log("first is : " + listYT[i].name);
+                    //Debug.Log("first is : " + listYT[i].name);
                     isFocusedOnVid = true;
                     currentFocused.enabled = true;
                     return;
@@ -79,7 +79,7 @@ public class YTVidDistancePlay : MonoBehaviour
         //prevFocused.enabled = false;
         //prevFocused.gameObject.GetComponent<UnityEngine.Video.VideoPlayer>().enabled = false;
         prevFocused.Stop();
-        Debug.Log("Stopping: " + prevFocused.name);
+        Debug.Log("Stopping Video: " + prevFocused.name);
         if(currentFocused != focusYT)
             prevFocused = currentFocused;
         currentFocused.Stop();

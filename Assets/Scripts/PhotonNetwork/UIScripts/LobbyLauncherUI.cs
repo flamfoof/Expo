@@ -88,12 +88,18 @@ public class LobbyLauncherUI : MonoBehaviour
             {
                 switch(genderList[i].GetComponent<GenderList>().gender)
                 {
-                    case GenderList.genders.Male: 
+                    case GenderList.genders.Male1: 
                         Debug.Log("Male");
-                        return GenderList.genders.Male;
-                    case GenderList.genders.Female: 
+                        return GenderList.genders.Male1;
+                    case GenderList.genders.Female1: 
                         Debug.Log("Female");
-                        return GenderList.genders.Female;
+                        return GenderList.genders.Female1;
+                    case GenderList.genders.Male2:
+                        Debug.Log("Male");
+                        return GenderList.genders.Male2;
+                    case GenderList.genders.Female2:
+                        Debug.Log("Female");
+                        return GenderList.genders.Female2;
                     case GenderList.genders.NonBinary: 
                         Debug.Log("Non-binary");
                         return GenderList.genders.NonBinary;

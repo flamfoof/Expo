@@ -23,10 +23,16 @@ public class AssignPlayerAvatar : MonoBehaviour
             gender = value; 
             switch(gender)
             {
-                case GenderList.genders.Male:
+                case GenderList.genders.Male1:
                     this.selectedPrefab = malePrefab;
                     break;
-                case GenderList.genders.Female:
+                case GenderList.genders.Female1:
+                    this.selectedPrefab = femalePrefab;
+                    break;
+                case GenderList.genders.Male2:
+                    this.selectedPrefab = malePrefab;
+                    break;
+                case GenderList.genders.Female2:
                     this.selectedPrefab = femalePrefab;
                     break;
                 case GenderList.genders.NonBinary:

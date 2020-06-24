@@ -15,6 +15,9 @@ public class UserActions : MonoBehaviour
     private InputAction actionSecondary;
     private InputAction actionSprint;
     private InputAction.CallbackContext context;
+    private FirstPersonAIO playerController;
+
+    private Animator anim;
 
     private bool isButtonHeld;
 
@@ -58,6 +61,11 @@ public class UserActions : MonoBehaviour
     {
         AttachControlsReference();
 
+        //todo: disable if in VR
+        if(anim)
+        {
+            UpdateAnim();
+        }
     }
 
     private void AttachControlsReference()
@@ -177,5 +185,13 @@ public class UserActions : MonoBehaviour
     public InputAction GetActionLook()
     {
         return this.actionLook;
+    }
+
+    public void UpdateAnim()
+    {
+        //add jump and other interactable animations here
+
+        //Walk Conditions: speed > 1.0f
+        anim.SetFloat("speed", playerController.groundVelocity);        
     }
 }

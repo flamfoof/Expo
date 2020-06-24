@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   malePrefab: {fileID: 2064870090830731533, guid: 6a741060ce98073459704d7c5e500624,
     type: 3}
-  femalePrefab: {fileID: 1026995138138735006, guid: f5b6ec209a3d1564991ff759872d7949,
+  femalePrefab: {fileID: 1815713559427966425, guid: 1383b62f58dd6ea4e877b7531b97ce87,
     type: 3}
-  defaultPrefab: {fileID: 5846140992235787633, guid: 697be2c67b6475e48b59866fc3c06225,
+  defaultPrefab: {fileID: 4776766274204132433, guid: b485809093da89748a2da1f727b3a4dd,
     type: 3}
   selectedPrefab: {fileID: 0}

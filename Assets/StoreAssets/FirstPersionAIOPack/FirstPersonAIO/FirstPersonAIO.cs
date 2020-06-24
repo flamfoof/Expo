@@ -199,6 +199,7 @@ public class FirstPersonAIO : MonoBehaviour {
     private float springPositionThreshold = 0.05f;
     Vector3 previousPosition;
     Vector3 previousVelocity = Vector3.zero;
+    public float groundVelocity = 0.0f;
     Vector3 miscRefVel;
     bool previousGrounded;
     AudioSource audioSource;
@@ -577,6 +578,7 @@ public class FirstPersonAIO : MonoBehaviour {
             Vector3 velChange = vel - previousVelocity;
             previousPosition = fps_Rigidbody.position;
             previousVelocity = vel;
+            groundVelocity = Vector3.Distance(Vector3.zero, new Vector3(previousVelocity.x, 0.0f, previousVelocity.z));
             springVelocity -= velChange.y;
             springVelocity -= springPosition * springElastic;
             springVelocity *= springDampen;

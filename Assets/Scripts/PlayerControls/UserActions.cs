@@ -17,12 +17,15 @@ public class UserActions : MonoBehaviour
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
 
-    private Animator anim;
+    public Animator anim;
+
+    GameObject bodyOrigin;
 
     private bool isButtonHeld;
 
     private void Awake() {
         AttachControlsReference();
+        playerController = GetComponent<FirstPersonAIO>();
 
         //binds these buttons to the functions
         //i.e. the primary action button will activate the Interact function
@@ -38,6 +41,11 @@ public class UserActions : MonoBehaviour
         actionSecondary.canceled += context => CancelButton(context);
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
+    }
+
+    private void Start() {
+        Debug.Log("Attaching anim");
+        Invoke("AttachAnim", 1.0f);
     }
 
     private void OnEnable() {
@@ -185,6 +193,15 @@ public class UserActions : MonoBehaviour
     public InputAction GetActionLook()
     {
         return this.actionLook;
+    }
+
+    public void AttachAnim()
+    {
+        anim = GetComponent<AttachAvatar>().bodyOrigin.transform.GetComponentInChildren<Animator>();
+        if(anim)
+        {
+            //Debug.Log("Found the thing: " + anim.gameObject.name);
+        }
     }
 
     public void UpdateAnim()

@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e99927cd6b0de74e838f342c680c73d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!114 &114051214696948948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +541,7 @@ MonoBehaviour:
   headbobHeight: 0.5
   headbobSideMovement: 0.5
   jumpLandIntensity: 3
+  groundVelocity: 0
   enableAudioSFX: 1
   Volume: 5
   jumpSound: {fileID: 0}
@@ -690,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970a5e5913a687b478d90e9a73edc339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultPrefab: {fileID: 5846140992235787633, guid: 697be2c67b6475e48b59866fc3c06225,
+  defaultPrefab: {fileID: 4776766274204132433, guid: b485809093da89748a2da1f727b3a4dd,
     type: 3}
   playerCharacterPrefab: {fileID: 0}
   bodyOrigin: {fileID: 755395735079132553}

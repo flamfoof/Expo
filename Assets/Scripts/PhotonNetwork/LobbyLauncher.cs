@@ -55,16 +55,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
 
         isConnecting = true;
 
-        if(!validUsername)
-        {
-            lobbyUI.UIControls.feedbackText.text = "Invalid username" + 
-            "\n Your name must be between 3-12 characters in length";
-            return;
-        } else {
-            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, nickname);
-            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
-            PhotonNetwork.NickName = nickname;
-        }
+        CheckIfValidUsername();
+
         Debug.Log("You have signed in as: " + PhotonNetwork.NickName);
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
@@ -149,6 +141,21 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             //call the server to load the scene
             
             PhotonNetwork.LoadLevel(scene);
+        }
+    }
+
+    public bool CheckIfValidUsername()
+    {
+        if(!validUsername)
+        {
+            lobbyUI.UIControls.feedbackText.text = "Invalid username" + 
+            "\n Your name must be between 2-12 characters in length";
+            return false;
+        } else {
+            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, nickname);
+            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
+            PhotonNetwork.NickName = nickname;
+            return true;
         }
     }
 }

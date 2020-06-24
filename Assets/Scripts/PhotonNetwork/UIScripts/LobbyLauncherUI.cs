@@ -49,7 +49,6 @@ public class LobbyLauncherUI : MonoBehaviour
 
         //Add listener to button to start connecting to server
         UIControls.submitLoginButton.onClick.AddListener(delegate {lobbyLauncher.Connect();});
-
     }
 
     public void SetPlayerNickname(string name)
@@ -118,7 +117,15 @@ public class LobbyLauncherUI : MonoBehaviour
             UIControls.loadingIcon.SetActive(isActive);
         } else {
             Debug.LogWarning("Unable to play load animation. Loading Icon is missing");
+        }        
+    }
+
+    public void CheckUsername()
+    {
+        if(lobbyLauncher.CheckIfValidUsername())
+        {
+            UIControls.mainLogin.SetActive(false);
+            UIControls.characterSelect.SetActive(true);
         }
-        
     }
 }

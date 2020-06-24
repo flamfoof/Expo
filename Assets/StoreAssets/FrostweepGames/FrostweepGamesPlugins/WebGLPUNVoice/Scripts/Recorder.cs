@@ -99,7 +99,7 @@ namespace FrostweepGames.WebGLPUNVoice
 		private void ProcessRecording()
 		{
 			int currentPosition = CustomMicrophone.GetPosition(_microphoneDevice);
-			
+
 			if (recording || currentPosition != _lastPosition)
 			{
 				float[] array = new float[Constants.RecordingTime * Constants.SampleRate];
@@ -112,12 +112,29 @@ namespace FrostweepGames.WebGLPUNVoice
 
 					if (lastPosition > _lastPosition)
 					{
-						_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
-						_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
+						//Debug.Log("LP: " + lastPosition + "      diff: " + (array.Length - lastPosition) + "     array size: " + array.Count());
+						//todo: fix this part up, it didn't have the if condition
+						if(array.Length - lastPosition > 0)
+						{
+							_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
+							_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
+						}
+							
 					}
 					else
 					{
-						_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
+						//Debug.Log("LP: " + lastPosition + "      diff: " + (_lastPosition - lastPosition) + "     array size: " + array.Count());
+						// LP + diff is bigger than total array size
+						try {
+							_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
+						}
+						catch(Exception e)
+						{
+							//Debug.Log("Error has occurred when adding to buffer range: " + e);
+							
+						}
+						//Debug.Log("Buffer: " + _buffer.Count() + "    ");
+						
 					}
 				}
 

@@ -2804,7 +2804,7 @@ GameObject:
   - component: {fileID: 92600495466241297}
   - component: {fileID: 3230757044178343740}
   m_Layer: 0
-  m_Name: male_suite7_lod0
+  m_Name: male_suite7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -542,7 +542,7 @@ MonoBehaviour:
   headbobSideMovement: 0.5
   jumpLandIntensity: 3
   groundVelocity: 0
-  enableAudioSFX: 1
+  enableAudioSFX: 0
   Volume: 5
   jumpSound: {fileID: 0}
   landSound: {fileID: 0}

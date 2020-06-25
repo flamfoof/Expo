@@ -39,7 +39,7 @@ public class AttachAvatar : MonoBehaviour
         foreach(AssignPlayerAvatar assign in GameObject.FindObjectsOfType(typeof(AssignPlayerAvatar)))
         {
             Debug.Log("PN: " + PhotonNetwork.NickName + "   player ID: " + assign.GetPlayerID());
-            if(PhotonNetwork.NickName == assign.GetPlayerID())
+            if(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname) == assign.GetPlayerID())
             {
                 Debug.Log("Setting anims");
                 assigner = assign;   

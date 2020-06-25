@@ -38,12 +38,14 @@ public class LobbyLauncherUI : MonoBehaviour
                 defaultName = PlayerPrefs.GetString(playerNickname);
                 UIControls.usernameInput.text = defaultName;
                 lobbyLauncher.validUsername = true;
+                lobbyLauncher.nickname = defaultName;
+                PhotonNetwork.NickName = defaultName;
+                assignPlayerAva.SetPlayerID(defaultName);  
                 Debug.Log("PHOTON NICK NAME: " + PhotonNetwork.NickName);
                 Debug.Log("PREFS NICK NAME: " + defaultName);
             }
         }
 
-        PhotonNetwork.NickName = defaultName;
 
         //add listener to the username input field
         UIControls.usernameInput.onValueChange.AddListener(delegate {SetPlayerNickname(UIControls.usernameInput.text);});

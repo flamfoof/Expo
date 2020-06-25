@@ -38,6 +38,7 @@ public class AttachAvatar : MonoBehaviour
         //playerCharacter.transform.parent = bodyOrigin.transform;
         foreach(AssignPlayerAvatar assign in GameObject.FindObjectsOfType(typeof(AssignPlayerAvatar)))
         {
+            Debug.Log("PN: " + PhotonNetwork.NickName + "   player ID: " + assign.GetPlayerID());
             if(PhotonNetwork.NickName == assign.GetPlayerID())
             {
                 Debug.Log("Setting anims");

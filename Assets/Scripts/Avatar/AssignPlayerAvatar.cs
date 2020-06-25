@@ -56,6 +56,7 @@ public class AssignPlayerAvatar : MonoBehaviour
     public void SetPlayerID(string id)
     {
         this.playerID = id;
+        Debug.Log("Player id is now: " + playerID);
     }
     
     public GenderList.genders Gender {

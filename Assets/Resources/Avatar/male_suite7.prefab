@@ -317,7 +317,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 235ce722a8d49454280c1eee687ebf6b, type: 2}
+  - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -719,7 +719,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 235ce722a8d49454280c1eee687ebf6b, type: 2}
+  - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2801,8 +2801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064870090830824813}
   - component: {fileID: 2064870090840091317}
-  - component: {fileID: 92600495466241297}
-  - component: {fileID: 3230757044178343740}
+  - component: {fileID: 2140908321729896679}
   m_Layer: 0
   m_Name: male_suite7
   m_TagString: Untagged
@@ -2858,7 +2857,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &92600495466241297
+--- !u!114 &2140908321729896679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2867,34 +2866,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2064870090830731533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 3230757044178343740}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &3230757044178343740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064870090830731533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  anim: {fileID: 2064870090840091317}
+  meshHair: {fileID: 6932772170972455916}
+  meshHead: {fileID: 2064870090836005995}
+  meshChest: {fileID: 2064870090836005997}
+  meshArm: {fileID: 2064870090836005987}
+  meshForearm: {fileID: 2064870090836005993}
+  meshSpine: {fileID: 2064870090836005917}
+  meshPelvis: {fileID: 2064870090836005905}
+  meshLegs: {fileID: 2064870090836005909}
+  meshFeet: {fileID: 2064870090836005999}
+  meshHat: {fileID: 2064870090836005913}
+  meshShirt: {fileID: 2064870090836005919}
+  meshPants: {fileID: 2064870090836005911}
+  meshShoes: {fileID: 2064870090836005907}
+  meshAccessories: {fileID: 2064870090836005893}
 --- !u!1 &2064870090830731537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3941,7 +3930,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 235ce722a8d49454280c1eee687ebf6b, type: 2}
+  - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

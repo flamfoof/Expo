@@ -39,7 +39,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
-
+                
 
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);

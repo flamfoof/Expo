@@ -9,7 +9,10 @@ public class AttachAvatar : MonoBehaviour
     public GameObject defaultPrefab;
     public GameObject playerCharacterPrefab;
     public GameObject bodyOrigin;
+    public AvatarInfo avatarInfo;
     public string avatarFolder = "Avatar/";
+
+    private AssignPlayerAvatar assigner;
 
     private void Awake() {
         if(!playerInfo)
@@ -31,7 +34,23 @@ public class AttachAvatar : MonoBehaviour
         //Debug.Log("Path: " + prefab.name);
         //Debug.Log("Prefab Path: " + AssetDatabase.GetAssetPath(playerCharacterPrefab)); //works
         //Debug.Log("Name of prefab: " + playerCharacterPrefab.name);
-        GameObject playerCharacter = PhotonNetwork.Instantiate(avatarFolder + playerCharacterPrefab.name , bodyOrigin.transform.position, Quaternion.identity);
-        playerCharacter.transform.parent = bodyOrigin.transform;
+        //GameObject playerCharacter = PhotonNetwork.Instantiate(avatarFolder + playerCharacterPrefab.name , bodyOrigin.transform.position, Quaternion.identity);
+        //playerCharacter.transform.parent = bodyOrigin.transform;
+        foreach(AssignPlayerAvatar assign in GameObject.FindObjectsOfType(typeof(AssignPlayerAvatar)))
+        {
+            if(PhotonNetwork.NickName == assign.GetPlayerID())
+            {
+                Debug.Log("Setting anims");
+                assigner = assign;   
+                assigner.ChangeAvatar(avatarInfo, assigner.playerAvatarInfo);
+                Destroy(assign.gameObject);
+            }                            
+        }
+
+        
     }
+
+    
+
+    
 }

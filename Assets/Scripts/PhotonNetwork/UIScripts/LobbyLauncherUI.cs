@@ -10,6 +10,8 @@ public class LobbyLauncherUI : MonoBehaviour
     public UIControlsDemo UIControls;
     private LobbyLauncher lobbyLauncher;
 
+    public AssignPlayerAvatar assignPlayerAva;
+
     public static string playerUsername = "Username";
     public static string playerNickname = "Nickname";
 
@@ -21,6 +23,7 @@ public class LobbyLauncherUI : MonoBehaviour
     void Start()
     {
         string defaultName = "";
+        assignPlayerAva = GameObject.FindObjectOfType<AssignPlayerAvatar>();
     
         if(!UIControls)
         {
@@ -49,6 +52,11 @@ public class LobbyLauncherUI : MonoBehaviour
 
         //Add listener to button to start connecting to server
         UIControls.submitLoginButton.onClick.AddListener(delegate {lobbyLauncher.Connect();});
+
+        foreach(Toggle characterToggle in UIControls.genderList)
+        {
+            characterToggle.onValueChanged.AddListener(delegate {CheckGender(UIControls.genderList);});
+        }
     }
 
     public void SetPlayerNickname(string name)
@@ -67,7 +75,8 @@ public class LobbyLauncherUI : MonoBehaviour
         } else {
             UIControls.feedbackText.text = "Name is valid";        
             lobbyLauncher.validUsername = true;
-            lobbyLauncher.nickname = name;
+            lobbyLauncher.nickname = name;   
+            assignPlayerAva.SetPlayerID(name);         
         }
         
     }
@@ -88,16 +97,20 @@ public class LobbyLauncherUI : MonoBehaviour
                 switch(genderList[i].GetComponent<GenderList>().gender)
                 {
                     case GenderList.genders.Male1: 
-                        Debug.Log("Male");
+                        Debug.Log("Male1");
+                        assignPlayerAva.Gender = GenderList.genders.Male1;
                         return GenderList.genders.Male1;
                     case GenderList.genders.Female1: 
-                        Debug.Log("Female");
+                        Debug.Log("Female1");
+                        assignPlayerAva.Gender = GenderList.genders.Female1;
                         return GenderList.genders.Female1;
                     case GenderList.genders.Male2:
-                        Debug.Log("Male");
+                        Debug.Log("Male2");
+                        assignPlayerAva.Gender = GenderList.genders.Male2;
                         return GenderList.genders.Male2;
                     case GenderList.genders.Female2:
-                        Debug.Log("Female");
+                        Debug.Log("Female2");
+                        assignPlayerAva.Gender = GenderList.genders.Female2;
                         return GenderList.genders.Female2;
                     case GenderList.genders.NonBinary: 
                         Debug.Log("Non-binary");
@@ -107,6 +120,7 @@ public class LobbyLauncherUI : MonoBehaviour
                 }
             }            
         }
+        
         return GenderList.genders.None;
     }
 

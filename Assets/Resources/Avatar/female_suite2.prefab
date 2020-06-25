@@ -3703,8 +3703,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1815713559428463097}
   - component: {fileID: 1815713559418574367}
+  - component: {fileID: -1235142433882332273}
   m_Layer: 0
-  m_Name: female_suite2_lod0
+  m_Name: female_suite2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3758,6 +3759,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1235142433882332273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815713559427966425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1815713559418574367}
+  meshHair: {fileID: 1102963360862041419}
+  meshHead: {fileID: 1815713559422757077}
+  meshChest: {fileID: 1815713559422757085}
+  meshArm: {fileID: 1815713559422757087}
+  meshForearm: {fileID: 1815713559422757081}
+  meshSpine: {fileID: 1815713559422757071}
+  meshPelvis: {fileID: 1815713559422757073}
+  meshLegs: {fileID: 1815713559422757075}
+  meshFeet: {fileID: 1815713559422757083}
+  meshHat: {fileID: 1815713559422757057}
+  meshShirt: {fileID: 1815713559422757053}
+  meshPants: {fileID: 1815713559422757055}
+  meshShoes: {fileID: 1815713559422757051}
+  meshAccessories: {fileID: 1815713559422757059}
 --- !u!1 &1815713559427966427
 GameObject:
   m_ObjectHideFlags: 0

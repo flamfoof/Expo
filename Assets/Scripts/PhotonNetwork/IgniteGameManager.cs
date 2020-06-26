@@ -121,7 +121,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             //changeAvatar.photonView.RPC("ChangeAvatar", RpcTarget.AllBuffered, player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), newA);
             //changeAvatar.photonView.RPC("TestDeb", RpcTarget.All);
-            changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), changeAvatar.playerAvatarInfo);
+            changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
         }
     }
 }

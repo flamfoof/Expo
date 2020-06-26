@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
 {
     //the playerID in this case would just be the name for now
     private string playerID;
     private GenderList.genders gender;
-    public GameObject malePrefab;
-    public GameObject femalePrefab;
+    public GameObject male1Prefab;
+    public GameObject male2Prefab;
+    public GameObject female1Prefab;
+    public GameObject female2Prefab;
     public GameObject defaultPrefab;
     public GameObject selectedPrefab;
 
@@ -57,23 +59,28 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
             return this.gender; 
         }
         set{ 
+            Hashtable hash = new Hashtable();            
+            hash.Add("AvatarType", gender);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+
             gender = value; 
             switch(gender)
             {
                 case GenderList.genders.Male1:
-                    this.selectedPrefab = malePrefab;
+                    this.selectedPrefab = male1Prefab;
+                    
                     SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
                     break;
                 case GenderList.genders.Female1:
-                    this.selectedPrefab = femalePrefab;
+                    this.selectedPrefab = female1Prefab;
                     SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
                     break;
                 case GenderList.genders.Male2:
-                    this.selectedPrefab = malePrefab;
+                    this.selectedPrefab = male2Prefab;
                     SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
                     break;
                 case GenderList.genders.Female2:
-                    this.selectedPrefab = femalePrefab;
+                    this.selectedPrefab = female2Prefab;
                     SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
                     break;
                 case GenderList.genders.NonBinary:
@@ -199,6 +206,85 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Done assigning");
     }
 
+    public void ChangeAvatar(AvatarInfo from, GenderList.genders gender)
+    {
+        Debug.Log("Started assigning");
+        AvatarInfo toThis = new AvatarInfo();
+        GameObject targetPrefab;
+
+        switch(gender)
+        {
+            case GenderList.genders.Male1:
+                targetPrefab = male1Prefab;
+                break;
+            case GenderList.genders.Female1:
+                targetPrefab = female1Prefab;
+                break;
+            case GenderList.genders.Male2:
+                targetPrefab = male2Prefab;
+                break;
+            case GenderList.genders.Female2:
+                targetPrefab = female2Prefab;
+                break;
+            default:
+                targetPrefab = defaultPrefab;
+                break;
+        }
+
+        toThis = targetPrefab.GetComponent<AvatarInfo>();
+
+        from.anim.avatar = toThis.anim.avatar;
+        from.anim.runtimeAnimatorController = toThis.anim.runtimeAnimatorController;
+        from.meshHair.sharedMesh = toThis.meshHair.sharedMesh;
+        from.meshHead.sharedMesh = toThis.meshHead.sharedMesh;
+        from.meshChest.sharedMesh = toThis.meshChest.sharedMesh;
+        from.meshArm.sharedMesh = toThis.meshArm.sharedMesh;
+        from.meshForearm.sharedMesh = toThis.meshForearm.sharedMesh;
+        from.meshSpine.sharedMesh = toThis.meshSpine.sharedMesh;
+        from.meshPelvis.sharedMesh = toThis.meshPelvis.sharedMesh;
+        from.meshLegs.sharedMesh = toThis.meshLegs.sharedMesh;
+        from.meshFeet.sharedMesh = toThis.meshFeet.sharedMesh;
+
+        from.meshHat.sharedMesh = toThis.meshHat.sharedMesh;
+        from.meshShirt.sharedMesh = toThis.meshShirt.sharedMesh;
+        from.meshPants.sharedMesh = toThis.meshPants.sharedMesh;
+        from.meshShoes.sharedMesh = toThis.meshShoes.sharedMesh;
+        from.meshAccessories.sharedMesh = toThis.meshAccessories.sharedMesh;
+
+        //visibility
+        from.meshHair.gameObject.SetActive(toThis.meshHair.gameObject.activeSelf);
+        from.meshHead.gameObject.SetActive(toThis.meshHead.gameObject.activeSelf);
+        from.meshChest.gameObject.SetActive(toThis.meshChest.gameObject.activeSelf);
+        from.meshArm.gameObject.SetActive(toThis.meshArm.gameObject.activeSelf);
+        from.meshForearm.gameObject.SetActive(toThis.meshForearm.gameObject.activeSelf);
+        from.meshSpine.gameObject.SetActive(toThis.meshSpine.gameObject.activeSelf);
+        from.meshPelvis.gameObject.SetActive(toThis.meshPelvis.gameObject.activeSelf);
+        from.meshLegs.gameObject.SetActive(toThis.meshLegs.gameObject.activeSelf);
+        from.meshFeet.gameObject.SetActive(toThis.meshFeet.gameObject.activeSelf);
+        from.meshHat.gameObject.SetActive(toThis.meshHat.gameObject.activeSelf);
+        from.meshShirt.gameObject.SetActive(toThis.meshShirt.gameObject.activeSelf);
+        from.meshPants.gameObject.SetActive(toThis.meshPants.gameObject.activeSelf);
+        from.meshShoes.gameObject.SetActive(toThis.meshShoes.gameObject.activeSelf);
+        from.meshAccessories.gameObject.SetActive(toThis.meshAccessories.gameObject.activeSelf);
+
+        // get the materialfrom.
+        from.meshHair.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshHair.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshHead.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshHead.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshChest.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshChest.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshArm.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshArm.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshForearm.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshForearm.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshSpine.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshSpine.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshPelvis.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshPelvis.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshLegs.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLegs.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshFeet.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshFeet.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshHat.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshHat.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshShirt.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshShirt.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial;
+        from.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial;
+        Debug.Log("Done assigning");
+    }
+
 
     [Serializable]    
     public class Hats
@@ -239,9 +325,9 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(stream.IsWriting)
         {
-            stream.SendNext(playerAvatarInfo);   
+            stream.SendNext(gender);   
         } else {
-
+            gender = (GenderList.genders) stream.ReceiveNext();
         }
     }
 }

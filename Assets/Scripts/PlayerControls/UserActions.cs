@@ -230,8 +230,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-
-            stream.SendNext(anim.GetFloat("speed"));            
+            if(anim)
+                stream.SendNext(anim.GetFloat("speed"));            
         } else {
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();

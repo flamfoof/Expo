@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
+public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 {
     //the playerID in this case would just be the name for now
     private string playerID;
@@ -62,7 +62,8 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
             Hashtable hash = new Hashtable();            
             hash.Add("AvatarType", gender);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-
+            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
+            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"].ToString());
             gender = value; 
             switch(gender)
             {
@@ -321,13 +322,4 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
         public List<ClothesType> clothesType;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(gender);   
-        } else {
-            gender = (GenderList.genders) stream.ReceiveNext();
-        }
-    }
 }

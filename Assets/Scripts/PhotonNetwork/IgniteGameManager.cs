@@ -70,7 +70,24 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
 
         //update the meshes
+        //sorry it's messy!
+        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
 
+        int count = 0;
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            Player pl = pv.Owner;
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                if(pl != null && pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>() == changeAvatar.defaultPrefab)
+                {
+                    Debug.Log(pv.Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
+                    changeAvatar.ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
+                }
+                count++;
+            }
+            
+        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -119,6 +136,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
         if(player.GetComponent<PhotonView>().IsMine)
         {            
+            Debug.Log(player.GetComponent<PhotonView>().Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
             changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
         } else{
             int count = 0;
@@ -129,7 +147,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 {
                     if(player == pv.gameObject)
                     {
-                        Debug.Log(pv.Owner.NickName + " has selected their character: " + GenderList.genders.Female1.ToString());
+                        Debug.Log(pv.Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
                         changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
                     }
                 }

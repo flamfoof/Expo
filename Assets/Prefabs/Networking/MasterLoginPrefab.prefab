@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -62
       objectReference: {fileID: 0}
+    - target: {fileID: 184483282, guid: 6be9e2dd4b6421d43ac4189c1ed90fba, type: 3}
+      propertyPath: gender
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 497622070, guid: 6be9e2dd4b6421d43ac4189c1ed90fba, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -168.2
@@ -246,6 +250,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290725412042124116, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
+        type: 3}
+      propertyPath: gender
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5626946046964902233, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
         type: 3}
@@ -482,6 +491,11 @@ PrefabInstance:
       propertyPath: characterSelect
       value: 
       objectReference: {fileID: 5379742739992456666}
+    - target: {fileID: 8654911756096674745, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
+        type: 3}
+      propertyPath: gender
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9171089773451613240, guid: 6be9e2dd4b6421d43ac4189c1ed90fba,
         type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -24,6 +24,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public Animator anim;
 
     GameObject bodyOrigin;
+    public bool disableServer = false;
+
+    public float emoteForce = 20.0f;
+    public int emoteAmount = 10;
 
     private bool isButtonHeld;
 
@@ -78,14 +82,17 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         {
             UpdateAnim();
         }
-
-        if(photonView.IsMine)
+        if(!disableServer)
         {
+            if(photonView.IsMine)
+            {
 
-        } else {
-            transform.position = Vector3.Lerp(transform.position, realPosition, .1f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
+            } else {
+                transform.position = Vector3.Lerp(transform.position, realPosition, .1f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
+            }
         }
+
     }
 
     private void AttachControlsReference()
@@ -159,10 +166,13 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             case InputActionPhase.Started:
                 if (ctx.interaction is SlowTapInteraction)
                     isButtonHeld = true;
+                
+                Emote();
                 break;
 
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
+
                 break;
         }
     }
@@ -184,6 +194,23 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 GetComponent<FirstPersonAIO>().sprintKey = false;
                 break;
         }
+    }
+
+    public void Emote()
+    {
+        Vector3 randPos;
+        float x, y, z;
+        Debug.Log("Spawned them");
+        for(int i = 0; i < emoteAmount; i++)
+        {
+            x = transform.position.x + Random.Range(-5.0f, 5.0f);
+            y = transform.position.y + Random.Range(-5.0f, 5.0f);
+            z = transform.position.z + Random.Range(-5.0f, 5.0f);
+            randPos = new Vector3(x, y, z);
+            PhotonNetwork.Instantiate(EmoteList.emotePath + GetComponent<EmoteList>().emotesList[Random.Range(0, 1)].name, randPos, Quaternion.identity);
+            //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
+        }
+        
     }
 
     private IEnumerator HoldButtonPress()

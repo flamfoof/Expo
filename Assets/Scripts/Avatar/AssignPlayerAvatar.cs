@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
@@ -42,6 +43,9 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     private void Start() {
         playerAvatarInfo = defaultPrefab.GetComponent<AvatarInfo>();
+
+        //catch all if an avatar never loads
+        InvokeRepeating("RefreshAvatarList", 5.0f, 10.0f);
     }
 
     public string GetPlayerID()
@@ -51,7 +55,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     public void SetPlayerID(string id)
     {
         this.playerID = id;
-        Debug.Log("Player id is now: " + playerID);
+        //Debug.Log("Player id is now: " + playerID);
     }
     
     public GenderList.genders Gender {
@@ -59,12 +63,14 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             return this.gender; 
         }
         set{ 
+            gender = value; 
+
             Hashtable hash = new Hashtable();            
             hash.Add("AvatarType", gender);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
             Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"].ToString());
-            gender = value; 
+
+            
             switch(gender)
             {
                 case GenderList.genders.Male1:
@@ -321,5 +327,74 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         public string name;
         public List<ClothesType> clothesType;
     }
+ 
+    public void RefreshAvatarList()
+    {
+        int count = 0;
+        bool stillDefault = false;
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHair.sharedMesh == 
+                    defaultPrefab.GetComponent<AvatarInfo>().meshHair.sharedMesh)
+                {
+                    stillDefault = true;
+                }
+                count++;
+            }                     
+        }
 
+        if(!stillDefault)
+            return;     
+
+        Invoke("RefreshAvatars", 1.5f);        
+    }
+
+    public void RefreshAvatars()
+    {
+        //update the meshes
+        //sorry it's messy!                   
+        int count = 0;
+                    
+        
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            Player pl = pv.Owner;
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHair.sharedMesh == 
+                    defaultPrefab.GetComponent<AvatarInfo>().meshHair.sharedMesh)
+                {
+                    Debug.Log(pv.Owner.NickName + " has selected their character: " + 
+                        (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);
+                    ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), 
+                        (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);
+                }
+                count++;
+            }            
+        }
+    }
+
+    public void NetworkAvatarUpdate()
+    {
+        Hashtable hash = new Hashtable();            
+        hash.Add("AvatarType", Gender);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+    }
+
+    public void PrintAvatarList()
+    {
+        int count = 0;
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                Debug.Log(pv.Owner.NickName + " has selected: " + 
+                    (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);                
+                count++;
+            }            
+        }
+
+    }
 }

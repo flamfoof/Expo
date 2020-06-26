@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
+public class AssignPlayerAvatar : MonoBehaviourPunCallbacks, IPunObservable
 {
     //the playerID in this case would just be the name for now
     private string playerID;
@@ -40,14 +40,6 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     private void Start() {
         playerAvatarInfo = defaultPrefab.GetComponent<AvatarInfo>();
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            SetAvatarFeatures(malePrefab.GetComponent<AvatarInfo>());
-        }
     }
 
     public string GetPlayerID()
@@ -93,6 +85,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     }
 
     //temporary solution to pre-set avatars
+    [PunRPC]
     public void SetAvatarFeatures(AvatarInfo info)
     {
         //set the basic class information from the unity components
@@ -153,6 +146,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     [PunRPC]
     public void ChangeAvatar(AvatarInfo from, AvatarInfo toThis)
     {
+        Debug.Log("Started assigning");
         from.anim.avatar = toThis.anim.avatar;
         from.anim.runtimeAnimatorController = toThis.anim.runtimeAnimatorController;
         from.meshHair.sharedMesh = toThis.meshHair.sharedMesh;
@@ -202,6 +196,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial;
+        Debug.Log("Done assigning");
     }
 
 
@@ -238,5 +233,15 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     {
         public string name;
         public List<ClothesType> clothesType;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(playerAvatarInfo);   
+        } else {
+
+        }
     }
 }

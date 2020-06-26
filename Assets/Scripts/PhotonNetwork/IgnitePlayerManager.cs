@@ -38,15 +38,6 @@ public class IgnitePlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     /// </summary>
     public void Awake()
     {
-        if (this.beams == null)
-        {
-            Debug.LogError("<Color=Red><b>Missing</b></Color> Beams Reference.", this);
-        }
-        else
-        {
-            this.beams.SetActive(false);
-        }
-
         // #Important
         // used in IgniteGameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
         if (photonView.IsMine)
@@ -119,11 +110,6 @@ public class IgnitePlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             this.ProcessInputs();
-
-            if (this.Health <= 0f)
-            {
-                IgniteGameManager.IgniteInstance.LeaveRoom();
-            }
         }
 
         if (this.beams != null && this.IsFiring != this.beams.activeInHierarchy)

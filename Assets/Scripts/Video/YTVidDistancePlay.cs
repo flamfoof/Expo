@@ -21,7 +21,7 @@ public class YTVidDistancePlay : MonoBehaviour
             listYT.Add(vid);
         }
         Invoke("FindPlayer", 1);
-        Debug.Log("started youtube videos");
+//        Debug.Log("started youtube videos");
         #if UNITY_WEBGL
         //Calls an update every 0.5 seconds to this function
         InvokeRepeating("CheckPlayerDistance", 2.0f, 0.8f);

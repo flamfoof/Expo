@@ -40,6 +40,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
                 
+                ServerAvatarChange(spawnedPlayer);
 
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
@@ -52,14 +53,14 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-			{
-				QuitApplication();
-			}
+        {
+            QuitApplication();
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("Player has entered the room" + newPlayer.NickName);
+        Debug.Log("Player has entered the room " + newPlayer.NickName);
 
         if(PhotonNetwork.IsMasterClient)
         {
@@ -67,6 +68,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
             //LoadExpo();
         }
+
+        //update the meshes
+
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -107,5 +111,17 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         Debug.LogFormat( "PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount );
 
         PhotonNetwork.LoadLevel(sceneMain);
+    }
+
+    public void ServerAvatarChange(GameObject player)
+    {
+        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
+
+        if(player.GetComponent<PhotonView>().IsMine)
+        {
+            //changeAvatar.photonView.RPC("ChangeAvatar", RpcTarget.AllBuffered, player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), newA);
+            //changeAvatar.photonView.RPC("TestDeb", RpcTarget.All);
+            changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), changeAvatar.playerAvatarInfo);
+        }
     }
 }

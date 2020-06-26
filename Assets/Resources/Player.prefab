@@ -679,9 +679,10 @@ MonoBehaviour:
   defaultPrefab: {fileID: 4776766274204132433, guid: b485809093da89748a2da1f727b3a4dd,
     type: 3}
   playerCharacterPrefab: {fileID: 0}
-  bodyOrigin: {fileID: 755395735079132553}
+  avatarBodyLocation: {fileID: 3894151488942785267}
   avatarInfo: {fileID: 6909113061706719052}
   avatarFolder: Avatar/
+  assigner: {fileID: 0}
 --- !u!1 &740732913567411867
 GameObject:
   m_ObjectHideFlags: 0

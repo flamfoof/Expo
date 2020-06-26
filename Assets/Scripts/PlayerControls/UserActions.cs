@@ -48,7 +48,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     private void Start() {
-        Debug.Log("Attaching anim");
+        //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
     }
 
@@ -209,7 +209,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void AttachAnim()
     {
-        anim = GetComponent<AttachAvatar>().bodyOrigin.transform.GetComponentInChildren<Animator>();
+        anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<Animator>();
         if(anim)
         {
             //Debug.Log("Found the thing: " + anim.gameObject.name);

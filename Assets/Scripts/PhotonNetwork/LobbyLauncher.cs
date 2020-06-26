@@ -151,7 +151,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             return false;
         } else {
             PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, nickname);
-            Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
+            //Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
             PhotonNetwork.NickName = nickname;
             return true;
         }

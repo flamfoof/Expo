@@ -28,12 +28,15 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
         {
             Debug.Log("PN: " + PhotonNetwork.NickName + "   player ID: " + assign.GetPlayerID());
             
-            if(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname) == assign.GetPlayerID())
+            if(photonView.IsMine && PlayerPrefs.GetString(LobbyLauncherUI.playerNickname) == assign.GetPlayerID())
             {
                 Debug.Log("Setting anims");
                 assigner = assign;   
                 assigner.ChangeAvatar(this.avatarInfo, assigner.playerAvatarInfo);
-            }    
+            } else {
+                assigner = assign;
+                assigner.photonView.RPC("ChangeAvatar", RpcTarget.All, this.avatarInfo, assigner.playerAvatarInfo);
+            }
         }
 
         

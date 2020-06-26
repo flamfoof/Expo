@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class AssignPlayerAvatar : MonoBehaviour
+public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 {
     //the playerID in this case would just be the name for now
     private string playerID;
@@ -149,6 +150,7 @@ public class AssignPlayerAvatar : MonoBehaviour
     /// <summary>
     /// Changes the Avatar's complete model to another Avatar with an AvatarInfo component
     /// </summary>
+    [PunRPC]
     public void ChangeAvatar(AvatarInfo from, AvatarInfo toThis)
     {
         from.anim.avatar = toThis.anim.avatar;

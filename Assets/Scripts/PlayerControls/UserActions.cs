@@ -235,8 +235,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         } else {
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
-
-            anim.SetFloat("speed", (float)stream.ReceiveNext());
+            if(anim)
+            {            
+                anim.SetFloat("speed", (float)stream.ReceiveNext());
+            }
+                
         }
     }
 }

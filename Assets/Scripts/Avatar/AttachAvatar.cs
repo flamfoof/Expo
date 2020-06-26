@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class AttachAvatar : MonoBehaviour
+public class AttachAvatar : MonoBehaviourPunCallbacks
 {
     private GameObject playerInfo;
     public GameObject defaultPrefab;
@@ -14,20 +14,8 @@ public class AttachAvatar : MonoBehaviour
 
     private AssignPlayerAvatar assigner;
 
-    private void Awake() {
-        if(!playerInfo)
-        {
-            playerInfo = GameObject.FindObjectOfType<AssignPlayerAvatar>().gameObject;
-            this.playerCharacterPrefab = playerInfo.GetComponent<AssignPlayerAvatar>().defaultPrefab;
-        } else {
-            Debug.LogError("Unable to find player Info for avatar. Will use default prefab");
-            this.playerCharacterPrefab = defaultPrefab;
-        }
-
-    }
-
     private void Start() {
-        playerCharacterPrefab = playerInfo.GetComponent<AssignPlayerAvatar>().selectedPrefab;
+        
         //Debug.Log(playerCharacterPrefab.name);
         //GameObject prefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource<GameObject>(this.playerCharacterPrefab);
         //GameObject prefab = Resources.Load("Avatar/");
@@ -39,13 +27,13 @@ public class AttachAvatar : MonoBehaviour
         foreach(AssignPlayerAvatar assign in GameObject.FindObjectsOfType(typeof(AssignPlayerAvatar)))
         {
             Debug.Log("PN: " + PhotonNetwork.NickName + "   player ID: " + assign.GetPlayerID());
+            
             if(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname) == assign.GetPlayerID())
             {
                 Debug.Log("Setting anims");
                 assigner = assign;   
-                assigner.ChangeAvatar(avatarInfo, assigner.playerAvatarInfo);
-                Destroy(assign.gameObject);
-            }                            
+                assigner.ChangeAvatar(this.avatarInfo, assigner.playerAvatarInfo);
+            }    
         }
 
         

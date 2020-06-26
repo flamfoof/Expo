@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class UserActions : MonoBehaviour
+public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
     //All movement, including camera, is in FirstPersionAIO.cs
     //
@@ -16,6 +18,8 @@ public class UserActions : MonoBehaviour
     private InputAction actionSprint;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
+    private Vector3 realPosition;
+    private Quaternion realRotation;
 
     public Animator anim;
 
@@ -73,6 +77,14 @@ public class UserActions : MonoBehaviour
         if(anim)
         {
             UpdateAnim();
+        }
+
+        if(photonView.IsMine)
+        {
+
+        } else {
+            transform.position = Vector3.Lerp(transform.position, realPosition, .1f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
         }
     }
 
@@ -210,5 +222,21 @@ public class UserActions : MonoBehaviour
 
         //Walk Conditions: speed > 1.0f
         anim.SetFloat("speed", playerController.groundVelocity);        
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+
+            stream.SendNext(anim.GetFloat("speed"));            
+        } else {
+            realPosition = (Vector3)stream.ReceiveNext();
+            realRotation = (Quaternion)stream.ReceiveNext();
+
+            anim.SetFloat("speed", (float)stream.ReceiveNext());
+        }
     }
 }

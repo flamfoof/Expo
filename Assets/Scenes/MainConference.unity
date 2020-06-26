@@ -3660,7 +3660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5331,11 +5331,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IgniteGameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938857522159327606, guid: b394027809c5d1b499b6826424a6d892,
-        type: 3}
-      propertyPath: sceneMain
-      value: MainConference
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
@@ -8736,31 +8731,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360160161}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1422133560 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
-    type: 3}
-  m_PrefabInstance: {fileID: 968898929}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1422133561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1422133560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ecc87b000f4fc54e957635cfc87fb73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  distanceThreshold: 6
-  firstFocused: 0
-  isFocusedOnVid: 0
-  currentFocused: {fileID: 0}
-  prevFocused: {fileID: 0}
-  listYT: []
 --- !u!1 &1427601749
 GameObject:
   m_ObjectHideFlags: 0
@@ -9258,7 +9228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x

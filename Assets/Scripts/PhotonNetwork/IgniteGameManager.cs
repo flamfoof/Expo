@@ -24,9 +24,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
         Hashtable hash = new Hashtable();            
         
-        hash.Add("AvatarType", changeAvatar.Gender);
-        
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);    
+           
 
         IgniteInstance = this;
 
@@ -59,6 +57,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             }
         }
         
+        hash.Add("AvatarType", changeAvatar.Gender);
+        
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
         
     }
 

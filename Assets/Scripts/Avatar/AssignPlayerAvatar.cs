@@ -45,7 +45,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         playerAvatarInfo = defaultPrefab.GetComponent<AvatarInfo>();
 
         //catch all if an avatar never loads
-        InvokeRepeating("RefreshAvatarList", 5.0f, 10.0f);
+        //InvokeRepeating("RefreshAvatarList", 5.0f, 10.0f);
     }
 
     public string GetPlayerID()

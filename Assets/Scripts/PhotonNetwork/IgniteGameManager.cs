@@ -118,10 +118,30 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
 
         if(player.GetComponent<PhotonView>().IsMine)
-        {
-            //changeAvatar.photonView.RPC("ChangeAvatar", RpcTarget.AllBuffered, player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), newA);
-            //changeAvatar.photonView.RPC("TestDeb", RpcTarget.All);
+        {            
             changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
+        } else{
+            int count = 0;
+            foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+            {
+                Player pl = pv.Owner;
+                if(pl != null)
+                {
+                    if(player == pv.gameObject)
+                    {
+                        Debug.Log(pv.Owner.NickName + " has selected their character: " + GenderList.genders.Female1.ToString());
+                        changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
+                    }
+                }
+                count++;
+            }
+            /*
+            for(int i = 0; i < PhotonNetwork.PlayerListOthers.; i++)
+            {
+                if(player == PhotonNetwork.PlayerListOthers[i].)
+                    changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[i].CustomProperties["AvatarType"]);
+            }*/
+            
         }
     }
 }

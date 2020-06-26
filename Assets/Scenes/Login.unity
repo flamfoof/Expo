@@ -484,6 +484,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
+        type: 3}
+      propertyPath: female1Prefab
+      value: 
+      objectReference: {fileID: 1815713559427966425, guid: 1383b62f58dd6ea4e877b7531b97ce87,
+        type: 3}
+    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
+        type: 3}
+      propertyPath: female2Prefab
+      value: 
+      objectReference: {fileID: 1815713559427966425, guid: 1383b62f58dd6ea4e877b7531b97ce87,
+        type: 3}
+    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
+        type: 3}
+      propertyPath: male1Prefab
+      value: 
+      objectReference: {fileID: 2064870090830731533, guid: 6a741060ce98073459704d7c5e500624,
+        type: 3}
+    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
+        type: 3}
+      propertyPath: male2Prefab
+      value: 
+      objectReference: {fileID: 2064870090830731533, guid: 6a741060ce98073459704d7c5e500624,
+        type: 3}
     - target: {fileID: 4547979283633418509, guid: f350403036669fb48b3ed05542bff123,
         type: 3}
       propertyPath: m_LocalPosition.x

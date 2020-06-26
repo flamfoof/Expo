@@ -1,28 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if !UNITY_WEBGL
 using Photon.Voice;
+#endif
 
 public class SelectVoicePlatform : MonoBehaviour
 {
     public GameObject webglVoice;
+    public GameObject platformVoice;
 
     void Start()
     {
         #if UNITY_WEBGL
         webglVoice.SetActive(true);
-        if(GetComponent<Photon.Voice.Unity.Recorder>())
-        {
-            Debug.Log("Turning Photon Voice Recorder because this is a WebGL build");
-            GetComponent<Photon.Voice.Unity.Recorder>().enabled = false;            
-        }
-        if(GetComponent<Photon.Voice.PUN.PhotonVoiceNetwork>())
-        {
-            Debug.Log("Turning off Photon Voice Network because this is a WebGL build");
-            GetComponent<Photon.Voice.PUN.PhotonVoiceNetwork>().enabled = false;
-        }
+        #else
+        platformVoice.SetActive(true);
+
             
         #endif
+
     }
 
     // Update is called once per frame

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6715458132555031630
+--- !u!1 &6119953973639658707
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6715458132555031625}
-  - component: {fileID: 6715458132555031605}
-  - component: {fileID: 6715458132555031604}
-  - component: {fileID: 6776445252089647778}
+  - component: {fileID: 880754626257764212}
+  - component: {fileID: 3396994016051155868}
+  - component: {fileID: 8803307660812855810}
   m_Layer: 0
-  m_Name: Voice
+  m_Name: PlatformCompatibleVoice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6715458132555031625
+  m_IsActive: 0
+--- !u!4 &880754626257764212
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715458132555031630}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 6119953973639658707}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7643693789349172424}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 6715458132555031625}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6715458132555031605
+--- !u!114 &3396994016051155868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715458132555031630}
+  m_GameObject: {fileID: 6119953973639658707}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
@@ -69,13 +67,13 @@ MonoBehaviour:
   recordOnlyWhenEnabled: 0
   skipDeviceChangeChecks: 0
   stopRecordingWhenPaused: 0
---- !u!114 &6715458132555031604
+--- !u!114 &8803307660812855810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715458132555031630}
+  m_GameObject: {fileID: 6119953973639658707}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81d9debcbaf99472bb70ffc2f99cb23f, type: 3}
@@ -89,7 +87,7 @@ MonoBehaviour:
   runInBackground: 1
   statsResetInterval: 1000
   speakerPrefab: {fileID: 0}
-  primaryRecorder: {fileID: 6715458132555031605}
+  primaryRecorder: {fileID: 3396994016051155868}
   Settings:
     AppIdRealtime: 
     AppIdChat: 
@@ -109,6 +107,39 @@ MonoBehaviour:
   AutoLeaveAndDisconnect: 1
   AutoCreateSpeakerIfNotFound: 1
   usePunAppSettings: 1
+--- !u!1 &6715458132555031630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6715458132555031625}
+  - component: {fileID: 6776445252089647778}
+  m_Layer: 0
+  m_Name: Voice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6715458132555031625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715458132555031630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7643693789349172424}
+  - {fileID: 880754626257764212}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6776445252089647778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   webglVoice: {fileID: 4873819213642455517}
+  platformVoice: {fileID: 6119953973639658707}
 --- !u!1001 &5104096171676151087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 393551136777434354, guid: 770cef4903d510742b4bab88dc975b32,
         type: 3}
       propertyPath: m_Name
-      value: PhotonWebVoice
+      value: PhotonWebGLVoice
       objectReference: {fileID: 0}
     - target: {fileID: 393551136777434354, guid: 770cef4903d510742b4bab88dc975b32,
         type: 3}

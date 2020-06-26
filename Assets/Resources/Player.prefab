@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 7621580824369844102}
   - component: {fileID: 56017626632305937}
   - component: {fileID: 7439937327771559780}
+  - component: {fileID: 7777150580243493783}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -471,6 +472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  disableServer: 0
+  emoteForce: 20
+  emoteAmount: 10
 --- !u!114 &114051214696948948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +687,20 @@ MonoBehaviour:
   avatarInfo: {fileID: 6909113061706719052}
   avatarFolder: Avatar/
   assigner: {fileID: 0}
+--- !u!114 &7777150580243493783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743903104223250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2121e6e51febb1488e02ef34c86a5eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emotesList:
+  - {fileID: 862185862102837945, guid: 12d27a84b9c782d4d811da467a7a262e, type: 3}
 --- !u!1 &740732913567411867
 GameObject:
   m_ObjectHideFlags: 0

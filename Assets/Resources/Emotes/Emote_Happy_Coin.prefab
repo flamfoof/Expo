@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 1397495232310406607}
   - component: {fileID: 462441808}
   - component: {fileID: 462441809}
-  - component: {fileID: 1883898464048684783}
-  - component: {fileID: -2253232958481125996}
   - component: {fileID: -2067205973876084481}
-  - component: {fileID: -6790188013764229275}
+  - component: {fileID: 8428268166956443599}
+  - component: {fileID: 3688049704577864687}
   m_Layer: 10
   m_Name: Emote_Happy_Coin
   m_TagString: Untagged
@@ -70,7 +69,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1883898464048684783
+--- !u!114 &-2067205973876084481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862185862102837945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ce632015424e846939ef9c9d48da2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Happy
+  duration: 5
+--- !u!114 &8428268166956443599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,12 +101,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -2253232958481125996}
-  - {fileID: -6790188013764229275}
+  - {fileID: 3688049704577864687}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-2253232958481125996
+--- !u!114 &3688049704577864687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,36 +120,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &-2067205973876084481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862185862102837945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ce632015424e846939ef9c9d48da2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Happy
-  duration: 5
---- !u!114 &-6790188013764229275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862185862102837945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &3893360981445934562
 GameObject:
   m_ObjectHideFlags: 0

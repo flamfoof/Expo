@@ -42,24 +42,25 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             if(!IgnitePlayerManager.LocalPlayerInstance)
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                
+                Player player;
                 GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
                 
                 //ServerAvatarChange(spawnedPlayer);
-                changeAvatar.RefreshAvatarList();
+                hash.Add("AvatarType", changeAvatar.Gender);
 
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
+                player = spawnedPlayer.GetPhotonView().Owner;
+                
+                RefreshAvatars();
+                Invoke("RefreshAvatars", 3.0f);
 
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
-        
-        hash.Add("AvatarType", changeAvatar.Gender);
-        
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
         
     }
 
@@ -92,7 +93,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
 
 
-        changeAvatar.RefreshAvatarList();
+        RefreshAvatars();
+
+        Invoke("RefreshAvatars", 3.0f);
         
     }
 
@@ -168,4 +171,31 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             
         }
     }
+
+    public void RefreshAvatars()
+    {
+        //update the meshes
+        //sorry it's messy!                   
+        int count = 0;
+                    
+        
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            Player pl = pv.Owner;
+            
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHair.sharedMesh == 
+                    changeAvatar.defaultPrefab.GetComponent<AvatarInfo>().meshHair.sharedMesh)
+                {
+                    Debug.Log(pv.Owner.NickName + " has selected their character: " + 
+                        (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);
+                    changeAvatar.ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), 
+                        (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);
+                }
+                count++;
+            }            
+        }
+    }
+
 }

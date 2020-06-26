@@ -69,7 +69,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             hash.Add("AvatarType", gender);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
             Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-
+            Debug.LogError("It chanegd..");
             
             switch(gender)
             {
@@ -215,8 +215,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     public void ChangeAvatar(AvatarInfo from, GenderList.genders gender)
     {
-        Debug.Log("Started assigning");
-        AvatarInfo toThis = new AvatarInfo();
+        AvatarInfo toThis;
         GameObject targetPrefab;
 
         switch(gender)
@@ -289,7 +288,6 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshPants.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshShoes.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial;
-        Debug.Log("Done assigning");
     }
 
 
@@ -390,8 +388,8 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         {
             if(pv.gameObject.GetComponent<UserActions>())
             {
-                Debug.Log(pv.Owner.NickName + " has selected: " + 
-                    (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);                
+                Debug.Log(pv.Owner.ActorNumber + " has selected: " + 
+                    (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);                
                 count++;
             }            
         }

@@ -26,11 +26,10 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
         //playerCharacter.transform.parent = bodyOrigin.transform;
         foreach(AssignPlayerAvatar assign in GameObject.FindObjectsOfType(typeof(AssignPlayerAvatar)))
         {
-            Debug.Log("PN: " + PhotonNetwork.NickName + "   player ID: " + assign.GetPlayerID());
             
             if(photonView.IsMine && PlayerPrefs.GetString(LobbyLauncherUI.playerNickname) == assign.GetPlayerID())
             {
-                Debug.Log("Setting anims");
+                //Debug.Log("Setting anims");
                 assigner = assign;   
                 assigner.ChangeAvatar(this.avatarInfo, assigner.playerAvatarInfo);
             } else {

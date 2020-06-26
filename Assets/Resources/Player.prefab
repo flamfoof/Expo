@@ -861,7 +861,7 @@ MonoBehaviour:
     SynchronizeType: 0
     Name: walk
   - Type: 1
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: speed
   m_SynchronizeLayers:
   - SynchronizeType: 2

@@ -46,7 +46,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
-
+        InvokeRepeating("RefreshAvatarList", 1.0f, 2.0f);
     }
 
     // Update is called once per frame
@@ -55,6 +55,32 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             QuitApplication();
+        }
+    }
+
+    void RefreshAvatarList()
+    {
+        //update the meshes
+        //sorry it's messy!
+        Debug.Log("Refreshing avatar");
+        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
+
+        int count = 0;
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            Player pl = pv.Owner;
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHair.sharedMesh == 
+                    changeAvatar.defaultPrefab.GetComponent<AvatarInfo>().meshHair.sharedMesh)
+                {
+                    Debug.Log(pv.Owner.NickName + " has selected their character: " + 
+                        (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);
+                    changeAvatar.ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), 
+                        (GenderList.genders)PhotonNetwork.PlayerList[count].CustomProperties["AvatarType"]);
+                }
+                count++;
+            }            
         }
     }
 
@@ -69,25 +95,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             //LoadExpo();
         }
 
-        //update the meshes
-        //sorry it's messy!
-        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
-
-        int count = 0;
-        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
-        {
-            Player pl = pv.Owner;
-            if(pv.gameObject.GetComponent<UserActions>())
-            {
-                if(pl != null && pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>() == changeAvatar.defaultPrefab)
-                {
-                    Debug.Log(pv.Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-                    changeAvatar.ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
-                }
-                count++;
-            }
-            
-        }
+        
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

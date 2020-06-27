@@ -490,7 +490,7 @@ MonoBehaviour:
   enableCameraMovement: 1
   mouseInputInversion: 0
   verticalRotationRange: 170
-  mouseSensitivity: 1
+  mouseSensitivity: 0.58
   fOVToMouseSensitivity: 0.475
   cameraSmoothing: 5
   lockAndHideCursor: 1

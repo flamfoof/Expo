@@ -3706,7 +3706,7 @@ GameObject:
   - component: {fileID: -1235142433882332273}
   m_Layer: 0
   m_Name: female_suite2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

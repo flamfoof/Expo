@@ -141,7 +141,7 @@ public class LobbyLauncherUI : MonoBehaviour
         if(lobbyLauncher.CheckIfValidUsername())
         {
             UIControls.mainLogin.SetActive(false);
-            UIControls.characterSelect.SetActive(true);
+            UIControls.worldSelect.SetActive(true);
         }
     }
 }

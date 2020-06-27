@@ -7,6 +7,8 @@ public class UIControlsDemo : MonoBehaviour
 {
     public GameObject mainLogin;
     public GameObject characterSelect;
+    public GameObject worldSelect;
+
     public Text feedbackText;
     public GameObject loadingIcon;
     public Button submitLoginButton;

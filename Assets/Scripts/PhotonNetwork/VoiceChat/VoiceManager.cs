@@ -17,11 +17,12 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     public bool recordAtStart = true;
 
     //FrostSweep library
-    Listener listener;
-    Recorder recorder;
+    public Listener listener;
+    public Recorder recorder;
 
-    #if UNITY_WEBGL
+
     private void Start() {
+        #if UNITY_WEBGL || UNITY_EDITOR
         voicePlatform = GetComponent<SelectVoicePlatform>();
         recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
         listener = voicePlatform.webglVoice.GetComponent<Listener>();
@@ -34,14 +35,15 @@ public class VoiceManager : MonoBehaviourPunCallbacks
             if(!gameManager)
                 Debug.Log("There is no game manager");
         }
-                
+
         if(recordAtStart)
         {
             recorder.StartRecord();
         }
+        #endif
 
     }
-    #endif
+    
 
     private void Update() {
         Debug.Log("Mic: " + listener.speakers.Count);
@@ -49,19 +51,34 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
     public void RefreshWebGLSpeakers()
     {
-        #if UNITY_WEBGL
-        foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)
+        Debug.Log("Starting refresh webgl");
+
+        #if UNITY_WEBGL || UNITY_EDITOR
+        if(listener.speakers.Count > 0)
         {
-            foreach(PhotonView pv in gameManager.playerList)
+            foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)
             {
-                Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
-                if(speaker.Value.Id == pv.Owner.ActorNumber)
+                Debug.Log("Starting with key pair: " + speaker.Value.Id);
+                bool isValidSpeaker = false;
+
+                foreach(PhotonView pv in gameManager.playerList)
                 {
-                    Debug.Log("They matched");
-                    speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
-                }                     
+                    Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
+                    if(speaker.Value.Id == pv.Owner.ActorNumber)
+                    {
+                        Debug.Log("They matched");
+                        speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
+                        isValidSpeaker = true;
+                    }                     
+                }
+
+                if(!speaker.Value.IsActive && !isValidSpeaker)
+                {
+                    speaker.Value.Dispose();
+                }
             }
         }
+        
         #endif
     }
 

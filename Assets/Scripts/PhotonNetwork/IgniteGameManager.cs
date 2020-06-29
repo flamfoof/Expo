@@ -62,7 +62,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+                
                 RefreshPlayerList();
+
+                voiceManager.RefreshWebGLSpeakers();
                 
                 RefreshAvatars();
                 Invoke("RefreshAvatars", 3.0f);
@@ -104,6 +107,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         
         RefreshPlayerList();
 
+        voiceManager.RefreshWebGLSpeakers();
+
         RefreshAvatars();
 
 
@@ -122,6 +127,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             
             //LoadExpo();
         }
+
+        RefreshPlayerList();
+
+        voiceManager.RefreshWebGLSpeakers();
 
     }
 

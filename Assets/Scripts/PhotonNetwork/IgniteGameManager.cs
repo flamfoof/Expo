@@ -11,6 +11,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     static public IgniteGameManager IgniteInstance;
+    public List<PhotonView> playerList;
     public GameObject spawnLoc;
     public string sceneLogin = "Login";
     public string sceneMain = "Exhibit";
@@ -20,6 +21,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        playerList = new List<PhotonView>();
                 
         changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
         Hashtable hash = new Hashtable();            
@@ -53,6 +55,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+                RefreshPlayerList();
                 
                 RefreshAvatars();
                 Invoke("RefreshAvatars", 3.0f);
@@ -91,7 +94,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
             //LoadExpo();
         }
-
+        
+        RefreshPlayerList();
 
         RefreshAvatars();
 
@@ -109,6 +113,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             
             //LoadExpo();
         }
+
     }
 
     public override void OnLeftRoom()
@@ -137,6 +142,19 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         Debug.LogFormat( "PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount );
 
         PhotonNetwork.LoadLevel(sceneMain);
+    }
+
+    public void RefreshPlayerList()
+    {
+        playerList.Clear();
+
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
+        {
+            if(pv.gameObject.GetComponent<UserActions>())
+            {
+                playerList.Add(pv);
+            }            
+        }
     }
 
     public void ServerAvatarChange(GameObject player)

@@ -3658,37 +3658,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: YoutubeAdvanced(use this)
       objectReference: {fileID: 0}
-    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.35
+      value: 81.5
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.35
+      value: 3.27
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.03
+      value: 75.38
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3619901
+      value: 0.50000006
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.60742337
+      value: -0.50000006
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.60742337
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.36199024
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_RootOrder
@@ -3704,22 +3700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 118.41501
-      objectReference: {fileID: 0}
-    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
-        type: 3}
-      propertyPath: YoutubeUrl
-      value: https://www.youtube.com/watch?v=QCqTn3SbfA0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
-        type: 3}
-      propertyPath: m_Looping
-      value: 1
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
@@ -5481,6 +5462,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b394027809c5d1b499b6826424a6d892, type: 3}
+--- !u!114 &968898930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4938857522159327606, guid: b394027809c5d1b499b6826424a6d892,
+    type: 3}
+  m_PrefabInstance: {fileID: 968898929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8f045a47706bb4f990140f921d9fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &993596232
 GameObject:
   m_ObjectHideFlags: 0
@@ -9178,7 +9171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10514,6 +10507,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+--- !u!1 &1681540965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6715458132555031630, guid: 7173d53e845a5cd45820172cc0777f90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1681540964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1681540966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681540965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bef02e87d2b454b80135b61b1e5f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 968898930}
 --- !u!1001 &1710660970
 PrefabInstance:
   m_ObjectHideFlags: 0

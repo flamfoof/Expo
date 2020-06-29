@@ -220,7 +220,7 @@ public class YoutubePlayer : MonoBehaviour
     /*PRIVATE INFO DO NOT CHANGE THESE URLS OR VALUES, ONLY IF YOU WANT HOST YOUR OWN SERVER| TURORIALS IN THE PROJECT FILES*/
     private const string serverURI = "https://webglplayer-server-weignite.herokuapp.com/api/info?url=";
     private const string formatURI = "&format=best&flatten=true";
-    private const string VIDEOURIFORWEBGLPLAYER = "https://youtubewebgl.herokuapp.com/download.php?mime=video/mp4&title=generatedvideo&token=";
+    private const string VIDEOURIFORWEBGLPLAYER = "https://webglplayer-weignite.herokuapp.com/download.php?mime=video/mp4&title=generatedvideo&token=";
     /*END OF PRIVATE INFO*/
 
     #endregion

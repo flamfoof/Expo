@@ -34,18 +34,36 @@ public class VoiceManager : MonoBehaviourPunCallbacks
             if(!gameManager)
                 Debug.Log("There is no game manager");
         }
-        //voicePlatform.webglVoice.GetComponent<Recorder
+                
         if(recordAtStart)
         {
             recorder.StartRecord();
         }
 
     }
+    #endif
 
     private void Update() {
         Debug.Log("Mic: " + listener.speakers.Count);
     }
 
-    #endif
+    public void RefreshWebGLSpeakers()
+    {
+        #if UNITY_WEBGL
+        foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)
+        {
+            foreach(PhotonView pv in gameManager.playerList)
+            {
+                Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
+                if(speaker.Value.Id == pv.Owner.ActorNumber)
+                {
+                    Debug.Log("They matched");
+                    speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
+                }                     
+            }
+        }
+        #endif
+    }
+
     
 }

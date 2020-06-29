@@ -11,6 +11,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     static public IgniteGameManager IgniteInstance;
+    public VoiceManager voiceManager;
     public List<PhotonView> playerList;
     public GameObject spawnLoc;
     public string sceneLogin = "Login";
@@ -23,8 +24,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     {
         playerList = new List<PhotonView>();
                 
-        changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
-        Hashtable hash = new Hashtable();            
+        if(!voiceManager)
+        {
+            voiceManager = GameObject.FindObjectOfType<VoiceManager>();
+        }
         
            
 
@@ -46,6 +49,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 Player player;
                 GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
+                changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
+                Hashtable hash = new Hashtable();                 
+
+
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
@@ -98,6 +105,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         RefreshPlayerList();
 
         RefreshAvatars();
+
+
 
         Invoke("RefreshAvatars", 3.0f);
         

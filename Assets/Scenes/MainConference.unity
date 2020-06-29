@@ -5405,6 +5405,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IgniteGameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4938857522159327606, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: voiceManager
+      value: 
+      objectReference: {fileID: 1681540966}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10526,6 +10531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 968898930}
+  recordAtStart: 1
 --- !u!1001 &1710660970
 PrefabInstance:
   m_ObjectHideFlags: 0

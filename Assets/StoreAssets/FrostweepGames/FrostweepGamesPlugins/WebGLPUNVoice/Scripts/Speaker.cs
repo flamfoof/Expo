@@ -169,5 +169,10 @@ namespace FrostweepGames.WebGLPUNVoice
                 data = new List<float>();
             }
         }
+
+        public GameObject GetSpeaker()
+        {
+            return this._selfObject;
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace FrostweepGames.WebGLPUNVoice
 			{
 				StartListen();
 			}
+			InvokeRepeating("CleanInactiveSpeakers", 5.0f, 5.0f);
 		}
 
 		private void OnDestroy()
@@ -64,7 +65,7 @@ namespace FrostweepGames.WebGLPUNVoice
 				}
 			}
 
-			CleanInactiveSpeakers();
+			
 		}
 
 		/// <summary>

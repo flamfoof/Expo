@@ -15,6 +15,8 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     public IgniteGameManager gameManager;
     private SelectVoicePlatform voicePlatform;
     public bool recordAtStart = true;
+    public float minAudioDistance = 0.0f;
+    public float maxAudioDistance = 15.0f;
 
     //FrostSweep library
     public Listener listener;
@@ -36,6 +38,8 @@ public class VoiceManager : MonoBehaviourPunCallbacks
                 Debug.Log("There is no game manager");
         }
 
+        listener.SpeakersUpdatedEvent += RefreshWebGLSpeakers;
+
         if(recordAtStart)
         {
             recorder.StartRecord();
@@ -45,13 +49,10 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     }
     
 
-    private void Update() {
-        Debug.Log("Mic: " + listener.speakers.Count);
-    }
-
     public void RefreshWebGLSpeakers()
     {
-        Debug.Log("Starting refresh webgl");
+        Debug.Log("Starting refresh webgl" + listener.name);
+        Debug.Log("Starting refresh webgl local p#: " + PhotonNetwork.LocalPlayer.ActorNumber);
 
         #if UNITY_WEBGL || UNITY_EDITOR
         if(listener.speakers.Count > 0)
@@ -68,6 +69,12 @@ public class VoiceManager : MonoBehaviourPunCallbacks
                     {
                         Debug.Log("They matched");
                         speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
+                        speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialize = true;
+                        speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialBlend = 1.0f;
+                        speaker.Value.GetSpeaker().GetComponent<AudioSource>().minDistance = minAudioDistance;
+                        speaker.Value.GetSpeaker().GetComponent<AudioSource>().maxDistance = maxAudioDistance;
+                        speaker.Value.GetSpeaker().GetComponent<AudioSource>().rolloffMode = AudioRolloffMode.Linear;
+                        
                         isValidSpeaker = true;
                     }                     
                 }
@@ -77,8 +84,16 @@ public class VoiceManager : MonoBehaviourPunCallbacks
                     speaker.Value.Dispose();
                 }
             }
+        } else if (listener.speakers.Count == 0)
+        {
+            CustomMicrophone.RequestMicrophonePermission();
+            recorder.StartRecord();
         }
         
+        if(!CustomMicrophone.HasConnectedMicrophoneDevices())
+        {
+            Debug.Log("No microphones were connected");
+        }
         #endif
     }
 

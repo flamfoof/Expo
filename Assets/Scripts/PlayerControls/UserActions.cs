@@ -9,7 +9,7 @@ using Photon.Realtime;
 public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
     //All movement, including camera, is in FirstPersionAIO.cs
-    //
+    
     private PlayerInput playerInput;
     private InputAction actionLook;
     private InputAction actionMove;
@@ -54,6 +54,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Start() {
         //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
+        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
     }
 
     private void OnEnable() {

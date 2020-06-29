@@ -63,12 +63,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
                 
-                RefreshPlayerList();
-
-                voiceManager.RefreshWebGLSpeakers();
                 
-                RefreshAvatars();
-                Invoke("RefreshAvatars", 3.0f);
 
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
@@ -94,6 +89,16 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         photonView.RPC("RefreshAvatarList", RpcTarget.AllBuffered);
     }
 
+    public void RefreshOnPlayerSpawn()
+    {
+        RefreshPlayerList();
+
+        voiceManager.RefreshWebGLSpeakers();
+        
+        RefreshAvatars();
+        Invoke("RefreshAvatars", 3.0f);
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("Player has entered the room " + newPlayer.NickName);
@@ -104,16 +109,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
             //LoadExpo();
         }
-        
-        RefreshPlayerList();
-
-        voiceManager.RefreshWebGLSpeakers();
-
-        RefreshAvatars();
-
-
-
-        Invoke("RefreshAvatars", 3.0f);
         
     }
 
@@ -127,11 +122,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             
             //LoadExpo();
         }
-
+        
         RefreshPlayerList();
 
         voiceManager.RefreshWebGLSpeakers();
-
     }
 
     public override void OnLeftRoom()

@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4424289483962040}
   - component: {fileID: 114682751469488624}
-  - component: {fileID: 114239945739289748}
+  - component: {fileID: 207976723923901624}
   m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &114239945739289748
+--- !u!114 &207976723923901624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,16 +351,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1216091964163738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_PointAction: {fileID: 8336913083895805648, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_MoveAction: {fileID: -1854855820290491532, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_SubmitAction: {fileID: -5343105638058735632, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_CancelAction: {fileID: 3507684294002147474, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_LeftClickAction: {fileID: 7024413415925378284, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_MiddleClickAction: {fileID: -5225528038875521367, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_RightClickAction: {fileID: -1718554234995167467, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 602952117989145478, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -6638738975565205880, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 8468674409026044352, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!1 &1221731068007604
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +540,7 @@ GameObject:
   - component: {fileID: 33465687069989882}
   - component: {fileID: 23557287780770044}
   - component: {fileID: 64063894611894050}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VideoRenderArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1291,7 +1310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4989317217930834}
   - component: {fileID: 328286099374850526}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: AudioPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1627,8 @@ GameObject:
   - component: {fileID: 114179375918869224}
   - component: {fileID: 328882641200394266}
   - component: {fileID: 82278814088756274}
-  m_Layer: 0
+  - component: {fileID: 1347472036959655579}
+  m_Layer: 5
   m_Name: YoutubeAdvanced(use this)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7418089f4181645b5df8f90e317bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  youtubeUrl: https://www.youtube.com/watch?v=NMUr2yNALhU
+  youtubeUrl: https://www.youtube.com/watch?v=ew2a91fIDj8
   videoQuality: 0
   customPlaylist: 0
   autoPlayNextVideo: 0
@@ -1835,6 +1855,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1347472036959655579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701608181382642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd5b507203432246a30ad98a4d677cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocal: 0
 --- !u!1 &1707965144686708
 GameObject:
   m_ObjectHideFlags: 0

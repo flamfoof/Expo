@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -20,8 +21,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private FirstPersonAIO playerController;
     private Vector3 realPosition;
     private Quaternion realRotation;
-
+    
+    public Camera camera;
+    public InteractableRayIdentifier playerActionRay;
     public Animator anim;
+    public TextMesh playerName;
 
     GameObject bodyOrigin;
     public bool disableServer = false;
@@ -114,8 +118,13 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     private void Interact(InputAction.CallbackContext ctx)
-    {
-        Debug.Log(ctx.phase);
+    {        
+       
+
+        //Debug.Log(ctx.phase);
+
+        
+
         switch (ctx.phase)
         {            
             
@@ -124,24 +133,39 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             case InputActionPhase.Performed:
                 if (ctx.interaction is SlowTapInteraction)
                 {
-                    //StartCoroutine(HoldButtonPress((int)(context.duration)));
+                    //StartCoroutine(HoldButtonPress((int)(context.duration)));  
+                    playerActionRay.UseInteractable(ctx.phase);                  
                 }
                 else
                 {
                     //If not held, then do this function
                     //something()
                 }
+                
+
                 isButtonHeld = false;
                 break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
                 if (ctx.interaction is SlowTapInteraction)
+                {
                     isButtonHeld = true;
+                    playerActionRay.UseInteractable(ctx.phase);                      
+                
+                }
+                    
+
+                
                 break;
 
             // Checks if button has been let go before the held time (before it's fully performed)
             case InputActionPhase.Canceled:
-                isButtonHeld = false;
+                if (ctx.interaction is SlowTapInteraction)
+                {
+                    isButtonHeld = false;
+                    playerActionRay.UseInteractable(ctx.phase);   
+                }
+                
                 //Debug.Log("Interact button pressed");
                 
                 break;
@@ -199,6 +223,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Emote()
     {
+        Debug.Log("emoted");
         Vector3 randPos;
         float x, y, z;
         Debug.Log("Spawned them");

@@ -20,7 +20,8 @@ public class YTVidDistancePlay : MonoBehaviour
         YoutubePlayer[] listVidPlayers = GameObject.FindObjectsOfType<YoutubePlayer>();
         foreach(YoutubePlayer vid in listVidPlayers)
         {
-            listYT.Add(vid);
+            if(!vid.GetComponent<LocalVideoPlay>().isLocal)
+                listYT.Add(vid);
         }
         Invoke("FindPlayer", 1);
 //        Debug.Log("started youtube videos");

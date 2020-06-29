@@ -13,6 +13,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     static public IgniteGameManager IgniteInstance;
     public VoiceManager voiceManager;
     public List<PhotonView> playerList;
+    static public GameObject localPlayer;
     public GameObject spawnLoc;
     public string sceneLogin = "Login";
     public string sceneMain = "Exhibit";
@@ -49,6 +50,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 Player player;
                 GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
+                player = spawnedPlayer.GetPhotonView().Owner;
                 changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
                 Hashtable hash = new Hashtable();                 
 
@@ -56,7 +58,12 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
                 spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
-                
+                spawnedPlayer.GetComponent<UserActions>().playerName.text = player.NickName;
+                if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
+                {
+                    localPlayer = spawnedPlayer;
+                }
+
                 //ServerAvatarChange(spawnedPlayer);
                 hash.Add("AvatarType", changeAvatar.Gender);
 
@@ -72,14 +79,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitApplication();
-        }
-    }
 
     //doesn't work. The player instantiates later than when joined room
     void RPCRefreshAvatar()
@@ -165,8 +164,18 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             if(pv.gameObject.GetComponent<UserActions>())
             {
                 playerList.Add(pv);
+                pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
+                Debug.Log("THE NAME IS NOT : " + pv.Owner.NickName);
+                Debug.Log("THE NAME IS NOT : " + pv.name);
+                Debug.Log("THE NAME IS NOT : " + pv.Owner.NickName);
             }            
+            
         }
+    }
+
+    public List<PhotonView> GetPlayerList()
+    {
+        return this.playerList;
     }
 
     public void ServerAvatarChange(GameObject player)

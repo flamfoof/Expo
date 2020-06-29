@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class YTVidDistancePlay : MonoBehaviour
 {
+    public List<GameObject> playerList;
     public GameObject player;
     public float distanceThreshold = 6.0f;
     public bool firstFocused = false;
@@ -31,7 +33,13 @@ public class YTVidDistancePlay : MonoBehaviour
 
     void FindPlayer()
     {
-        player = GameObject.FindObjectOfType<UserActions>().gameObject;
+        foreach(UserActions players in GameObject.FindObjectsOfType(typeof(UserActions)))
+        {
+            if(players.GetComponent<PhotonView>().IsMine)
+            {
+                player = players.gameObject;
+            }
+        }
     }
 
     #if !UNITY_WEBGL

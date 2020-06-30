@@ -1,7 +1,4 @@
-﻿#if UNITY_EDITOR
-using UnityEditor;
-#endif
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace Photon.Voice.Unity.UtilityScripts

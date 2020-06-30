@@ -41,14 +41,10 @@ namespace Photon.Voice.Unity
 
         private LocalVoice voice = LocalVoiceAudioDummy.Dummy;
 
-        #if UNITY_EDITOR
         [SerializeField]
-        #endif
         private string unityMicrophoneDevice;
 
-        #if UNITY_EDITOR
         [SerializeField]
-        #endif
         private int photonMicrophoneDeviceId = -1;
 
         private IAudioDesc inputSource;

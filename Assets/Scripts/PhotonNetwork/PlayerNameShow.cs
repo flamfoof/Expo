@@ -17,7 +17,6 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         foreach(PhotonView pv in gm.GetPlayerList())
         {
             pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
-            Debug.Log("FFFFFFFF" + pv.Owner.NickName);
         }
         
     }

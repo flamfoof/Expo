@@ -61,8 +61,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 spawnedPlayer.GetComponent<UserActions>().playerName.text = player.NickName;
                 if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
                 {
-                    localPlayer = spawnedPlayer;
-                    voiceManager.listener.gameObject.transform.SetParent(spawnedPlayer.transform);
+                    localPlayer = spawnedPlayer;                    
                 }
 
                 //ServerAvatarChange(spawnedPlayer);
@@ -70,10 +69,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
-                
-                
-                
-
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
@@ -167,9 +162,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             {
                 playerList.Add(pv);
                 pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
-                Debug.Log("THE NAME IS NOT : " + pv.Owner.NickName);
-                Debug.Log("THE NAME IS NOT : " + pv.name);
-                Debug.Log("THE NAME IS NOT : " + pv.Owner.NickName);
             }            
             
         }
@@ -178,6 +170,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public List<PhotonView> GetPlayerList()
     {
         return this.playerList;
+    }
+
+    public void SetParent(Transform parent, Transform child)
+    {
+        child.SetParent(parent);
     }
 
     public void ServerAvatarChange(GameObject player)

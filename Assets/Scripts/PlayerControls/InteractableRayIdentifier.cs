@@ -66,10 +66,13 @@ public class InteractableRayIdentifier : MonoBehaviour
 
     public void UseInteractable(InputActionPhase phase)
     {
-        //phase can be either performed, started, or cancelled.
-        if(focusedObject.GetComponent<Interactables>())
-        {
-            focusedObject.GetComponent<Interactables>().Perform(phase);
+        if(focusedObject)
+        {            
+            //phase can be either performed, started, or cancelled.
+            if(focusedObject.GetComponent<Interactables>())
+            {
+                focusedObject.GetComponent<Interactables>().Perform(phase);
+            } 
         } else {
             Debug.Log("No valid object has been selected");
         }

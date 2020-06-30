@@ -10,7 +10,7 @@ using Photon.Realtime;
 public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
     //All movement, including camera, is in FirstPersionAIO.cs
-    
+    private IgniteGameManager gameManager;
     private PlayerInput playerInput;
     private InputAction actionLook;
     private InputAction actionMove;
@@ -38,6 +38,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Awake() {
         AttachControlsReference();
         playerController = GetComponent<FirstPersonAIO>();
+        gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
 
         //binds these buttons to the functions
         //i.e. the primary action button will activate the Interact function
@@ -59,6 +60,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
+        gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
     }
 
     private void OnEnable() {
@@ -118,16 +120,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     private void Interact(InputAction.CallbackContext ctx)
-    {        
-       
-
+    {               
         //Debug.Log(ctx.phase);
-
-        
-
         switch (ctx.phase)
-        {            
-            
+        {                        
             // For when button is held.
             // Time held to perform is managed by the ExpoControls in PlayerInputs folder
             case InputActionPhase.Performed:
@@ -153,9 +149,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                     playerActionRay.UseInteractable(ctx.phase);                      
                 
                 }
-                    
-
-                
                 break;
 
             // Checks if button has been let go before the held time (before it's fully performed)

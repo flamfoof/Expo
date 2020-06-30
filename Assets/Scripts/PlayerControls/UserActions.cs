@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,6 +7,7 @@ using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -60,7 +62,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
-        gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
+        if(photonView.IsMine)
+            gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
     }
 
     private void OnEnable() {
@@ -281,11 +284,13 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         } else {
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
-            if(anim)
-            {            
+            try
+            {
                 anim.SetFloat("speed", (float)stream.ReceiveNext());
-            }
-                
+            } catch (Exception e) {
+                Debug.Log("Server doesn't have any info on anim class. ");
+            }                
         }
+                
     }
 }

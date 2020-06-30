@@ -59,15 +59,15 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         {
             foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)
             {
-                Debug.Log("Starting with key pair: " + speaker.Value.Id);
+                //Debug.Log("Starting with key pair: " + speaker.Value.Id);
                 bool isValidSpeaker = false;
 
                 foreach(PhotonView pv in gameManager.playerList)
                 {
-                    Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
+                    //Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
                     if(speaker.Value.Id == pv.Owner.ActorNumber)
                     {
-                        Debug.Log("They matched");
+                        //Debug.Log("They matched");
                         speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
                         speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialize = true;
                         speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialBlend = 1.0f;

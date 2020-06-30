@@ -62,6 +62,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
                 {
                     localPlayer = spawnedPlayer;
+                    voiceManager.listener.gameObject.transform.SetParent(spawnedPlayer.transform);
                 }
 
                 //ServerAvatarChange(spawnedPlayer);
@@ -69,6 +70,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+                
                 
                 
 

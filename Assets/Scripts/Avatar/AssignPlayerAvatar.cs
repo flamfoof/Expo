@@ -19,13 +19,13 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     [Header("These variables are for customizing characters (later feature)")]
     public AvatarInfo playerAvatarInfo;
-
+    /*
     public List<Hats> hats;
     public List<Shirts> shirt;
     public List<Pants> pants;
     public List<Shoes> shoes;
     public List<Accessories> accessories;
-
+    */
     public enum ClothesType
     {
         Hat,
@@ -289,7 +289,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshAccessories.gameObject.GetComponent<Renderer>().sharedMaterial;
     }
 
-
+/*
     [Serializable]    
     public class Hats
     {
@@ -324,7 +324,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         public string name;
         public List<ClothesType> clothesType;
     }
- 
+ */
     public void RefreshAvatarList()
     {
         int count = 0;

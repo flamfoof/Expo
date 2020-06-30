@@ -24,7 +24,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
 
     private void Start() {
-        #if UNITY_WEBGL || UNITY_EDITOR
+        #if UNITY_WEBGL
         voicePlatform = GetComponent<SelectVoicePlatform>();
         recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
         listener = voicePlatform.webglVoice.GetComponent<Listener>();
@@ -54,7 +54,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         Debug.Log("Starting refresh webgl" + listener.name);
         Debug.Log("Starting refresh webgl local p#: " + PhotonNetwork.LocalPlayer.ActorNumber);
 
-        #if UNITY_WEBGL || UNITY_EDITOR
+        #if UNITY_WEBGL
         if(listener.speakers.Count > 0)
         {
             foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)

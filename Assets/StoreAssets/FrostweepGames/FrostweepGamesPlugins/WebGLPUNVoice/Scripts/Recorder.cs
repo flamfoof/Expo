@@ -8,7 +8,7 @@ namespace FrostweepGames.WebGLPUNVoice
 {
 	/// <summary>
 	/// Basic record system for voice chat
-	/// </summary>
+	/// </summary>a
 	public class Recorder : MonoBehaviour
 	{
 		/// <summary>
@@ -61,8 +61,6 @@ namespace FrostweepGames.WebGLPUNVoice
 		/// </summary>
 		public bool recording = false;
 
-		public bool micFound = false;
-
 		/// <summary>
 		/// Initializes buffer, refreshes microphones list and selects first microphone device if exists
 		/// </summary>
@@ -74,13 +72,7 @@ namespace FrostweepGames.WebGLPUNVoice
 
 			if (CustomMicrophone.HasConnectedMicrophoneDevices())
 			{
-				Debug.Log("Found microphone");
-				SetMicrophone();
-				
-			} else if(!CustomMicrophone.HasConnectedMicrophoneDevices())
-			{
-				Debug.Log("No microphone found");
-
+				_microphoneDevice = CustomMicrophone.devices[0];
 			}
 		}
 
@@ -89,8 +81,7 @@ namespace FrostweepGames.WebGLPUNVoice
 		/// </summary>
 		private void Update()
 		{
-			if(micFound)
-				ProcessRecording();
+			ProcessRecording();
 		}
 
 		/// <summary>
@@ -112,29 +103,12 @@ namespace FrostweepGames.WebGLPUNVoice
 
 					if (lastPosition > _lastPosition)
 					{
-						//Debug.Log("LP: " + lastPosition + "      diff: " + (array.Length - lastPosition) + "     array size: " + array.Count());
-						//todo: fix this part up, it didn't have the if condition
-						if(array.Length - lastPosition > 0)
-						{
-							_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
-							_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
-						}
-							
+						_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
+						_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
 					}
 					else
 					{
-						//Debug.Log("LP: " + lastPosition + "      diff: " + (_lastPosition - lastPosition) + "     array size: " + array.Count());
-						// LP + diff is bigger than total array size
-						try {
-							_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
-						}
-						catch(Exception e)
-						{
-							//Debug.Log("Error has occurred when adding to buffer range: " + e);
-							
-						}
-						//Debug.Log("Buffer: " + _buffer.Count() + "    ");
-						
+						_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
 					}
 				}
 
@@ -216,11 +190,6 @@ namespace FrostweepGames.WebGLPUNVoice
 			}
 
 			RecordEndedEvent?.Invoke();
-		}
-		private void SetMicrophone()
-		{
-			_microphoneDevice = CustomMicrophone.devices[0];
-			micFound = true;
 		}
 	}
 }

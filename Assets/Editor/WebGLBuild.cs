@@ -1,6 +1,4 @@
-﻿#if UNITY_WEBGL
-#if UNITY_EDITOR
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -8,7 +6,8 @@ using UnityEngine;
 using UnityEditor;
 
 public class WebGLBuild : MonoBehaviour
-{
+{   
+    #if UNITY_WEBGL
     /*
     Preface:    Let me begin by saying that this script exclusively just moves Photon Voice out
                 of the project in order for WebGL to build. That's all it does because WebGL 
@@ -132,7 +131,6 @@ public class WebGLBuild : MonoBehaviour
         Debug.Log("Build Directory: " + path + "/" + buildName);
         proc.Start();
     }
+    #endif
 
 }
-#endif
-#endif

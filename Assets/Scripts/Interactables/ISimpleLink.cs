@@ -9,17 +9,7 @@ public class ISimpleLink : Interactables
 
     public override void Perform(InputActionPhase phase)
     {
-        switch(phase)
-        {
-            case InputActionPhase.Performed:
 
-                break;
-            case InputActionPhase.Started:
-
-                break;
-            case InputActionPhase.Canceled:
-                break;               
-        }
         Application.OpenURL(linkURL);
     }
 }

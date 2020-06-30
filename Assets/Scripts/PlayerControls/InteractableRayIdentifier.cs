@@ -36,7 +36,7 @@ public class InteractableRayIdentifier : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit: " + hit.collider.name);
+            //Debug.Log("Did Hit: " + hit.collider.name);
             focusedObject = hit.collider.gameObject;
                    
         } else {

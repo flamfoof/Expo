@@ -47,27 +47,50 @@ public class VoiceManager : MonoBehaviourPunCallbacks
         #endif
 
     }
+
+    /*
+    private void Start() {
+        
+        if(recordAtStart)
+        {
+            Debug.Log("Started Recording");
+
+            recorder.StartRecord();
+            
+        }
+        
+    }*/
     
 
     public void RefreshWebGLSpeakers()
     {
         //Debug.Log("Starting refresh webgl" + listener.name);
         //Debug.Log("Starting refresh webgl local p#: " + PhotonNetwork.LocalPlayer.ActorNumber);
+        if(!CustomMicrophone.IsRecording(CustomMicrophone.devices[0]))
+        {
+            Debug.Log("Refresh: Not recording, starting to");
+            Debug.Log("Mic permission: " + CustomMicrophone.HasMicrophonePermission());
+            Debug.Log("Mic connected?: " + CustomMicrophone.HasConnectedMicrophoneDevices());
+            recorder.StartRecord();
+            recorder.CheckIfPlayerIsRecording(IgniteGameManager.localPlayer);
+            Invoke("RefreshWebGLSpeakers", 1.0f);
+            return;
+        }
 
         #if UNITY_WEBGL
         if(listener.speakers.Count > 0)
         {
             foreach(KeyValuePair<int, Speaker> speaker in listener.Speakers)
             {
-                //Debug.Log("Starting with key pair: " + speaker.Value.Id);
+                Debug.Log("Starting with key pair: " + speaker.Value.Id);
                 bool isValidSpeaker = false;
 
                 foreach(PhotonView pv in gameManager.playerList)
                 {
-                    //Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
+                    Debug.Log("Checking speaker value: " + speaker.Value.Id + " and " + pv.Owner.ActorNumber);
                     if(speaker.Value.Id == pv.Owner.ActorNumber)
                     {
-                        //Debug.Log("They matched");
+                        Debug.Log("They matched");
                         speaker.Value.GetSpeaker().transform.SetParent(pv.gameObject.transform);
                         speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialize = true;
                         speaker.Value.GetSpeaker().GetComponent<AudioSource>().spatialBlend = 1.0f;
@@ -81,6 +104,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
                 if(!speaker.Value.IsActive && !isValidSpeaker)
                 {
+                    Debug.Log("Disposed");
                     speaker.Value.Dispose();
                 }
             }

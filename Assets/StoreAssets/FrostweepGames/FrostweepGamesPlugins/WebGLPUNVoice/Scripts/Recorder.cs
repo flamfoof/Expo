@@ -103,12 +103,25 @@ namespace FrostweepGames.WebGLPUNVoice
 
 					if (lastPosition > _lastPosition)
 					{
-						_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
-						_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
+						try{
+							_buffer.AddRange(array.ToList().GetRange(lastPosition, array.Length - lastPosition));
+							_buffer.AddRange(array.ToList().GetRange(0, _lastPosition));
+						} catch (Exception e)
+						{
+							
+						}
+						
+						
 					}
 					else
 					{
-						_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
+						try{
+							_buffer.AddRange(array.ToList().GetRange(lastPosition, _lastPosition - lastPosition));
+						}
+						catch (Exception e)
+						{
+
+						}
 					}
 				}
 
@@ -190,6 +203,11 @@ namespace FrostweepGames.WebGLPUNVoice
 			}
 
 			RecordEndedEvent?.Invoke();
+		}
+
+		public void CheckIfPlayerIsRecording(GameObject player)
+		{
+			player.GetComponent<UserActions>().Announce();
 		}
 	}
 }

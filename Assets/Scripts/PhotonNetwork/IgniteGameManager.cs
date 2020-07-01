@@ -95,6 +95,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         Invoke("RefreshAvatars", 3.0f);
     }
 
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("Player has entered the room " + newPlayer.NickName);
@@ -158,12 +159,14 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
-            if(pv.gameObject.GetComponent<UserActions>())
+            if(pv) //checks if they are still connected
             {
-                playerList.Add(pv);
-                pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
-            }            
-            
+                if(pv.gameObject.GetComponent<UserActions>())
+                {
+                    playerList.Add(pv);
+                    pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
+                }      
+            }
         }
     }
 

@@ -168,6 +168,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 }      
             }
         }
+
+        #if UNITY_WEBGL
+        
+        #endif
     }
 
     public List<PhotonView> GetPlayerList()

@@ -33,7 +33,7 @@ namespace FrostweepGames.WebGLPUNVoice.Examples
 
         public GameObject remoteClientPrefab;
 
-        public Recorder recorder;
+        public FrostRecorder recorder;
 
         public Listener listener;
 

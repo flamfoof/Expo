@@ -16,6 +16,9 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using Microphone = Photon.Voice.Unity.CustomMicrophone;
+#endif
 
 namespace Photon.Voice.Unity
 {

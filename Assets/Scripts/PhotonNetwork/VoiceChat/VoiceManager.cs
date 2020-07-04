@@ -20,13 +20,13 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
     //FrostSweep library
     public Listener listener;
-    public Recorder recorder;
+    public FrostRecorder recorder;
 
 
     private void Awake() {
         #if UNITY_WEBGL
         voicePlatform = GetComponent<SelectVoicePlatform>();
-        recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
+        recorder = voicePlatform.webglVoice.GetComponent<FrostRecorder>();
         listener = voicePlatform.webglVoice.GetComponent<Listener>();
 
         CustomMicrophone.RequestMicrophonePermission();
@@ -64,6 +64,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
     public void RefreshWebGLSpeakers()
     {
+        /*
         //Debug.Log("Starting refresh webgl" + listener.name);
         //Debug.Log("Starting refresh webgl local p#: " + PhotonNetwork.LocalPlayer.ActorNumber);
         if(!CustomMicrophone.IsRecording(CustomMicrophone.devices[0]))
@@ -119,6 +120,8 @@ public class VoiceManager : MonoBehaviourPunCallbacks
             Debug.Log("No microphones were connected");
         }
         #endif
+        */
+        Debug.Log("Disabled webgl audio refreshing");
     }
 
     

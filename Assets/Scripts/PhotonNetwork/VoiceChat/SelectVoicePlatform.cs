@@ -14,7 +14,7 @@ public class SelectVoicePlatform : MonoBehaviour
     void Start()
     {
         #if UNITY_WEBGL
-        webglVoice.SetActive(true);
+        //webglVoice.SetActive(true);
         #else
         platformVoice.SetActive(true);
 

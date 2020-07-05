@@ -64,6 +64,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
 
     public void RefreshWebGLSpeakers()
     {
+        /*
         //Debug.Log("Starting refresh webgl" + listener.name);
         //Debug.Log("Starting refresh webgl local p#: " + PhotonNetwork.LocalPlayer.ActorNumber);
         if(!CustomMicrophone.IsRecording(CustomMicrophone.devices[0]))
@@ -119,6 +120,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
             Debug.Log("No microphones were connected");
         }
         #endif
+        */
     }
 
     

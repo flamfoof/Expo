@@ -68,7 +68,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             Hashtable hash = new Hashtable();            
             hash.Add("AvatarType", gender);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
+            //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
             
             switch(gender)
             {

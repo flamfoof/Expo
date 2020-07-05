@@ -63,7 +63,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
         if(photonView.IsMine)
-            gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
+            //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
         
         Announce();
         
@@ -73,7 +73,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         //mostly used for debugging microphone connection for voice recording in WebGL
         PhotonView pv = PhotonView.Get(this);
-        pv.RPC("AnnounceVoiceConnect", RpcTarget.All, PhotonNetwork.NickName, FrostweepGames.Plugins.Native.CustomMicrophone.IsRecording(FrostweepGames.Plugins.Native.CustomMicrophone.devices[0]));
+        //pv.RPC("AnnounceVoiceConnect", RpcTarget.All, PhotonNetwork.NickName, FrostweepGames.Plugins.Native.CustomMicrophone.IsRecording(FrostweepGames.Plugins.Native.CustomMicrophone.devices[0]));
     }
 
     [PunRPC]

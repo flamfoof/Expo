@@ -155,6 +155,8 @@ namespace Photon.Voice.Unity
             }
         }
 
+   
+
         /// <summary>If true, this Recorder has been initialized and is ready to transmit to remote clients. Otherwise call <see cref="Init(VoiceConnection)"/>.</summary>
         public bool IsInitialized
         {

@@ -17,7 +17,7 @@ namespace Photon.Voice.Unity
 
 		public MicWrapper(string device, int suggestedFrequency, ILogger logger)
         {   
-            #if UNITY_WEBGL && !UNITY_EDITOR
+            #if UNITY_WEBGL  && !UNITY_EDITOR
             try
             {
                 this.device = device;

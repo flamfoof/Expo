@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_WEBGL
-using FrostweepGames.Plugins.Native;
-using FrostweepGames.WebGLPUNVoice;
+using Photon.Voice.Unity;
 #elif !UNITY_WEBGL
-using Photon.Voice;
+using Photon.Voice.;
 #endif
 using Photon.Pun;
 using Photon.Realtime;
@@ -19,15 +18,15 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     public float maxAudioDistance = 15.0f;
 
     //FrostSweep library
-    public Listener listener;
-    public FrostRecorder recorder;
+
+    public Recorder recorder;
 
 
     private void Awake() {
         #if UNITY_WEBGL
         voicePlatform = GetComponent<SelectVoicePlatform>();
-        recorder = voicePlatform.webglVoice.GetComponent<FrostRecorder>();
-        listener = voicePlatform.webglVoice.GetComponent<Listener>();
+        recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
+        //listener = voicePlatform.webglVoice.GetComponent<Listener>();
 
         CustomMicrophone.RequestMicrophonePermission();
 
@@ -38,11 +37,11 @@ public class VoiceManager : MonoBehaviourPunCallbacks
                 Debug.Log("There is no game manager");
         }
 
-        listener.SpeakersUpdatedEvent += RefreshWebGLSpeakers;
+        //listener.SpeakersUpdatedEvent += RefreshWebGLSpeakers;
 
         if(recordAtStart)
         {
-            recorder.StartRecord();
+            //recorder.StartRecord();
         }
         #endif
 

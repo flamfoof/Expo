@@ -15,7 +15,6 @@ namespace Photon.Voice.Unity
         }
 #endif
 
-
         void OnGUI()
         {
             GUILayout.BeginVertical(GUILayout.Height(Screen.height));

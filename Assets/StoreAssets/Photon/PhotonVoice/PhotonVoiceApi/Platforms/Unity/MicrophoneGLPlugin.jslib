@@ -2,6 +2,37 @@ var MicrophoneGLPlugin = {
 
   buffer: undefined,
 
+getMicrophoneDevices: function()
+	{
+		if(document.microphoneDevices == undefined)
+			document.microphoneDevices = new Array();
+
+		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+			 console.log("enumerateDevices() not supported.");
+
+			 SendMessage('Microphone', 'SetMicrophoneDevices', JSON.stringify(document.microphoneDevices));
+			 return;
+		}
+
+		navigator.mediaDevices.enumerateDevices()
+		 .then(function(devices) {
+
+			var outputDevicesArr = new Array();
+
+			devices.forEach(function(device) {
+				if(device.kind == "audioinput"){
+					outputDevicesArr.push(device);
+				}
+			  });
+
+			document.microphoneDevices = outputDevicesArr;
+
+		    SendMessage('Microphone', 'SetMicrophoneDevices', JSON.stringify(document.microphoneDevices));
+		 })
+		 .catch(function(err) {
+			 console.log("get devices exception: " + err.name + ": " + err.message + "; " + err.stack);
+		 });
+	},
   Init: function() {
 
     console.log("Init:");
@@ -87,6 +118,8 @@ var MicrophoneGLPlugin = {
 		});
 	}
   },
+  
+
   
   QueryAudioInput: function() {
 

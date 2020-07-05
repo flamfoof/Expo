@@ -21,6 +21,15 @@ namespace Photon.Voice.Unity
 #endif
 		}
 
+		public static string[] GetMicrophoneDevices()
+		{
+#if UNITY_WEBGL && !UNITY_EDITOR
+			return Photon.Voice.Unity.MicrophoneGL.Instance.GetMicrophoneDevices(); 
+#else
+			return new string[0]; 
+#endif
+		}
+
 		public static AudioClip Start(string deviceName, bool loop, int lengthSec, int frequency)
 		{
 #if UNITY_WEBGL && !UNITY_EDITOR

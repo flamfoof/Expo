@@ -207,7 +207,7 @@ namespace FrostweepGames.WebGLPUNVoice
 
 		public void CheckIfPlayerIsRecording(GameObject player)
 		{
-			player.GetComponent<UserActions>().Announce();
+			//player.GetComponent<UserActions>().Announce();
 		}
 	}
 }

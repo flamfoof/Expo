@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_WEBGL
-using FrostweepGames.Plugins.Native;
-using FrostweepGames.WebGLPUNVoice;
 #elif !UNITY_WEBGL
 using Photon.Voice;
 #endif
@@ -19,8 +17,7 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     public float maxAudioDistance = 15.0f;
 
     //FrostSweep library
-    public Listener listener;
-    public Recorder recorder;
+
 
 
     private void Awake() {

@@ -2129,18 +2129,31 @@ public class YoutubePlayer : MonoBehaviour
     //WEBGL only...
     public void WebGlGetVideo(string url)
     {
-        logTest = "Getting Url Player";
-        byte[] bytesToEncode = Encoding.UTF8.GetBytes(url);
-        string encodedText = Convert.ToBase64String(bytesToEncode);
-        videoUrl = VIDEOURIFORWEBGLPLAYER + "" + encodedText;
-        videoQuality = YoutubeVideoQuality.STANDARD;
-        logTest = videoUrl + " Done";
-        Debug.Log("Play!! " + videoUrl);
-        videoPlayer.source = VideoSource.Url;
-        videoPlayer.url = videoUrl;
-        videoPlayer.Prepare();
-        //videoPrepared = false;
-        videoPlayer.prepareCompleted += WeblPrepared; ;
+        try{
+            logTest = "Getting Url Player";
+            byte[] bytesToEncode = Encoding.UTF8.GetBytes(url);
+            string encodedText = Convert.ToBase64String(bytesToEncode);
+            videoUrl = VIDEOURIFORWEBGLPLAYER + "" + encodedText;
+            videoQuality = YoutubeVideoQuality.STANDARD;
+            logTest = videoUrl + " Done";
+            Debug.Log("Play!! " + videoUrl);
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = videoUrl;
+            videoPlayer.Prepare();
+            //videoPrepared = false;
+            videoPlayer.prepareCompleted += WeblPrepared;
+        } catch(Exception e)
+        {
+            Debug.Log("video didn't load, retrying.");
+            Debug.LogError(e);
+            StartCoroutine(webglvid(url));
+        }
+    }
+
+    public IEnumerator webglvid(string url)
+    {
+        yield return new WaitForSeconds(2.0f);
+        WebGlGetVideo(url);
     }
 
     private void WeblPrepared(VideoPlayer source)

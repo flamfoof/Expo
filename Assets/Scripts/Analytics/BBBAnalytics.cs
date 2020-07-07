@@ -53,11 +53,11 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         //Debug.Log("Updating sesion time");
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
-            Debug.Log("Starting this");
-            Debug.Log(pv.name);
+            //Debug.Log("Starting this");
+            //Debug.Log(pv.name);
             if(pv.gameObject)
             {
-                Debug.Log("still alive");
+                //Debug.Log("still alive");
             }
             if(pv.GetComponent<UserActions>())
             {

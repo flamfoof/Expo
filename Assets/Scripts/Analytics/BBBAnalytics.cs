@@ -71,8 +71,13 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
                 }
             } 
         }
-
-        avgSessionTime = totalSessionTime / totalPlayers;
+        if(attendees != 0)
+        {
+            avgSessionTime = totalSessionTime / attendees;
+        } else {
+            avgSessionTime = 0.0f;
+        }
+            
 
 
         /*
@@ -99,8 +104,15 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
 
     void UpdateAllTexts()
     {
+        string sessionTempText = "";
+        if(avgSessionTime > 60)
+        {
+            sessionTempText = Mathf.FloorToInt(avgSessionTime/60) + " m " + System.Math.Round(avgSessionTime % 60, 2) + "s";
+        } else {
+            sessionTempText = System.Math.Round(avgSessionTime, 2) + "s";
+        }
         attendeesText.text = "Attendees: " + attendees;
-        sessionText.text = "Avg. Session TIme: " + avgSessionTime;
+        sessionText.text = "Avg. Session Time: " + sessionTempText;
         clicksText.text = "Baby Seat Clicks: " + clicks;
     }
 
@@ -108,12 +120,8 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
     {
         if(stream.IsWriting)
         {
-            stream.SendNext(attendees);
-            stream.SendNext(avgSessionTime);
             stream.SendNext(clicks);  
         } else {
-            attendees = (int)stream.ReceiveNext();
-            avgSessionTime = (float)stream.ReceiveNext();
             clicks = (int) stream.ReceiveNext();
         }
                 

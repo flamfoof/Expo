@@ -53,19 +53,25 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         //Debug.Log("Updating sesion time");
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
+            Debug.Log("Starting this");
+            Debug.Log(pv.name);
+            if(pv.gameObject)
+            {
+                Debug.Log("still alive");
+            }
             if(pv.GetComponent<UserActions>())
             {
                 if(sessionNameList.Contains(pv.Owner.NickName))
                 {
                     int index = sessionNameList.IndexOf(pv.Owner.NickName);
-                    sessionTimeList[index] = pv.GetComponent<UserActions>().loginTimer;
+                    sessionTimeList[index] = pv.GetComponent<UserActions>().SessionTimer;
                     totalSessionTime += sessionTimeList[index];
                     totalPlayers++;
                     //Debug.Log("set time of player: " + sessionNameList[index] + " to timer: " + sessionTimeList[index]);
                 } else {
                     sessionNameList.Add(pv.Owner.NickName);
-                    sessionTimeList.Add(pv.GetComponent<UserActions>().loginTimer);
-                    totalSessionTime += pv.GetComponent<UserActions>().loginTimer;
+                    sessionTimeList.Add(pv.GetComponent<UserActions>().SessionTimer);
+                    totalSessionTime += pv.GetComponent<UserActions>().SessionTimer;
                     totalPlayers++;
                     //Debug.Log("Added new player: " + pv.Owner.NickName + " to the list.");
                 }
@@ -80,7 +86,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
             
 
 
-        /*
+        /* Trying to get info from network, not working
         for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {   
             string playerName = PhotonNetwork.PlayerList[i].ActorNumber.ToString();
@@ -95,6 +101,8 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
             }
         }*/
     }
+
+    
 
     void UpdateAttendeesCount()
     {
@@ -116,6 +124,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         clicksText.text = "Baby Seat Clicks: " + clicks;
     }
 
+    //may not be necessary
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting)

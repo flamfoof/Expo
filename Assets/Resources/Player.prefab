@@ -476,7 +476,8 @@ MonoBehaviour:
   playerActionRay: {fileID: 9220169153553486127}
   anim: {fileID: 0}
   playerName: {fileID: 7700156854495169686}
-  loginTimer: 0
+  sessionTimer: 0
+  realSessionTimer: 0
   objectsInteracted: []
   disableServer: 0
   emoteForce: 20

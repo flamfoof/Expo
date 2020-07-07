@@ -29,7 +29,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public InteractableRayIdentifier playerActionRay;
     public Animator anim;
     public TextMesh playerName;
-    public float loginTimer = 0.0f;
+    public float sessionTimer = 0.0f;
+    public float realSessionTimer = 0.0f;
+
+    public float SessionTimer {
+        get{
+            if(photonView.IsMine)
+            {
+                return this.sessionTimer;
+            } else {
+                return this.realSessionTimer;
+            }
+        }
+        set {
+            if(photonView.IsMine)
+            {
+                this.sessionTimer = value;
+            } else {
+                this.realSessionTimer = value;
+            }
+        }
+    }
+    
     public List<string> objectsInteracted;
 
     GameObject bodyOrigin;
@@ -65,7 +86,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Start() {
         //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
-        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();        
+        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
+        IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
 
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
@@ -111,7 +133,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         AttachControlsReference();
 
-        loginTimer += Time.deltaTime;
+        if(photonView.IsMine)
+            sessionTimer += Time.deltaTime;
 
         //todo: disable if in VR
         if(anim)
@@ -322,12 +345,13 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(loginTimer);
+            stream.SendNext(SessionTimer);
             if(anim)
                 stream.SendNext(anim.GetFloat("speed"));            
         } else {
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
+            realSessionTimer = (float)stream.ReceiveNext();
             try
             {
                 anim.SetFloat("speed", (float)stream.ReceiveNext());

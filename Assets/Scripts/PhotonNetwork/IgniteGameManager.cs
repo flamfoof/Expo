@@ -71,7 +71,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
-                AddUniquePlayer(player);
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
@@ -108,7 +107,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
-            AddUniquePlayer(newPlayer);
 
             //LoadExpo();
         }
@@ -126,6 +124,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             //LoadExpo();
         }
         
+        PhotonNetwork.DestroyPlayerObjects(otherPlayer);
+
         RefreshPlayerList();
 
         voiceManager.RefreshWebGLSpeakers();
@@ -174,6 +174,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 }      
             }
         }
+        
     }
 
     public List<PhotonView> GetPlayerList()
@@ -245,14 +246,21 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void AddUniquePlayer(Player player)
+    public void RefreshUniquePlayer()
     {
-        if(!uniquePlayersLogged.Contains(player.NickName))
+        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
-            uniquePlayersLogged.Add(player.NickName);
-            Debug.Log("New unique player has joined: " + player.NickName);
-            totalUniquePlayers++;
-        }        
+            if(pv.GetComponent<UserActions>())
+            {
+                if(!uniquePlayersLogged.Contains(pv.Owner.NickName))
+                {
+                    uniquePlayersLogged.Add(pv.Owner.NickName);
+                    Debug.Log("New unique player has joined: " + pv.Owner.NickName);
+                    totalUniquePlayers++;
+                }  
+            }
+                  
+        }
     }
 
     public void PrintPlayerStats()

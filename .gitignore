@@ -94,3 +94,5 @@ ExportedObj/
 /Assets/StoreAssets/Photon/PhotonRealtime/Demos/*/*
 /Assets/StoreAssets/Photon/PhotonUnityNetworking/Demos/*
 /Assets/StoreAssets/Photon/PhotonVoice/Demos/*
+Assets/Scripts/PhotonNetwork/VoiceChat/VoiceManager.cs
+Assets/Scripts/PhotonNetwork/VoiceChat/VoiceManager.cs

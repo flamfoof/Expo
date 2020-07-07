@@ -529,9 +529,9 @@ MonoBehaviour:
     gravityMultiplier: 1
     zeroFrictionMaterial: {fileID: 0}
     highFrictionMaterial: {fileID: 0}
-    maxSlopeAngle: 70
+    maxSlopeAngle: 55
     maxWallShear: 89
-    maxStepHeight: 0.2
+    maxStepHeight: 0.6
     curntGroundNormal: {x: 0, y: 0, z: 0}
     moveDirRef: {x: 0, y: 0}
     lastKnownSlopeAngle: 0

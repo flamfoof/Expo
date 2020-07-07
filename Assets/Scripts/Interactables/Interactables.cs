@@ -6,6 +6,7 @@ using Photon.Pun;
 
 public class Interactables : MonoBehaviour
 {
+    [SerializeField]
     private int timesUsed;
     public int TimesUsed {get{return this.timesUsed; } set{timesUsed = value;}}
     public GameObject[] assetParts;
@@ -28,7 +29,6 @@ public class Interactables : MonoBehaviour
             Debug.Log("Default cancelled");
                 break;               
         }
-
     }
 
     public enum InteractableType

@@ -2855,6 +2855,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5662415, y: 9.530916, z: 24.016775}
   m_Center: {x: 0.030157926, y: -0.7123142, z: 0.052710418}
+--- !u!114 &408328660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8925229626602608008, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+    type: 3}
+  m_PrefabInstance: {fileID: 636155568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &414218581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3870,6 +3882,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560724551}
   m_Mesh: {fileID: 4300000, guid: 94dc2d841c681684a9221a6a69f441a6, type: 3}
+--- !u!328 &570418398 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 639332364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &576803311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,6 +4366,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0036510795
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7099056
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0036265426
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70427805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.019
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.59000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90.456
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229625970683028, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.348
+      objectReference: {fileID: 0}
     - target: {fileID: 8925229626438997099, guid: ee7bb70954fb28e4089aa04c0a99aa99,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4407,6 +4475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AnalyticsBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925229626990312033, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Avg. Session Time: '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee7bb70954fb28e4089aa04c0a99aa99, type: 3}
@@ -4544,7 +4617,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 570418398}
     - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_Enabled
@@ -4839,6 +4912,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674379446}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &675095841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8925229626438997100, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+    type: 3}
+  m_PrefabInstance: {fileID: 636155568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &675095842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675095841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 675095843}
+  viewIdField: 10
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &675095843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675095841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46ea0da29d67b84bae025557653eb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 968898930}
+  attendees: 0
+  clicks: 0
+  avgSessionTime: 0
+  attendeesText: {fileID: 408328660}
+  sessionText: {fileID: 1633681221}
+  clicksText: {fileID: 1692468745}
 --- !u!1 &690973207
 GameObject:
   m_ObjectHideFlags: 0
@@ -5649,7 +5769,7 @@ GameObject:
   - component: {fileID: 784017698}
   - component: {fileID: 784017697}
   - component: {fileID: 784017696}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10427,7 +10547,7 @@ GameObject:
   - component: {fileID: 1288370541}
   - component: {fileID: 1288370540}
   - component: {fileID: 1288370539}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SimpleLink Variant (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10461,9 +10581,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/product/uppababy-reg-mesa-infant-car-seat/5172670
+  analytics: {fileID: 675095843}
 --- !u!65 &1288370540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11575,7 +11697,7 @@ GameObject:
   - component: {fileID: 1477636708}
   - component: {fileID: 1477636707}
   - component: {fileID: 1477636706}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SimpleLink Variant (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11608,9 +11730,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/static/storepickup/?icid=hp_merch_merch2_im_storepickup_19335
+  analytics: {fileID: 0}
 --- !u!65 &1477636707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12978,6 +13102,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8b1f75d755aed874996b0779196ddd83, type: 3}
+--- !u!114 &1633681221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8925229626990312033, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+    type: 3}
+  m_PrefabInstance: {fileID: 636155568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1641230515
 GameObject:
   m_ObjectHideFlags: 0
@@ -13578,6 +13714,18 @@ MonoBehaviour:
   maxAudioDistance: 15
   listener: {fileID: 0}
   recorder: {fileID: 0}
+--- !u!114 &1692468745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8925229626512791166, guid: ee7bb70954fb28e4089aa04c0a99aa99,
+    type: 3}
+  m_PrefabInstance: {fileID: 636155568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1710660970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13961,7 +14109,7 @@ GameObject:
   - component: {fileID: 1730458926}
   - component: {fileID: 1730458925}
   - component: {fileID: 1730458924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SimpleLink Variant (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13994,9 +14142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/selfservice/FindStore
+  analytics: {fileID: 0}
 --- !u!65 &1730458925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19517,7 +19667,7 @@ GameObject:
   - component: {fileID: 1608920289823215248}
   - component: {fileID: 8202668948067722568}
   - component: {fileID: 6442403264405878317}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20038,9 +20188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/product/ergobaby-omni-360-cool-air-mesh-baby-carrier/5125450
+  analytics: {fileID: 0}
 --- !u!114 &3975841885012127582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20053,9 +20205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/product/skip-hop-reg-forma-backpack-diaper-bag/5210846
+  analytics: {fileID: 0}
 --- !u!114 &3975841885027273401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20068,9 +20222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/store/product/4moms-reg-mamaroo-reg-4-classic-infant-seat-in-black/1061817777
+  analytics: {fileID: 0}
 --- !u!1 &4137138535247175487
 GameObject:
   m_ObjectHideFlags: 0
@@ -23194,7 +23350,7 @@ GameObject:
   - component: {fileID: 89801367064205400}
   - component: {fileID: 5843885411904449832}
   - component: {fileID: 2755199869593693577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23213,7 +23369,7 @@ GameObject:
   - component: {fileID: 89801367049944511}
   - component: {fileID: 5843885412024125647}
   - component: {fileID: 2755199869575121006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23232,7 +23388,7 @@ GameObject:
   - component: {fileID: 89801367358457852}
   - component: {fileID: 5843885411644797580}
   - component: {fileID: 2755199870424822317}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32612,7 +32768,7 @@ GameObject:
   - component: {fileID: 6887657765435125114}
   - component: {fileID: 6887657765435125117}
   - component: {fileID: 6887657765435125118}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BBB Logo (interactable link)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32706,9 +32862,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a337a91c91e942a6c5005b70dc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesUsed: 0
   assetParts: []
   canAttach: 0
   linkURL: https://www.buybuybaby.com/
+  analytics: {fileID: 0}
 --- !u!65 &6887657765435125118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40965,7 +41123,7 @@ GameObject:
   - component: {fileID: 7404124963752161885}
   - component: {fileID: 5747018285991093543}
   - component: {fileID: 3975841885012127582}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightBackStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40984,7 +41142,7 @@ GameObject:
   - component: {fileID: 7404124963975944122}
   - component: {fileID: 5747018285774504128}
   - component: {fileID: 3975841885027273401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SimpleLink Variant (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41003,7 +41161,7 @@ GameObject:
   - component: {fileID: 7404124964806805534}
   - component: {fileID: 5747018286034952036}
   - component: {fileID: 3975841884783351069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: backLeftStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

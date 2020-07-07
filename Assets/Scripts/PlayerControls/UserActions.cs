@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using Random = UnityEngine.Random;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -28,6 +29,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public InteractableRayIdentifier playerActionRay;
     public Animator anim;
     public TextMesh playerName;
+    public float loginTimer = 0.0f;
+    public List<string> objectsInteracted;
 
     GameObject bodyOrigin;
     public bool disableServer = false;
@@ -41,6 +44,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         AttachControlsReference();
         playerController = GetComponent<FirstPersonAIO>();
         gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
+        //InvokeRepeating("UpdateLoginTime", 1.0f, 1.0f);
 
         //binds these buttons to the functions
         //i.e. the primary action button will activate the Interact function
@@ -61,13 +65,16 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Start() {
         //Debug.Log("Attaching anim");
         Invoke("AttachAnim", 1.0f);
-        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
-        if(photonView.IsMine)
-            gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
+        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();        
+
+        //cutting off webgl micrphone setting for now
+        //if(photonView.IsMine)
+            //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
         
         //Announce();
         
     }
+
     /*
     public void Announce()
     {
@@ -104,6 +111,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         AttachControlsReference();
 
+        loginTimer += Time.deltaTime;
+
         //todo: disable if in VR
         if(anim)
         {
@@ -119,7 +128,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
             }
         }
-
     }
 
     private void AttachControlsReference()
@@ -290,12 +298,31 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         anim.SetFloat("speed", playerController.groundVelocity);        
     }
 
+    public void AddInteractedData(GameObject interactedObject)
+    {
+        Hashtable hash = new Hashtable();
+        objectsInteracted.Add(interactedObject.name);
+        hash.Add("InteractedList", objectsInteracted);
+        //PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+    }   
+
+    public void UpdateLoginTime()
+    {
+        /* Not working
+        Hashtable hash = new Hashtable();        
+        hash.Add("LoginTime", loginTimer);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["LoginTime"]);
+        */
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting)
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+            stream.SendNext(loginTimer);
             if(anim)
                 stream.SendNext(anim.GetFloat("speed"));            
         } else {

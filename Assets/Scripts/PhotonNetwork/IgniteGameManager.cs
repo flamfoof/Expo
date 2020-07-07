@@ -13,6 +13,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     static public IgniteGameManager IgniteInstance;
     public VoiceManager voiceManager;
     public List<PhotonView> playerList;
+    public List<string> uniquePlayersLogged;
+    public int totalUniquePlayers;
     static public GameObject localPlayer;
     public GameObject spawnLoc;
     public string sceneLogin = "Login";
@@ -69,10 +71,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+                AddUniquePlayer(player);
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
+
+
         
     }
 
@@ -103,6 +108,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
+            AddUniquePlayer(newPlayer);
 
             //LoadExpo();
         }
@@ -239,4 +245,21 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void AddUniquePlayer(Player player)
+    {
+        if(!uniquePlayersLogged.Contains(player.NickName))
+        {
+            uniquePlayersLogged.Add(player.NickName);
+            Debug.Log("New unique player has joined: " + player.NickName);
+            totalUniquePlayers++;
+        }        
+    }
+
+    public void PrintPlayerStats()
+    {
+        for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            
+        }
+    }
 }

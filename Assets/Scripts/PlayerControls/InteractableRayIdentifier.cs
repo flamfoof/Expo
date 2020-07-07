@@ -71,7 +71,24 @@ public class InteractableRayIdentifier : MonoBehaviour
             //phase can be either performed, started, or cancelled.
             if(focusedObject.GetComponent<Interactables>())
             {
-                focusedObject.GetComponent<Interactables>().Perform(phase);
+                switch (phase)
+                {                        
+                    case InputActionPhase.Performed:
+                        focusedObject.GetComponent<Interactables>().Perform(phase);
+                        player.GetComponent<UserActions>().AddInteractedData(focusedObject);
+                        break;
+                    // Checks if button has been pressed
+                    case InputActionPhase.Started:
+                        focusedObject.GetComponent<Interactables>().Perform(phase);
+                        player.GetComponent<UserActions>().AddInteractedData(focusedObject);
+                        break;
+                    // Checks if button has been let go before the held time (before it's fully performed)
+                    case InputActionPhase.Canceled:
+                        focusedObject.GetComponent<Interactables>().Perform(phase);
+                        player.GetComponent<UserActions>().AddInteractedData(focusedObject);
+                        break;
+                }
+                        
             } 
         } else {
             Debug.Log("No valid object has been selected");

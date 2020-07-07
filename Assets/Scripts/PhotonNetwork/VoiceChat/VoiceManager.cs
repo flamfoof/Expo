@@ -26,23 +26,23 @@ public class VoiceManager : MonoBehaviourPunCallbacks
     private void Awake() {
         #if UNITY_WEBGL
         voicePlatform = GetComponent<SelectVoicePlatform>();
-        recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
-        listener = voicePlatform.webglVoice.GetComponent<Listener>();
+        //recorder = voicePlatform.webglVoice.GetComponent<Recorder>();
+        //listener = voicePlatform.webglVoice.GetComponent<Listener>();
 
-        CustomMicrophone.RequestMicrophonePermission();
-
+        //CustomMicrophone.RequestMicrophonePermission();
+        /*
         if(!gameManager)
         {
             gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
             if(!gameManager)
                 Debug.Log("There is no game manager");
-        }
+        }*/
 
-        listener.SpeakersUpdatedEvent += RefreshWebGLSpeakers;
+        //listener.SpeakersUpdatedEvent += RefreshWebGLSpeakers;
 
         if(recordAtStart)
         {
-            recorder.StartRecord();
+            //recorder.StartRecord();
         }
         #endif
 

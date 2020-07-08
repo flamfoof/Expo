@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6715458132555031625}
   - component: {fileID: 6776445252089647778}
+  - component: {fileID: 1681540966}
   m_Layer: 0
   m_Name: Voice
   m_TagString: Untagged
@@ -153,3 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webglVoice: {fileID: 0}
   platformVoice: {fileID: 6119953973639658707}
+--- !u!114 &1681540966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715458132555031630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bef02e87d2b454b80135b61b1e5f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  recordAtStart: 1
+  minAudioDistance: 0
+  maxAudioDistance: 15

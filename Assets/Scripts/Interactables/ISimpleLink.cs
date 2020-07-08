@@ -6,12 +6,13 @@ public class ISimpleLink : Interactables
 {
     public string linkURL;
     public IgniteAnalytics analytics;
-
+    public bool isSlide = false;
     [DllImport("__Internal")]
 	private static extern void openWindow(string url);
     
     public override void Perform(InputActionPhase phase)
     {
+
         if(phase == InputActionPhase.Started)
         {
             TimesUsed++;

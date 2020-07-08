@@ -20,7 +20,7 @@ public class ISimpleSlide : Interactables
     {
         print(currentSlide);
         print(slides.Length);
-        if (currentSlide < slides.Length)
+        if (currentSlide < slides.Length-1)
         {
 
             slides[currentSlide].SetActive(false);

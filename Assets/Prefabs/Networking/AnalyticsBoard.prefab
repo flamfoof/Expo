@@ -26,8 +26,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8925229625970683032}
-  m_LocalRotation: {x: 0.0035471425, y: 0.6897209, z: -0.0037282652, w: 0.724057}
-  m_LocalPosition: {x: 0, y: 0, z: -0.018}
+  m_LocalRotation: {x: 0.0036510795, y: 0.7099056, z: -0.0036265426, w: 0.70427805}
+  m_LocalPosition: {x: 0, y: 0, z: -0.019}
   m_LocalScale: {x: 0.0015954968, y: 0.0015952766, z: 0.00165834}
   m_Children:
   - {fileID: 8925229627307963790}
@@ -36,10 +36,10 @@ RectTransform:
   - {fileID: 8925229626512791105}
   m_Father: {fileID: 8925229626438997099}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.59000003, y: 90.456, z: 0.004}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.013, y: 0.348}
+  m_AnchoredPosition: {x: -0.007, y: 0.348}
   m_SizeDelta: {x: 724, y: 418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8925229625970683031
@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 8925229626438997099}
   - component: {fileID: 8925229626438997098}
   - component: {fileID: 8925229626438997101}
+  - component: {fileID: 675095842}
+  - component: {fileID: 675095843}
   m_Layer: 9
   m_Name: AnalyticsBoard
   m_TagString: Untagged
@@ -127,7 +129,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8925229626438997100}
-  m_LocalRotation: {x: 0.00012807308, y: 0.024279252, z: 0.0051444904, w: 0.99969196}
+  m_LocalRotation: {x: 0.00012503016, y: 0.02428351, z: 0.005147181, w: 0.99969184}
   m_LocalPosition: {x: 76.93, y: 0.76114, z: 63.149}
   m_LocalScale: {x: 3.5055084, y: 3.644455, z: 3.6442652}
   m_Children:
@@ -183,6 +185,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &675095842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925229626438997100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 675095843}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &675095843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925229626438997100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46ea0da29d67b84bae025557653eb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  attendees: 0
+  clicks: 0
+  avgSessionTime: 0
+  attendeesText: {fileID: 8925229626602608008}
+  sessionText: {fileID: 8925229626990312033}
+  clicksText: {fileID: 8925229626512791166}
 --- !u!1 &8925229626512791104
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +459,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Avg. Session Time:'
+  m_Text: 'Avg. Session Time: '
 --- !u!1 &8925229627307963793
 GameObject:
   m_ObjectHideFlags: 0

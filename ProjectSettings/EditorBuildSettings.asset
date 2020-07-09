@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/StoreAssets/FrostweepGames/FrostweepGamesPlugins/WebGLPUNVoice/Examples/Demo_1/FGP_Demo_1.unity
     guid: ce2cb076d1c4be6409b8fcf58e4e5a1b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TrainingRoom.unity
     guid: 07d7818c4f1f54c47bce6fe62ecc59ea
+  - enabled: 1
+    path: Assets/Scenes/Distillery.unity
+    guid: b20d01c9ce15a374083608b6d4b30c52
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 9d4987e3f08e71c44b6de977544869a2,
       type: 2}

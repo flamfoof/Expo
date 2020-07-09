@@ -121,7 +121,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         }
         attendeesText.text = "Attendees: " + attendees;
         sessionText.text = "Avg. Session Time: " + sessionTempText;
-        clicksText.text = "Baby Seat Clicks: " + clicks;
+        clicksText.text = "Web Clicks: " + clicks;
     }
 
     //may not be necessary

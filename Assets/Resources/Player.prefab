@@ -509,10 +509,10 @@ MonoBehaviour:
   targetAngles: {x: 0, y: 0, z: 0}
   playerCanMove: 1
   walkByDefault: 1
-  walkSpeed: 4
+  walkSpeed: 4.46
   sprintKey: 0
-  sprintSpeed: 12
-  jumpPower: 5
+  sprintSpeed: 7.1
+  jumpPower: 3.03
   canJump: 1
   canHoldJump: 0
   useStamina: 1

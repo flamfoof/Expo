@@ -127,28 +127,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4547979283460984810}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &172572390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172572389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 900
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &665550733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,6 +1342,11 @@ PrefabInstance:
       propertyPath: scene
       value: Distillery
       objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: maxPlayerCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2857749407582345353, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -1843,30 +1826,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
-        type: 3}
-      propertyPath: female1Prefab
-      value: 
-      objectReference: {fileID: 1815713559427966425, guid: a2b3537dd555eeb4c9e3c2e753c96b49,
-        type: 3}
-    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
-        type: 3}
-      propertyPath: female2Prefab
-      value: 
-      objectReference: {fileID: 1815713559427966425, guid: 1383b62f58dd6ea4e877b7531b97ce87,
-        type: 3}
-    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
-        type: 3}
-      propertyPath: male1Prefab
-      value: 
-      objectReference: {fileID: 2064870090830731533, guid: 6a741060ce98073459704d7c5e500624,
-        type: 3}
-    - target: {fileID: 4547979283633418508, guid: f350403036669fb48b3ed05542bff123,
-        type: 3}
-      propertyPath: male2Prefab
-      value: 
-      objectReference: {fileID: 2064870090830731533, guid: 87ec2dbf20943014f800610f64c6062c,
-        type: 3}
+    - target: {fileID: 172572390, guid: f350403036669fb48b3ed05542bff123, type: 3}
+      propertyPath: viewIdField
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 4547979283633418509, guid: f350403036669fb48b3ed05542bff123,
         type: 3}
       propertyPath: m_LocalPosition.x

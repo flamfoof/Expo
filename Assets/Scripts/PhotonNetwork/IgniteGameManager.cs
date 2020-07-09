@@ -93,7 +93,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     {
         RefreshPlayerList();
 
-        voiceManager.RefreshWebGLSpeakers();
+        if(voiceManager)
+            voiceManager.RefreshWebGLSpeakers();
         
         RefreshAvatars();
         Invoke("RefreshAvatars", 3.0f);
@@ -128,7 +129,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
         RefreshPlayerList();
 
-        voiceManager.RefreshWebGLSpeakers();
+        if(voiceManager)
+            voiceManager.RefreshWebGLSpeakers();
     }
 
     public override void OnLeftRoom()

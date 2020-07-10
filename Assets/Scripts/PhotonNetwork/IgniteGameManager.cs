@@ -25,6 +25,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        
         playerList = new List<PhotonView>();
                 
         if(!voiceManager)
@@ -80,6 +81,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         
     }
 
+    void PrintRoomName()
+    {
+        Debug.Log("room name");
+        Debug.Log("Client state: " + PhotonNetwork.NetworkClientState.ToString());
+        Debug.Log("Server: " + PhotonNetwork.Server.ToString());
+        Debug.Log(PhotonNetwork.CurrentRoom != null ? PhotonNetwork.CurrentRoom.Name : "Not Joined");
+    }
 
     //doesn't work. The player instantiates later than when joined room
     void RPCRefreshAvatar()

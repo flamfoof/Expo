@@ -110,8 +110,19 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         LogFeedback("Unable to join a random room: Creating a new Space");
         Debug.Log("Unable to join a random room: Creating a new Space");
 
+        // Not being used yet, but will be helpful later in adjusting room options
+        RoomOptions roomOptions = new RoomOptions()
+        {
+            MaxPlayers = 0,
+            IsOpen = true,
+            IsVisible = true,
+            PublishUserId = false,
+            CleanupCacheOnLeave = false,
+        };
+
         //unable to join a random room, so just make one because there are none at the moment.
-        PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions{MaxPlayers = this.maxPlayerCount});
+        //PhotonNetwork.CreateRoom("VoiceRoom_" + System.DateTime.Now.Ticks, roomOptions);
+        PhotonNetwork.CreateRoom("Ignite_" + System.DateTime.Now.Ticks, new Photon.Realtime.RoomOptions{MaxPlayers = this.maxPlayerCount});
     }
 /*
     private void OnDisconnected(DisconnectCause info) 

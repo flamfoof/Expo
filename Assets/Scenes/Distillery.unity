@@ -2140,10 +2140,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_PlayOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.data[0]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}

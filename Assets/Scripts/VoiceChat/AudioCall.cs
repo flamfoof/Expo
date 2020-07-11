@@ -105,6 +105,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             audioCallUI = GetComponent<AudioCallUI>();
         }
+        StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
+        UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
     }
 
     void Update()
@@ -113,6 +115,26 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             mCall.Update();
         }
+    }
+
+    /// <summary>
+    /// Called once the call factory is ready to be used.
+    /// </summary>
+    protected virtual void OnCallFactoryReady()
+    {
+        //set to warning for regular use
+        UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
+    }
+    /// <summary>
+    /// Called if the call factory failed to initialize.
+    /// This is usually an asset configuration error, attempt to run a platform that isn't supported or the user
+    /// managed to run the app while blocking video / audio access
+    /// </summary>
+    /// <param name="error">Error returned by the init process.</param>
+    protected virtual void OnCallFactoryFailed(string error)
+    {
+        string fullErrorMsg = typeof(CallApp).Name + " can't start. The " + typeof(UnityCallFactory).Name + " failed to initialize with following error: " + error;
+        Debug.LogError(fullErrorMsg);
     }
 
     void GetRoomID()

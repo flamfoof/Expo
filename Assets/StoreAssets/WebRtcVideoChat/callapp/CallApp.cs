@@ -513,6 +513,7 @@ public class CallApp : MonoBehaviour
         mUseAddress = address;
         InternalJoin();
     }
+    
     private void InternalJoin()
     {
         if (mCallActive)

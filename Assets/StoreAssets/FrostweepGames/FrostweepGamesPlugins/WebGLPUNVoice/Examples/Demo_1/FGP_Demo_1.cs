@@ -57,6 +57,7 @@ namespace FrostweepGames.WebGLPUNVoice.Examples
             stateText.text = "Client state: " + PhotonNetwork.NetworkClientState.ToString();
             serverText.text = "Server: " + PhotonNetwork.Server.ToString();
             roomNameText.text = "Room: " + (PhotonNetwork.CurrentRoom != null ? PhotonNetwork.CurrentRoom.Name : "Not Joined");
+            Debug.Log(PhotonNetwork.CurrentRoom != null ? PhotonNetwork.CurrentRoom.Name : "Not Joined");
         }
 
         private void SpeakersUpdatedEventHandler()

@@ -46,12 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceID: 
   audioCallUI: {fileID: 1681540967}
-  uSignalingUrl: ws://signaling.because-why-not.com/callapp
-  uSecureSignalingUrl: wss://signaling.because-why-not.com/callapp
+  uSignalingUrl: ws://rtc-ignite-voice.herokuapp.com/
+  uSecureSignalingUrl: wss://rtc-ignite-voice.herokuapp.com/
   uForceSecureSignaling: 0
   uIceServer: stun:stun.because-why-not.com:443
-  uIceServerUser: testuser14
-  uIceServerPassword: pass14
+  uIceServerUser: na
+  uIceServerPassword: na
   uIceServer2: stun:stun.l.google.com:19302
 --- !u!114 &1681540967
 MonoBehaviour:

@@ -12,6 +12,15 @@ public class LobbyLauncherUI : MonoBehaviour
 
     public AssignPlayerAvatar assignPlayerAva;
 
+    #region Public Variable
+    [SerializeField]private InputField usernameInput;
+    [SerializeField]private InputField emailInput;
+    [SerializeField]private InputField passwordInput;
+    [SerializeField]private Text nameFeedbackTxt;
+    [SerializeField] private Text emailFeedbackTxt;
+    [SerializeField] private Text passwordFeedbackTxt;
+    #endregion
+
     public static string playerUsername = "Username";
     public static string playerNickname = "Nickname";
 
@@ -22,6 +31,9 @@ public class LobbyLauncherUI : MonoBehaviour
     }
     void Start()
     {
+        Debug.Log("The name........." +PlayerPrefs.GetString("Name"));
+        Debug.Log("The email.............."+PlayerPrefs.GetString("Email"));
+        Debug.Log("The Password............."+PlayerPrefs.GetString("Password"));
         string defaultName = "";
         assignPlayerAva = GameObject.FindObjectOfType<AssignPlayerAvatar>();
     
@@ -31,12 +43,12 @@ public class LobbyLauncherUI : MonoBehaviour
         }
 
         //sets default previous username if available
-        if(UIControls.usernameInput)
+        if(usernameInput)
         {
             if(PlayerPrefs.HasKey(playerNickname) && PlayerPrefs.GetString(playerNickname) != "")
             {
                 defaultName = PlayerPrefs.GetString(playerNickname);
-                UIControls.usernameInput.text = defaultName;
+                usernameInput.text = defaultName;
                 lobbyLauncher.validUsername = true;
                 lobbyLauncher.nickname = defaultName;
                 PhotonNetwork.NickName = defaultName;
@@ -48,9 +60,10 @@ public class LobbyLauncherUI : MonoBehaviour
 
 
         //add listener to the username input field
-        UIControls.usernameInput.onValueChange.AddListener(delegate {SetPlayerNickname(UIControls.usernameInput.text);});
-        
-        //TODO: add listner to the password input field maybe
+        usernameInput.onValueChanged.AddListener(delegate { CheckName(); });
+
+        emailInput.onValueChanged.AddListener(delegate { CheckEmail(); });
+        passwordInput.onValueChanged.AddListener(delegate { CheckPassword(); });
 
         //Add listener to button to start connecting to server
         UIControls.submitLoginButton.onClick.AddListener(delegate {lobbyLauncher.Connect();});
@@ -69,12 +82,14 @@ public class LobbyLauncherUI : MonoBehaviour
             lobbyLauncher.validUsername = false;
             UIControls.feedbackText.text = "Name cannot be empty";
             return;
-        } else if(name.Length < 2 || name.Length > 12)
+        }
+        else if(name.Length < 2 || name.Length > 12)
         {
             lobbyLauncher.validUsername = false;
             UIControls.feedbackText.text = "Name must be greater than 2 characters, and be 12 or less characters.";
             return;
-        } else {
+        }
+        else {
             UIControls.feedbackText.text = "Name is valid";        
             lobbyLauncher.validUsername = true;
             lobbyLauncher.nickname = name;   
@@ -82,14 +97,6 @@ public class LobbyLauncherUI : MonoBehaviour
         }
         
     }
-
-    public void SubmitLogin()
-    {
-        //TODO: Get username and password and compare them to the database
-        //      logins
-
-    }
-
     public GenderList.genders CheckGender(Toggle[] genderList)
     {
         for(int i = 0; i < genderList.Length; i++)
@@ -136,12 +143,73 @@ public class LobbyLauncherUI : MonoBehaviour
         }        
     }
 
-    public void CheckUsername()
+    public void SubmitButtonClick()
     {
-        if(lobbyLauncher.CheckIfValidUsername())
+        if(CheckName() && CheckEmail() && CheckPassword())
         {
             UIControls.mainLogin.SetActive(false);
             UIControls.worldSelect.SetActive(true);
+        }
+    }
+    public void CreateButtonClick()
+    {
+        UIControls.mainLogin.SetActive(false);
+        UIControls.signUp.SetActive(true);
+    }
+    private bool CheckName()
+    {
+        //Name Checking
+        if(string.IsNullOrEmpty(usernameInput.text))
+        {
+            nameFeedbackTxt.text = "Please Enter User Name";
+            return false;
+        }
+        else if(PlayerPrefs.GetString("Name","") != usernameInput.text)
+        {
+            nameFeedbackTxt.text = "Please Enter Correct Name";
+            return false;
+        }
+        else
+        {
+            nameFeedbackTxt.text = "Name is Valid";
+            return true;    
+        }
+    }
+    private bool CheckEmail()
+    {
+        //Email Checking
+        if (string.IsNullOrEmpty(emailInput.text))
+        {
+            emailFeedbackTxt.text = "Please Enter Email";
+            return false;
+        }
+        else if (PlayerPrefs.GetString("Email", "") != emailInput.text)
+        {
+            emailFeedbackTxt.text = "Please Enter Correct Email";
+            return false;
+        }
+        else
+        {
+            emailFeedbackTxt.text = "Email is Valid";
+            return true;
+        }
+    }
+    private bool CheckPassword()
+    {
+        if (string.IsNullOrEmpty(passwordInput.text))
+        {
+            passwordFeedbackTxt.text = "Please Enter Password";
+            return false;
+        }
+        else if (PlayerPrefs.GetString("Password", "") != passwordInput.text)
+        {
+            passwordFeedbackTxt.text = "Please Enter Correct Password";
+            return false;
+        }
+        else
+        {
+            passwordFeedbackTxt.text = "Password is Valid";
+            return true;
         }
     }
 }

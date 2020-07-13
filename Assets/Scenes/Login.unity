@@ -309,11 +309,81 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 941678264, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 963320460, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258676733, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710940857, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052069023, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 130550835226785125, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 130550835226785125, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 130550835226785125, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969363931858636848, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969363931858636848, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969363931858636848, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: playerInfo
       value: 
       objectReference: {fileID: 172572389}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: autoStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3761887105523843658, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5252003945651793588, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Name
@@ -374,6 +444,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6153986921982997232, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153986922414965874, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7374317886193026301, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -387,11 +467,6 @@ PrefabInstance:
     - target: {fileID: 7374317886193026301, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8778522001213881814, guid: 178b7249da4692848ab3f10f8bc0b5ac,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

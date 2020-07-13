@@ -3793,6 +3793,7 @@ GameObject:
   - component: {fileID: 886160647006048944}
   - component: {fileID: 9090115007503685312}
   - component: {fileID: 8873539399625032855}
+  - component: {fileID: 2260131597315040709}
   m_Layer: 5
   m_Name: SignUp
   m_TagString: Untagged
@@ -3868,6 +3869,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2260131597315040709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184063077748775895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0917e4048b5b4242b4757b9829a3ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameField: {fileID: 4320867647346447948}
+  emailField: {fileID: 4944279661816695123}
+  passwordField: {fileID: 7593969586861416640}
+  confirmPasswordField: {fileID: 5157162344145920337}
+  feedbackTxt: {fileID: 1413052304506732926}
 --- !u!1 &3270446856371939116
 GameObject:
   m_ObjectHideFlags: 0
@@ -4886,7 +4904,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3995362707398378465}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2260131597315040709}
+        m_MethodName: CreateButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6563462885500547584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6499,13 +6528,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainLogin: {fileID: 2162333994605552252}
+  signUp: {fileID: 0}
   characterSelect: {fileID: 7854397001692638958}
   worldSelect: {fileID: 7854397001692638958}
   feedbackText: {fileID: 8272999753928077764}
   loadingIcon: {fileID: 497622069}
   submitLoginButton: {fileID: 2264501641964227227}
-  usernameInput: {fileID: 65154111}
-  passwordInput: {fileID: 340651896503257908}
   genderToggle: {fileID: 50980663}
   genderList:
   - {fileID: 1257479102}

@@ -172,13 +172,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
         //use video and audio by default (the UI is toggled on by default as well it will change on click )
         mediaConfig.Audio = true;
-        mediaConfig.Video = true;
+        mediaConfig.Video = false;
         mediaConfig.VideoDeviceName = null;
 
         //This format is the only reliable format that works on all
         //platforms currently.
         mediaConfig.Format = FramePixelFormat.ABGR;
 
+        /* original lines
         mediaConfig.MinWidth = 160;
         mediaConfig.MinHeight = 120;
         //Larger resolutions are possible in theory but
@@ -192,7 +193,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //will be overwritten by UI in normal use
         mediaConfig.IdealWidth = 160;
         mediaConfig.IdealHeight = 120;
+        mediaConfig.IdealFrameRate = 30;*/
+
+        mediaConfig.MinWidth = 0;
+        mediaConfig.MinHeight = 0;
+        mediaConfig.MaxWidth = 0;
+        mediaConfig.MaxHeight = 0;
+        mediaConfig.IdealWidth = 0;
+        mediaConfig.IdealHeight = 0;
         mediaConfig.IdealFrameRate = 30;
+
         return mediaConfig;
     }
 
@@ -207,7 +217,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //Byn.Awrtc.Native.InternalDataPeer.sDebugIgnoreTypSrflx = true;
 
         NetworkConfig netConfig = CreateNetworkConfig();
-
+        //this is what we need for multiple audio connections
+        netConfig.IsConference = true;
 
         Debug.Log("Creating call using NetworkConfig:" + netConfig);
         mCall = CreateCall(netConfig);

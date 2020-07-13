@@ -31,8 +31,15 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
     public byte maxPlayerCount = 10;
     public GameObject playerInfo;
 
+    //for testing purposes
+    public bool autoStart = false;
+
     private void Awake() 
     {
+        #if !UNITY_EDITOR
+        autoStart = false;
+        #endif
+
         lobbyUI = GetComponent<LobbyLauncherUI>();
         if(!playerInfo)
         {
@@ -44,6 +51,16 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if(autoStart)
+        {
+            PhotonNetwork.NickName = "Testor";
+            PhotonNetwork.GameVersion = this.gameVersion;
+            PhotonNetwork.ConnectUsingSettings();
+            validUsername = true;
+            Connect();
+            Debug.Log("Starting editor scene shortcut");
+        }
+
         lobbyUI.UIControls.feedbackText.text = "";
         Debug.Log("Start connecting");
     }

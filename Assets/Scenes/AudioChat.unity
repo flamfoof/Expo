@@ -360,6 +360,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5808136504793770182, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: uSignalingUrl
+      value: ws://rtc-ignite-voice.herokuapp.com/conferenceapp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808136504793770182, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: uSecureSignalingUrl
+      value: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
+      objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalPosition.x

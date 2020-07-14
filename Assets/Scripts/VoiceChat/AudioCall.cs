@@ -81,13 +81,13 @@ public class AudioCall : MonoBehaviourPunCallbacks
     protected string mUseAddress = null;
     protected MediaConfig mMediaConfigInUse;
     protected ConnectionId mRemoteUserId = ConnectionId.INVALID;
-
-
     protected bool mAutoRejoin = true;
     protected IEnumerator mAutoRejoinCoroutine = null;
-    protected float mRejoinTime = 3600;
+    protected float mRejoinTime = 0.5f;
 
     protected bool mLocalFrameEvents = true;
+
+    public Action audioState;
 
     private void Awake() {
         mMediaConfig = CreateMediaConfig();
@@ -142,15 +142,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
         Debug.Log("Finding Voice Room ID...");
         if(voiceID == "")
         {                                      
-            voiceID = "Voice_" + PhotonNetwork.CurrentRoom.Name;
-            Debug.Log(voiceID); 
-            Debug.Log("Sucessfully found a room");
-            CancelInvoke("GetRoomID");
-            SetupCall();
-            Join(voiceID);
+            ConnectToRoom();
         } else {
             Debug.Log("Failed to find Voice ID");
         }
+    }
+    
+    public void ConnectToRoom()
+    {
+        voiceID = "Voice_" + PhotonNetwork.CurrentRoom.Name;
+        Debug.Log(voiceID); 
+        Debug.Log("Sucessfully found a room");
+        CancelInvoke("GetRoomID");
+        SetupCall();
+        Join(voiceID);
     }
 
     public virtual MediaConfig CreateMediaConfig()

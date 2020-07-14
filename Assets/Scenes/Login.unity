@@ -210,6 +210,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1216247490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379742739992456666, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749407078148979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1663164917
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +450,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6076173221586932525, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: worldSelect
+      value: 
+      objectReference: {fileID: 1216247490}
     - target: {fileID: 6153986921982997232, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Text
@@ -468,6 +479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124284292488060182, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SubmitButtonClick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}

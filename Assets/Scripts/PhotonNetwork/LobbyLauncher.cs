@@ -79,6 +79,13 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
 
+        if(!lobbyUI.hasSelectedAvatar)
+        {
+            lobbyUI.UIControls.characterFeedbackText.text = "Please select a character";
+            lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(true);
+            return;
+        }
+
         //play the idle loading animation
         lobbyUI.PlayLoadAnimation(true);
 

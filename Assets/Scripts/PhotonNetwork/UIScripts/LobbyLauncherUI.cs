@@ -11,6 +11,7 @@ public class LobbyLauncherUI : MonoBehaviour
     private LobbyLauncher lobbyLauncher;
 
     public AssignPlayerAvatar assignPlayerAva;
+    public bool hasSelectedAvatar = false;
 
     #region Public Variable
     [SerializeField]private InputField usernameInput;
@@ -108,6 +109,7 @@ public class LobbyLauncherUI : MonoBehaviour
         {
             if(genderList[i].isOn)
             {
+                hasSelectedAvatar = true;
                 switch(genderList[i].GetComponent<GenderList>().gender)
                 {
                     case GenderList.genders.Male1: 
@@ -182,7 +184,7 @@ public class LobbyLauncherUI : MonoBehaviour
             return false;
         }
         else
-        {            
+        {
             nameFeedbackTxt.text = "Name is Valid";
             SetPlayerNickname(usernameInput.text);
             return true;    
@@ -225,6 +227,7 @@ public class LobbyLauncherUI : MonoBehaviour
                 passwordFeedbackTxt.text = "Ignite!";
                 return true;
             }
+            return true;
         }
 
         if (string.IsNullOrEmpty(passwordInput.text))

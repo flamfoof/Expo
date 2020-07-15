@@ -8361,7 +8361,7 @@ PrefabInstance:
     - target: {fileID: 5808136504793770182, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: uIceServer2
-      value: stun.l.google.com:19302
+      value: stun:stun.l.google.com:19302
       objectReference: {fileID: 0}
     - target: {fileID: 5808136504793770182, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}

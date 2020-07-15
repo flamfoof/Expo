@@ -317,13 +317,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 //this usually means a user is using the string / room name already to wait for incoming calls
                 //try to connect to this user
                 //(note might also mean the server is down or the name is invalid in which case call will fail as well)
+                /*
                 if(!isConference)
                 {
                     mCall.Call(mUseAddress);
                 } else {
                     mCall.Listen(mUseAddress);
-                }
-                //mCall.Call(mUseAddress);
+                }*/
+                mCall.Call(mUseAddress);
                     
                 
                 break;

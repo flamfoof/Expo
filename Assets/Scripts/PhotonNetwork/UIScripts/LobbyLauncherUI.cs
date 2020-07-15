@@ -22,7 +22,12 @@ public class LobbyLauncherUI : MonoBehaviour
     #endregion
 
     public static string playerUsername = "Username";
-    public static string playerNickname = "Nickname";
+    public static string playerNickname = "Name";
+    
+    //for testing purposes
+    public bool skipName = false;
+    public bool skipEmail = false;
+    public bool skipPass = false;
 
 
     private void Awake() {
@@ -31,7 +36,7 @@ public class LobbyLauncherUI : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("The name........." +PlayerPrefs.GetString("Name"));
+        Debug.Log("The name........." +PlayerPrefs.GetString(playerNickname));
         Debug.Log("The email.............."+PlayerPrefs.GetString("Email"));
         Debug.Log("The Password............."+PlayerPrefs.GetString("Password"));
         string defaultName = "";
@@ -158,6 +163,13 @@ public class LobbyLauncherUI : MonoBehaviour
     }
     private bool CheckName()
     {
+        if(skipName)
+        {
+            nameFeedbackTxt.text = "Name is valid";
+            SetPlayerNickname(usernameInput.text);
+            return true;
+        }
+        
         //Name Checking
         if(string.IsNullOrEmpty(usernameInput.text))
         {
@@ -170,13 +182,23 @@ public class LobbyLauncherUI : MonoBehaviour
             return false;
         }
         else
-        {
+        {            
             nameFeedbackTxt.text = "Name is Valid";
+            SetPlayerNickname(usernameInput.text);
             return true;    
         }
     }
     private bool CheckEmail()
     {
+        if(skipEmail)
+        {
+            if(emailInput.text == "ignite")
+            {
+                emailFeedbackTxt.text = "Ignite!";
+                return true;
+            }
+        }
+        
         //Email Checking
         if (string.IsNullOrEmpty(emailInput.text))
         {
@@ -196,6 +218,15 @@ public class LobbyLauncherUI : MonoBehaviour
     }
     private bool CheckPassword()
     {
+        if(skipPass)
+        {
+            if(passwordInput.text == "ignite")
+            {
+                passwordFeedbackTxt.text = "Ignite!";
+                return true;
+            }
+        }
+
         if (string.IsNullOrEmpty(passwordInput.text))
         {
             passwordFeedbackTxt.text = "Please Enter Password";

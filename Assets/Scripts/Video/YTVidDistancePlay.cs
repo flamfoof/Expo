@@ -8,6 +8,9 @@ public class YTVidDistancePlay : MonoBehaviour
     public List<GameObject> playerList;
     public GameObject player;
     public float distanceThreshold = 6.0f;
+    [Tooltip("The minimum distance away from video that")]
+    public float distanceMinimumAudioDist = 4.0f;
+    public float distanceToFocusedVid = 0.0f;
     public bool firstFocused = false;
     public bool isFocusedOnVid = false;
     public YoutubePlayer currentFocused;
@@ -23,7 +26,7 @@ public class YTVidDistancePlay : MonoBehaviour
             if(!vid.GetComponent<LocalVideoPlay>().isLocal)
                 listYT.Add(vid);
         }
-        Invoke("FindPlayer", 1);
+        Invoke("FindPlayer", 1.0f);
 //        Debug.Log("started youtube videos");
         #if UNITY_WEBGL
         //Calls an update every 0.5 seconds to this function
@@ -31,6 +34,30 @@ public class YTVidDistancePlay : MonoBehaviour
 
         #endif
     }
+
+    #if UNITY_WEBGL
+    private void Update() {
+        if(currentFocused)
+        {
+            float distance;
+            float minAudioDist = currentFocused.gameObject.GetComponent<LocalVideoPlay>().minDistVolume;
+            float maxAudioDist = currentFocused.gameObject.GetComponent<LocalVideoPlay>().maxDistVolume;
+            
+            distanceToFocusedVid = Vector3.Distance(currentFocused.transform.position, player.transform.position);
+            distance = maxAudioDist - distanceToFocusedVid - minAudioDist;
+
+            Debug.Log((distance));
+
+            if(distance < 0.0f)
+                distance = 0.0f;
+
+            if(distance > maxAudioDist)
+                distance = maxAudioDist;
+
+            currentFocused.videoPlayer.SetDirectAudioVolume(0, (distance / (maxAudioDist - minAudioDist)));
+        }
+    }
+    #endif
 
     void FindPlayer()
     {
@@ -56,16 +83,19 @@ public class YTVidDistancePlay : MonoBehaviour
     {
         for(int i = 0; i < listYT.Count; i++)
         {
+            float currentDistance = Vector3.Distance(listYT[i].transform.position, player.transform.position);
             //Debug.Log("Distance: " + listYT[i].name + Vector3.Distance(listYT[i].transform.position, player.transform.position));
             if(!currentFocused)
             {
-                if(Vector3.Distance(listYT[i].transform.position, player.transform.position) < distanceThreshold && !firstFocused)
+                
+                if(currentDistance < distanceThreshold && !firstFocused)
                 {
                     for(int j = 0; j < listYT.Count; j++)
                     {
                         firstFocused = true;
                         prevFocused = listYT[i].gameObject.GetComponent<YoutubePlayer>();
                         currentFocused = listYT[i].gameObject.GetComponent<YoutubePlayer>();
+                        distanceToFocusedVid = currentDistance;
                         //Debug.Log("Found first video");
                     }
                     //Debug.Log("first is : " + listYT[i].name);
@@ -74,10 +104,11 @@ public class YTVidDistancePlay : MonoBehaviour
                     return;
                 }
             } else {
-                if(Vector3.Distance(listYT[i].gameObject.transform.position, player.transform.position) < distanceThreshold && currentFocused != listYT[i])
+                if(currentDistance < distanceThreshold && currentFocused != listYT[i])
                 {
                     //Debug.LogError("Happened " + ++count);
-                    SetFocus(listYT[i]);                    
+                    SetFocus(listYT[i]);   
+                    distanceToFocusedVid = currentDistance;                 
                 }
             }
         }

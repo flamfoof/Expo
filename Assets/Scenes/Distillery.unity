@@ -330,6 +330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1422133561, guid: b394027809c5d1b499b6826424a6d892, type: 3}
+      propertyPath: distanceMinimumAudioDist
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_Name
@@ -2128,7 +2132,7 @@ PrefabInstance:
     - target: {fileID: 82278814088756274, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_Volume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
@@ -2143,7 +2147,17 @@ PrefabInstance:
     - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_EnabledAudioTracks.Array.data[0]
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.data[0]
+      value: 0.104
       objectReference: {fileID: 0}
     - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
@@ -2153,7 +2167,27 @@ PrefabInstance:
     - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_EnabledAudioTracks.Array.data[0]
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.data[0]
+      value: 0.251
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_DirectAudioMutes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347472036959655579, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: minDistVolume
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}

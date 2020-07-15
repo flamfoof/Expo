@@ -383,7 +383,12 @@ PrefabInstance:
     - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: autoStart
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: scene
+      value: MainConference
       objectReference: {fileID: 0}
     - target: {fileID: 3761887105523843658, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}

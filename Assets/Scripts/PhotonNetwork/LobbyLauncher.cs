@@ -55,6 +55,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = "Testor";
             PhotonNetwork.GameVersion = this.gameVersion;
+            nickname = "Testor";
             PhotonNetwork.ConnectUsingSettings();
             validUsername = true;
             Connect();
@@ -178,7 +179,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             "\n Your name must be between 2-12 characters in length";
             return false;
         } else {
-            PlayerPrefs.SetString(LobbyLauncherUI.playerNickname, nickname);
+            PlayerPrefs.SetString("Name", nickname);
             //Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
             PhotonNetwork.NickName = nickname;
             return true;

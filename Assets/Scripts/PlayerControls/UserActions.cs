@@ -25,7 +25,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     public GameObject playerUI;
-    public bool isAppFocused;
+    public bool isAppFocused = true;
+    public bool isMenuOpen = false;
     private Vector3 realPosition;
     private Quaternion realRotation;
     private CanvasGroup infoCanvasGroup;
@@ -89,8 +90,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
-        actionEmailBttn.started += context => EmailButton(context);
-        actionEmailBttn.canceled += context => EmailButton(context);
+        //actionEmailBttn.started += context => EmailButton(context);
+        //actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -131,7 +132,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionMove.Enable();
         actionSprint.Enable();
         actionMenu.Enable();
-        actionEmailBttn.Enable();
+        //actionEmailBttn.Enable();
         
     }
 
@@ -141,7 +142,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Disable();
         actionMove.Disable();
         actionSprint.Disable();
-        actionEmailBttn.Disable();
+        //actionEmailBttn.Disable();
     }
 
 
@@ -210,13 +211,18 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             actionLook = playerInput.actions["Look"];
             actionMove = playerInput.actions["Move"];
             actionSprint = playerInput.actions["Sprint"];
-                 
+            actionMenu = playerInput.actions["Menu"];
         }
     }
 
     private void Interact(InputAction.CallbackContext ctx)
     {               
         //Debug.Log(ctx.phase);
+        if(isMenuOpen)
+        {
+            return;
+        }
+        
         switch (ctx.phase)
         {                        
             // For when button is held.
@@ -301,7 +307,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 if (ctx.interaction is SlowTapInteraction)
                     isButtonHeld = true;
                 
-                Emote();
+                //Emote();
                 break;
 
             case InputActionPhase.Canceled:
@@ -334,16 +340,31 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         switch (ctx.phase)
         {
-            case InputActionPhase.Performed:
-                playerUI.SetActive(!playerUI.activeSelf);
+            case InputActionPhase.Performed:                
                 break;
 
             case InputActionPhase.Started:
+                OpenMenu();
                 break;
 
             case InputActionPhase.Canceled:
                 break;
         }
+    }
+
+    public void OpenMenu()
+    {
+        if(isMenuOpen)
+        {
+            StartCoroutine(RefocusApplicationCursor());
+            playerUI.SetActive(false);
+            isMenuOpen = !isMenuOpen;
+        } else {
+            StartCoroutine(UnfocusApplicationCursor());
+            playerUI.SetActive(true);
+            isMenuOpen = !isMenuOpen;
+        }
+        
     }
 
     public void Emote()
@@ -428,13 +449,20 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         Cursor.visible = false;
     }
 
+    public IEnumerator UnfocusApplicationCursor()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true;
+    }
+
     private void OnApplicationFocus(bool focusStatus) 
     {
         isAppFocused = focusStatus;
         if(!isAppFocused)
         {
-            Cursor.lockState = CursorLockMode.None; 
-            Cursor.visible = true; 
+            StartCoroutine(UnfocusApplicationCursor());
             Debug.Log("Unfocused");
         } else {
             StartCoroutine(RefocusApplicationCursor());

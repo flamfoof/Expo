@@ -72,6 +72,7 @@ public class FirstPersonAIO : MonoBehaviour {
     #region Variables
 
     #region Input Settings
+    UserActions userActions;
     PlayerInput playerInput;
     InputAction actionMove;
     InputAction actionLook;
@@ -286,11 +287,18 @@ public class FirstPersonAIO : MonoBehaviour {
         
 */
     private void Start(){
-        playerInput = GetComponent<UserActions>().GetPlayerInput();
-        actionMove = GetComponent<UserActions>().GetActionMove();
-        actionLook = GetComponent<UserActions>().GetActionLook();
-        actionCrouch = playerInput.actions["Crouch"];
-        actionJump = playerInput.actions["Jump"];
+        if(GetComponent<UserActions>())
+        {
+            userActions = GetComponent<UserActions>();
+            playerInput = userActions.GetPlayerInput();
+            actionMove = userActions.GetActionMove();
+            actionLook = userActions.GetActionLook();
+            actionCrouch = playerInput.actions["Crouch"];
+            actionJump = playerInput.actions["Jump"];
+        } else {
+            Debug.Log("There is no UserAction script on this object: " + gameObject.name);
+        }
+        
         //actionSprint = playerInput.actions["Sprint"];
 
         #region Look Settings - Start
@@ -360,7 +368,8 @@ public class FirstPersonAIO : MonoBehaviour {
     private void Update(){
         #region Look Settings - Update
 
-        if(enableCameraMovement){
+
+        if(enableCameraMovement && userActions.isAppFocused && !userActions.isMenuOpen){
             
             float mouseYInput = 0;
             float mouseXInput = 0;

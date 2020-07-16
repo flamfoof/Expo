@@ -20,9 +20,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction actionPrimary;
     private InputAction actionSecondary;
     private InputAction actionSprint;
+    private InputAction actionMenu;
     private InputAction actionEmailBttn;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
+    public GameObject playerUI;
+    public bool isAppFocused;
     private Vector3 realPosition;
     private Quaternion realRotation;
     private CanvasGroup infoCanvasGroup;
@@ -85,6 +88,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSecondary.canceled += context => CancelButton(context);
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
+        actionMenu.started += context => MenuButton(context);
         actionEmailBttn.started += context => EmailButton(context);
         actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
@@ -126,7 +130,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Enable();
         actionMove.Enable();
         actionSprint.Enable();
+        actionMenu.Enable();
         actionEmailBttn.Enable();
+        
     }
 
     private void OnDisable() {
@@ -177,6 +183,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
+
     //Fade Out the Info Popup Canvas 
     IEnumerator AlphaFadeOut(float start,float end,float duration)
     {
@@ -323,6 +330,22 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private void MenuButton(InputAction.CallbackContext ctx)
+    {
+        switch (ctx.phase)
+        {
+            case InputActionPhase.Performed:
+                playerUI.SetActive(!playerUI.activeSelf);
+                break;
+
+            case InputActionPhase.Started:
+                break;
+
+            case InputActionPhase.Canceled:
+                break;
+        }
+    }
+
     public void Emote()
     {
         Debug.Log("emoted");
@@ -395,6 +418,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["LoginTime"]);
         */
+    }
+
+    public IEnumerator RefocusApplicationCursor()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.visible = false;
+    }
+
+    private void OnApplicationFocus(bool focusStatus) 
+    {
+        isAppFocused = focusStatus;
+        if(!isAppFocused)
+        {
+            Cursor.lockState = CursorLockMode.None; 
+            Cursor.visible = true; 
+            Debug.Log("Unfocused");
+        } else {
+            StartCoroutine(RefocusApplicationCursor());
+            Debug.Log("Focused");
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

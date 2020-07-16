@@ -21,7 +21,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction actionSecondary;
     private InputAction actionSprint;
     private InputAction actionMenu;
-    private InputAction actionEmailBttn;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     public GameObject playerUI;
@@ -89,8 +88,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
-        actionEmailBttn.started += context => EmailButton(context);
-        actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -131,8 +128,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionMove.Enable();
         actionSprint.Enable();
         actionMenu.Enable();
-        actionEmailBttn.Enable();
-        
     }
 
     private void OnDisable() {
@@ -141,7 +136,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Disable();
         actionMove.Disable();
         actionSprint.Disable();
-        actionEmailBttn.Disable();
     }
 
 
@@ -259,27 +253,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
         }
     }
-    private void EmailButton(InputAction.CallbackContext ctx)
+    public void EmailButton(InputAction.CallbackContext ctx)
     {
-        switch(ctx.phase)
-        {
-            case InputActionPhase.Performed:
-                {
-
-                }
-                break;
-            case InputActionPhase.Started:
-                {
-                    //After Click on the Info Button
-                    Application.OpenURL("mailto:" + PlayerPrefs.GetString("Email") + "?subject=" + "It was great meeting you today!" + "&body=" + "Sent from \n the We Ignite Platform");
-                }
-                break;
-            case InputActionPhase.Canceled:
-                {
-
-                }
-                break;
-        }
+        //After Click on the Info Button
+        Application.OpenURL("mailto:" + PlayerPrefs.GetString("Email") + "?subject=" + "It was great meeting you today!" + "&body=" + "Sent from \n the We Ignite Platform");
     }
     private void CancelButton(InputAction.CallbackContext ctx)
     {

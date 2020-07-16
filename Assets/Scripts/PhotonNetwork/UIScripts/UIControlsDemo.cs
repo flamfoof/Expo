@@ -16,6 +16,7 @@ public class UIControlsDemo : MonoBehaviour
     public Button submitLoginButton;
     public ToggleGroup genderToggle;
     public Toggle[] genderList;
+    public Text characterFeedbackText;
 
 
     private void Start()

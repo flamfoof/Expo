@@ -87,7 +87,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     protected bool mLocalFrameEvents = true;
 
-    public Action audioState;
+    public bool isConference = true;
 
     private void Awake() {
         mMediaConfig = CreateMediaConfig();
@@ -317,7 +317,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 //this usually means a user is using the string / room name already to wait for incoming calls
                 //try to connect to this user
                 //(note might also mean the server is down or the name is invalid in which case call will fail as well)
+                /*
+                if(!isConference)
+                {
+                    mCall.Call(mUseAddress);
+                } else {
+                    mCall.Listen(mUseAddress);
+                }*/
                 mCall.Call(mUseAddress);
+                    
+                
                 break;
 
             case CallEventType.ConnectionFailed:

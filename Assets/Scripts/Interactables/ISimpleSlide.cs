@@ -1,12 +1,23 @@
 ﻿using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class ISimpleSlide : Interactables
 {
     public string linkURL;
     public GameObject[] slides;
+    public Image slideImage;
     int currentSlide = 0;
+    public int slideCount = 0;
+    public Sprite[] images;
+
+    private void Start() 
+    {
+        slideCount = images.Length;    
+    }
     
     public override void Perform(InputActionPhase phase)
     {
@@ -20,6 +31,7 @@ public class ISimpleSlide : Interactables
     {
         print(currentSlide);
         print(slides.Length);
+
         if (currentSlide < slides.Length-1)
         {
 
@@ -38,4 +50,5 @@ public class ISimpleSlide : Interactables
             slides[currentSlide].SetActive(true);
         }
     }
+
 }

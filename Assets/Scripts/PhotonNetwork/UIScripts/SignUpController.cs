@@ -8,6 +8,7 @@ public class SignUpController : MonoBehaviour
 {
     #region Public Variable
     [SerializeField] private InputField nameField;
+    [SerializeField] private InputField organizationField;
     [SerializeField] private InputField emailField;
     [SerializeField] private InputField passwordField;
     [SerializeField] private InputField confirmPasswordField;
@@ -15,6 +16,7 @@ public class SignUpController : MonoBehaviour
     [SerializeField] private Text emailFeedbackTxt;
     [SerializeField] private Text passwordFeedbackTxt;
     [SerializeField] private Text confirmPasswordFeedbackTxt;
+    [SerializeField] private Text organizationFeedbackTxt;
     #endregion
     #region Private Variable
     private UIControlsDemo UIControls;
@@ -31,6 +33,7 @@ public class SignUpController : MonoBehaviour
     {
         RefreshText();
         nameField.onValueChanged.AddListener(delegate { CheckUserName(); });
+        organizationField.onValueChanged.AddListener(delegate { CheckOrganization(); });
         emailField.onValueChanged.AddListener(delegate { CheckEmail(); });
         passwordField.onValueChanged.AddListener(delegate { CheckPassword(); });
         confirmPasswordField.onValueChanged.AddListener(delegate { CheckConfirmPassword(); });
@@ -40,17 +43,15 @@ public class SignUpController : MonoBehaviour
     #region Public Methods
     public void CreateButtonClick()
     {
-        if(CheckUserName() && CheckEmail() && CheckPassword() && CheckConfirmPassword())
+        if(CheckUserName() && CheckOrganization() &&CheckEmail() && CheckPassword() && CheckConfirmPassword())
         {
             PlayerPrefs.SetString("Name",nameField.text);
+            PlayerPrefs.SetString("Organization",organizationField.text);
             PlayerPrefs.SetString("Email", emailField.text);
             PlayerPrefs.SetString("Password", passwordField.text);
             RefreshText();
-            Debug.Log("The Signup Created SuccessFully.....");
-        }
-        else
-        {
-            //StartCoroutine("HideFeedbackText");
+            UIControls.mainLogin.SetActive(true);
+            UIControls.signUp.SetActive(false);
         }
     }
     public void BackButtonClick()
@@ -61,6 +62,25 @@ public class SignUpController : MonoBehaviour
     #endregion
 
     #region Private Methods
+    private bool CheckOrganization()
+    {
+        if(string.IsNullOrEmpty(organizationField.text))
+        {
+            Debug.Log("Please Enter the Organization");
+            organizationFeedbackTxt.text = "Please Enter Organization";
+            return false;
+        }
+        else if (organizationField.text.Length < 12)
+        {
+            organizationFeedbackTxt.text = "Organization must be greater than 12 characters";
+            return false;
+        }
+        else
+        {
+            organizationFeedbackTxt.text = "";
+            return true;
+        }
+    }
     private bool CheckUserName()
     {
         if (string.IsNullOrEmpty(nameField.text))
@@ -69,14 +89,14 @@ public class SignUpController : MonoBehaviour
             nameFeedbackTxt.text = "Please Enter User Name";
             return false;
         }
-        else if (nameField.text.Length < 2 || nameField.text.Length > 12)
-        {
-            nameFeedbackTxt.text = "Name must be greater than 2 characters, and be 12 or less characters.";
-            return false;
-        }
+        //else if (nameField.text.Length < 2 || nameField.text.Length > 12)
+        //{
+        //    nameFeedbackTxt.text = "Name must be greater than 2 characters, and be 12 or less characters.";
+        //    return false;
+        //}
         else
         {
-            nameFeedbackTxt.text = "Name is Valid";
+            nameFeedbackTxt.text = "";
             return true;
         }
     }
@@ -110,7 +130,7 @@ public class SignUpController : MonoBehaviour
         }
         else if (validate.ValidatePassword(passwordField.text) == Validate.ErrorCode.INVALID)
         {
-            passwordFeedbackTxt.text = "Please Enter the Password with 6 charcater,upper case and lower case,special charcater";
+            passwordFeedbackTxt.text = "Please Enter the Password with 6 charcater,special charcater & number";
             return false;
         }
         else

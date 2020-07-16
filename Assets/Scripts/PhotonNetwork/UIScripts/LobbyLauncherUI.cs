@@ -65,7 +65,7 @@ public class LobbyLauncherUI : MonoBehaviour
 
 
         //add listener to the username input field
-        usernameInput.onValueChanged.AddListener(delegate { CheckName(); });
+        //usernameInput.onValueChanged.AddListener(delegate { CheckName(); });
 
         emailInput.onValueChanged.AddListener(delegate { CheckEmail(); });
         passwordInput.onValueChanged.AddListener(delegate { CheckPassword(); });
@@ -150,7 +150,7 @@ public class LobbyLauncherUI : MonoBehaviour
 
     public void SubmitButtonClick()
     {
-        if(CheckName() && CheckEmail() && CheckPassword())
+        if(/*CheckName() && */CheckEmail() && CheckPassword())
         {
             UIControls.mainLogin.SetActive(false);
             UIControls.worldSelect.SetActive(true);

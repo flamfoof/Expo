@@ -13,12 +13,12 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     void Start()
     {
         gm = GameObject.FindObjectOfType<IgniteGameManager>();
-
-        foreach(PhotonView pv in gm.GetPlayerList())
+        foreach (PhotonView pv in gm.GetPlayerList())
         {
-            pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
+            //Show the name and organization from PlayerPrefs
+            pv.GetComponent<UserActions>().playerName.text = PlayerPrefs.GetString("Name", "");//pv.Owner.NickName;
+            pv.GetComponent<UserActions>().playerOrganization.text = PlayerPrefs.GetString("Organization", "");
         }
-        
     }
 
     void Update()
@@ -27,7 +27,8 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         {
             if(!pv.IsMine)
             {
-                pv.GetComponent<UserActions>().playerName.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);    
+                pv.GetComponent<UserActions>().playerName.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
+                pv.GetComponent<UserActions>().playerOrganization.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
             }
         }
     }

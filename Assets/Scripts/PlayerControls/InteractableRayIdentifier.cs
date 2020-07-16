@@ -8,6 +8,7 @@ public class InteractableRayIdentifier : MonoBehaviour
     public GameObject player;
     public Camera camera;
     public GameObject focusedObject;
+    public GameObject playerfocusedObject; //For Player Object
     public bool isUsing = false;
     Interactables.InteractableType interactType;
     public RaycastHit hit;
@@ -31,6 +32,8 @@ public class InteractableRayIdentifier : MonoBehaviour
 
     private void CastRay()
     {
+        //Get the player Mask
+        LayerMask playerMask = LayerMask.GetMask("Player");
         // Does the ray intersect any objects excluding the player layer
         // The draw rays are more for VR if we get that set up
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
@@ -38,10 +41,19 @@ public class InteractableRayIdentifier : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             //Debug.Log("Did Hit: " + hit.collider.name);
             focusedObject = hit.collider.gameObject;
-                   
-        } else {
+            playerfocusedObject = null;
+        }
+        //Detect the Player Object
+        //Assign the Player to the Focused Object
+        else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
+            playerfocusedObject = hit.collider.gameObject;
+        }
+        else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             focusedObject = null;
+            playerfocusedObject = null;
             //Debug.Log("Did not Hit");
         }
         /*

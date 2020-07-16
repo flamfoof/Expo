@@ -47,7 +47,7 @@ public class Validate : MonoBehaviour {
 	/// <returns>The password.</returns>
 	private static Regex ValidPassword()
 	{
-		string Password_Pattern = "^.*(?=.{6,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=]).*$"; /*"((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.-^*()%!]).{6,20})"; */
+		string Password_Pattern = "^.*(?=.{6,})(?=.*\\d)(?=.*[a-z])(?=.*[!*@#$%^&+=]).*$"; /*"((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.-^*()%!]).{6,20})"; */
 		return new Regex(Password_Pattern);
 	}
 	/// <summary>

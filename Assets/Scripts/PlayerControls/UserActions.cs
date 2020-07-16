@@ -20,15 +20,19 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction actionPrimary;
     private InputAction actionSecondary;
     private InputAction actionSprint;
+    private InputAction actionEmailBttn;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     private Vector3 realPosition;
     private Quaternion realRotation;
-    
+    private CanvasGroup infoCanvasGroup;
+
     public Camera camera;
     public InteractableRayIdentifier playerActionRay;
     public Animator anim;
     public TextMesh playerName;
+    public TextMesh playerOrganization;
+    public GameObject infoPopup; //For InfoPopUp
     public float sessionTimer = 0.0f;
     public float realSessionTimer = 0.0f;
 
@@ -81,10 +85,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSecondary.canceled += context => CancelButton(context);
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
+        actionEmailBttn.started += context => EmailButton(context);
+        actionEmailBttn.canceled += context => EmailButton(context);
+        infoCanvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start() {
         //Debug.Log("Attaching anim");
+        infoPopup.SetActive(false);   //Set the Popup inactive
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
@@ -118,6 +126,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Enable();
         actionMove.Enable();
         actionSprint.Enable();
+        actionEmailBttn.Enable();
     }
 
     private void OnDisable() {
@@ -126,6 +135,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Disable();
         actionMove.Disable();
         actionSprint.Disable();
+        actionEmailBttn.Disable();
     }
 
 
@@ -146,10 +156,37 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             if(photonView.IsMine)
             {
 
-            } else {
+            }
+            else {
                 transform.position = Vector3.Lerp(transform.position, realPosition, .1f);
                 transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
+                //Show the Popup if the hover on the player.
+                if(playerActionRay.playerfocusedObject)
+                {
+                    infoCanvasGroup.alpha = 1.0f;
+                    infoPopup.SetActive(true);
+                }
+                //Disable the Popup
+                else
+                {
+                    if(infoPopup.activeInHierarchy)
+                    {
+                        StartCoroutine(AlphaFadeOut(infoCanvasGroup.alpha,0,3.0f));
+                    }
+                }
             }
+        }
+    }
+    //Fade Out the Info Popup Canvas 
+    IEnumerator AlphaFadeOut(float start,float end,float duration)
+    {
+        StopCoroutine("AlphaFadeOut");
+        float counter = 0f;
+        while(counter < duration)
+        {
+            counter += Time.deltaTime;
+            infoCanvasGroup.alpha = Mathf.Lerp(start,end,counter/duration);
+            yield return null;
         }
     }
 
@@ -215,7 +252,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
         }
     }
+    private void EmailButton(InputAction.CallbackContext ctx)
+    {
+        switch(ctx.phase)
+        {
+            case InputActionPhase.Performed:
+                {
 
+                }
+                break;
+            case InputActionPhase.Started:
+                {
+                    //After Click on the Info Button
+                    Application.OpenURL("mailto:" + PlayerPrefs.GetString("Email") + "?subject=" + "It was great meeting you today!" + "&body=" + "Sent from \n the We Ignite Platform");
+                }
+                break;
+            case InputActionPhase.Canceled:
+                {
+
+                }
+                break;
+        }
+    }
     private void CancelButton(InputAction.CallbackContext ctx)
     {
         switch (ctx.phase)

@@ -19,7 +19,6 @@ public class InteractableRayIdentifier : MonoBehaviour
     void Start()
     {
         camera = player.GetComponent<UserActions>().camera;
-
         //if on PC, attach playerActionRay to Camera
         transform.SetParent(camera.transform);
         transform.localPosition = new Vector3(0, 0, 0);
@@ -32,6 +31,7 @@ public class InteractableRayIdentifier : MonoBehaviour
 
     private void CastRay()
     {
+        
         //Get the player Mask
         LayerMask playerMask = LayerMask.GetMask("Player");
         // Does the ray intersect any objects excluding the player layer

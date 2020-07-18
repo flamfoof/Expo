@@ -16,4 +16,10 @@ public class IgniteAnalytics : MonoBehaviourPunCallbacks
         //amount is usually 1
         
     }
+    
+    public virtual void ClickedStats(Interactables interacble, int amount)
+    {
+        
+        
+    }
 }

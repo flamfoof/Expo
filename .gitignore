@@ -88,11 +88,17 @@ ExportedObj/
 /Assets/FirstPersionAIOPack/DemoScene/
 /Assets/FirstPersionAIOPack/DemoScene/*
 /Assets/StoreAssets/FirstPersionAIOPack/DemoScene/*
+/Assets/StoreAssets/FirstPersionAIOPack/DemoScene.meta
 /Assets/StoreAssets/InputSystems/Samples/Input System/1.0.0/*
 /Assets/StoreAssets/Photon/PhotonChat/Demos/*
+/Assets/StoreAssets/Photon/PhotonChat/Demos.meta
 /Assets/StoreAssets/Photon/PhotonRealtime/Demos/*
 /Assets/StoreAssets/Photon/PhotonRealtime/Demos/*/*
+/Assets/StoreAssets/Photon/PhotonRealtime/Demos.meta
 /Assets/StoreAssets/Photon/PhotonUnityNetworking/Demos/*
+/Assets/StoreAssets/Photon/PhotonUnityNetworking/Demos.meta
 /Assets/StoreAssets/Photon/PhotonVoice/Demos/*
-Assets/Scripts/PhotonNetwork/VoiceChat/VoiceManager.cs
-Assets/Scripts/PhotonNetwork/VoiceChat/VoiceManager.cs
+/Assets/StoreAssets/Photon/PhotonVoice/Demos.meta
+/Assets/Scripts/PhotonNetwork/VoiceChat/VoiceManager.cs
+/Assets/StoreAssets/UnityWebGLOpenLink/Assets/Scripts/*
+/Assets/StoreAssets/UnityWebGLOpenLink/Assets/*

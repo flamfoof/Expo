@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.EventSystems;
 
 public class LobbyLauncherUI : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class LobbyLauncherUI : MonoBehaviour
     public bool skipName = false;
     public bool skipEmail = false;
     public bool skipPass = false;
+    EventSystem system;
 
 
     private void Awake() {
@@ -37,6 +39,7 @@ public class LobbyLauncherUI : MonoBehaviour
     }
     void Start()
     {
+        system = EventSystem.current;
         Debug.Log("The name........." +PlayerPrefs.GetString(playerNickname));
         Debug.Log("The email.............."+PlayerPrefs.GetString("Email"));
         Debug.Log("The Password............."+PlayerPrefs.GetString("Password"));
@@ -80,6 +83,30 @@ public class LobbyLauncherUI : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+
+            if (next != null)
+            {
+                InputField inputfield = next.GetComponent<InputField>();
+                if (inputfield != null)
+                    inputfield.OnPointerClick(new PointerEventData(system));
+
+                system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
+            }
+
+            //Here is the navigating back part:
+            else
+            {
+                next = Selectable.allSelectablesArray[0];
+                system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
+            }
+
+        }
+    }
     public void SetPlayerNickname(string name)
     {
         if(string.IsNullOrEmpty(name))

@@ -320,6 +320,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1788698741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 835650339348928739, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749407078148979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1809949400 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2857749405750271372, guid: 178b7249da4692848ab3f10f8bc0b5ac,
@@ -340,6 +346,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 835650339348928739, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311830220541664792, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -369,11 +380,21 @@ PrefabInstance:
       propertyPath: passwordFeedbackTxt
       value: 
       objectReference: {fileID: 1809949400}
+    - target: {fileID: 4155385112789508424, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6006564260142226743, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6076173221586932525, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: signUp
+      value: 
+      objectReference: {fileID: 1788698741}
     - target: {fileID: 6153986922414965874, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -394,6 +415,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7374317886193026301, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724480357500337182, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Name
+      value: NameInputField
+      objectReference: {fileID: 0}
     - target: {fileID: 8124284292488060182, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -403,6 +434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SubmitButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381958892819670090, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 178b7249da4692848ab3f10f8bc0b5ac, type: 3}

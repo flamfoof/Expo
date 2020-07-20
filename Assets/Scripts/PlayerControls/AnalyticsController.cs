@@ -7,7 +7,7 @@ using WeIgnite;
 public class AnalyticsController : SingletonClass<AnalyticsController>
 {
     //Profile and Profile Information
-    private void ProfileInfoAnalytics()
+    public void ProfileInfoAnalytics()
     {
         Analytics.CustomEvent("profile_info", new Dictionary<string, object>
         {
@@ -18,7 +18,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         });
     }
     //Average Time Spent
-    private void AverageTimeSpent(float timespent)
+    public void AverageTimeSpent(float timespent)
     {
         Analytics.CustomEvent("average_time_spent", new Dictionary<string, object>
         {
@@ -26,7 +26,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         });
     }
     //Number of Attendees
-    private void AttendesNumber(int attendeeNumber)
+    public void AttendesNumber(int attendeeNumber)
     {
         Analytics.CustomEvent("number_of_attendees", new Dictionary<string, object>
         {
@@ -34,7 +34,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         });
     }
     //Website Click and what website it was
-    private void WebsiteClick(string websiteUrl)
+    public void WebsiteClick(string websiteUrl)
     {
         Analytics.CustomEvent("website_click", new Dictionary<string, object>
         {

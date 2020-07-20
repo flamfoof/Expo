@@ -6,6 +6,7 @@ using Photon.Pun;
 using Byn.Awrtc;
 using Byn.Awrtc.Unity;
 using Byn.Unity.Examples;
+using UnityEngine.UI;
 
 //Reference CallApp.js for more info
 public class AudioCall : MonoBehaviourPunCallbacks
@@ -69,6 +70,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// Contains the configuration used for the next call
     /// </summary>
     protected MediaConfig mMediaConfig;
+
+
+    /// <summary>
+    /// Input field to enter a new message.
+    /// </summary>
+    public InputField uMessageField;
+
+    /// <summary>
+    /// Output message list to show incoming and sent messages + output messages of the
+    /// system itself.
+    /// </summary>
+    public MessageList uOutput;
+
+    public Text receiveTxt;
 
     //Configuration for the currently active call
     /// <summary>
@@ -359,6 +374,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {
                     //text message received
                     MessageEventArgs args = e as MessageEventArgs;
+                    Append(args.Content);
+                    receiveTxt.text = args.Content;
                     Debug.Log(args.Content);
                     break;
                 }
@@ -462,6 +479,50 @@ public class AudioCall : MonoBehaviourPunCallbacks
             return roomName.Substring(0, CallApp.MAX_CODE_LENGTH);
         } else {
             return roomName;
+        }
+    }
+
+    /// <summary>
+    /// This is called if the send button
+    /// </summary>
+    public void SendButtonPressed()
+    {
+        //get the message written into the text field
+        string msg = uMessageField.text;
+        SendMsg(msg);
+    }
+    /// <summary>
+    /// Sends a message to the other end
+    /// </summary>
+    /// <param name="msg"></param>
+    private void SendMsg(string msg)
+    {
+        if (String.IsNullOrEmpty(msg))
+        {
+            //never send null or empty messages. webrtc can't deal with that
+            return;
+        }
+
+        Append(msg);
+        mCall.Send(msg);
+
+        //reset UI
+        uMessageField.text = "";
+        uMessageField.Select();
+    }
+    /// <summary>
+    /// Adds a new message to the message view
+    /// </summary>
+    /// <param name="text"></param>
+    private void Append(string text)
+    {
+        if (uOutput != null)
+        {
+            uOutput.AddTextEntry(text);
+        }
+        else
+        {
+            Debug.Log("Chat: " + text);
         }
     }
 }

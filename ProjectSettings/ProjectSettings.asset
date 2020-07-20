@@ -667,10 +667,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 6d62572f-dd9d-421c-9076-787d012b36cd
+  cloudProjectId: 47486357-d1bf-4678-aa36-5e0454397267
   framebufferDepthMemorylessMode: 0
   projectName: Expo
-  organizationId: we-ignite
+  organizationId: soumen123
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0

@@ -271,12 +271,18 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
     private void CancelButton(InputAction.CallbackContext ctx)
     {
+        if(isMenuOpen)
+        {
+            return;
+        }
+
         switch (ctx.phase)
         {            
             case InputActionPhase.Performed:
                 if (ctx.interaction is SlowTapInteraction)
                 {
-                    //StartCoroutine(HoldButtonPress((int)(ctx.duration)));
+                    StartCoroutine(UnfocusApplicationCursor());
+                    
                 }
                 else
                 {
@@ -294,7 +300,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
-
+                StartCoroutine(RefocusApplicationCursor());
                 break;
         }
     }
@@ -426,9 +432,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public IEnumerator RefocusApplicationCursor()
     {
         yield return new WaitForEndOfFrame();
-
-        Cursor.lockState = CursorLockMode.Locked; 
-        Cursor.visible = false;
+        if(!isMenuOpen)
+        {
+            Cursor.lockState = CursorLockMode.Locked; 
+            Cursor.visible = false;
+        }
+        
     }
 
     public IEnumerator UnfocusApplicationCursor()

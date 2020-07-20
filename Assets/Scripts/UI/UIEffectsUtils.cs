@@ -43,8 +43,6 @@ public class UIEffectsUtils : MonoBehaviour
                 fading = false;
             }
         }
-        
-        //Debug.Log("faded in");
     }
 
     public IEnumerator FadeOut(Image image, float time)
@@ -68,8 +66,6 @@ public class UIEffectsUtils : MonoBehaviour
                 fading = false;
             }
         }
-        
-        //Debug.Log("faded out");
     }
 
     public void FadeInImage(Image image, float time)
@@ -109,8 +105,6 @@ public class UIEffectsUtils : MonoBehaviour
                 fading = false;
             }
         }
-        
-        //Debug.Log("faded in");
     }
 
     public IEnumerator FadeIn(Image image, float time)
@@ -127,26 +121,39 @@ public class UIEffectsUtils : MonoBehaviour
             image.color = tempColor;
             yield return new WaitForFixedUpdate();
             
-            if(tempColor.a > 1.0f)
+            if(tempColor.a >= 1.0f)
             {
                 tempColor.a = 1.0f;
                 image.color = tempColor;
                 fading = false;
             }
         }
-        
-        //Debug.Log("faded out");
     }
 
-    public static IEnumerator AlphaFadeOut(CanvasGroup infoCanvasGroup, float start,float end,float duration)
+    public IEnumerator FadeRepeat(Image image, float time)
     {
-        //StopCoroutine("AlphaFadeOut");
-        float counter = 0f;
-        while(counter < duration)
+        bool fadeMode = true;
+        yield return new WaitForFixedUpdate();
+        while(true)
         {
-            counter += Time.deltaTime;
-            infoCanvasGroup.alpha = Mathf.Lerp(start,end,counter/duration);
-            yield return null;
+            yield return new WaitForFixedUpdate();
+            if(fadeMode)
+            {
+                yield return StartCoroutine(FadeIn(image, time));
+                fadeMode = false;
+            } else 
+            {
+                yield return StartCoroutine(FadeOut(image, time));
+                fadeMode = true;
+            }
         }
+    }
+
+    public IEnumerator StopFadeRepeat(Image image, float time)
+    {        
+        yield return new WaitForFixedUpdate();
+        StopCoroutine (FadeRepeat(image, time));
+        Debug.Log("Stopped coroutine fading");
+        StartCoroutine(FadeOut(image, time));    
     }
 }

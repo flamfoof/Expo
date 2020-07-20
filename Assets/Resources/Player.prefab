@@ -482,7 +482,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   playerName: {fileID: 7700156854495169686}
   playerOrganization: {fileID: 8570543854567576599}
-  infoPopup: {fileID: 0}
+  infoPopup: {fileID: 2771875661726662095}
   sessionTimer: 0
   realSessionTimer: 0
   objectsInteracted: []
@@ -1247,6 +1247,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3380974606642386707, guid: f2a5b27952b60d249a0f8ea93bab2135,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3974097495545704104, guid: f2a5b27952b60d249a0f8ea93bab2135,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1408,6 +1413,12 @@ GameObject:
 --- !u!224 &5484497312542061459 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4936179906207471951, guid: f2a5b27952b60d249a0f8ea93bab2135,
+    type: 3}
+  m_PrefabInstance: {fileID: 620384350525827804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2771875661726662095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3380974606642386707, guid: f2a5b27952b60d249a0f8ea93bab2135,
     type: 3}
   m_PrefabInstance: {fileID: 620384350525827804}
   m_PrefabAsset: {fileID: 0}

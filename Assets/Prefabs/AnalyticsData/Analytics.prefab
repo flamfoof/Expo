@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8155336159836900306}
   - component: {fileID: 8155336159836900305}
-  - component: {fileID: 6344168511923723121}
+  - component: {fileID: 5401376223902879578}
   - component: {fileID: 180292222726626664}
   m_Layer: 0
   m_Name: Analytics
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSpent: 0
---- !u!114 &6344168511923723121
+--- !u!114 &5401376223902879578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8155336159836900304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24835f47d2d04f84ebf30bff11b29638, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bb1c813484baf346883d17850300117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &180292222726626664

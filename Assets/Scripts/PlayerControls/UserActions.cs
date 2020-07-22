@@ -25,10 +25,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     public GameObject playerUI;
+    public GameObject commandUI;
     public CommunicationManager rtc;
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
     public bool isChatOpen = false;
+    public bool isCommandRingOpen = false;
+    public bool canMove = true;
+    public bool canLook = true;
     public int ping;
     private Vector3 realPosition;
     private Quaternion realRotation;
@@ -88,9 +92,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionPrimary.started += context => Interact(context);
         actionPrimary.performed += context => Interact(context);
         actionPrimary.canceled += context => Interact(context);
-        actionSecondary.started += context => CancelButton(context);
-        actionSecondary.performed += context => CancelButton(context);
-        actionSecondary.canceled += context => CancelButton(context);
+        actionSecondary.started += context => SecondaryButton(context);
+        actionSecondary.performed += context => SecondaryButton(context);
+        actionSecondary.canceled += context => SecondaryButton(context);
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
@@ -102,7 +106,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start() {
         //Debug.Log("Attaching anim");
-        infoPopup.SetActive(false);   //Set the Popup inactive
+        //infoPopup.SetActive(false);   //Set the Popup inactive
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
@@ -226,6 +230,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Interact(InputAction.CallbackContext ctx)
     {               
         //Debug.Log(ctx.phase);
+        if(!isAppFocused || isCommandRingOpen)
+        {
+            return;
+        }
+
         if(isMenuOpen)
         {
             return;
@@ -273,12 +282,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
         }
     }
+
     public void EmailButton(InputAction.CallbackContext ctx)
     {
         //After Click on the Info Button
         Application.OpenURL("mailto:" + PlayerPrefs.GetString("Email") + "?subject=" + "It was great meeting you today!" + "&body=" + "Sent from \n the We Ignite Platform");
     }
-    private void CancelButton(InputAction.CallbackContext ctx)
+
+    private void SecondaryButton(InputAction.CallbackContext ctx)
     {
         if(isMenuOpen)
         {
@@ -289,9 +300,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         {            
             case InputActionPhase.Performed:
                 if (ctx.interaction is SlowTapInteraction)
-                {
-                    StartCoroutine(UnfocusApplicationCursor());
-                    
+                {                    
+                    ActivateCommandRing();
                 }
                 else
                 {
@@ -302,14 +312,17 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             case InputActionPhase.Started:
                 if (ctx.interaction is SlowTapInteraction)
-                    isButtonHeld = true;
-                
+                {
+                    
+                }
+                isButtonHeld = true;
+                OpenCommandRing(true);
                 //Emote();
                 break;
 
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
-                StartCoroutine(RefocusApplicationCursor());
+                OpenCommandRing(false);
                 break;
         }
     }
@@ -365,18 +378,41 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    public void OpenCommandRing(bool toggle)
+    {
+        if(toggle)
+        {
+            UpdateControlLock(true, false);
+            commandUI.SetActive(true);            
+            isCommandRingOpen = toggle;
+            StartCoroutine(UnfocusApplicationCursor());
+        } else {
+            UpdateControlLock(true, true);
+            commandUI.SetActive(false);
+            isCommandRingOpen = toggle;
+            StartCoroutine(RefocusApplicationCursor());
+        }
+    }
+
+    public void ActivateCommandRing()
+    {
+
+    }
+
     public void OpenMenu(bool toggle)
     {
         if(toggle)
         {
+            UpdateControlLock(false, false);
             StartCoroutine(UnfocusApplicationCursor());
             playerUI.SetActive(toggle);
-            isMenuOpen = !isMenuOpen;
+            isMenuOpen = toggle;
             
         } else {
+            UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
             playerUI.SetActive(toggle);
-            isMenuOpen = !isMenuOpen;
+            isMenuOpen = toggle;
         }  
 
         //close chat if menu is open
@@ -392,19 +428,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(toggle)
         {
+            UpdateControlLock(false, true);
             StartCoroutine(UnfocusApplicationCursor());
             rtc.sendMessage.SetActive(toggle);
             rtc.webRTC.uMessageField.text = "";
             rtc.webRTC.uMessageField.Select();
-            isChatOpen = !isChatOpen;
+            isChatOpen = toggle;
         } else {            
+            UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
             if (rtc.webRTC.uMessageField.text != "") {
                 rtc.webRTC.SendButtonPressed();
             }
             rtc.sendMessage.SetActive(toggle);
-            isChatOpen = !isChatOpen;
+            isChatOpen = toggle;
         }
+    }
+
+    public void OpenEmoteMenu()
+    {
+        //currently just emotes. Will replace with menu UI
+        Debug.Log("Emoted");
+        Emote();
     }
 
     public void Emote()
@@ -463,6 +508,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         anim.SetFloat("speed", playerController.groundVelocity);        
     }
 
+    public void UpdateControlLock(bool move, bool look)
+    {
+        canMove = move;
+        canLook = look;
+    }
+
     public void AddInteractedData(GameObject interactedObject)
     {
         Hashtable hash = new Hashtable();
@@ -483,9 +534,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public IEnumerator RefocusApplicationCursor()
     {
-        yield return new WaitForEndOfFrame();
-        if(!isMenuOpen)
+        yield return new WaitForFixedUpdate();
+        if(!isMenuOpen && !isChatOpen)
         {
+            UpdateControlLock(true, true);
             Cursor.lockState = CursorLockMode.Locked; 
             Cursor.visible = false;
         }
@@ -494,7 +546,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public IEnumerator UnfocusApplicationCursor()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForFixedUpdate();
 
         Cursor.lockState = CursorLockMode.None; 
         Cursor.visible = true;

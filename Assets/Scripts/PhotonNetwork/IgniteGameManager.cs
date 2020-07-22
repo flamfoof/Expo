@@ -243,8 +243,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             
             if(pv.gameObject.GetComponent<UserActions>())
             {
-                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHair.sharedMesh == 
-                    changeAvatar.defaultPrefab.GetComponent<AvatarInfo>().meshHair.sharedMesh)
+                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHead.sharedMesh == 
+                    changeAvatar.defaultPrefab.GetComponent<AvatarInfo>().meshHead.sharedMesh)
                 {
                     Debug.Log(pv.Owner.NickName + " has selected their character: " + 
                         (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);

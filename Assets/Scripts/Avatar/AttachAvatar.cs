@@ -32,7 +32,8 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 //Debug.Log("Setting anims");
                 assigner = assign;   
                 assigner.ChangeAvatar(this.avatarInfo, assigner.playerAvatarInfo);
-            } else {
+            }
+            else {
                 assigner = assign;
                 //assigner.photonView.RPC("ChangeAvatar", RpcTarget.All, avatarInfo, assigner.playerAvatarInfo);
             }

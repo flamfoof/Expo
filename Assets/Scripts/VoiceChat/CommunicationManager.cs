@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_WEBGL
 #elif !UNITY_WEBGL
 using Photon.Voice;
@@ -8,10 +9,12 @@ using Photon.Voice;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class VoiceManager : MonoBehaviourPunCallbacks
+public class CommunicationManager : MonoBehaviourPunCallbacks
 {
     public IgniteGameManager gameManager;
     private SelectVoicePlatform voicePlatform;
+    public AudioCall webRTC;
+    public GameObject sendMessage;
     public bool recordAtStart = true;
     public float minAudioDistance = 0.0f;
     public float maxAudioDistance = 15.0f;

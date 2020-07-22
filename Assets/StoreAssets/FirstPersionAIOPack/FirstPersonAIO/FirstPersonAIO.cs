@@ -369,7 +369,7 @@ public class FirstPersonAIO : MonoBehaviour {
         #region Look Settings - Update
 
 
-        if(enableCameraMovement && userActions.isAppFocused && !userActions.isMenuOpen){
+        if(enableCameraMovement && userActions.canLook){
             
             float mouseYInput = 0;
             float mouseXInput = 0;
@@ -529,7 +529,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
             #endregion
 
-        if(playerCanMove){
+        if(playerCanMove && userActions.canMove){
           fps_Rigidbody.velocity = MoveDirection+(Vector3.up * yVelocity);
 
         } else{fps_Rigidbody.velocity = Vector3.zero;}

@@ -81,9 +81,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// Output message list to show incoming and sent messages + output messages of the
     /// system itself.
     /// </summary>
-    public MessageList uOutput;
+    public ChatText uOutput;
 
     public Text receiveTxt;
+
+    public Scrollbar scrollbar;
 
     //Configuration for the currently active call
     /// <summary>
@@ -113,6 +115,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        scrollbar.value = 0;
         InvokeRepeating("GetRoomID", 1.0f, 1.0f);
 
         //in case we have any UI we want to add in.
@@ -488,7 +491,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void SendButtonPressed()
     {
         //get the message written into the text field
-        string msg = uMessageField.text;
+        string msg = PhotonNetwork.NickName + ": " + uMessageField.text;
+        
         SendMsg(msg);
     }
     /// <summary>
@@ -497,14 +501,21 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// <param name="msg"></param>
     private void SendMsg(string msg)
     {
+        bool atBottomOfChat = false;
         if (String.IsNullOrEmpty(msg))
         {
             //never send null or empty messages. webrtc can't deal with that
             return;
         }
-
+        if(scrollbar.value <= 0.1)
+            atBottomOfChat = true;
+        Debug.Log("bottom" + atBottomOfChat);
+            
         Append(msg);
         mCall.Send(msg);
+
+        if(atBottomOfChat)
+            StartCoroutine(SetScrollbar(3.0f));
 
         //reset UI
         uMessageField.text = "";
@@ -524,5 +535,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             Debug.Log("Chat: " + text);
         }
+    }
+
+    private IEnumerator SetScrollbar(float value)
+    {
+        yield return new WaitForSeconds(Time.deltaTime * value);
+        scrollbar.value = 0;
     }
 }

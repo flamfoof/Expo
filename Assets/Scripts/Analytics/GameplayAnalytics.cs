@@ -20,7 +20,8 @@ public class GameplayAnalytics : IgniteAnalytics
     void UpdateInteractableList()
     {
         Interactables[] tempList = FindObjectsOfType<Interactables>();
-        interactableList.Clear();
+        if(interactableList.Count != 0)
+            interactableList.Clear();
 
         for(int i = 0; i < tempList.Length; i++)
         {

@@ -11,7 +11,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     static public IgniteGameManager IgniteInstance;
-    public VoiceManager voiceManager;
+    public CommunicationManager voiceManager;
     public List<PhotonView> playerList;
     public List<string> uniquePlayersLogged;
     public int totalUniquePlayers;
@@ -30,7 +30,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 
         if(!voiceManager)
         {
-            voiceManager = GameObject.FindObjectOfType<VoiceManager>();
+            voiceManager = GameObject.FindObjectOfType<CommunicationManager>();
         }
         
            

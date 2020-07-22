@@ -19,6 +19,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &12488077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600770479530496657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!114 &2826545129637915635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,11 +76,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 12488077}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5748077925165243111
+--- !u!114 &7732642300513474643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,16 +89,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600770479530496657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 7541514657232051221}
-  meshLeftEye: {fileID: 1158059926885538931}
-  meshRightEye: {fileID: 7459398381588322982}
-  meshBody: {fileID: 101439188924056873}
-  meshHead: {fileID: 6232647986651695962}
-  meshUpperTeeth: {fileID: 2218396041518932008}
-  meshLowerTeeth: {fileID: 7527679385628822910}
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &1942878367456618274
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942878367456618275}
+  - component: {fileID: 9111836149972484593}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Untagged
@@ -115,6 +127,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9111836149972484593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942878367456618274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7541514657232051221}
+  meshLeftEye: {fileID: 1158059926885538931}
+  meshRightEye: {fileID: 7459398381588322982}
+  meshBody: {fileID: 101439188924056873}
+  meshHead: {fileID: 6232647986651695962}
+  meshUpperTeeth: {fileID: 2218396041518932008}
+  meshLowerTeeth: {fileID: 7527679385628822910}
 --- !u!1001 &1942878367948074944
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,11 +21,15 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction actionSecondary;
     private InputAction actionSprint;
     private InputAction actionMenu;
+    private InputAction actionChat;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     public GameObject playerUI;
+    public CommunicationManager rtc;
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
+    public bool isChatOpen = false;
+    public int ping;
     private Vector3 realPosition;
     private Quaternion realRotation;
     private CanvasGroup infoCanvasGroup;
@@ -72,6 +76,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         AttachControlsReference();
         playerController = GetComponent<FirstPersonAIO>();
         gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
+        rtc = GameObject.FindObjectOfType<CommunicationManager>();
         //InvokeRepeating("UpdateLoginTime", 1.0f, 1.0f);
 
         //binds these buttons to the functions
@@ -89,6 +94,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSprint.started += context => SprintButton(context);        
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
+        actionChat.started += context => ChatButton(context);
         //actionEmailBttn.started += context => EmailButton(context);
         //actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
@@ -131,6 +137,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionMove.Enable();
         actionSprint.Enable();
         actionMenu.Enable();
+        actionChat.Enable();
         //actionEmailBttn.Enable();
         
     }
@@ -141,9 +148,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionLook.Disable();
         actionMove.Disable();
         actionSprint.Disable();
+        actionChat.Disable();
         //actionEmailBttn.Disable();
     }
-
 
     void Update()
     {
@@ -182,6 +189,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
+        ping = PhotonNetwork.GetPing();
     }
 
     //Fade Out the Info Popup Canvas 
@@ -211,6 +219,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             actionMove = playerInput.actions["Move"];
             actionSprint = playerInput.actions["Sprint"];
             actionMenu = playerInput.actions["Menu"];
+            actionChat = playerInput.actions["Chat"];
         }
     }
 
@@ -332,7 +341,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
 
             case InputActionPhase.Started:
-                OpenMenu();
+                OpenMenu(!isMenuOpen);
                 break;
 
             case InputActionPhase.Canceled:
@@ -340,19 +349,62 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void OpenMenu()
+    private void ChatButton(InputAction.CallbackContext ctx)
     {
-        if(isMenuOpen)
+        switch (ctx.phase)
         {
-            StartCoroutine(RefocusApplicationCursor());
-            playerUI.SetActive(false);
-            isMenuOpen = !isMenuOpen;
-        } else {
-            StartCoroutine(UnfocusApplicationCursor());
-            playerUI.SetActive(true);
-            isMenuOpen = !isMenuOpen;
+            case InputActionPhase.Performed:                
+                break;
+
+            case InputActionPhase.Started:
+                OpenChat(!isChatOpen);
+                break;
+
+            case InputActionPhase.Canceled:
+                break;
         }
-        
+    }
+
+    public void OpenMenu(bool toggle)
+    {
+        if(toggle)
+        {
+            StartCoroutine(UnfocusApplicationCursor());
+            playerUI.SetActive(toggle);
+            isMenuOpen = !isMenuOpen;
+            
+        } else {
+            StartCoroutine(RefocusApplicationCursor());
+            playerUI.SetActive(toggle);
+            isMenuOpen = !isMenuOpen;
+        }  
+
+        //close chat if menu is open
+        if(isChatOpen)
+        {
+            rtc.webRTC.uMessageField.text = "";
+            OpenChat(false);      
+        }
+            
+    }
+
+    public void OpenChat(bool toggle)
+    {
+        if(toggle)
+        {
+            StartCoroutine(UnfocusApplicationCursor());
+            rtc.sendMessage.SetActive(toggle);
+            rtc.webRTC.uMessageField.text = "";
+            rtc.webRTC.uMessageField.Select();
+            isChatOpen = !isChatOpen;
+        } else {            
+            StartCoroutine(RefocusApplicationCursor());
+            if (rtc.webRTC.uMessageField.text != "") {
+                rtc.webRTC.SendButtonPressed();
+            }
+            rtc.sendMessage.SetActive(toggle);
+            isChatOpen = !isChatOpen;
+        }
     }
 
     public void Emote()
@@ -465,12 +517,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(stream.IsWriting)
         {
+            //Debug.Log("Sending player position data + anim");
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(SessionTimer);
             if(anim)
-                stream.SendNext(anim.GetFloat("speed"));            
+                stream.SendNext(anim.GetFloat("speed"));     
         } else {
+            //Debug.Log("Receiving player position data + anim");
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
             realSessionTimer = (float)stream.ReceiveNext();

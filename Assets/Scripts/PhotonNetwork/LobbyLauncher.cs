@@ -28,7 +28,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
     public bool validPassword = false;
     private bool isConnecting = false;
     private string gameVersion = "1.0";
-    public byte maxPlayerCount = 10;
+    public byte maxPlayerCount = 30;
+    public int photonSendRate = 5;
     public GameObject playerInfo;
 
     //for testing purposes
@@ -47,6 +48,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         }
         //syncs the scene when the player loads in to the master scene/room
         PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.SendRate = photonSendRate;
+        PhotonNetwork.SerializationRate = photonSendRate;
     }
 
     private void Start()

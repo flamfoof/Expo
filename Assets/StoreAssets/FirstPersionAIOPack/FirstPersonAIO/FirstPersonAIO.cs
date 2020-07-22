@@ -529,7 +529,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
             #endregion
 
-        if(playerCanMove){
+        if(playerCanMove && !userActions.isMenuOpen && !userActions.isChatOpen){
           fps_Rigidbody.velocity = MoveDirection+(Vector3.up * yVelocity);
 
         } else{fps_Rigidbody.velocity = Vector3.zero;}

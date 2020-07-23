@@ -167,6 +167,8 @@ public class SignUpController : MonoBehaviour
         emailFeedbackTxt.text = "";
         passwordFeedbackTxt.text = "";
         confirmPasswordFeedbackTxt.text = "";
+        organizationFeedbackTxt.text = "";
+        organizationField.text = "";
     }
     #endregion
 

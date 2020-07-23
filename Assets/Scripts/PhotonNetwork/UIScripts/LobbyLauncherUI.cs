@@ -71,8 +71,8 @@ public class LobbyLauncherUI : MonoBehaviour
         //add listener to the username input field
         //usernameInput.onValueChanged.AddListener(delegate { CheckName(); });
 
-        emailInput.onValueChanged.AddListener(delegate { CheckEmail(); });
-        passwordInput.onValueChanged.AddListener(delegate { CheckPassword(); });
+        //emailInput.onValueChanged.AddListener(delegate { CheckEmail(); });
+        //passwordInput.onValueChanged.AddListener(delegate { CheckPassword(); });
 
         //Add listener to button to start connecting to server
         UIControls.submitLoginButton.onClick.AddListener(delegate {lobbyLauncher.Connect();});

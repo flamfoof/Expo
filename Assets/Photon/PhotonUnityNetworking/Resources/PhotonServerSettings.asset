@@ -33,6 +33,9 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
+  - ChangeAvatar
+  - SetAvatarFeatures
+  - TriggeredEvent
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

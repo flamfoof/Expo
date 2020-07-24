@@ -31,6 +31,6 @@ public class Emote : MonoBehaviourPunCallbacks
         rb.AddForce(forceDirection * forceIntensity);
     }
     private void OnDestroy() {
-        PhotonNetwork.Destroy(photonView);
+        Destroy(photonView);
     }
 }

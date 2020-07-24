@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 #if !UNITY_WEBGL
-using Photon.Voice;
+//using Photon.Voice;
 #endif
 
 public class SelectVoicePlatform : MonoBehaviour

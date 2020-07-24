@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_WEBGL
 #elif !UNITY_WEBGL
-using Photon.Voice;
+//using Photon.Voice;
 #endif
 using Photon.Pun;
 using Photon.Realtime;

@@ -16,7 +16,7 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         foreach (PhotonView pv in gm.GetPlayerList())
         {
             //Show the name and organization from PlayerPrefs
-            pv.GetComponent<UserActions>().playerName.text = PlayerPrefs.GetString("Name", "");//pv.Owner.NickName;
+            //pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
             pv.GetComponent<UserActions>().playerOrganization.text = PlayerPrefs.GetString("Organization", "");
         }
     }

@@ -15,13 +15,16 @@ public class LobbyLauncherUI : MonoBehaviour
     public bool hasSelectedAvatar = false;
 
     #region Public Variable
-    [SerializeField]private InputField usernameInput;
-    [SerializeField]private InputField emailInput;
-    [SerializeField]private InputField passwordInput;
-    [SerializeField]private Text nameFeedbackTxt;
+    [SerializeField] 
+private InputField usernameInput;
+    [SerializeField] private InputField emailInput;
+    [SerializeField] private InputField passwordInput;
+    [SerializeField] private Text nameFeedbackTxt;
     [SerializeField] private Text emailFeedbackTxt;
     [SerializeField] private Text passwordFeedbackTxt;
+    [SerializeField] private GameObject feedBackTxtObj;
     #endregion
+    private CanvasGroup feedBackTxtCanvasGroup;
 
     public static string playerUsername = "Username";
     public static string playerNickname = "Name";
@@ -35,7 +38,8 @@ public class LobbyLauncherUI : MonoBehaviour
 
     private void Awake() {
         lobbyLauncher = GetComponent<LobbyLauncher>();
-        UIControls = GameObject.FindObjectOfType<UIControlsDemo>();        
+        UIControls = GameObject.FindObjectOfType<UIControlsDemo>();
+        feedBackTxtCanvasGroup = feedBackTxtObj.GetComponent<CanvasGroup>();
     }
     void Start()
     {
@@ -52,12 +56,12 @@ public class LobbyLauncherUI : MonoBehaviour
         }
 
         //sets default previous username if available
-        if(usernameInput)
+        if(emailInput)
         {
             if(PlayerPrefs.HasKey(playerNickname) && PlayerPrefs.GetString(playerNickname) != "")
             {
                 defaultName = PlayerPrefs.GetString(playerNickname);
-                usernameInput.text = defaultName;
+                emailInput.text = defaultName;
                 lobbyLauncher.validUsername = true;
                 lobbyLauncher.nickname = defaultName;
                 PhotonNetwork.NickName = defaultName;
@@ -116,12 +120,12 @@ public class LobbyLauncherUI : MonoBehaviour
             UIControls.feedbackText.text = "Name cannot be empty";
             return;
         }
-        else if(name.Length < 2 || name.Length > 12)
-        {
-            lobbyLauncher.validUsername = false;
-            UIControls.feedbackText.text = "Name must be greater than 2 characters, and be 12 or less characters.";
-            return;
-        }
+        //else if(name.Length < 2 || name.Length > 12)
+        //{
+        //    lobbyLauncher.validUsername = false;
+        //    UIControls.feedbackText.text = "Name must be greater than 2 characters, and be 12 or less characters.";
+        //    return;
+        //}
         else {
             UIControls.feedbackText.text = "Name is valid";        
             lobbyLauncher.validUsername = true;
@@ -179,7 +183,7 @@ public class LobbyLauncherUI : MonoBehaviour
 
     public void SubmitButtonClick()
     {
-        if(/*CheckName() && */CheckEmail() && CheckPassword())
+        if((CheckName() || CheckEmail()) && CheckPassword())
         {
             UIControls.mainLogin.SetActive(false);
             UIControls.worldSelect.SetActive(true);
@@ -200,22 +204,25 @@ public class LobbyLauncherUI : MonoBehaviour
             return true;
         }
         
-        //Name Checking
-        if(string.IsNullOrEmpty(usernameInput.text))
+        ////Name Checking
+        //if(string.IsNullOrEmpty(emailInput.text))
+        //{
+        //    emailFeedbackTxt.text = "Please Enter User Name";
+        //    return false;
+        //}
+        else if(PlayerPrefs.GetString("Name","") != emailInput.text)
         {
-            nameFeedbackTxt.text = "Please Enter User Name";
-            return false;
-        }
-        else if(PlayerPrefs.GetString("Name","") != usernameInput.text)
-        {
-            nameFeedbackTxt.text = "Please Enter Correct Name";
+            emailFeedbackTxt.text = "Please Enter Correct UserName/E-mail";
+            feedBackTxtCanvasGroup.alpha = 1.0f;
+            StartCoroutine(AlphaFadeOut(feedBackTxtCanvasGroup.alpha, 0, 3.0f));
             return false;
         }
         else
         {
-            nameFeedbackTxt.text = "Name is Valid";
-            SetPlayerNickname(usernameInput.text);
-            return true;    
+            emailFeedbackTxt.text = "";
+            //nameFeedbackTxt.text = "Name is Valid";
+            //SetPlayerNickname(emailInput.text);
+            return true;
         }
     }
     private bool CheckEmail()
@@ -232,17 +239,21 @@ public class LobbyLauncherUI : MonoBehaviour
         //Email Checking
         if (string.IsNullOrEmpty(emailInput.text))
         {
-            emailFeedbackTxt.text = "Please Enter Email";
+            emailFeedbackTxt.text = "Please Enter UserName/E-mail";
+            feedBackTxtCanvasGroup.alpha = 1.0f;
+            StartCoroutine(AlphaFadeOut(feedBackTxtCanvasGroup.alpha, 0, 3.0f));
             return false;
         }
         else if (PlayerPrefs.GetString("Email", "") != emailInput.text)
         {
-            emailFeedbackTxt.text = "Please Enter Correct Email";
+            emailFeedbackTxt.text = "Please Enter Correct UserName/E-mail";
+            feedBackTxtCanvasGroup.alpha = 1.0f;
+            StartCoroutine(AlphaFadeOut(feedBackTxtCanvasGroup.alpha, 0, 3.0f));
             return false;
         }
         else
         {
-            emailFeedbackTxt.text = "Email is Valid";
+            emailFeedbackTxt.text = "";//"Email is Valid";
             return true;
         }
     }
@@ -261,17 +272,35 @@ public class LobbyLauncherUI : MonoBehaviour
         if (string.IsNullOrEmpty(passwordInput.text))
         {
             passwordFeedbackTxt.text = "Please Enter Password";
+            feedBackTxtCanvasGroup.alpha = 1.0f;
+            StartCoroutine(AlphaFadeOut(feedBackTxtCanvasGroup.alpha, 0, 3.0f));
             return false;
         }
         else if (PlayerPrefs.GetString("Password", "") != passwordInput.text)
         {
             passwordFeedbackTxt.text = "Please Enter Correct Password";
+            feedBackTxtCanvasGroup.alpha = 1.0f;
+            StartCoroutine(AlphaFadeOut(feedBackTxtCanvasGroup.alpha, 0, 3.0f));
             return false;
         }
         else
         {
-            passwordFeedbackTxt.text = "Password is Valid";
+            passwordFeedbackTxt.text = "";
+            //passwordFeedbackTxt.text = "Password is Valid";
             return true;
+        }
+    }
+
+    //Fade Out the Info Popup Canvas 
+    IEnumerator AlphaFadeOut(float start, float end, float duration)
+    {
+        StopCoroutine("AlphaFadeOut");
+        float counter = 0f;
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            feedBackTxtCanvasGroup.alpha = Mathf.Lerp(start, end, counter / duration);
+            yield return null;
         }
     }
 }

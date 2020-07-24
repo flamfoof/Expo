@@ -9,9 +9,11 @@ public class InteractableRayIdentifier : MonoBehaviour
     public Camera camera;
     public GameObject focusedObject;
     public GameObject playerfocusedObject; //For Player Object
+    public float maxDistance = 30.0f;
     public bool isUsing = false;
     Interactables.InteractableType interactType;
     public RaycastHit hit;
+    //9 for interactable
     public int layerMask = 1 << 9 | 1 << 5;
     private RaycastHit[] hits;
 
@@ -19,7 +21,7 @@ public class InteractableRayIdentifier : MonoBehaviour
     void Start()
     {
         camera = player.GetComponent<UserActions>().camera;
-        //if on PC, attach playerActionRay to Camera
+        //if on PC, attach playerActionRay to Camera, otherwise put on VR controller
         transform.SetParent(camera.transform);
         transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -31,12 +33,11 @@ public class InteractableRayIdentifier : MonoBehaviour
 
     private void CastRay()
     {
-        
         //Get the player Mask
         LayerMask playerMask = LayerMask.GetMask("Player");
         // Does the ray intersect any objects excluding the player layer
         // The draw rays are more for VR if we get that set up
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             //Debug.Log("Did Hit: " + hit.collider.name);
@@ -45,13 +46,13 @@ public class InteractableRayIdentifier : MonoBehaviour
         }
         //Detect the Player Object
         //Assign the Player to the Focused Object
-        else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask))
+        else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, playerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             playerfocusedObject = hit.collider.gameObject;
         }
         else {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
             playerfocusedObject = null;
             //Debug.Log("Did not Hit");
@@ -99,13 +100,10 @@ public class InteractableRayIdentifier : MonoBehaviour
                         focusedObject.GetComponent<Interactables>().Perform(phase);
                         player.GetComponent<UserActions>().AddInteractedData(focusedObject);
                         break;
-                }
-                        
+                }                        
             } 
         } else {
             Debug.Log("No valid object has been selected");
-        }
-            
+        }            
     }
-
 }

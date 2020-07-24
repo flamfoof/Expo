@@ -704,6 +704,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotesList:
   - {fileID: 862185862102837945, guid: 12d27a84b9c782d4d811da467a7a262e, type: 3}
+  - {fileID: 862185862102837945, guid: 8245b7d83a122014eb57b657df530ecd, type: 3}
+  - {fileID: 862185862102837945, guid: fa8068b6c96901e488b4332e5ab363d3, type: 3}
 --- !u!114 &5739746197564236030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +907,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   focusedObject: {fileID: 0}
   playerfocusedObject: {fileID: 0}
+  maxDistance: 30
   isUsing: 0
   layerMask: 512
 --- !u!114 &2644525187360116923

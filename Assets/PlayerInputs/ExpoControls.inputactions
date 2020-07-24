@@ -35,7 +35,7 @@
                     "id": "dfe788a1-a9a9-478d-ba78-e5c9b6133916",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "SlowTap(duration=0.2,pressPoint=0.2)"
                 },
                 {
                     "name": "Jump",

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Photon.Pun;
 using Photon.Realtime;
 using Random = UnityEngine.Random;
@@ -177,8 +178,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             }
             else {
-                transform.position = Vector3.Lerp(transform.position, realPosition, .1f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .1f);
+                transform.position = Vector3.Lerp(transform.position, realPosition, .5f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .5f);
                 //Show the Popup if the hover on the player.
                 if(playerActionRay.playerfocusedObject)
                 {
@@ -315,16 +316,18 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             case InputActionPhase.Started:
                 if (ctx.interaction is SlowTapInteraction)
                 {
-                    
+                    OpenCommandRing(true);
                 }
                 isButtonHeld = true;
-                OpenCommandRing(true);
                 //Emote();
                 break;
 
             case InputActionPhase.Canceled:
                 isButtonHeld = false;
-                OpenCommandRing(false);
+                if (ctx.interaction is SlowTapInteraction)
+                {                    
+                    OpenCommandRing(false);
+                }                
                 break;
         }
     }
@@ -398,7 +401,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void ActivateCommandRing()
     {
-
+        GameObject selectedButton = null;
+        if(EventSystem.current.currentSelectedGameObject)
+        {
+            selectedButton = EventSystem.current.currentSelectedGameObject;
+            if(selectedButton.GetComponent<CommandButton>())
+                EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+        }
+        OpenCommandRing(false);
     }
 
     public void OpenMenu(bool toggle)
@@ -447,29 +457,53 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void OpenEmoteMenu()
+    
+    public void OpenEmoteMenu(int emoteIndex)
     {
         //currently just emotes. Will replace with menu UI
-        Debug.Log("Emoted");
-        Emote();
+        if(emoteIndex == -1)
+        {
+            Debug.Log("No emote slected");
+            return;
+        }
+        
+        //Emote(emoteIndex);
+        //sends a message to everyone that you are using emote
+        photonView.RPC("Emote", RpcTarget.AllBuffered, emoteIndex);
     }
 
-    public void Emote()
+    [PunRPC]
+    public void Emote(int emoteIndex)
     {
-        Debug.Log("emoted");
         Vector3 randPos;
         float x, y, z;
-        Debug.Log("Spawned them");
         for(int i = 0; i < emoteAmount; i++)
         {
             x = transform.position.x + Random.Range(-5.0f, 5.0f);
             y = transform.position.y + Random.Range(-5.0f, 5.0f);
             z = transform.position.z + Random.Range(-5.0f, 5.0f);
             randPos = new Vector3(x, y, z);
-            PhotonNetwork.Instantiate(EmoteList.emotePath + GetComponent<EmoteList>().emotesList[Random.Range(0, 1)].name, randPos, Quaternion.identity);
+            Instantiate(GetComponent<EmoteList>().emotesList[emoteIndex], randPos, Quaternion.identity);
+            //PhotonNetwork.Instantiate(EmoteList.emotePath + GetComponent<EmoteList>().emotesList[Random.Range(0, 1)].name, randPos, Quaternion.identity);
             //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
-        }
-        
+        }        
+    }
+
+    [PunRPC]
+    public void RandomEmote()
+    {
+        Vector3 randPos;
+        float x, y, z;
+        int numEmotes = GetComponent<EmoteList>().emotesList.Count;
+        for(int i = 0; i < emoteAmount; i++)
+        {
+            x = transform.position.x + Random.Range(-5.0f, 5.0f);
+            y = transform.position.y + Random.Range(-5.0f, 5.0f);
+            z = transform.position.z + Random.Range(-5.0f, 5.0f);
+            randPos = new Vector3(x, y, z);
+            Instantiate(GetComponent<EmoteList>().emotesList[Random.Range(0, numEmotes)], randPos, Quaternion.identity);
+            //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
+        }        
     }
 
     private IEnumerator HoldButtonPress()

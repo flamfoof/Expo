@@ -144,7 +144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -0.00012207031}
+  m_AnchoredPosition: {x: 5, y: -0.000015258789}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &799856774
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1564456714}
   m_HandleRect: {fileID: 1564456713}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -901,8 +901,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -242.3, y: -90.2}
-  m_SizeDelta: {x: 290.56, y: 143.6}
+  m_AnchoredPosition: {x: -228, y: -90.2}
+  m_SizeDelta: {x: 300, y: 143.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5069842901306909277
 CanvasRenderer:
@@ -1116,7 +1116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -205, y: -196}
+  m_AnchoredPosition: {x: -228, y: -196}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3876996609402604670
@@ -1165,7 +1165,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 370, y: 40}
+  m_SizeDelta: {x: 300, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7295762729207765239
 CanvasRenderer:
@@ -1484,7 +1484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270.5, y: -1}
+  m_AnchoredPosition: {x: 251, y: -1}
   m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3069509742797033538
@@ -1643,6 +1643,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   webRTC: {fileID: 6478637238366009795}
   sendMessage: {fileID: 5063427659900530138}
+  receiveText: {fileID: 2338516778931424323}
   recordAtStart: 1
   minAudioDistance: 0
   maxAudioDistance: 15
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   uMessageField: {fileID: 4337185609708388612}
   uOutput: {fileID: 799856776}
   receiveTxt: {fileID: 0}
+  scrollbar: {fileID: 1229657444}
   isConference: 1
 --- !u!114 &3633223461223209499
 MonoBehaviour:

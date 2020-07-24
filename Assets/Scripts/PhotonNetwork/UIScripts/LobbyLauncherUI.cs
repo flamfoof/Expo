@@ -196,6 +196,7 @@ public class LobbyLauncherUI : MonoBehaviour
         {
             nameFeedbackTxt.text = "Name is valid";
             SetPlayerNickname(usernameInput.text);
+            lobbyLauncher.validUsername = true;
             return true;
         }
         

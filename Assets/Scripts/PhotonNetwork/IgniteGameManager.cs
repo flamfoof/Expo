@@ -12,6 +12,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     static public IgniteGameManager IgniteInstance;
     public CommunicationManager voiceManager;
+    public CommandRing commandUI;
     public List<PhotonView> playerList;
     public List<string> uniquePlayersLogged;
     public int totalUniquePlayers;

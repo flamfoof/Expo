@@ -102,6 +102,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //actionEmailBttn.started += context => EmailButton(context);
         //actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
+        commandUI = gameManager.commandUI.gameObject;
     }
 
     private void Start() {
@@ -110,6 +111,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
+        commandUI = gameManager.commandUI.gameObject;
 
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
@@ -382,15 +384,15 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(toggle)
         {
-            UpdateControlLock(true, false);
+            //UpdateControlLock(true, false);
             commandUI.SetActive(true);            
             isCommandRingOpen = toggle;
-            StartCoroutine(UnfocusApplicationCursor());
+            //StartCoroutine(UnfocusApplicationCursor());
         } else {
-            UpdateControlLock(true, true);
+            //UpdateControlLock(true, true);
             commandUI.SetActive(false);
             isCommandRingOpen = toggle;
-            StartCoroutine(RefocusApplicationCursor());
+            //StartCoroutine(RefocusApplicationCursor());
         }
     }
 
@@ -584,7 +586,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             {
                 anim.SetFloat("speed", (float)stream.ReceiveNext());
             } catch (Exception e) {
-                Debug.Log("Server doesn't have any info on anim class. ");
+                //Debug.Log("Server doesn't have any info on anim class. ");
             }                
         }
                 

@@ -84,7 +84,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
 
         if(!lobbyUI.hasSelectedAvatar)
         {
-            lobbyUI.UIControls.characterFeedbackText.text = "Please select a character";
+            if(lobbyUI.UIControls.characterFeedbackText)
+                lobbyUI.UIControls.characterFeedbackText.text = "Please select a character";
             lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(true);
             return;
         }
@@ -190,7 +191,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             return false;
         } else {
             PlayerPrefs.SetString("Name", nickname);
-            //Debug.Log(PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
+            //Debug.Log("TEES:" + PlayerPrefs.GetString(LobbyLauncherUI.playerNickname));
             PhotonNetwork.NickName = nickname;
             return true;
         }

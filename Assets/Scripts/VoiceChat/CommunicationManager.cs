@@ -15,6 +15,7 @@ public class CommunicationManager : MonoBehaviourPunCallbacks
     private SelectVoicePlatform voicePlatform;
     public AudioCall webRTC;
     public GameObject sendMessage;
+    public GameObject receiveText;
     public bool recordAtStart = true;
     public float minAudioDistance = 0.0f;
     public float maxAudioDistance = 15.0f;

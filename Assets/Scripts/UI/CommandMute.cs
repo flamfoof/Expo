@@ -8,6 +8,6 @@ public class CommandMute : CommandButton
     
     public override void Click()
     {
-        
+        IgniteGameManager.voiceManager.webRTC.GetComponent<AudioCall>().SetMuteSelf(isMuteButton);
     }
 }

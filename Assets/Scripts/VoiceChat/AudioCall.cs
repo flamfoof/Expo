@@ -542,4 +542,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(Time.deltaTime * value);
         scrollbar.value = 0;
     }
+
+    public void SetMuteSelf(bool status)
+    {
+        mCall.SetMute(status);
+    }
 }

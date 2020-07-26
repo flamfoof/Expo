@@ -7459,19 +7459,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1422133561, guid: b394027809c5d1b499b6826424a6d892, type: 3}
-      propertyPath: distanceThreshold
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_Name
       value: IgniteGameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938857522159327606, guid: b394027809c5d1b499b6826424a6d892,
-        type: 3}
-      propertyPath: voiceManager
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}

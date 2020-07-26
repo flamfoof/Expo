@@ -530,7 +530,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void AttachAnim()
     {
-        anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<Animator>();
+        anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().anim;
         if(anim)
         {
             //Debug.Log("Found the thing: " + anim.gameObject.name);
@@ -542,7 +542,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //add jump and other interactable animations here
 
         //Walk Conditions: speed > 1.0f
-        anim.SetFloat("speed", playerController.groundVelocity);        
+        anim.SetFloat("speed", playerController.groundVelocity);
     }
 
     public void UpdateControlLock(bool move, bool look)

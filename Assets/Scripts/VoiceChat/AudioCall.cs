@@ -378,7 +378,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                     //text message received
                     MessageEventArgs args = e as MessageEventArgs;
                     Append(args.Content);
-                    receiveTxt.text = args.Content;
+                    //receiveTxt.text = args.Content;
                     Debug.Log(args.Content);
                     break;
                 }

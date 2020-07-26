@@ -100,8 +100,17 @@ public class CommandRing : MonoBehaviour
 
     void RaycastWorldUI(){
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
-
         pointerData.position = Input.mousePosition;
+
+        #if UNITY_WEBGL
+        //This is because the locked cursor is not always center on WebGL
+        if(Cursor.lockState == CursorLockMode.Locked)
+        {
+            Vector2 screenXY = new Vector2(Screen.width/2, Screen.height/2);
+            pointerData.position = screenXY;
+        }
+        
+        #endif
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);

@@ -402,17 +402,17 @@ PrefabInstance:
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522356450377, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
@@ -1968,6 +1968,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724292074656920661, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2026,17 +2055,17 @@ PrefabInstance:
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.638538
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031630, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
@@ -2265,6 +2294,16 @@ PrefabInstance:
     - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: m_DirectAudioMutes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_Url
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 328882641200394266, guid: 8923e8db48d76694585cfc5ddb4d57ed,
+        type: 3}
+      propertyPath: m_DataSource
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1347472036959655579, guid: 8923e8db48d76694585cfc5ddb4d57ed,

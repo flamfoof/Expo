@@ -438,7 +438,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public void OpenChat(bool toggle)
-    {
+    {            
         if(toggle)
         {
             UpdateControlLock(false, true);
@@ -446,6 +446,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.sendMessage.SetActive(toggle);
             rtc.webRTC.uMessageField.text = "";
             rtc.webRTC.uMessageField.Select();
+            rtc.webRTC.uMessageField.ActivateInputField();
             isChatOpen = toggle;
         } else {            
             UpdateControlLock(true, true);

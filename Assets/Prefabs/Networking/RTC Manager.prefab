@@ -486,7 +486,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1564456714}
   m_HandleRect: {fileID: 1564456713}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -798,7 +798,7 @@ RectTransform:
   - {fileID: 2272864774266892340}
   - {fileID: 8196876473488609274}
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -925,6 +925,91 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textOutputPrefab: {fileID: 0}
+--- !u!1 &3003230807819300068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2651697293166167715}
+  - component: {fileID: 5626122721021716196}
+  - component: {fileID: 2884629022014743731}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2651697293166167715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003230807819300068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6715458132555031625}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5626122721021716196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003230807819300068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &2884629022014743731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003230807819300068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_PointAction: {fileID: 8336913083895805648, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_MoveAction: {fileID: -1854855820290491532, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_SubmitAction: {fileID: -5343105638058735632, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_CancelAction: {fileID: 3507684294002147474, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_LeftClickAction: {fileID: 7024413415925378284, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_MiddleClickAction: {fileID: -5225528038875521367, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_RightClickAction: {fileID: -1718554234995167467, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 602952117989145478, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -6638738975565205880, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 8468674409026044352, guid: b21f1eb4c1ffe1846b0397671335a4b8,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!1 &4024578528915466016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,113 +1426,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &6119953973639658707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 880754626257764212}
-  - component: {fileID: 3396994016051155868}
-  - component: {fileID: 8803307660812855810}
-  m_Layer: 0
-  m_Name: PlatformCompatibleVoice
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &880754626257764212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6119953973639658707}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3396994016051155868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6119953973639658707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 1
-  voiceDetection: 1
-  voiceDetectionThreshold: 0.01
-  voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Mic in at front panel (Pink) (Realtek(R) Audio)
-  photonMicrophoneDeviceId: 0
-  interestGroup: 0
-  debugEchoMode: 0
-  reliableMode: 0
-  encrypt: 0
-  transmitEnabled: 1
-  samplingRate: 24000
-  frameDuration: 20000
-  bitrate: 30000
-  sourceType: 0
-  microphoneType: 0
-  audioClip: {fileID: 0}
-  loopAudioClip: 1
-  reactOnSystemChanges: 0
-  autoStart: 1
-  recordOnlyWhenEnabled: 0
-  skipDeviceChangeChecks: 0
-  stopRecordingWhenPaused: 0
---- !u!114 &8803307660812855810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6119953973639658707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d9debcbaf99472bb70ffc2f99cb23f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KeepAliveInBackground: 5000
-  ApplyDontDestroyOnLoad: 1
-  logLevel: 1
-  enableSupportLogger: 0
-  updateInterval: 50
-  runInBackground: 1
-  statsResetInterval: 1000
-  speakerPrefab: {fileID: 0}
-  primaryRecorder: {fileID: 3396994016051155868}
-  Settings:
-    AppIdRealtime: 
-    AppIdChat: 
-    AppIdVoice: 
-    AppVersion: 
-    UseNameServer: 1
-    FixedRegion: 
-    Server: 
-    Port: 0
-    Protocol: 0
-    AuthMode: 0
-    EnableLobbyStatistics: 0
-    NetworkLogging: 1
-  ShowSettings: 0
-  MinimalTimeScaleToDispatchInFixedUpdate: -1
-  AutoConnectAndJoin: 1
-  AutoLeaveAndDisconnect: 1
-  AutoCreateSpeakerIfNotFound: 1
-  usePunAppSettings: 1
 --- !u!1 &6581907358593465058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,9 +1585,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 880754626257764212}
   - {fileID: 1031669706400911587}
   - {fileID: 2724292074656920661}
+  - {fileID: 2651697293166167715}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1627,7 +1605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webglVoice: {fileID: 0}
   webRTCVoice: {fileID: 8218399313992025316}
-  platformVoice: {fileID: 6119953973639658707}
+  platformVoice: {fileID: 0}
 --- !u!114 &1681540966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,7 +1655,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6478637238366009795
 MonoBehaviour:

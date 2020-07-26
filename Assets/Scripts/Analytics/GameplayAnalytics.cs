@@ -12,6 +12,8 @@ public class GameplayAnalytics : IgniteAnalytics
 
     void Start()
     {
+        timer = GetComponent<TimerScript>();
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(this.gameObject);
     }

@@ -37,6 +37,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public int ping;
     private Vector3 realPosition;
     private Quaternion realRotation;
+    public float lerpSpeed = 1.0f;
     private CanvasGroup infoCanvasGroup;
 
     public Camera camera;
@@ -178,8 +179,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             }
             else {
-                transform.position = Vector3.Lerp(transform.position, realPosition, .5f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .5f);
+                transform.position = Vector3.Lerp(transform.position, realPosition, lerpSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, lerpSpeed);
                 //Show the Popup if the hover on the player.
                 if(playerActionRay.playerfocusedObject)
                 {
@@ -437,7 +438,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public void OpenChat(bool toggle)
-    {
+    {            
         if(toggle)
         {
             UpdateControlLock(false, true);
@@ -445,6 +446,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.sendMessage.SetActive(toggle);
             rtc.webRTC.uMessageField.text = "";
             rtc.webRTC.uMessageField.Select();
+            rtc.webRTC.uMessageField.ActivateInputField();
             isChatOpen = toggle;
         } else {            
             UpdateControlLock(true, true);
@@ -529,7 +531,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void AttachAnim()
     {
-        anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<Animator>();
+        anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().anim;
         if(anim)
         {
             //Debug.Log("Found the thing: " + anim.gameObject.name);
@@ -541,7 +543,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //add jump and other interactable animations here
 
         //Walk Conditions: speed > 1.0f
-        anim.SetFloat("speed", playerController.groundVelocity);        
+        anim.SetFloat("speed", playerController.groundVelocity);
     }
 
     public void UpdateControlLock(bool move, bool look)

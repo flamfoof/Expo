@@ -45,4 +45,9 @@ public class CommandEmote : CommandButton
             }
         }
     }
+
+    void OnDisable()
+    {
+        HideChildrenButton();
+    }
 }

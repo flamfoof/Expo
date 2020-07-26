@@ -991,7 +991,7 @@ PrefabInstance:
         type: 3}
       propertyPath: usernameInput
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4066015460277660925}
     - target: {fileID: 5745220642172085151, guid: 3bffea09948a0c440a5ec311459cd658,
         type: 3}
       propertyPath: emailInput
@@ -1022,6 +1022,21 @@ PrefabInstance:
       propertyPath: feedBackTxtObj
       value: 
       objectReference: {fileID: 8297993585520071270}
+    - target: {fileID: 5745220642172085151, guid: 3bffea09948a0c440a5ec311459cd658,
+        type: 3}
+      propertyPath: skipName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745220642172085151, guid: 3bffea09948a0c440a5ec311459cd658,
+        type: 3}
+      propertyPath: skipEmail
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745220642172085151, guid: 3bffea09948a0c440a5ec311459cd658,
+        type: 3}
+      propertyPath: skipPass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5745220642172085216, guid: 3bffea09948a0c440a5ec311459cd658,
         type: 3}
       propertyPath: scene
@@ -1041,6 +1056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745220642172085216, guid: 3bffea09948a0c440a5ec311459cd658,
+        type: 3}
+      propertyPath: photonSendRate
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5745220642172085217, guid: 3bffea09948a0c440a5ec311459cd658,
         type: 3}

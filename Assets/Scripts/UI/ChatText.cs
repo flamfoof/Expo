@@ -60,7 +60,6 @@ public class ChatText : MonoBehaviour
 
         GameObject go = transform.gameObject;
         go.name = ngp.name + mCounter;
-        Debug.Log(go.name);
         mCounter++;
     }
     

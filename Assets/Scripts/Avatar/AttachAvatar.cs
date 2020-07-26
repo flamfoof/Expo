@@ -14,8 +14,8 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
 
     public AssignPlayerAvatar assigner;
 
-    private void Start() {
-        
+    private void Start() 
+    { 
         //Debug.Log(playerCharacterPrefab.name);
         //GameObject prefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource<GameObject>(this.playerCharacterPrefab);
         //GameObject prefab = Resources.Load("Avatar/");

@@ -506,16 +506,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             //never send null or empty messages. webrtc can't deal with that
             return;
-        }
-        if(scrollbar.value <= 0.1)
-            atBottomOfChat = true;
-        Debug.Log("bottom" + atBottomOfChat);
+        }        
             
         Append(msg);
         mCall.Send(msg);
 
-        if(atBottomOfChat)
-            StartCoroutine(SetScrollbar(3.0f));
+
 
         //reset UI
         uMessageField.text = "";
@@ -527,14 +523,25 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// <param name="text"></param>
     private void Append(string text)
     {
+        
         if (uOutput != null)
         {
+            FloorChatIndexView();
             uOutput.AddTextEntry(text);
         }
         else
         {
             Debug.Log("Chat: " + text);
         }
+    }
+
+    public void FloorChatIndexView()
+    {
+        bool atBottomOfChat = false;
+        if(scrollbar.value <= 0.1)
+                atBottomOfChat = true;
+        if(atBottomOfChat)
+            StartCoroutine(SetScrollbar(3.0f));
     }
 
     private IEnumerator SetScrollbar(float value)

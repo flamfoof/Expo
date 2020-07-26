@@ -37,6 +37,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public int ping;
     private Vector3 realPosition;
     private Quaternion realRotation;
+    public float lerpSpeed = 1.0f;
     private CanvasGroup infoCanvasGroup;
 
     public Camera camera;
@@ -178,8 +179,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             }
             else {
-                transform.position = Vector3.Lerp(transform.position, realPosition, .5f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, .5f);
+                transform.position = Vector3.Lerp(transform.position, realPosition, lerpSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, lerpSpeed);
                 //Show the Popup if the hover on the player.
                 if(playerActionRay.playerfocusedObject)
                 {

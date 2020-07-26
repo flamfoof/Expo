@@ -484,6 +484,7 @@ MonoBehaviour:
   canMove: 1
   canLook: 1
   ping: 0
+  lerpSpeed: 0.1
   camera: {fileID: 20724644957976244}
   playerActionRay: {fileID: 9220169153553486127}
   anim: {fileID: 0}
@@ -910,21 +911,6 @@ MonoBehaviour:
   maxDistance: 30
   isUsing: 0
   layerMask: 512
---- !u!114 &2644525187360116923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2475301903173617132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!1 &4770868699208633711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,16 +1526,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 74134c157c5914b43b8e9a62c4e1b5b7, type: 2}
-    - target: {fileID: 4073263421761128433, guid: 432f044a86e36bf4e9c88ee51c92647a,
-        type: 3}
-      propertyPath: viewIdField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4073263421761128433, guid: 432f044a86e36bf4e9c88ee51c92647a,
-        type: 3}
-      propertyPath: ObservedComponents.Array.data[0]
-      value: 
-      objectReference: {fileID: 2644525187360116923}
     - target: {fileID: 6232647986651695962, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1573,12 +1549,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3777708314081351549}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3358383666074038366 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1942878367456618275, guid: 432f044a86e36bf4e9c88ee51c92647a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3777708314081351549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5340885436681655948 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9111836149972484593, guid: 432f044a86e36bf4e9c88ee51c92647a,
@@ -1591,9 +1561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2475301903173617132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1600770479530496657, guid: 432f044a86e36bf4e9c88ee51c92647a,
+--- !u!4 &3358383666074038366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1942878367456618275, guid: 432f044a86e36bf4e9c88ee51c92647a,
     type: 3}
   m_PrefabInstance: {fileID: 3777708314081351549}
   m_PrefabAsset: {fileID: 0}

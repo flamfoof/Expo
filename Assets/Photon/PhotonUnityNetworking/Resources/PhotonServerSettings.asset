@@ -36,6 +36,8 @@ MonoBehaviour:
   - ChangeAvatar
   - SetAvatarFeatures
   - TriggeredEvent
+  - Emote
+  - RandomEmote
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 3.24
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 23002981675cee84bbbebf0794b85ea2, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7e94338dca7ded64cac2bbdb6b63be08, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2614,7 +2614,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -133.6
       objectReference: {fileID: 0}
     - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2642,11 +2642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMin.y
@@ -2658,14 +2658,19 @@ PrefabInstance:
       objectReference: {fileID: 968898930}
     - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_SizeDelta.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294105796828630345, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
@@ -4544,6 +4549,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77763327, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 712279850, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1348297416665978, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -7473,6 +7486,11 @@ PrefabInstance:
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605695473609353755, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

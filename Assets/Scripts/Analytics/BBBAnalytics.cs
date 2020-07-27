@@ -26,7 +26,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
             gameManager = IgniteGameManager.IgniteInstance;
 
         InvokeRepeating("UpdateAvgSessionTime", 1.0f, 1.0f);
-        
+        InvokeRepeating("AnalyticsAvgTimeUpdate", 1.0f, 5.0f);
     }
 
     void FixedUpdate()
@@ -35,13 +35,22 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         UpdateAllTexts();
     }
 
-    public override void ClickedStats()
+    public override void ClickedStats(string url)
     {
         photonView.RPC("TriggeredEvent", RpcTarget.All);
+        Invoke("AnalyticsUpdateClicks", 0.5f);
+    }
+
+    void AnalyticsUpdateClicks(string url)
+    {
+        if(AnalyticsController.Instance)
+        {
+            AnalyticsController.Instance.WebsiteClick(url);
+        }
     }
 
     [PunRPC]
-    void TriggeredEvent()
+    void TriggeredEvent(string url)
     {
         clicks++;
     }
@@ -83,7 +92,6 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         } else {
             avgSessionTime = 0.0f;
         }
-            
 
 
         /* Trying to get info from network, not working
@@ -100,6 +108,15 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
                 sessionTimeList.Add((float)PhotonNetwork.PlayerList[i].CustomProperties["LoginTime"]);
             }
         }*/
+    }
+
+    void AnalyticsAvgTimeUpdate()
+    {                    
+        //invoked
+        if(AnalyticsController.Instance)
+        {
+            AnalyticsController.Instance.AverageTimeSpent(avgSessionTime);
+        }
     }
 
     

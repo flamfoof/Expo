@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 using WeIgnite;
 
 //inherited from Ignite Analytics monobehaviour pun callback
@@ -15,7 +16,13 @@ public class GameplayAnalytics : IgniteAnalytics
         timer = GetComponent<TimerScript>();
         
         SceneManager.sceneLoaded += OnSceneLoaded;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);        
+        AnalyticsSessionInfo.sessionStateChanged += OnSessionStateChanged;
+    }
+
+    void OnSessionStateChanged(AnalyticsSessionState sessionState, long sessionId, long sessionElapsedTime, bool sessionChanged)
+    {
+        Debug.Log("Call    " + AnalyticsSessionInfo.userId  + " " + sessionState + " " + sessionId + " " + sessionElapsedTime + " " + sessionChanged);
     }
 
     //In the case that there are new interactables being added or when scene changes.
@@ -51,6 +58,8 @@ public class GameplayAnalytics : IgniteAnalytics
         UpdateInteractableList();
 
         timer.StartTimer();
+        Debug.Log("Start analytic info  " + AnalyticsSessionInfo.userId + " " + AnalyticsSessionInfo.sessionState + " " + AnalyticsSessionInfo.sessionId + " " + AnalyticsSessionInfo.sessionElapsedTime);
+        
     }
 
     //TODO: Send analytics to Unity Analytics

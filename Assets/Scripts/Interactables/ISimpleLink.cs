@@ -18,7 +18,7 @@ public class ISimpleLink : Interactables
             TimesUsed++;
             if(analytics)
             {
-                analytics.ClickedStats();
+                analytics.ClickedStats(linkURL);
             }
 
             //Application.OpenURL(linkURL);

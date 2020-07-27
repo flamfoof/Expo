@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4938857522159327607}
   - component: {fileID: 4938857522159327606}
   - component: {fileID: 1422133561}
+  - component: {fileID: 4084682869762659739}
   m_Layer: 0
   m_Name: IgniteGameManager
   m_TagString: Untagged
@@ -49,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1743903104223250, guid: 2e62f5703e5f8d2488a5e1bc8433be41,
     type: 3}
-  voiceManager: {fileID: 0}
   commandUI: {fileID: 3516366016013513357}
   playerList: []
   uniquePlayersLogged: []
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4938857522159327601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ecc87b000f4fc54e957635cfc87fb73, type: 3}
   m_Name: 
@@ -79,6 +79,18 @@ MonoBehaviour:
   currentFocused: {fileID: 0}
   prevFocused: {fileID: 0}
   listYT: []
+--- !u!114 &4084682869762659739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938857522159327601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a4bb9bbcb83ca4ba552e16f2194769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4938857522356450376
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +212,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BlockingObjects
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 268975615077242879, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 268975615077242879, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1843774188406491686, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}
@@ -490,6 +512,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BlockingObjects
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319133894752154421, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319133894752154421, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 8345321219672700126, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}

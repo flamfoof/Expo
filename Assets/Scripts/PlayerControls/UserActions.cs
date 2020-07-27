@@ -31,6 +31,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
     public bool isChatOpen = false;
+    public float chatFadeTimer = 3.0f;
+    public bool isChatFading = false;
     public bool isCommandRingOpen = false;
     public bool canMove = true;
     public bool canLook = true;
@@ -46,8 +48,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public TextMesh playerName;
     public TextMesh playerOrganization;
     public GameObject infoPopup; //For InfoPopUp
+    private UIEffectsUtils uiEffects;
     public float sessionTimer = 0.0f;
     public float realSessionTimer = 0.0f;
+    
 
     public float SessionTimer {
         get{
@@ -105,11 +109,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
         commandUI = gameManager.commandUI.gameObject;
+        uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
     }
 
     private void Start() {
         //Debug.Log("Attaching anim");
-        //infoPopup.SetActive(false);   //Set the Popup inactive
+        infoPopup.SetActive(false);   //Set the Popup inactive
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
@@ -447,6 +452,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.webRTC.uMessageField.text = "";
             rtc.webRTC.uMessageField.Select();
             rtc.webRTC.uMessageField.ActivateInputField();
+            if(isChatFading)
+            {
+                isChatFading = false;
+            }
+            StartCoroutine(FadeChat(true));
             isChatOpen = toggle;
         } else {            
             UpdateControlLock(true, true);
@@ -454,9 +464,44 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             if (rtc.webRTC.uMessageField.text != "") {
                 rtc.webRTC.SendButtonPressed();
             }
+            StartCoroutine(FadeChat(false));
             rtc.sendMessage.SetActive(toggle);
             isChatOpen = toggle;
         }
+    }
+
+    public IEnumerator FadeChat(bool toggle)
+    {
+        float timer = 0.0f;
+        isChatFading = true;
+
+        if(toggle == false)
+        {
+            while(timer < chatFadeTimer)
+            {
+                yield return new WaitForEndOfFrame();
+                timer += Time.deltaTime;
+                if(!isChatFading)
+                    break;
+            }
+        }
+        
+        if(isChatFading)
+        {
+            if(toggle)
+            {
+                if(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>().alpha != 1)
+                {
+                    uiEffects.FadeInCanvasGroup(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>(), 2.0f);
+                }
+                    
+            } else {
+                if(!rtc.webRTC.lockChatVisibility)
+                    uiEffects.FadeOutCanvasGroup(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>(), 1.0f);
+            }  
+        }
+         
+        isChatFading = false;
     }
 
     

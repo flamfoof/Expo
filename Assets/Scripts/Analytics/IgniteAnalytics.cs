@@ -10,6 +10,11 @@ public class IgniteAnalytics : MonoBehaviourPunCallbacks
     {
 
     }
+
+    public virtual void ClickedStats(string url)
+    {
+
+    }
     
     public virtual void ClickedStats(int amount)
     {

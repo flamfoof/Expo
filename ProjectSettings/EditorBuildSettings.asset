@@ -15,15 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainConference.unity
     guid: e80390c5d5a475d4e98884b0639d1740
   - enabled: 0
-    path: Assets/StoreAssets/FrostweepGames/FrostweepGamesPlugins/WebGLPUNVoice/Examples/Demo_1/FGP_Demo_1.unity
-    guid: ce2cb076d1c4be6409b8fcf58e4e5a1b
-  - enabled: 0
     path: Assets/Scenes/TrainingRoom.unity
     guid: 07d7818c4f1f54c47bce6fe62ecc59ea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Distillery.unity
     guid: b20d01c9ce15a374083608b6d4b30c52
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AudioChat.unity
     guid: 0738678bde3e9324ea8dd0745abc71ee
   m_configObjects:

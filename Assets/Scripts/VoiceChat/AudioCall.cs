@@ -83,7 +83,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// </summary>
     public ChatText uOutput;
 
-    public Text receiveTxt;
+    public GameObject receiveTxt;
+    public bool lockChatVisibility = false;
 
     public Scrollbar scrollbar;
 
@@ -533,6 +534,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             Debug.Log("Chat: " + text);
         }
+    }
+
+    public void ToggleChatVisibility()
+    {
+        lockChatVisibility = !lockChatVisibility;
     }
 
     public void FloorChatIndexView()

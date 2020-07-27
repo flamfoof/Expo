@@ -1680,7 +1680,7 @@ MonoBehaviour:
   uIceServer2: stun:stun.l.google.com:19302
   uMessageField: {fileID: 4337185609708388612}
   uOutput: {fileID: 799856776}
-  receiveTxt: {fileID: 0}
+  receiveTxt: {fileID: 2338516778931424323}
   scrollbar: {fileID: 1229657444}
   isConference: 1
 --- !u!114 &3633223461223209499

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -19,6 +20,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     [Header("These variables are for customizing characters (later feature)")]
     public AvatarInfo playerAvatarInfo;
+
     /*
     public List<Hats> hats;
     public List<Shirts> shirt;
@@ -259,7 +261,28 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
 
 
+
+        //Assigning skeleton locations to account for female/male differences
+        Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
+        Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
+        for(int i = 0; i < fromSkeleton.Length; i++)
+        {
+            fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;
+            
+            Debug.Log("Name from: " + fromSkeleton[i].name + "    To: " + toSkeleton[i].name);
+            fromSkeleton[i].name = toSkeleton[i].name;
+            
+        }
+
+        StartCoroutine(RebindThisAnim(from.anim));
+        
         Debug.Log("Done assigning");
+    }
+
+    public IEnumerator RebindThisAnim(Animator anim)
+    {
+        yield return new WaitForEndOfFrame();
+        anim.Rebind();
     }
 
     public void ChangeAvatar(AvatarInfo from, GenderList.genders gender)

@@ -78,7 +78,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             }
         }
 
-
+        if(AnalyticsController.Instance)
+        {
+            AnalyticsController.Instance.ProfileInfoAnalytics();
+        }
         
     }
 
@@ -267,7 +270,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 {
                     uniquePlayersLogged.Add(pv.Owner.NickName);
                     Debug.Log("New unique player has joined: " + pv.Owner.NickName);
+                    
                     totalUniquePlayers++;
+
+                    if(AnalyticsController.Instance)
+                    {
+                        AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
+                    }
                 }  
             }
                   

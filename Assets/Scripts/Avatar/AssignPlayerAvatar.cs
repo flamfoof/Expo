@@ -260,11 +260,17 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
 
+        OnTransformChildrenChanged(from, toThis);
 
+        Debug.Log("Done assigning");
+    }
 
+    public void OnTransformChildrenChanged(AvatarInfo from, AvatarInfo toThis) {
         //Assigning skeleton locations to account for female/male differences
         Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
         Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
+        //from.skeletonBase.transform.localPosition = toThis.skeletonBase.transform.localPosition;
+        from.skeletonBase.transform.localScale = toThis.skeletonBase.transform.localScale;
         for(int i = 0; i < fromSkeleton.Length; i++)
         {
             fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;
@@ -275,8 +281,6 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         }
 
         StartCoroutine(RebindThisAnim(from.anim));
-        
-        Debug.Log("Done assigning");
     }
 
     public IEnumerator RebindThisAnim(Animator anim)
@@ -386,19 +390,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
 
-        //Assigning skeleton locations to account for female/male differences
-        Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
-        Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
-        for(int i = 0; i < fromSkeleton.Length; i++)
-        {
-            fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;
-            
-            Debug.Log("Name from: " + fromSkeleton[i].name + "    To: " + toSkeleton[i].name);
-            fromSkeleton[i].name = toSkeleton[i].name;
-            
-        }
-
-        StartCoroutine(RebindThisAnim(from.anim));
+        OnTransformChildrenChanged(from, toThis);
     }
 
     /*

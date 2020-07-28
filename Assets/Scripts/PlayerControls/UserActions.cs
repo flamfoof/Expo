@@ -516,7 +516,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         
         //Emote(emoteIndex);
         //sends a message to everyone that you are using emote
-        photonView.RPC("Emote", RpcTarget.AllBuffered, emoteIndex);
+        photonView.RPC("Emote", RpcTarget.All, emoteIndex);
     }
 
     [PunRPC]

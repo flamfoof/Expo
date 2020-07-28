@@ -24,10 +24,13 @@ public class ISimplePresentation : Interactables, IPunObservable
     {
         if (phase == InputActionPhase.Started)
         {
-            NextSlide();
+
+            //NextSlide();
+            GetComponent<PhotonView>().RPC("NextSlide", RpcTarget.AllBuffered);
         }
     }
 
+    [PunRPC]
     public void NextSlide()
     {
         //have it before setting sprite, sprite is already at default

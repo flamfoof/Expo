@@ -16,7 +16,7 @@ public class LobbyLauncherUI : MonoBehaviour
 
     #region Public Variable
     [SerializeField] 
-private InputField usernameInput;
+    private InputField usernameInput;
     [SerializeField] private InputField emailInput;
     [SerializeField] private InputField passwordInput;
     [SerializeField] private Text nameFeedbackTxt;
@@ -109,6 +109,10 @@ private InputField usernameInput;
                 system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
             }
 
+        }
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            SubmitButtonClick();
         }
     }
     public void SetPlayerNickname(string name)

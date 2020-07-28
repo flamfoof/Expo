@@ -52,6 +52,7 @@ public class SignUpController : MonoBehaviour
             RefreshText();
             UIControls.mainLogin.SetActive(true);
             UIControls.signUp.SetActive(false);
+            //AnalyticsController.Instance.ProfileInfoAnalytics();
         }
     }
     public void BackButtonClick()

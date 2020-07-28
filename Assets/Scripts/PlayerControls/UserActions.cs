@@ -665,7 +665,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             realSessionTimer = (float)stream.ReceiveNext();
             try
             {
-                anim.SetFloat("speed", (float)stream.ReceiveNext());
+                //anim.SetFloat("speed", (float)stream.ReceiveNext());
+                //Debug.Log("anim: " + anim.GetFloat("speed"));
             } catch (Exception e) {
                 //Debug.Log("Server doesn't have any info on anim class. ");
             }                

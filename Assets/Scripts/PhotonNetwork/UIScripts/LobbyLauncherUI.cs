@@ -266,7 +266,7 @@ private InputField usernameInput;
                 passwordFeedbackTxt.text = "Ignite!";
                 return true;
             }
-            return true;
+            return false;
         }
 
         if (string.IsNullOrEmpty(passwordInput.text))

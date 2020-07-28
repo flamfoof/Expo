@@ -220,6 +220,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                     {
                         Debug.Log(pv.Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
                         changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
+                        player.transform.name = pv.Owner.NickName;
                     }
                 }
                 count++;

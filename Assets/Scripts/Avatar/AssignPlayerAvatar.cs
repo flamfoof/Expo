@@ -283,8 +283,10 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     {
         yield return new WaitForEndOfFrame();
         anim.Rebind();
+        anim.applyRootMotion = true;
     }
 
+    //function called by server to change the other players' character
     public void ChangeAvatar(AvatarInfo from, GenderList.genders gender)
     {
         AvatarInfo toThis;
@@ -383,6 +385,20 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshBody.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshBody.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
+
+        //Assigning skeleton locations to account for female/male differences
+        Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
+        Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
+        for(int i = 0; i < fromSkeleton.Length; i++)
+        {
+            fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;
+            
+            Debug.Log("Name from: " + fromSkeleton[i].name + "    To: " + toSkeleton[i].name);
+            fromSkeleton[i].name = toSkeleton[i].name;
+            
+        }
+
+        StartCoroutine(RebindThisAnim(from.anim));
     }
 
     /*

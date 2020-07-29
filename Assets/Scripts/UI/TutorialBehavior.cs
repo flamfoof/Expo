@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
 public class TutorialBehavior : MonoBehaviour
 {
     public GameObject[] tutorialScreens;
+    public GameObject player;
     bool waitingforscreen = false;
     int currentScreenNum = 0;
     GameObject currentScreen;
 
     void Start()
     {
+        
+        if(IgniteGameManager.localPlayer != player)
+        {
+            gameObject.SetActive(false);
+        }
         currentScreen = tutorialScreens[currentScreenNum];
+        
     }
     // Update is called once per frame
     void Update()

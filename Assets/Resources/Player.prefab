@@ -1784,6 +1784,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_jaw_end
       objectReference: {fileID: 0}
+    - target: {fileID: 9057154495360608772, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1743903104223250}
     - target: {fileID: 9081342287484776776, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name

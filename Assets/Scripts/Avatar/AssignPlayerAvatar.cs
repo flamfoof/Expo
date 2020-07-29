@@ -260,12 +260,12 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
 
-        OnTransformChildrenChanged(from, toThis);
+        OnTransformAvatarChildrenChanged(from, toThis);
 
         Debug.Log("Done assigning");
     }
 
-    public void OnTransformChildrenChanged(AvatarInfo from, AvatarInfo toThis) {
+    public void OnTransformAvatarChildrenChanged(AvatarInfo from, AvatarInfo toThis) {
         //Assigning skeleton locations to account for female/male differences
         Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
         Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
@@ -390,7 +390,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         from.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshLowerTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
         from.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial = toThis.meshUpperTeeth.gameObject.GetComponent<Renderer>().sharedMaterial;
 
-        OnTransformChildrenChanged(from, toThis);
+        OnTransformAvatarChildrenChanged(from, toThis);
     }
 
     /*

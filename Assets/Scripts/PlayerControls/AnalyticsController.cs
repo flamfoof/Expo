@@ -17,7 +17,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
             { "password",PlayerPrefs.GetString("Password")},
             { "sessionID", AnalyticsSessionInfo.sessionId}
         });
-        Debug.Log("Profiled analytics");
+        //Debug.Log("Profiled analytics");
     }
     //Average Time Spent
     public void AverageTimeSpent(float timespent)
@@ -26,7 +26,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         {
             { "timeSpent", timespent },
         });
-        Debug.Log("Logged analytic time: " + timespent);
+        //Debug.Log("Logged analytic time: " + timespent);
     }
     //Number of Attendees
     public void AttendesNumber(int attendeeNumber)
@@ -35,7 +35,7 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         {
             { "attendeeNumber", attendeeNumber },
         });
-        Debug.Log("Logged atteendees count: " + attendeeNumber);
+        //Debug.Log("Logged atteendees count: " + attendeeNumber);
     }
     //Website Click and what website it was
     public void WebsiteClick(string websiteUrl)
@@ -44,6 +44,6 @@ public class AnalyticsController : SingletonClass<AnalyticsController>
         {
             { "websiteClick",websiteUrl },
         });
-        Debug.Log("Logged website clicked: " + websiteUrl);
+        //Debug.Log("Logged website clicked: " + websiteUrl);
     }
 }

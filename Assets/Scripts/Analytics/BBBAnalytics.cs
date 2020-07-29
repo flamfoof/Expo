@@ -139,7 +139,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         attendeesText.text = "Attendees: " + attendees;
         AnalyticsController.Instance.AttendesNumber(attendees);
         sessionText.text = "Avg. Session Time: " + sessionTempText;
-        AnalyticsController.Instance.AverageTimeSpent(float.Parse(sessionTempText));
+        AnalyticsController.Instance.AverageTimeSpent(avgSessionTime);
         clicksText.text = "Web Clicks: " + clicks;
     }
 

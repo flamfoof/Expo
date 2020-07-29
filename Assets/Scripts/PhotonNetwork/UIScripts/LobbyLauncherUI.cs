@@ -15,8 +15,7 @@ public class LobbyLauncherUI : MonoBehaviour
     public bool hasSelectedAvatar = false;
 
     #region Public Variable
-    [SerializeField] 
-    private InputField usernameInput;
+    [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField emailInput;
     [SerializeField] private InputField passwordInput;
     [SerializeField] private Text nameFeedbackTxt;
@@ -138,6 +137,29 @@ public class LobbyLauncherUI : MonoBehaviour
         }
         
     }
+    public GenderList.genders CheckAvatarGender()
+    {
+        switch (UIControls.selectedAvatarIndex)
+        {
+            case 0:
+                Debug.Log("Male1");
+                assignPlayerAva.Gender = GenderList.genders.Male1;
+                return GenderList.genders.Male1;
+            case 1:
+                Debug.Log("Female1");
+                assignPlayerAva.Gender = GenderList.genders.Female1;
+                return GenderList.genders.Female1;
+            case 2:
+                Debug.Log("Male2");
+                assignPlayerAva.Gender = GenderList.genders.Male2;
+                return GenderList.genders.Male2;
+            default:
+                break;
+        }
+        return GenderList.genders.None;
+    }
+
+    //public GenderList.genders
     public GenderList.genders CheckGender(Toggle[] genderList)
     {
         for(int i = 0; i < genderList.Length; i++)

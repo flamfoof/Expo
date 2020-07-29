@@ -82,21 +82,22 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
 
-        if(!lobbyUI.hasSelectedAvatar)
-        {
-            if(lobbyUI.UIControls.characterFeedbackText)
-                lobbyUI.UIControls.characterFeedbackText.text = "Please select a character";
-            lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(true);
-            return;
-        }
+        //if(!lobbyUI.hasSelectedAvatar)
+        //{
+        //    if(lobbyUI.UIControls.characterFeedbackText)
+        //        lobbyUI.UIControls.characterFeedbackText.text = "Please select a character";
+        //    lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(true);
+        //    return;
+        //}
 
         //play the idle loading animation
         lobbyUI.PlayLoadAnimation(true);
 
         //set the player info
-        playerInfo.GetComponent<AssignPlayerAvatar>().Gender = lobbyUI.CheckGender(lobbyUI.UIControls.genderList);
+        //playerInfo.GetComponent<AssignPlayerAvatar>().Gender = lobbyUI.CheckGender(lobbyUI.UIControls.genderList);
+        playerInfo.GetComponent<AssignPlayerAvatar>().Gender = lobbyUI.CheckAvatarGender();
 
-        if(PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected)
         {
             LogFeedback("Joining Room...");
 

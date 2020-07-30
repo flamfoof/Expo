@@ -270,7 +270,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         Transform[] fromSkeleton = from.skeletonBase.GetComponentsInChildren<Transform>();
         Transform[] toSkeleton = toThis.skeletonBase.GetComponentsInChildren<Transform>();
         //from.skeletonBase.transform.localPosition = toThis.skeletonBase.transform.localPosition;
-        from.skeletonBase.transform.localScale = toThis.skeletonBase.transform.localScale;
+        from.avatarRoot.transform.localScale = toThis.skeletonBase.transform.localScale;
         for(int i = 0; i < fromSkeleton.Length; i++)
         {
             fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;

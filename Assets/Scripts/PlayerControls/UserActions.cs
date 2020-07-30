@@ -257,12 +257,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 if (ctx.interaction is SlowTapInteraction)
                 {
                     //StartCoroutine(HoldButtonPress((int)(context.duration)));  
-                    //playerActionRay.UseInteractable(ctx.phase);
+                    playerActionRay.UseInteractable(ctx.phase);
                     //Debug.Log("slowtap performed");
                 } else if(ctx.interaction is HoldInteraction)
                 {
                     //currently 0.2s hold for performed
-                    playerActionRay.UseInteractable(ctx.phase);
+                    //playerActionRay.UseInteractable(ctx.phase);
                     //Debug.Log("hold performed");
                 }
                 else

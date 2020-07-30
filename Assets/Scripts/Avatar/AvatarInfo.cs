@@ -29,4 +29,5 @@ public class AvatarInfo : MonoBehaviour
     public SkinnedMeshRenderer meshUpperTeeth;
     public SkinnedMeshRenderer meshLowerTeeth;
     public GameObject skeletonBase;
+    public GameObject avatarRoot;
 }

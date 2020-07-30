@@ -1271,7 +1271,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &314143278953730809
 CanvasRenderer:
@@ -1983,6 +1983,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_LeftForeArm
       objectReference: {fileID: 0}
+    - target: {fileID: 9111836149972484593, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: avatarRoot
+      value: 
+      objectReference: {fileID: 2475301903173617132}
     - target: {fileID: 9157037417081110344, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -2014,6 +2019,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2475301903173617132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1600770479530496657, guid: 432f044a86e36bf4e9c88ee51c92647a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3777708314081351549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8376895124138796706
 PrefabInstance:
   m_ObjectHideFlags: 0

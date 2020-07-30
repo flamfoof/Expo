@@ -53,6 +53,7 @@ MonoBehaviour:
   meshUpperTeeth: {fileID: 3585699866733400495}
   meshLowerTeeth: {fileID: 3421877015685129737}
   skeletonBase: {fileID: 1913546709820357450}
+  avatarRoot: {fileID: 0}
 --- !u!95 &4533721416012787672
 Animator:
   serializedVersion: 3
@@ -92,7 +93,7 @@ PrefabInstance:
     - target: {fileID: 3016473475025881489, guid: e422dda7c46457d40b28a60bff35d4a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.335
+      value: -1.501
       objectReference: {fileID: 0}
     - target: {fileID: 3016473475025881489, guid: e422dda7c46457d40b28a60bff35d4a5,
         type: 3}
@@ -142,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 3016473475025881489, guid: e422dda7c46457d40b28a60bff35d4a5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.649
+      value: 1.848
       objectReference: {fileID: 0}
     - target: {fileID: 3016473475025881489, guid: e422dda7c46457d40b28a60bff35d4a5,
         type: 3}
@@ -332,7 +333,7 @@ PrefabInstance:
     - target: {fileID: 5007596760653002671, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.267
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5007596760653002671, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}
@@ -342,17 +343,17 @@ PrefabInstance:
     - target: {fileID: 5007596760653002671, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.173402
       objectReference: {fileID: 0}
     - target: {fileID: 5007596760653002671, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.173402
       objectReference: {fileID: 0}
     - target: {fileID: 5007596760653002671, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.173402
       objectReference: {fileID: 0}
     - target: {fileID: 5266764545580405427, guid: d6b11682209817744bfe0dd7d49f204f,
         type: 3}

@@ -147,7 +147,16 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        StartCoroutine(UnfocusApplicationCursor());
         SceneManager.LoadScene(sceneLogin);
+    }
+
+    public IEnumerator UnfocusApplicationCursor()
+    {
+        yield return new WaitForFixedUpdate();
+
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true;
     }
 
 

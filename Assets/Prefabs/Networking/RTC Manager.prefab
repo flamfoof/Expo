@@ -1895,7 +1895,7 @@ MonoBehaviour:
   audioCallUI: {fileID: 3633223461223209499}
   uSignalingUrl: ws://rtc-ignite-voice.herokuapp.com/conferenceapp
   uSecureSignalingUrl: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
-  uForceSecureSignaling: 0
+  uForceSecureSignaling: 1
   uIceServer: stun:stun.because-why-not.com:443
   uIceServerUser: na
   uIceServerPassword: na

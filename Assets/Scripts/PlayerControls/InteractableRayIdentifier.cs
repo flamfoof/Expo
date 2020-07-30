@@ -7,6 +7,8 @@ public class InteractableRayIdentifier : MonoBehaviour
 {
     public GameObject player;
     public Camera camera;
+    public CanvasGroup canvas;
+    public UIEffectsUtils effectsUtils;
     public GameObject focusedObject;
     public GameObject playerfocusedObject; //For Player Object
     public float maxDistance = 30.0f;
@@ -43,6 +45,7 @@ public class InteractableRayIdentifier : MonoBehaviour
             //Debug.Log("Did Hit: " + hit.collider.name);
             focusedObject = hit.collider.gameObject;
             playerfocusedObject = null;
+            canvas.alpha = 1;
         }
         //Detect the Player Object
         //Assign the Player to the Focused Object
@@ -50,11 +53,13 @@ public class InteractableRayIdentifier : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             playerfocusedObject = hit.collider.gameObject;
+            canvas.alpha = 1;
         }
         else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
             playerfocusedObject = null;
+            canvas.alpha = 0;
             //Debug.Log("Did not Hit");
         }
         /*

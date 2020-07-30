@@ -13,7 +13,7 @@ public class ISimpleLink : Interactables
     public override void Perform(InputActionPhase phase)
     {
 
-        if(phase == InputActionPhase.Started)
+        if(phase == InputActionPhase.Performed)
         {
             TimesUsed++;
             if(analytics)

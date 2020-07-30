@@ -27,7 +27,7 @@
                     "id": "7c7d2a09-bf14-4298-a746-12eca4b7b105",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold,SlowTap"
+                    "interactions": "Hold(duration=0.2,pressPoint=0.2),SlowTap(duration=0.2)"
                 },
                 {
                     "name": "Secondary",
@@ -101,7 +101,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -228,13 +228,68 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
+                    "name": "D-pad",
+                    "id": "1c9ec134-bbae-4801-bd62-7b547da316f1",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f4bf44ab-45f3-4903-9ba0-eda998748900",
+                    "path": "<XInputController>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "fcbfa5e0-b4d7-4982-828b-7e230829c7e3",
+                    "path": "<XInputController>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "47b39106-995f-4290-b1d1-0e1edce735b4",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "13ac1abd-ef9b-4b84-b0b9-d40634c7566f",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d4e6c4da-4621-4554-ad43-0388451bd21c",
+                    "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,12 +317,12 @@
                 },
                 {
                     "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "ca11a168-e021-4a33-b361-6c77af481d2d",
+                    "path": "<XInputController>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Primary",
+                    "groups": "Gamepad",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -306,12 +361,12 @@
                 },
                 {
                     "name": "",
-                    "id": "58e927b8-cf6e-4bec-98aa-ac7c32e293dc",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "a7a1bd77-4737-422e-9955-bd47156a2ce8",
+                    "path": "<XInputController>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Secondary",
+                    "groups": "Gamepad",
+                    "action": "Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -339,6 +394,17 @@
                 },
                 {
                     "name": "",
+                    "id": "090d71f7-533d-4ba3-9bc6-5e4051b6b5cf",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Secondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3f27180f-26f5-444c-9cab-a6e56d1855e3",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -350,11 +416,11 @@
                 },
                 {
                     "name": "",
-                    "id": "454c8ac4-0374-4961-b917-584132f68832",
-                    "path": "",
+                    "id": "220dd0f1-f225-4659-ad71-7f88924947dc",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Gamepad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -405,6 +471,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fa49dc8f-358b-4de5-ab12-805d0d7a9f95",
+                    "path": "<XInputController>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "018199f1-efb4-43a3-930a-8577d187c9aa",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -427,11 +504,33 @@
                 },
                 {
                     "name": "",
+                    "id": "31679aa7-58a9-4bd8-8880-b674d20d0b93",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4060fd4c-5c39-4f90-a855-67744074ef9b",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Chat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c76a1ba5-3665-46da-a939-91d45e063efd",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Chat",
                     "isComposite": false,
                     "isPartOfComposite": false

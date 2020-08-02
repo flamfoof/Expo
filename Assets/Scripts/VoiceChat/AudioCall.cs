@@ -54,6 +54,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// change the CreateNetworkConfig method.
     /// </summary>
     public string uIceServer2 = "stun:stun.l.google.com:19302";
+    public string uIceServer3 = "stun:stun.l.google.com:19302";
+    public string uIceServer4 = "stun:stun.l.google.com:19302";
+    public string uIceServer5 = "stun:stun.l.google.com:19302";
+    public string uIceServer6 = "stun:stun.l.google.com:19302";
+    public string uIceServer7 = "stun:stun.l.google.com:19302";
     
 
     /// <summary>
@@ -101,7 +106,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
     protected ConnectionId mRemoteUserId = ConnectionId.INVALID;
     protected bool mAutoRejoin = true;
     protected IEnumerator mAutoRejoinCoroutine = null;
-    protected float mRejoinTime = 0.5f;
+    protected float mRejoinTime = 0.2f;
 
     protected bool mLocalFrameEvents = true;
 
@@ -297,6 +302,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
             netConfig.IceServers.Add(new IceServer(uIceServer, uIceServerUser, uIceServerPassword));
         if (string.IsNullOrEmpty(uIceServer2) == false)
             netConfig.IceServers.Add(new IceServer(uIceServer2));
+        if (string.IsNullOrEmpty(uIceServer3) == false)
+            netConfig.IceServers.Add(new IceServer(uIceServer3));
+        if (string.IsNullOrEmpty(uIceServer4) == false)
+            netConfig.IceServers.Add(new IceServer(uIceServer4));
+        if (string.IsNullOrEmpty(uIceServer5) == false)
+            netConfig.IceServers.Add(new IceServer(uIceServer5));
+        if (string.IsNullOrEmpty(uIceServer6) == false)
+            netConfig.IceServers.Add(new IceServer(uIceServer6));
+        if (string.IsNullOrEmpty(uIceServer7) == false)
+            netConfig.IceServers.Add(new IceServer(uIceServer7));
 
         if (Application.platform == RuntimePlatform.WebGLPlayer || uForceSecureSignaling)
         {

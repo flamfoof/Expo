@@ -23,6 +23,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private InputAction actionSprint;
     private InputAction actionMenu;
     private InputAction actionChat;
+    private InputAction actionTeleport;
     private InputAction.CallbackContext context;
     private FirstPersonAIO playerController;
     public GameObject playerUI;
@@ -105,6 +106,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
         actionChat.started += context => ChatButton(context);
+        actionTeleport.started += context => TeleportButton(context);
+        actionTeleport.performed += context => TeleportButton(context);
+        actionTeleport.canceled += context => TeleportButton(context);
         //actionEmailBttn.started += context => EmailButton(context);
         //actionEmailBttn.canceled += context => EmailButton(context);
         infoCanvasGroup = GetComponent<CanvasGroup>();
@@ -233,7 +237,18 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             actionSprint = playerInput.actions["Sprint"];
             actionMenu = playerInput.actions["Menu"];
             actionChat = playerInput.actions["Chat"];
+            actionTeleport = playerInput.actions["Teleport"];
         }
+
+        /*
+        Primary - Left click
+        Secondary - Right click
+        Look - Mouse XY
+        Move - WASD, Arrow Keys
+        Menu - Tab
+        Chat - Enter/ Right click UI
+        Teleport - Space
+        */
     }
 
     private void Interact(InputAction.CallbackContext ctx)
@@ -396,6 +411,27 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    
+    public void TeleportButton(InputAction.CallbackContext ctx)
+    {   
+        switch (ctx.phase)
+        {
+            case InputActionPhase.Performed: 
+                //Or do it as a coroutine   
+                Teleport();      
+                break;
+
+            case InputActionPhase.Started:
+                TeleportIndicator();
+                break;
+
+            case InputActionPhase.Canceled:
+                //Or do it as a coroutine
+                Teleport();
+                break;
+        }
+    }
+
     public void OpenCommandRing(bool toggle)
     {
         if(toggle)
@@ -475,6 +511,17 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.sendMessage.SetActive(toggle);
             isChatOpen = toggle;
         }
+    }
+
+    //You can rename these functions or type as you wish
+    public void TeleportIndicator()
+    {
+
+    }
+
+    public void Teleport()
+    {
+
     }
 
     public IEnumerator FadeChat(bool toggle)

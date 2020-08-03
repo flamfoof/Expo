@@ -428,10 +428,10 @@
                 {
                     "name": "",
                     "id": "b2245985-ccf0-4446-91bc-1496cd166dca",
-                    "path": "<Keyboard>/t",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -4570,7 +4570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 77763327, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 77763327, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalScale.x
@@ -4611,7 +4611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 712279850, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 712279850, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7150,7 +7150,7 @@ Transform:
   m_GameObject: {fileID: 900308208}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 2.7, y: 0.448, z: 2.88}
-  m_LocalScale: {x: 0.0768991, y: 0.049680267, z: 0.049680267}
+  m_LocalScale: {x: 0.1510606, y: 0.049680267, z: 0.049680267}
   m_Children: []
   m_Father: {fileID: 6888929936236549670}
   m_RootOrder: 5
@@ -10848,6 +10848,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/store/product/uppababy-reg-mesa-infant-car-seat/5172670
   analytics: {fileID: 675095843}
   isSlide: 0
+  canClick: 1
 --- !u!65 &1288370540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12097,6 +12098,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/store/static/storepickup/?icid=hp_merch_merch2_im_storepickup_19335
   analytics: {fileID: 0}
   isSlide: 0
+  canClick: 1
 --- !u!65 &1477636707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14497,6 +14499,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/store/selfservice/FindStore
   analytics: {fileID: 0}
   isSlide: 0
+  canClick: 1
 --- !u!65 &1730458925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18613,7 +18616,7 @@ PrefabInstance:
     - target: {fileID: 4634803932102260195, guid: bb92c2f25c5fbb8409ce5acf47da42ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 67.35
+      value: 61.67
       objectReference: {fileID: 0}
     - target: {fileID: 4634803932102260195, guid: bb92c2f25c5fbb8409ce5acf47da42ba,
         type: 3}
@@ -18663,7 +18666,7 @@ PrefabInstance:
     - target: {fileID: 4634803932102260195, guid: bb92c2f25c5fbb8409ce5acf47da42ba,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.88
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4634803932102260195, guid: bb92c2f25c5fbb8409ce5acf47da42ba,
         type: 3}
@@ -20747,8 +20750,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9054485784996272120}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -172.67169, y: -8.409464, z: 161.86662}
-  m_LocalScale: {x: 200, y: 1672.0365, z: 100}
+  m_LocalPosition: {x: -172.67169, y: -8.22, z: 161.86662}
+  m_LocalScale: {x: 200, y: 1672.0365, z: 77.137634}
   m_Children: []
   m_Father: {fileID: 5006512735392615172}
   m_RootOrder: 5
@@ -20953,6 +20956,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/store/product/ergobaby-omni-360-cool-air-mesh-baby-carrier/5125450
   analytics: {fileID: 0}
   isSlide: 0
+  canClick: 1
 --- !u!114 &3975841885012127582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20971,6 +20975,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/store/product/skip-hop-reg-forma-backpack-diaper-bag/5210846
   analytics: {fileID: 0}
   isSlide: 0
+  canClick: 1
 --- !u!1 &4137138535247175487
 GameObject:
   m_ObjectHideFlags: 0
@@ -25828,7 +25833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6887657764183459718}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 45, y: 0.04, z: 75.62}
+  m_LocalPosition: {x: 45, y: -0.34, z: 75.62}
   m_LocalScale: {x: 1.1683, y: 1.1683, z: 1.1683}
   m_Children:
   - {fileID: 6887657764491616983}
@@ -28719,7 +28724,7 @@ Transform:
   m_GameObject: {fileID: 6887657764763169803}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: -0.7071068}
   m_LocalPosition: {x: -2.657, y: 0.448, z: 2.878}
-  m_LocalScale: {x: 0.07892108, y: 0.049680267, z: 0.049680267}
+  m_LocalScale: {x: 0.15503258, y: 0.049680267, z: 0.049680267}
   m_Children: []
   m_Father: {fileID: 6888929936236549670}
   m_RootOrder: 3
@@ -33131,7 +33136,7 @@ Transform:
   m_GameObject: {fileID: 6887657765435125112}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 3.92, z: -1.743}
-  m_LocalScale: {x: 0.20562801, y: 0.12002148, z: 0.12002148}
+  m_LocalScale: {x: 0.32998535, y: 0.073823005, z: 0.073823005}
   m_Children: []
   m_Father: {fileID: 6888929936236549670}
   m_RootOrder: 1
@@ -33215,6 +33220,7 @@ MonoBehaviour:
   linkURL: https://www.buybuybaby.com/
   analytics: {fileID: 0}
   isSlide: 0
+  canClick: 1
 --- !u!65 &6887657765435125118
 BoxCollider:
   m_ObjectHideFlags: 0

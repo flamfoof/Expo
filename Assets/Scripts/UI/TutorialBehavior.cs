@@ -31,6 +31,11 @@ public class TutorialBehavior : MonoBehaviour
                 waitingforscreen = true;
                 NextTutorialScreen();
             }
+            if (Input.GetKeyDown(KeyCode.UpArrow) && currentScreen.name == "wTutorialScreen")
+            {
+                waitingforscreen = true;
+                NextTutorialScreen();
+            }
             if (Input.GetMouseButton(1) && currentScreen.name == "rightClickTutorialScreen")
             {
                 waitingforscreen = true;

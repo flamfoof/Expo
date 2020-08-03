@@ -46,7 +46,7 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
                     volumeTarget = currentDistFromPlayer / topDistance;
                 }
                 Debug.Log("Volume of " + listPV[i].name + " is now: " + volumeTarget);
-                SetVolumeLevels(volumeTarget, listPV[i].GetComponent<PlayerVoiceID>().remoteUserID);                
+                SetVolumeLevels(volumeTarget, listPV[i].GetComponent<PlayerVoiceID>().id);                
             }                
         }
     }
@@ -57,7 +57,7 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
         return distance;
     }
 
-    void SetVolumeLevels(float volume, ConnectionId voiceID)
+    void SetVolumeLevels(float volume, int voiceID)
     {
         audioCall.SetVolume(volume, voiceID);
     }

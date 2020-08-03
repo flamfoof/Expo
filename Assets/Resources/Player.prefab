@@ -735,6 +735,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0e88e7485be9c469c3a6c3aaa23a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minDistance: 3
+  maxDistance: 12
+  volume: 1
 --- !u!114 &7135246383753968220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259252e7c8757004ba1ecedb610cd755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: 0
 --- !u!1 &740732913567411867
 GameObject:
   m_ObjectHideFlags: 0

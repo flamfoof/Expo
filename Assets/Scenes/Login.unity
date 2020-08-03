@@ -573,6 +573,16 @@ PrefabInstance:
       propertyPath: skipPass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: skipName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: skipEmail
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2857749407582345352, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_IsActive

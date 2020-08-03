@@ -530,8 +530,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
         return mRemoteUserId;
     }
 
-    public void SetVolume(float volume, ConnectionId user)
+    public void SetVolume(float volume, int user)
     {
-        mCall.SetVolume(volume, user);
+        ConnectionId tempId;
+        tempId = mRemoteUserId;
+        tempId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
+        
+        mCall.SetVolume(volume, tempId);
     }
 }

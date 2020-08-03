@@ -44,8 +44,9 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
                 {
                     float topDistance = maxDistance - minDistance;
                     volumeTarget = currentDistFromPlayer / topDistance;
+                    volumeTarget = Mathf.Abs(volumeTarget - 1.0f);
                 }
-                Debug.Log("Volume of " + listPV[i].name + " is now: " + volumeTarget);
+                //Debug.Log("Volume of " + listPV[i].name + " is now: " + volumeTarget);
                 SetVolumeLevels(volumeTarget, listPV[i].GetComponent<PlayerVoiceID>().id);                
             }                
         }

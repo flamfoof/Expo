@@ -459,7 +459,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// Sends a message to the other end
     /// </summary>
     /// <param name="msg"></param>
-    private void SendMsg(string msg)
+    public void SendMsg(string msg)
     {
         bool atBottomOfChat = false;
         if (String.IsNullOrEmpty(msg))

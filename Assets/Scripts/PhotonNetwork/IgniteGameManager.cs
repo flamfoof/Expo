@@ -314,7 +314,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Custom Logging");
             Debug.Log(logString);
-            voiceManager.webRTC.SendMessage(logString);
+            voiceManager.webRTC.SendMsg(logString);
         }
         
         //Debug.Log(stackTrace);

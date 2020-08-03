@@ -16,43 +16,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public string uSignalingUrl = "ws://signaling.because-why-not.com/callapp";
 
-    /// <summary>
-    /// By default the secure version is currently only used in WebGL builds as
-    /// some browsers require. Unity old mono version comes with a SSL implementation
-    /// that can be quite slow and hangs sometimes
-    /// </summary>
     public string uSecureSignalingUrl = "wss://signaling.because-why-not.com/callapp";
 
-    /// <summary>
-    /// If set to true only the secure signaling url will be used.
-    /// </summary>
+
     public bool uForceSecureSignaling = false;
 
-
-    /// <summary>
-    /// Ice server is either a stun or a turn server used to get trough
-    /// the firewall.
-    /// Warning: make sure the url is in a valid format and
-    /// starts with stun: or turn:
-    /// 
-    /// WebRTC will try many different ways to connect the peers so if
-    /// this server is not available it might still be able
-    /// to establish a direct connection or use the second ice server.
-    /// 
-    /// If you need more than two servers change the CreateNetworkConfig
-    /// method.
-    /// </summary>
     public string uIceServer = "stun:stun.because-why-not.com:443";
 
     //
     public string uIceServerUser = "";
     public string uIceServerPassword = "";
-
-    /// <summary>
-    /// Second ice server. As I can't guarantee the test server is always online.
-    /// If you need more than two servers or username / password then
-    /// change the CreateNetworkConfig method.
-    /// </summary>
     public string uIceServer2 = "stun:stun.l.google.com:19302";
     public string uIceServer3 = "stun:stun.l.google.com:19302";
     public string uIceServer4 = "stun:stun.l.google.com:19302";
@@ -60,32 +33,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public string uIceServer6 = "stun:stun.l.google.com:19302";
     public string uIceServer7 = "stun:stun.l.google.com:19302";
     
-
-    /// <summary>
-    /// Do not change. This length is enforced on the server side to avoid abuse.
-    /// </summary>
     public const int MAX_CODE_LENGTH = 256;
 
-    /// <summary>
-    /// Call class handling all the functionality
-    /// </summary>
     protected ICall mCall;
     
-    /// <summary>
-    /// Contains the configuration used for the next call
-    /// </summary>
     protected MediaConfig mMediaConfig;
 
-
-    /// <summary>
-    /// Input field to enter a new message.
-    /// </summary>
     public InputField uMessageField;
 
-    /// <summary>
-    /// Output message list to show incoming and sent messages + output messages of the
-    /// system itself.
-    /// </summary>
     public ChatText uOutput;
 
     public GameObject receiveTxt;
@@ -93,13 +48,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public Scrollbar scrollbar;
 
-    //Configuration for the currently active call
-    /// <summary>
-    /// Set to true after Join is called.
-    /// Set to false after either Join failed or the call
-    /// ended / network failed / user exit
-    /// 
-    /// </summary>
     protected bool mCallActive = false;
     protected string mUseAddress = null;
     protected MediaConfig mMediaConfigInUse;
@@ -141,20 +89,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
     }
 
-    /// <summary>
-    /// Called once the call factory is ready to be used.
-    /// </summary>
     protected virtual void OnCallFactoryReady()
     {
         //set to warning for regular use
         UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
     }
-    /// <summary>
-    /// Called if the call factory failed to initialize.
-    /// This is usually an asset configuration error, attempt to run a platform that isn't supported or the user
-    /// managed to run the app while blocking video / audio access
-    /// </summary>
-    /// <param name="error">Error returned by the init process.</param>
+
     protected virtual void OnCallFactoryFailed(string error)
     {
         string fullErrorMsg = typeof(CallApp).Name + " can't start. The " + typeof(UnityCallFactory).Name + " failed to initialize with following error: " + error;
@@ -199,7 +139,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
             #endif 
         }
 
-        //use video and audio by default (the UI is toggled on by default as well it will change on click )
         mediaConfig.Audio = true;
         mediaConfig.Video = false;
         mediaConfig.VideoDeviceName = null;
@@ -211,11 +150,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
         /* original lines
         mediaConfig.MinWidth = 160;
         mediaConfig.MinHeight = 120;
-        //Larger resolutions are possible in theory but
-        //allowing users to set this too high is risky.
-        //A lot of devices do have great cameras but not
-        //so great CPU's which might be unable to
-        //encode fast enough.
         mediaConfig.MaxWidth = 1920;
         mediaConfig.MaxHeight = 1080;
 
@@ -238,12 +172,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void SetupCall()
     {
         Debug.Log("Setting up ...");
-        //hacks to turn off certain connection types. If both set to true only
-        //turn servers are used. This helps simulating a NAT that doesn't support
-        //opening ports.
-        //hack to turn off direct connections
-        //Byn.Awrtc.Native.InternalDataPeer.sDebugIgnoreTypHost = true;
-        //Byn.Awrtc.Native.InternalDataPeer.sDebugIgnoreTypSrflx = true;
 
         NetworkConfig netConfig = CreateNetworkConfig();
         //this is what we need for multiple audio connections
@@ -298,20 +226,39 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public NetworkConfig CreateNetworkConfig()
     {
         NetworkConfig netConfig = new NetworkConfig();
+        
         if (string.IsNullOrEmpty(uIceServer) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer, uIceServerUser, uIceServerPassword));
+            Debug.Log("Connected to RTC: " + uIceServer);
+        }
         if (string.IsNullOrEmpty(uIceServer2) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer2));
-        if (string.IsNullOrEmpty(uIceServer3) == false)
+            Debug.Log("Connected to RTC: " + uIceServer2);
+        } else if (string.IsNullOrEmpty(uIceServer3) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer3));
-        if (string.IsNullOrEmpty(uIceServer4) == false)
+            Debug.Log("Connected to RTC: " + uIceServer3);
+        } else if (string.IsNullOrEmpty(uIceServer4) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer4));
-        if (string.IsNullOrEmpty(uIceServer5) == false)
+            Debug.Log("Connected to RTC: " + uIceServer4);
+        } else if (string.IsNullOrEmpty(uIceServer5) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer5));
-        if (string.IsNullOrEmpty(uIceServer6) == false)
+            Debug.Log("Connected to RTC: " + uIceServer5);
+        } else if (string.IsNullOrEmpty(uIceServer6) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer6));
-        if (string.IsNullOrEmpty(uIceServer7) == false)
+            Debug.Log("Connected to RTC: " + uIceServer6);
+        } else if (string.IsNullOrEmpty(uIceServer7) == false)
+        {
             netConfig.IceServers.Add(new IceServer(uIceServer7));
+            Debug.Log("Connected to RTC: " + uIceServer7);
+        }            
+        
+            
 
         if (Application.platform == RuntimePlatform.WebGLPlayer || uForceSecureSignaling)
         {
@@ -337,9 +284,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 //Outgoing call was successful or an incoming call arrived
                 Debug.Log("Connection established");
                 mRemoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
+                mRemoteUserId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
+                
                 Debug.Log("New connection with id: " + mRemoteUserId
                     + " audio:" + mCall.HasAudioTrack(mRemoteUserId)
-                    + " video:" + mCall.HasVideoTrack(mRemoteUserId));
+                    + " video:" + mCall.HasVideoTrack(mRemoteUserId)
+                    + "New connection with id: " + mRemoteUserId.id);
                 break;
             case CallEventType.CallEnded:
                 //Call was ended / one of the users hung up -> reset the app
@@ -347,10 +297,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 InternalResetCall();
                 break;
             case CallEventType.ListeningFailed:
-                //listening for incoming connections failed
-                //this usually means a user is using the string / room name already to wait for incoming calls
-                //try to connect to this user
-                //(note might also mean the server is down or the name is invalid in which case call will fail as well)
                 /*
                 if(!isConference)
                 {
@@ -379,9 +325,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 break;
 
             case CallEventType.FrameUpdate:
-                {
-                    
-                    //new frame received from webrtc (either from local camera or network)
+                {                    
                     if (e is FrameUpdateEventArgs)
                     {
                         //UpdateFrame((FrameUpdateEventArgs)e);
@@ -574,5 +518,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void SetMuteSelf(bool status)
     {
         mCall.SetMute(status);
+    }
+
+    public short GetRemoteUserID()
+    {
+        return mRemoteUserId.id;
+    }
+
+    public ConnectionId GetConnectionId()
+    {
+        return mRemoteUserId;
+    }
+
+    public void SetVolume(float volume, ConnectionId user)
+    {
+        mCall.SetVolume(volume, user);
     }
 }

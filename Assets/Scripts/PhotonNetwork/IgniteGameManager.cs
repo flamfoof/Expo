@@ -12,6 +12,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     static public IgniteGameManager IgniteInstance;
     static public CommunicationManager voiceManager;
+    public int playerVoiceID;
     public CommandRing commandUI;
     public List<PhotonView> playerList;
     public List<string> uniquePlayersLogged;
@@ -21,12 +22,17 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public string sceneLogin = "Login";
     public string sceneMain = "Exhibit";
     private AssignPlayerAvatar changeAvatar;
+    public bool gameTesting = false;
 
     private GameObject instance;
 
     void Start()
     {
-        
+        if(gameTesting)
+        {
+            Application.logMessageReceived += CustomLogger;
+        }
+
         playerList = new List<PhotonView>();
                 
         if(!voiceManager)
@@ -100,6 +106,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         PhotonView photonView = PhotonView.Get(changeAvatar.photonView);
         photonView.RPC("RefreshAvatarList", RpcTarget.AllBuffered);
     }
+
 
     public void RefreshOnPlayerSpawn()
     {
@@ -196,9 +203,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                     pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
                 }      
             }
-        }
-        
+        }        
     }
+
 
     public List<PhotonView> GetPlayerList()
     {
@@ -239,8 +246,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             {
                 if(player == PhotonNetwork.PlayerListOthers[i].)
                     changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[i].CustomProperties["AvatarType"]);
-            }*/
-            
+            }*/            
         }
     }
 
@@ -299,5 +305,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             
         }
+    }
+
+    void CustomLogger(string logString, string stackTrace, LogType type)
+    {
+        Debug.Log("Custom Logging");
+        Debug.Log(logString);
+        Debug.Log(stackTrace);
+        Debug.Log(type.ToString());
     }
 }

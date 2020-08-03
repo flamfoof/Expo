@@ -278,6 +278,7 @@ public class CallApp : MonoBehaviour
                 //Outgoing call was successful or an incoming call arrived
                 Append("Connection established");
                 mRemoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
+                mRemoteUserId.id = 12;
                 Debug.Log("New connection with id: " + mRemoteUserId
                     + " audio:" + mCall.HasAudioTrack(mRemoteUserId)
                     + " video:" + mCall.HasVideoTrack(mRemoteUserId));

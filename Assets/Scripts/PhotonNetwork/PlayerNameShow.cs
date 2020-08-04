@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -27,8 +28,15 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         {
             if(!pv.IsMine)
             {
-                pv.GetComponent<UserActions>().playerName.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
-                pv.GetComponent<UserActions>().playerOrganization.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
+                try{    
+                    pv.GetComponent<UserActions>().playerName.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
+                    pv.GetComponent<UserActions>().playerOrganization.transform.LookAt(IgniteGameManager.localPlayer.transform, Vector3.up);
+                }
+                catch (Exception e) {
+                    Debug.Log("Exception when finding aiming name: " + e);
+                    Debug.Log("player in player list not found");
+                    gm.RefreshPlayerList();
+                }
             }
         }
     }

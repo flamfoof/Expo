@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -82,6 +83,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
+            RefreshPlayerList();
         }
 
         if(AnalyticsController.Instance)
@@ -192,7 +194,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public void RefreshPlayerList()
     {
         playerList.Clear();
-
+        Debug.Log("Refreshing List");
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
             if(pv) //checks if they are still connected
@@ -200,7 +202,15 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 if(pv.gameObject.GetComponent<UserActions>())
                 {
                     playerList.Add(pv);
-                    pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
+                    try
+                    {
+                        pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("Setting player name error: " + e);
+                    }
+                    
                 }      
             }
         }        
@@ -310,14 +320,15 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     void CustomLogger(string logString, string stackTrace, LogType type)
     {
         
-        if(type == 0)
+        if(type.ToString() == "Exception")
         {
             Debug.Log("Custom Logging");
             Debug.Log(logString);
-            voiceManager.webRTC.SendMsg(logString);
+            voiceManager.webRTC.SendMsg(PhotonNetwork.NickName + " Error : " + logString);
+            //voiceManager.webRTC.SendMsg(PhotonNetwork.NickName + " Stack : " + stackTrace);
         }
         
         //Debug.Log(stackTrace);
-        //Debug.Log(type.ToString());
+        //Debug.Log(type);
     }
 }

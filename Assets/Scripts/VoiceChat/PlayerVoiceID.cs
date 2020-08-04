@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Byn.Awrtc;
+using Byn.Awrtc.Unity;
 
 public class PlayerVoiceID : MonoBehaviourPunCallbacks
 {

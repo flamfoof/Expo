@@ -571,7 +571,17 @@ PrefabInstance:
     - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: skipPass
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: skipEmail
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: skipName
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2857749407582345352, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
@@ -961,6 +971,11 @@ PrefabInstance:
     - target: {fileID: 7374317886193026301, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374317886193026301, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8007717808855699966, guid: 178b7249da4692848ab3f10f8bc0b5ac,

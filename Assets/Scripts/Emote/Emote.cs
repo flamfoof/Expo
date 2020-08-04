@@ -26,8 +26,10 @@ public class Emote : MonoBehaviourPunCallbacks
     }
     void StartEmojiEffects()
     {
-        float forceIntensity = Random.Range(.5f, 5f);
-        Vector3 forceDirection = new Vector3(Random.Range(-2f, 5f), 4f, Random.Range(-2f, 5f));
+        print("Emoji!");
+        float forceIntensity = Random.Range(3f, 75f);
+        Vector3 forceDirection = new Vector3(IgniteGameManager.localPlayer.transform.forward.x * Random.Range(-15, 15   ), IgniteGameManager.localPlayer.transform.forward.y * Random.Range(25, 50), IgniteGameManager.localPlayer.transform.forward.z * Random.Range(3, 9));
+
         rb.AddForce(forceDirection * forceIntensity);
     }
     private void OnDestroy() {

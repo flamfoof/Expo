@@ -30,7 +30,16 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
+  RpcList:
+  - ChangeAvatar
+  - ClickRpc
+  - DestroyRpc
+  - Emote
+  - NextSlide
+  - RandomEmote
+  - SetAvatarFeatures
+  - TriggeredEvent
+  - SetVoiceID
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

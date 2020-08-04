@@ -79,7 +79,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public bool disableServer = false;
 
     public float emoteForce = 20.0f;
-    public int emoteAmount = 10;
+    public int emoteAmount = 35;
 
     private bool isButtonHeld;
 
@@ -576,19 +576,30 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void Emote(int emoteIndex)
     {
+        StartCoroutine(RandomEmoteTime(emoteIndex));
+        
+    }
+
+    IEnumerator RandomEmoteTime(int index)
+    {
         Vector3 randPos;
+
         float x, y, z;
-        for(int i = 0; i < emoteAmount; i++)
+        for (int i = 0; i < emoteAmount; i++)
         {
-            x = transform.position.x + Random.Range(-5.0f, 5.0f);
-            y = transform.position.y + Random.Range(-5.0f, 5.0f);
-            z = transform.position.z + Random.Range(-5.0f, 5.0f);
+            x = transform.position.x + Random.Range(-1.0f, 1.0f);
+            y = transform.position.y + Random.Range(1f, 8f);
+            z = transform.position.z + Random.Range(-1.0f, 1.0f);
             randPos = new Vector3(x, y, z);
-            Instantiate(GetComponent<EmoteList>().emotesList[emoteIndex], randPos, Quaternion.identity);
+
+            yield return new WaitForSeconds(Random.Range(.01f, .12f));
+            Instantiate(GetComponent<EmoteList>().emotesList[index], randPos, Quaternion.identity);
             //PhotonNetwork.Instantiate(EmoteList.emotePath + GetComponent<EmoteList>().emotesList[Random.Range(0, 1)].name, randPos, Quaternion.identity);
             //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
-        }        
+        }
     }
+
+
 
     [PunRPC]
     public void RandomEmote()

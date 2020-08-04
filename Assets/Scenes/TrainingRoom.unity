@@ -3586,6 +3586,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 808363688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &808363690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 8e8788467bb52cc45957359a206f5b7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 808363688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &808363691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808363690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5964003, y: 0.79688203, z: 2.785666}
+  m_Center: {x: 0, y: 0.39844072, z: 0.00000756979}
 --- !u!1 &813261788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,6 +6195,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerLighting
       objectReference: {fileID: 0}
+    - target: {fileID: 8557133559439100571, guid: 48edb2446bfa713459d350f6ce79982e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8557133559439100571, guid: 48edb2446bfa713459d350f6ce79982e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48edb2446bfa713459d350f6ce79982e, type: 3}
 --- !u!4 &1337372956 stripped
@@ -7028,7 +7057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1649086561
 Light:
   m_ObjectHideFlags: 0

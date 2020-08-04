@@ -7507,6 +7507,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IgniteGameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4938857522159327606, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: gameTesting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_LocalPosition.x

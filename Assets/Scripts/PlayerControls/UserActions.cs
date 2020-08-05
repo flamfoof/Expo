@@ -516,12 +516,15 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     //You can rename these functions or type as you wish
     public void TeleportIndicator()
     {
-
+        //Transform the Player to the Raycast Position
+        if (playerActionRay.floorfocusedObject)
+        {
+            this.transform.localPosition = playerActionRay.floorfocusedObject.transform.localPosition;
+        }
     }
-
     public void Teleport()
     {
-
+        
     }
 
     public IEnumerator FadeChat(bool toggle)

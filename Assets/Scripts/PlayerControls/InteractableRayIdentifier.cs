@@ -11,6 +11,7 @@ public class InteractableRayIdentifier : MonoBehaviour
     public UIEffectsUtils effectsUtils;
     public GameObject focusedObject;
     public GameObject playerfocusedObject; //For Player Object
+    public GameObject floorfocusedObject; //For Floor Object
     public float maxDistance = 30.0f;
     public bool isUsing = false;
     Interactables.InteractableType interactType;
@@ -37,6 +38,7 @@ public class InteractableRayIdentifier : MonoBehaviour
     {
         //Get the player Mask
         LayerMask playerMask = LayerMask.GetMask("Player");
+        LayerMask floorMask = LayerMask.GetMask("Floor");
         // Does the ray intersect any objects excluding the player layer
         // The draw rays are more for VR if we get that set up
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
@@ -55,10 +57,17 @@ public class InteractableRayIdentifier : MonoBehaviour
             playerfocusedObject = hit.collider.gameObject;
             canvas.alpha = 1;
         }
+        else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, floorMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+            floorfocusedObject = hit.collider.gameObject;
+            canvas.alpha = 1;
+        }
         else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
             playerfocusedObject = null;
+            floorfocusedObject = null;
             canvas.alpha = 0;
             //Debug.Log("Did not Hit");
         }

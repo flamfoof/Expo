@@ -753,7 +753,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }        
             
         Append(msg);
-        //mCall.Send(msg);
+        
+        mCall.Send(msg);
 
 
 

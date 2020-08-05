@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AvatarInfo : MonoBehaviour
 {
@@ -30,4 +27,14 @@ public class AvatarInfo : MonoBehaviour
     public SkinnedMeshRenderer meshLowerTeeth;
     public GameObject skeletonBase;
     public GameObject avatarRoot;
+    public int characterIndex;
+    public int headIndex;
+    public scr_Selector CharacterPrefab;
+
+    private void Start()
+    {
+        //set avatar index from character select
+        CharacterPrefab.ChangeHead(headIndex);
+        CharacterPrefab.ChangeBody(characterIndex);
+    }
 }

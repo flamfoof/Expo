@@ -1,0 +1,5 @@
+Shaders were made with amplify shader editor.
+Shaders have parameters that the shuffler script will depend on.
+_isBald
+_hasHat
+And some other parameters for color customization.

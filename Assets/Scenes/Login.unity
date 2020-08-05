@@ -763,6 +763,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 160
       objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: scene
+      value: TrainingRoom
+      objectReference: {fileID: 0}
     - target: {fileID: 2857749407582345353, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_AnchoredPosition.x

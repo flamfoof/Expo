@@ -169,6 +169,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
+        if(voiceManager.webRTC)
+            voiceManager.webRTC.LeaveCall();
         PhotonNetwork.LeaveRoom();
     }
 

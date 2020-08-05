@@ -425,6 +425,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
     }
 
+    public void LeaveCall()
+    {
+        CleanupCall();
+    }
+
     protected virtual void CleanupCall()
     {
         if (mCall != null)

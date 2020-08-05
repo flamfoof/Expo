@@ -124,7 +124,22 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
     void UpdateAttendeesCount()
     {
         if(gameManager)
-            attendees = gameManager.totalUniquePlayers;
+        {
+            if(PhotonNetwork.IsMasterClient)
+            {
+                if(attendees != gameManager.totalUniquePlayers && attendees < gameManager.totalUniquePlayers)
+                {
+                    //attendees++;
+                    photonView.RPC("AddPlayerCount", RpcTarget.AllBuffered);
+                }
+            }
+        }
+    }
+
+    [PunRPC]
+    void AddPlayerCount()
+    {
+        attendees++;
     }
 
     void UpdateAllTexts()

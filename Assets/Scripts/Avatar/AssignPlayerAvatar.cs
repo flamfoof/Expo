@@ -275,7 +275,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         {
             fromSkeleton[i].transform.localPosition = toSkeleton[i].transform.localPosition;
             
-            Debug.Log("Name from: " + fromSkeleton[i].name + "    To: " + toSkeleton[i].name);
+            //Debug.Log("Name from: " + fromSkeleton[i].name + "    To: " + toSkeleton[i].name);
             fromSkeleton[i].name = toSkeleton[i].name;
             
         }

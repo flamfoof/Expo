@@ -14,6 +14,10 @@ public class TutorialChatCopy : MonoBehaviour
 
     void Start()
     {
+        if(!chatView)
+        {
+            chatView = GameObject.Find("ReceiveText");
+        }
         InvokeRepeating("RespawnChat", 0.1f, 2.0f);
     }
 

@@ -18,6 +18,8 @@ public class UIControlsDemo : MonoBehaviour
     public Toggle[] genderList;
     public GameObject[] selectAvatarObj;
     public int selectedAvatarIndex = 0;
+    public int selectedHeadIndex = 0;
+
     public Text characterFeedbackText;
 
 

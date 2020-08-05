@@ -7,7 +7,7 @@ public class SelectAvatar : MonoBehaviour
 {
     [SerializeField] private Button previousBttn;
     [SerializeField] private Button nextBttn;
-
+    private int characterCount = 9;
     private UIControlsDemo UIControls;
 
     private void Awake()
@@ -52,7 +52,7 @@ public class SelectAvatar : MonoBehaviour
     public void NextButtonClick()
     {
         UIControls.selectedAvatarIndex++;
-        if (UIControls.selectedAvatarIndex >= 2)
+        if (UIControls.selectedAvatarIndex >= characterCount)
         {
             nextBttn.interactable = false;
         }

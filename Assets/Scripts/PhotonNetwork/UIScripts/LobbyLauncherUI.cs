@@ -80,10 +80,7 @@ public class LobbyLauncherUI : MonoBehaviour
         //Add listener to button to start connecting to server
         UIControls.submitLoginButton.onClick.AddListener(delegate {lobbyLauncher.Connect();});
 
-        foreach(Toggle characterToggle in UIControls.genderList)
-        {
-            characterToggle.onValueChanged.AddListener(delegate {CheckGender(UIControls.genderList);});
-        }
+
     }
 
     void Update()
@@ -141,8 +138,8 @@ public class LobbyLauncherUI : MonoBehaviour
     //TODO: Remove Genderlist functionality. character should be selected by index
     public GenderList.genders CheckAvatarGender()
     {
-        assignPlayerAva.avatarIndex = UIControls.selectedAvatarIndex;
-        assignPlayerAva.headIndex = UIControls.selectedHeadIndex;
+        //assignPlayerAva.avatarIndex = UIControls.selectedAvatarIndex;
+        //assignPlayerAva.headIndex = UIControls.selectedHeadIndex;
 
         assignPlayerAva.Gender = GenderList.genders.Male1;
         return GenderList.genders.Male1;

@@ -82,6 +82,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
 
+
         //if(!lobbyUI.hasSelectedAvatar)
         //{
         //    if(lobbyUI.UIControls.characterFeedbackText)

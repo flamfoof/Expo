@@ -15,7 +15,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     public GameObject selectedPrefab;
     public GameObject defaultPrefab;
 
-    public int avatarIndex;
+    public int bodyIndex;
     public int headIndex;
 
     [Header("These variables are for customizing characters (later feature)")]

@@ -11,12 +11,12 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     //the playerID in this case would just be the name for now
     private string playerID;
     private GenderList.genders gender;
-    public GameObject male1Prefab;
-    public GameObject male2Prefab;
-    public GameObject female1Prefab;
-    public GameObject female2Prefab;
-    public GameObject defaultPrefab;
+    public GameObject maleCharPrefab;
     public GameObject selectedPrefab;
+    public GameObject defaultPrefab;
+
+    public int bodyIndex;
+    public int headIndex;
 
     [Header("These variables are for customizing characters (later feature)")]
     public AvatarInfo playerAvatarInfo;
@@ -75,23 +75,8 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             switch(gender)
             {
                 case GenderList.genders.Male1:
-                    this.selectedPrefab = male1Prefab;
-                    
-                    SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
-                    break;
-                case GenderList.genders.Female1:
-                    this.selectedPrefab = female1Prefab;
-                    SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
-                    break;
-                case GenderList.genders.Male2:
-                    this.selectedPrefab = male2Prefab;
-                    SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
-                    break;
-                case GenderList.genders.Female2:
-                    this.selectedPrefab = female2Prefab;
-                    SetAvatarFeatures(selectedPrefab.GetComponent<AvatarInfo>());
-                    break;
-                case GenderList.genders.NonBinary:
+                    this.selectedPrefab = maleCharPrefab;
+
                     break;
                 default:
                     break;
@@ -299,16 +284,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
         switch(gender)
         {
             case GenderList.genders.Male1:
-                targetPrefab = male1Prefab;
-                break;
-            case GenderList.genders.Female1:
-                targetPrefab = female1Prefab;
-                break;
-            case GenderList.genders.Male2:
-                targetPrefab = male2Prefab;
-                break;
-            case GenderList.genders.Female2:
-                targetPrefab = female2Prefab;
+                targetPrefab = maleCharPrefab;
                 break;
             default:
                 targetPrefab = defaultPrefab;

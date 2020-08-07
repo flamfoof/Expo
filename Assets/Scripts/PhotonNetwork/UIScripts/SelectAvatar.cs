@@ -1,66 +1,116 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectAvatar : MonoBehaviour
 {
-    [SerializeField] private Button previousBttn;
-    [SerializeField] private Button nextBttn;
-
+    [SerializeField] private Button bodyPreviousBttn;
+    [SerializeField] private Button bodyNextBttn;
+    [SerializeField] private Button headPreviousBttn;
+    [SerializeField] private Button headNextBttn;
+    private int characterCount = 9;
     private UIControlsDemo UIControls;
+    public AssignPlayerAvatar AssignAvatar;
+
+    public scr_Selector maleCharacteristics;
 
     private void Awake()
     {
         UIControls = GameObject.FindObjectOfType<UIControlsDemo>();
     }
+
+
     private void OnEnable()
     {
-        UIControls.selectedAvatarIndex = 0;
-        EnableSpecificCharacter(UIControls.selectedAvatarIndex);
-        if (UIControls.selectedAvatarIndex == 0)
+        EnableCharHead(AssignAvatar.headIndex);
+        EnableCharBody(AssignAvatar.bodyIndex);
+
+        if (AssignAvatar.headIndex == 0)
         {
-            previousBttn.interactable = false;
+            headPreviousBttn.interactable = false;
+            bodyPreviousBttn.interactable = false;
         }
     }
+
     private void DeactivateAllCharacter()
     {
-        for(int i = 0;i<UIControls.selectAvatarObj.Length;i++)
+        for (int i = 0; i < UIControls.selectAvatarObj.Length; i++)
         {
             UIControls.selectAvatarObj[i].SetActive(false);
         }
     }
-    private void EnableSpecificCharacter(int index)
+    private void EnableCharBody(int index)
     {
-        DeactivateAllCharacter();
-        UIControls.selectAvatarObj[index].SetActive(true);
+        maleCharacteristics.pickOneSuit(index);
     }
-    public void PreviousButtonClick()
+    private void EnableCharHead(int index)
     {
-        UIControls.selectedAvatarIndex--;
-        if (UIControls.selectedAvatarIndex <= 0)
-        {
-            previousBttn.interactable = false;
-        }
-        else
-        {
-            previousBttn.interactable = true;
-            nextBttn.interactable = true;
-        }
-        EnableSpecificCharacter(UIControls.selectedAvatarIndex);
+        maleCharacteristics.PickOneHead(index);
     }
-    public void NextButtonClick()
+
+    public void PreviousButtonClick(string characteristic)
     {
-        UIControls.selectedAvatarIndex++;
-        if (UIControls.selectedAvatarIndex >= 2)
+        if (characteristic == "head")
         {
-            nextBttn.interactable = false;
+            AssignAvatar.headIndex--;
+
+            if (AssignAvatar.headIndex <= 0)
+            {
+                headPreviousBttn.interactable = false;
+            }
+            else
+            {
+                headPreviousBttn.interactable = true;
+                headNextBttn.interactable = true;
+            }
+            EnableCharHead(AssignAvatar.headIndex);
         }
-        else
+        else if (characteristic == "body")
         {
-            previousBttn.interactable = true;
-            nextBttn.interactable = true;
+            AssignAvatar.bodyIndex--;
+            if (AssignAvatar.bodyIndex <= 0)
+            {
+                bodyPreviousBttn.interactable = false;
+            }
+            else
+            {
+                bodyPreviousBttn.interactable = true;
+                bodyNextBttn.interactable = true;
+            }
+            EnableCharBody(AssignAvatar.bodyIndex);
         }
-        EnableSpecificCharacter(UIControls.selectedAvatarIndex);
+    }
+
+    public void NextButtonClick(string characteristic)
+    {
+        if (characteristic == "head")
+        {
+            AssignAvatar.headIndex++;
+            print("Setting up head #" + AssignAvatar.headIndex);
+
+            if (AssignAvatar.headIndex >= characterCount)
+            {
+                headNextBttn.interactable = false;
+            }
+            else
+            {
+                headPreviousBttn.interactable = true;
+                headNextBttn.interactable = true;
+            }
+            EnableCharHead(AssignAvatar.headIndex);
+        }
+        else if (characteristic == "body")
+        {
+            AssignAvatar.bodyIndex++;
+            if (AssignAvatar.bodyIndex >= characterCount)
+            {
+                bodyNextBttn.interactable = false;
+            }
+            else
+            {
+                bodyPreviousBttn.interactable = true;
+                bodyNextBttn.interactable = true;
+            }
+            EnableCharBody(AssignAvatar.bodyIndex);
+        }
     }
 }

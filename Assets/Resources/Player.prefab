@@ -931,6 +931,7 @@ MonoBehaviour:
   effectsUtils: {fileID: 2685464229722125212}
   focusedObject: {fileID: 0}
   playerfocusedObject: {fileID: 0}
+  floorfocusedObject: {fileID: 0}
   maxDistance: 30
   isUsing: 0
   layerMask: 512

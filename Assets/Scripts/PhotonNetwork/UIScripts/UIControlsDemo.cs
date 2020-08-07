@@ -14,10 +14,8 @@ public class UIControlsDemo : MonoBehaviour
     public Text feedbackText;
     public GameObject loadingIcon;
     public Button submitLoginButton;
-    public ToggleGroup genderToggle;
-    public Toggle[] genderList;
     public GameObject[] selectAvatarObj;
-    public int selectedAvatarIndex = 0;
+
     public Text characterFeedbackText;
 
 

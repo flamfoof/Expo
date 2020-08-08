@@ -88,6 +88,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         playerController = GetComponent<FirstPersonAIO>();
         gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
         rtc = GameObject.FindObjectOfType<CommunicationManager>();
+        playerController.canJump = false;
         //InvokeRepeating("UpdateLoginTime", 1.0f, 1.0f);
 
         //binds these buttons to the functions

@@ -6,6 +6,17 @@ TagManager:
   tags:
   - Canvas
   - NoAmbient
+  - MaleHead
+  - MaleSuit
+  - Female_SkinForSkirt
+  - Female_TrouserSuit
+  - Female_SkirtSuit
+  - Female_SkinForTrousers
+  - Beards
+  - Hair
+  - Head
+  - Body
+  - Glasses
   layers:
   - Default
   - TransparentFX
@@ -19,7 +30,7 @@ TagManager:
   - Interactables
   - Emotes
   - NoAmbient
-  - 
+  - Floor
   - 
   - 
   - 

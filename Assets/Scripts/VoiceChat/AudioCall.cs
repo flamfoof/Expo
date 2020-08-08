@@ -321,15 +321,19 @@ public class AudioCall : MonoBehaviourPunCallbacks
         switch (e.Type)
         {
             case CallEventType.CallAccepted:
+                
                 //Outgoing call was successful or an incoming call arrived
                 Debug.Log("Connection established");
                 mRemoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
-                mRemoteUserId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
-                
+                //mRemoteUserId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
+                ConnectionId cID = new ConnectionId();
+                cID.id = (short)2;
+                //mCall.SetVolume(0, cID);
                 Debug.Log("New connection with id: " + mRemoteUserId
                     + " audio:" + mCall.HasAudioTrack(mRemoteUserId)
                     + " video:" + mCall.HasVideoTrack(mRemoteUserId)
-                    + "New connection with id: " + mRemoteUserId.id);
+                    //+ " connection thing: " + mCall.SetVolume(0, cID)
+                    + " New connection with id: " + mRemoteUserId.id);
                 if(IgniteGameManager.IgniteInstance.gameTesting)
                     SendMsg(PhotonNetwork.NickName + ": New connection with id: " + mRemoteUserId);
                 Debug.Log("Hash: " + mRemoteUserId.GetHashCode());
@@ -812,6 +816,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public ConnectionId GetConnectionId()
     {
         return mRemoteUserId;
+    }
+
+    public void ButtonMuteChannel(ConnectionId remoteUser, float val)
+    {
+        mCall.SetVolume(val, remoteUser);
     }
 
     public void SetVolume(float volume, int user)

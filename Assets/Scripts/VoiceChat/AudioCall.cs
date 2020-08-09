@@ -56,16 +56,23 @@ public class AudioCall : MonoBehaviourPunCallbacks
     protected bool mCallActive = false;
     protected string mUseAddress = null;
     private static string sAddress = null;
+    private string sLocalAddress = null;
     protected MediaConfig mMediaConfigInUse;
     protected ConnectionId mRemoteUserId = ConnectionId.INVALID;
+    public List<ConnectionId> mRemoteUserList = new List<ConnectionId>();
     private List<ConnectionId> mConnectionIds = new List<ConnectionId>();
+    public bool startedVoiceServer = false;
+    public List<int> connectedVoiceID = new List<int>();
     protected bool mAutoRejoin = true;
     protected IEnumerator mAutoRejoinCoroutine = null;
     protected float mRejoinTime = 0.2f;
+    private float mediaNetworkConnectionTime = 2.0f;
 
     protected bool mLocalFrameEvents = true;
 
     public bool isConference = true;
+    private bool isICall = false;
+    private bool isMediaNetwork = true;
 
     
     private void Awake() {
@@ -79,61 +86,65 @@ public class AudioCall : MonoBehaviourPunCallbacks
         scrollbar.value = 0;
 
         StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
-        UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
+        UnityCallFactory.EnsureInit(OnCallFactoryReadyMediaNetwork, OnCallFactoryFailedMediaNetwork);
         
-         //Disabling ICall Events
-        InvokeRepeating("GetRoomID", 1.0f, 1.0f);
-
-        //in case we have any UI we want to add in.
-        if(GetComponent<AudioCallUI>())
+        if(isICall)
         {
-            audioCallUI = GetComponent<AudioCallUI>();
+            //Disabling ICall Events
+            InvokeRepeating("GetRoomID", 1.0f, 1.0f);
+
+            //in case we have any UI we want to add in.
+            if(GetComponent<AudioCallUI>())
+            {
+                audioCallUI = GetComponent<AudioCallUI>();
+            }
+            StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
+            UnityCallFactory.EnsureInit(OnCallFactoryReadyICall, OnCallFactoryFailedICall);
         }
-        StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
-        UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
+        
     }
 
     void Update()
     {
-
-        /*
-        if (mMediaNetwork == null)
-            return;
-
-        mMediaNetwork.Update();
-
-        //This is the event handler via polling.
-        //This needs to be called or the memory will fill up with unhanded events!
-        NetworkEvent evt;
-        while (mMediaNetwork != null && mMediaNetwork.Dequeue(out evt))
+        if(isMediaNetwork)
         {
-            HandleNetworkEvent(evt);
-        }
-        //polls for video updates
-        HandleMediaEvents();
+            if (mMediaNetwork == null)
+                return;
 
-        //Flush will resync changes done in unity to the native implementation
-        //(and possibly drop events that aren't handled in the future)
-        if (mMediaNetwork != null)
-            mMediaNetwork.Flush();
-            */
-        
-        if (mCall != null)
+            mMediaNetwork.Update();
+
+            //This is the event handler via polling.
+            //This needs to be called or the memory will fill up with unhanded events!
+            NetworkEvent evt;
+            while (mMediaNetwork != null && mMediaNetwork.Dequeue(out evt))
+            {
+                HandleNetworkEvent(evt);
+            }
+            //polls for video updates
+            HandleMediaEvents();
+
+            //Flush will resync changes done in unity to the native implementation
+            //(and possibly drop events that aren't handled in the future)
+            if (mMediaNetwork != null)
+                mMediaNetwork.Flush();
+        }
+
+        if (mCall != null && isICall)
         {
             mCall.Update();
         }
         
     }
 
-    //-----------------ICALL -------------------------
+    #region ICall
     
-    protected virtual void OnCallFactoryReady()
+    protected virtual void OnCallFactoryReadyICall()
     {
         //set to warning for regular use
         UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
     }
 
-    protected virtual void OnCallFactoryFailed(string error)
+    protected virtual void OnCallFactoryFailedICall(string error)
     {
         string fullErrorMsg = typeof(CallApp).Name + " can't start. The " + typeof(UnityCallFactory).Name + " failed to initialize with following error: " + error;
         Debug.LogError(fullErrorMsg);
@@ -325,6 +336,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 //Outgoing call was successful or an incoming call arrived
                 Debug.Log("Connection established");
                 mRemoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
+                mRemoteUserList.Add(mRemoteUserId);
+                //mRemoteUserId.id = (short)69;
                 //mRemoteUserId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
                 ConnectionId cID = new ConnectionId();
                 cID.id = (short)2;
@@ -342,6 +355,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
             case CallEventType.CallEnded:
                 //Call was ended / one of the users hung up -> reset the app
                 Debug.Log("Call ended");
+                mRemoteUserList.Clear();
                 InternalResetCall();
                 break;
             case CallEventType.ListeningFailed:
@@ -499,21 +513,32 @@ public class AudioCall : MonoBehaviourPunCallbacks
             return roomName;
         }
     }
-    //-----------------ICALL END----------------------
+    #endregion ICall
 
-    //-----------------MediaNetwork-------------------
-    /*
-    protected virtual void OnCallFactoryReady()
+    #region MediaNetwork
+
+    protected virtual void OnCallFactoryReadyMediaNetwork()
     {
         UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
-        StartCoroutine(InitWebRTC());
+        if(PhotonNetwork.LocalPlayer.ActorNumber != -1)
+        {
+            //PhotonNetwork.PlayerList;
+            StartCoroutine(InitWebRTC(PhotonNetwork.LocalPlayer.ActorNumber));
+        }
+            //StartCoroutine(InitWebRTC(PhotonNetwork.LocalPlayer.ActorNumber));
+            
     }
 
-    protected virtual void OnCallFactoryFailed(string error)
+    public void MediaReconnect(int val)
+    {
+        StartCoroutine(InitWebRTC(val));
+    }
+
+    protected virtual void OnCallFactoryFailedMediaNetwork(string error)
     {
         string fullErrorMsg = typeof(CallApp).Name + " can't start. The " + typeof(UnityCallFactory).Name + " failed to initialize with following error: " + error;
         Debug.LogError(fullErrorMsg);
-    }*/
+    }
 
     /// <summary>
     /// Init process. Sets configuration and triggers the connection process
@@ -521,22 +546,24 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// <returns>
     /// Returns IEnumerator so unity treats it as a Coroutine
     /// </returns>
-    private IEnumerator InitWebRTC()
+    private IEnumerator InitWebRTC(int playerActorID)
     {
+        Debug.Log("PLAYER IS: " + playerActorID);
         if (sAddress == null)
         {
-            //to avoid the awkward moment of connecting two random users who test this package
-            //we use a randomized addresses now to connect only the local test Apps  ;)
-            sAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + PhotonNetwork.LocalPlayer.ActorNumber;
-
+            sAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + playerActorID;
+            Debug.Log("PLAYER IS: " + sAddress);
+            sLocalAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + PhotonNetwork.LocalPlayer.ActorNumber;
         }
-
 
         if (UnityCallFactory.Instance == null)
         {
             Debug.LogError("No access to webrtc. ");
-        }
-        else
+        } else if (connectedVoiceID.Contains(playerActorID))
+        {
+            Debug.Log("This connection is already being used");
+            sAddress = null;
+        } else
         {
             UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
             //Factory works. Prepare Peers
@@ -545,33 +572,38 @@ public class AudioCall : MonoBehaviourPunCallbacks
             if (string.IsNullOrEmpty(uIceServer) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer, uIceServerUser, uIceServerPassword));
-                Debug.Log("Connected to RTC: " + uIceServer);
+                //Debug.Log("Connected to RTC: " + uIceServer);
             }
             if (string.IsNullOrEmpty(uIceServer2) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer2));
-                Debug.Log("Connected to RTC: " + uIceServer2);
-            } else if (string.IsNullOrEmpty(uIceServer3) == false)
+                //Debug.Log("Connected to RTC: " + uIceServer2);
+            } /*
+            if (string.IsNullOrEmpty(uIceServer3) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer3));
-                Debug.Log("Connected to RTC: " + uIceServer3);
-            } else if (string.IsNullOrEmpty(uIceServer4) == false)
+                //Debug.Log("Connected to RTC: " + uIceServer3);
+            } 
+            if (string.IsNullOrEmpty(uIceServer4) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer4));
-                Debug.Log("Connected to RTC: " + uIceServer4);
-            } else if (string.IsNullOrEmpty(uIceServer5) == false)
+                //Debug.Log("Connected to RTC: " + uIceServer4);
+            } 
+            if (string.IsNullOrEmpty(uIceServer5) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer5));
-                Debug.Log("Connected to RTC: " + uIceServer5);
-            } else if (string.IsNullOrEmpty(uIceServer6) == false)
+                //Debug.Log("Connected to RTC: " + uIceServer5);
+            } 
+            if (string.IsNullOrEmpty(uIceServer6) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer6));
-                Debug.Log("Connected to RTC: " + uIceServer6);
-            } else if (string.IsNullOrEmpty(uIceServer7) == false)
+                //Debug.Log("Connected to RTC: " + uIceServer6);
+            } 
+            if (string.IsNullOrEmpty(uIceServer7) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer7));
-                Debug.Log("Connected to RTC: " + uIceServer7);
-            }     
+                //Debug.Log("Connected to RTC: " + uIceServer7);
+            }     */
 
             if (Application.platform == RuntimePlatform.WebGLPlayer || uForceSecureSignaling)
             {
@@ -597,41 +629,77 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 mMediaConfig.Audio = audioOn;
                 mMediaConfig.Video = videoOn;
 
-                Debug.Log("Accepting incoming connections on " + sAddress);
-                mMediaNetwork.Configure(mMediaConfig);
-                mMediaNetwork.StartServer(sAddress);
+                if(!startedVoiceServer)
+                {
+                    Debug.Log("Accepting incoming connections on " + sLocalAddress);
+                    mMediaNetwork.Configure(mMediaConfig);
+                    mMediaNetwork.StartServer(sLocalAddress);
+                    startedVoiceServer = true;
+                }                
             } else if(audioOn && !videoOn)
             {
                 mMediaConfig.Audio = audioOn;
                 mMediaConfig.Video = videoOn;
 
-                Debug.Log("Accepting incoming connections on " + sAddress);
-                mMediaNetwork.Configure(mMediaConfig);
-                mMediaNetwork.StartServer(sAddress);
+                if(!startedVoiceServer)
+                {
+                    Debug.Log("Accepting incoming connections on " + sLocalAddress);
+                    mMediaNetwork.Configure(mMediaConfig);
+                    mMediaNetwork.StartServer(sLocalAddress);
+                    startedVoiceServer = true;
+                }    
             } else if(!audioOn && videoOn)
             {
                 mMediaConfig.Audio = audioOn;
                 mMediaConfig.Video = videoOn;
 
-                Debug.Log("Accepting incoming connections on " + sAddress);
-                mMediaNetwork.Configure(mMediaConfig);
-                mMediaNetwork.StartServer(sAddress);
+                if(!startedVoiceServer)
+                {
+                    Debug.Log("Accepting incoming connections on " + sLocalAddress);
+                    mMediaNetwork.Configure(mMediaConfig);
+                    mMediaNetwork.StartServer(sLocalAddress);
+                    startedVoiceServer = true;
+                }    
             } else
             {
                 //this one will just receive (but could also send if needed)
                 mMediaConfig.Audio = false;
                 mMediaConfig.Video = false;
-                mMediaNetwork.Configure(mMediaConfig);
+                if(!startedVoiceServer)
+                {
+                    mMediaNetwork.Configure(mMediaConfig);
+                    startedVoiceServer = true;
+                }    
             }
+            Debug.Log("Very Trying to connect to " + sAddress);
             //wait a while before trying to connect othe sender
             //so it has time to register at the signaling server
-            yield return new WaitForSeconds(mRejoinTime);
-            if (videoOn == false)
+            yield return new WaitForSeconds(mediaNetworkConnectionTime);
+            if(!connectedVoiceID.Contains(playerActorID))
             {
-                Debug.Log("Tring to connect to " + sAddress);
-                mMediaNetwork.Connect(sAddress);
-            }
+                if (videoOn == false)
+                {
+                    Debug.Log("Trying to connect to " + sAddress);
+                    mMediaNetwork.Connect(sAddress);
+                    connectedVoiceID.Add(playerActorID);
+                    sAddress = null;
+                }
+            } else 
+            {
+                Debug.Log("The address has already been connected to: " + sAddress);
+                sAddress = null;
+            }            
         }
+    }
+
+    private void MediaNetworkDispose()
+    {
+        if(mMediaNetwork != null)
+        {
+            mMediaNetwork.Dispose();
+            mMediaNetwork = null;
+            startedVoiceServer = false;
+        }        
     }
 
     private void OnDestroy()
@@ -730,7 +798,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 break;
         }
     }
-    //-----------------MediaNetwork END---------------
+    #endregion MediaNetwokr
     
 
     /// <summary>
@@ -805,7 +873,15 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public void SetMuteSelf(bool status)
     {
-        mCall.SetMute(status);
+        if(isMediaNetwork)
+        {
+            mMediaNetwork.SetMute(status);
+        } else if(isICall)
+        {
+            mCall.SetMute(status);
+        }
+            
+        
     }
 
     public short GetRemoteUserID()
@@ -820,7 +896,22 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public void ButtonMuteChannel(ConnectionId remoteUser, float val)
     {
-        mCall.SetVolume(val, remoteUser);
+        if(isMediaNetwork)
+        {
+            mMediaNetwork.SetVolume(val, remoteUser);
+        } else if(isICall)
+        {
+            mCall.SetVolume(val, remoteUser);
+        }
+        
+    }
+
+    public void GetHash(int userIndex)
+    {
+        Debug.Log("this mcall hash: " + mCall.GetHashCode());
+        Debug.Log("Targetted cid hash: " + mRemoteUserList[userIndex].GetHashCode());
+        Debug.Log("Targetted cid string: " + mRemoteUserList[userIndex].ToString());
+        Debug.Log("Targetted cid buffered amount?: " + mCall.GetBufferedAmount(mRemoteUserList[userIndex], true));
     }
 
     public void SetVolume(float volume, int user)

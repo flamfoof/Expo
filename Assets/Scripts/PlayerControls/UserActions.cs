@@ -710,10 +710,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         if(!isAppFocused)
         {
             StartCoroutine(UnfocusApplicationCursor());
-            Debug.Log("Unfocused");
+            //Debug.Log("Unfocused");
         } else {
             StartCoroutine(RefocusApplicationCursor());
-            Debug.Log("Focused");
+            //Debug.Log("Focused");
         }
     }
 

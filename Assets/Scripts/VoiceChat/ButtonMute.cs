@@ -22,4 +22,10 @@ public class ButtonMute : MonoBehaviour
         cid.id = (short)val;
         audioCall.ButtonMuteChannel(cid, vol);
     }
+
+    public void VoiceReonnectTest()
+    {
+        int val = int.Parse(iF.text);
+        audioCall.MediaReconnect(val);
+    }
 }

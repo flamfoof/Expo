@@ -478,7 +478,7 @@ public class YoutubePlayer : MonoBehaviour
                 if (lastTimePlayed == videoPlayer.time)//buffering
                 {
                     ShowLoading();
-                    Debug.Log("Buffering");
+                    //Debug.Log("Buffering");
                 }
                 else//not buffering
                 {

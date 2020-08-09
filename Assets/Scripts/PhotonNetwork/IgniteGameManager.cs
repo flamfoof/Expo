@@ -194,7 +194,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public void RefreshPlayerList()
     {
         playerList.Clear();
-
+        //Player[] pList = PhotonNetwork.PlayerList;
+        
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
             if(pv) //checks if they are still connected
@@ -205,7 +206,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                     pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
                 }      
             }
-        }        
+        }
+        
     }
 
 
@@ -296,11 +298,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                         {
                             AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
                         }
-                    }
-                    
+                    }                    
                 }  
-            }
-                  
+            }                  
         }
     }
 

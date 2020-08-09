@@ -44,6 +44,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
     
     protected MediaConfig mMediaConfig;
 
+    /// <summary>
+    /// Helper to keep to keep track of each instance
+    /// </summary>
+    private static int sInstances = 0;
+
+    /// <summary>
+    /// Helper to give each instance an id to print via log output
+    /// </summary>
+    private int mIndex = 0;
+
     public InputField uMessageField;
 
     public ChatText uOutput;
@@ -547,13 +557,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// Returns IEnumerator so unity treats it as a Coroutine
     /// </returns>
     private IEnumerator InitWebRTC(int playerActorID)
-    {
-        Debug.Log("PLAYER IS: " + playerActorID);
+    {        
         if (sAddress == null)
         {
             sAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + playerActorID;
             Debug.Log("PLAYER IS: " + sAddress);
-            sLocalAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + PhotonNetwork.LocalPlayer.ActorNumber;
+            sLocalAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + "1";
         }
 
         if (UnityCallFactory.Instance == null)
@@ -617,11 +626,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
             mMediaNetwork = UnityCallFactory.Instance.CreateMediaNetwork(netConfig);
 
             //keep track of multiple local instances for testing.
-            /*
             mIndex = sInstances;
             sInstances++;
-            Debug.Log("Instance " + mIndex + " created.");*/
-
+            Debug.Log("Instance " + mIndex + " created.");
 
             if (videoOn && audioOn)
             {
@@ -633,6 +640,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Accepting incoming connections on " + sLocalAddress);
                     mMediaNetwork.Configure(mMediaConfig);
+                    mMediaNetwork.StartServer(sLocalAddress);
                     mMediaNetwork.StartServer(sLocalAddress);
                     startedVoiceServer = true;
                 }                
@@ -754,7 +762,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
     /// <param name="txt"></param>
     private void Log(string txt)
     {
-        Debug.Log("Instance " + PhotonNetwork.LocalPlayer.ActorNumber + ": " + txt);
+        Debug.Log("Instance " + PhotonNetwork.LocalPlayer.ActorNumber + ": " + txt);        
     }
 
 

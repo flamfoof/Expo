@@ -79,6 +79,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+                //spawnedPlayer.GetComponent<PlayerVoiceID>().SetVoiceID(player.ActorNumber);
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }

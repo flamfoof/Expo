@@ -562,7 +562,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             sAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + playerActorID;
             Debug.Log("PLAYER IS: " + sAddress);
-            sLocalAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + "1";
+            sLocalAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + PhotonNetwork.LocalPlayer.ActorNumber;
         }
 
         if (UnityCallFactory.Instance == null)
@@ -626,9 +626,10 @@ public class AudioCall : MonoBehaviourPunCallbacks
             mMediaNetwork = UnityCallFactory.Instance.CreateMediaNetwork(netConfig);
 
             //keep track of multiple local instances for testing.
+            /*
             mIndex = sInstances;
             sInstances++;
-            Debug.Log("Instance " + mIndex + " created.");
+            Debug.Log("Instance " + mIndex + " created.");*/
 
             if (videoOn && audioOn)
             {
@@ -689,7 +690,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("Trying to connect to " + sAddress);
                     mMediaNetwork.Connect(sAddress);
+                    
                     connectedVoiceID.Add(playerActorID);
+                    Debug.Log("Is it succes?");
                     sAddress = null;
                 }
             } else 
@@ -784,6 +787,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
             case NetEventType.ConnectionFailed:
                 //call failed
                 Log("Outgoing connection failed");
+
                 break;
             case NetEventType.Disconnected:
 

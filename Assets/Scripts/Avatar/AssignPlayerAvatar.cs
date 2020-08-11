@@ -12,6 +12,8 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     private string playerID;
     private GenderList.genders gender;
     public GameObject maleCharPrefab;
+    public GameObject femaleCharPrefab;
+
     public GameObject selectedPrefab;
     public GameObject defaultPrefab;
 
@@ -76,7 +78,6 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             {
                 case GenderList.genders.Male1:
                     this.selectedPrefab = maleCharPrefab;
-
                     break;
                 default:
                     break;

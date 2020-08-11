@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectAvatar : MonoBehaviour
@@ -7,17 +8,58 @@ public class SelectAvatar : MonoBehaviour
     [SerializeField] private Button bodyNextBttn;
     [SerializeField] private Button headPreviousBttn;
     [SerializeField] private Button headNextBttn;
-    private int characterCount = 9;
+    private int headCharacterCount;
+    private int bodyCharacterCount;
     private UIControlsDemo UIControls;
     public AssignPlayerAvatar AssignAvatar;
+    AssignPlayerAvatar selectedAvatarType;
 
     public scr_Selector maleCharacteristics;
+    public scr_Selector_Female femaleCharacteristics;
+
+    string avatarGender = "male";
 
     private void Awake()
     {
+
         UIControls = GameObject.FindObjectOfType<UIControlsDemo>();
     }
+    private void Start()
+    {
+        headCharacterCount = maleCharacteristics.Heads.Count;
+        bodyCharacterCount = maleCharacteristics.Suits.Count;
+    }
 
+    public void SwitchAvatarGender(string avatarName)
+    {
+        avatarGender = avatarName;
+        if (avatarGender == "male")
+        {
+            bodyCharacterCount = maleCharacteristics.Suits.Count;
+            headCharacterCount = maleCharacteristics.Heads.Count;
+
+            maleCharacteristics.gameObject.SetActive(true);
+            femaleCharacteristics.gameObject.SetActive(false);
+        }
+        else
+        {
+            femaleCharacteristics.gameObject.SetActive(true);
+            maleCharacteristics.gameObject.SetActive(false);
+            StartCoroutine("GetCharacterSize");
+       }
+        //pressing previous button to reset UI
+
+        PreviousButtonClick(avatarGender);
+    }
+
+    IEnumerator GetCharacterSize()
+    {
+        yield return new WaitForSeconds(.1f);
+        bodyCharacterCount = femaleCharacteristics.SkinTrousers.Count;
+        headCharacterCount = femaleCharacteristics.SuitTrousers.Count;
+        print("Setting char size ** = head " + headCharacterCount + " body " + bodyCharacterCount);
+
+    }
 
     private void OnEnable()
     {
@@ -38,27 +80,47 @@ public class SelectAvatar : MonoBehaviour
             UIControls.selectAvatarObj[i].SetActive(false);
         }
     }
+
     private void EnableCharBody(int index)
     {
-        maleCharacteristics.pickOneSuit(index);
+        if (avatarGender == "male")
+        {
+            maleCharacteristics.pickOneSuit(index);
+        }
+        else
+        {
+            femaleCharacteristics.pickSuit(index);
+        }
     }
+
     private void EnableCharHead(int index)
     {
-        maleCharacteristics.PickOneHead(index);
+        if (avatarGender == "male")
+        {
+            maleCharacteristics.PickOneHead(index);
+
+        }
+        else
+        {
+            femaleCharacteristics.pickSkin(index);
+        }
     }
 
     public void PreviousButtonClick(string characteristic)
     {
+        print("head index " + AssignAvatar.headIndex);
+        print("body index" + AssignAvatar.bodyIndex);
+
         if (characteristic == "head")
         {
-            AssignAvatar.headIndex--;
-
-            if (AssignAvatar.headIndex <= 0)
+            if (AssignAvatar.headIndex <= 1)
             {
                 headPreviousBttn.interactable = false;
             }
             else
             {
+                AssignAvatar.headIndex--;
+
                 headPreviousBttn.interactable = true;
                 headNextBttn.interactable = true;
             }
@@ -66,13 +128,14 @@ public class SelectAvatar : MonoBehaviour
         }
         else if (characteristic == "body")
         {
-            AssignAvatar.bodyIndex--;
             if (AssignAvatar.bodyIndex <= 0)
             {
                 bodyPreviousBttn.interactable = false;
             }
             else
             {
+                AssignAvatar.bodyIndex--;
+
                 bodyPreviousBttn.interactable = true;
                 bodyNextBttn.interactable = true;
             }
@@ -84,12 +147,14 @@ public class SelectAvatar : MonoBehaviour
     {
         if (characteristic == "head")
         {
-            AssignAvatar.headIndex++;
-            print("Setting up head #" + AssignAvatar.headIndex);
 
-            if (AssignAvatar.headIndex >= characterCount)
+            AssignAvatar.headIndex++;
+            print("Setting up head #" + AssignAvatar.headIndex + "/" + headCharacterCount);
+
+            if (AssignAvatar.headIndex >= headCharacterCount-1)
             {
                 headNextBttn.interactable = false;
+                AssignAvatar.headIndex = headCharacterCount - 1;
             }
             else
             {
@@ -101,7 +166,9 @@ public class SelectAvatar : MonoBehaviour
         else if (characteristic == "body")
         {
             AssignAvatar.bodyIndex++;
-            if (AssignAvatar.bodyIndex >= characterCount)
+            print("Setting up head #" + AssignAvatar.bodyIndex + "/" + bodyCharacterCount);
+
+            if (AssignAvatar.bodyIndex >= bodyCharacterCount - 1)
             {
                 bodyNextBttn.interactable = false;
             }

@@ -39,8 +39,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     private IMediaNetwork mMediaNetwork = null;
 
+
+
     public bool audioOn = true;
     public bool videoOn = false;
+
     
     protected MediaConfig mMediaConfig;
 
@@ -67,6 +70,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public bool isConference = true;
 
+    public GameObject uVideoLayout;
+    public GameObject uVideoPrefab;
+
+    public Texture2D uNoImgTexture;
+
+    private class VideoData
+    {
+        public GameObject uiObject;
+        public Texture2D texture;
+        public RawImage image;
+
+    }
+
+    private Dictionary<ConnectionId, VideoData> mVideoUiElements = new Dictionary<ConnectionId, VideoData>();
     
     private void Awake() {
         mMediaConfig = CreateMediaConfig();
@@ -322,23 +339,15 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             case CallEventType.CallAccepted:
                 //Outgoing call was successful or an incoming call arrived
-                Debug.Log("Connection established");
+
                 mRemoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
-                mRemoteUserId.id = (short)PhotonNetwork.LocalPlayer.ActorNumber;
-                
-                Debug.Log("New connection with id: " + mRemoteUserId
-                    + " audio:" + mCall.HasAudioTrack(mRemoteUserId)
-                    + " video:" + mCall.HasVideoTrack(mRemoteUserId)
-                    + "New connection with id: " + mRemoteUserId.id);
-                if(IgniteGameManager.IgniteInstance.gameTesting)
-                    SendMsg(PhotonNetwork.NickName + ": New connection with id: " + mRemoteUserId);
-                Debug.Log("Hash: " + mRemoteUserId.GetHashCode());
-                Debug.Log(mRemoteUserId.GetHashCode());
+                OnNewCall(e as CallAcceptedEventArgs);
                 break;
             case CallEventType.CallEnded:
                 //Call was ended / one of the users hung up -> reset the app
                 Debug.Log("Call ended");
                 InternalResetCall();
+                OnCallEnded(e as CallEndedEventArgs);
                 break;
             case CallEventType.ListeningFailed:
                 /*
@@ -370,10 +379,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
             case CallEventType.FrameUpdate:
                 {                    
-                    if (e is FrameUpdateEventArgs)
-                    {
-                        //UpdateFrame((FrameUpdateEventArgs)e);
-                    }
+                    FrameUpdateEventArgs frameargs = e as FrameUpdateEventArgs;
+                    UpdateFrame(frameargs.ConnectionId, frameargs.Frame);
                     break;
                 }
 
@@ -397,24 +404,60 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     }
 
-    protected virtual void UpdateFrame(FrameUpdateEventArgs frameUpdateEventArgs)
+    private void OnNewCall(CallAcceptedEventArgs args)
     {
-        //the avoid wasting CPU time the library uses the format returned by the browser -> ABGR little endian thus
-        //the bytes are in order R G B A
-        //Unity seem to use this byte order but also flips the image horizontally (reading the last row first?)
-        //this is reversed using UI to avoid wasting CPU time
-
-        //Debug.Log("frame update remote: " + frameUpdateEventArgs.IsRemote);
-        /*
-        if (frameUpdateEventArgs.IsRemote == false)
-        {
-            mUi.UpdateLocalTexture(frameUpdateEventArgs.Frame, frameUpdateEventArgs.Format);
-        }
-        else
-        {
-            mUi.UpdateRemoteTexture(frameUpdateEventArgs.Frame, frameUpdateEventArgs.Format);
-        }*/
+        SetupVideoUi(args.ConnectionId);
     }
+
+    private void OnCallEnded(CallEndedEventArgs args)
+    {
+        VideoData data;
+        if (mVideoUiElements.TryGetValue(args.ConnectionId, out data))
+        {
+            mVideoUiElements.Remove(args.ConnectionId);
+        }
+    }
+
+    private void SetupVideoUi(ConnectionId id)
+    {
+        //create texture + ui element
+        VideoData vd = new VideoData();
+        vd.uiObject = Instantiate(uVideoPrefab);
+        vd.uiObject.transform.SetParent(uVideoLayout.transform, false);
+        vd.image = vd.uiObject.GetComponentInChildren<RawImage>();
+        vd.image.texture = uNoImgTexture;
+        mVideoUiElements[id] = vd;
+    }
+
+    private void UpdateFrame(ConnectionId id, IFrame frame)
+    {
+        if (mVideoUiElements.ContainsKey(id))
+        {
+            VideoData videoData = mVideoUiElements[id];
+            UpdateTexture(ref videoData.texture, frame);
+            videoData.image.texture = videoData.texture;
+        }
+    }
+
+    private void UpdateTexture(ref Texture2D tex, IFrame frame)
+        {
+            //texture exists but has the wrong height /width? -> destroy it and set the value to null
+            if (tex != null && (tex.width != frame.Width || tex.height != frame.Height))
+            {
+                Texture2D.Destroy(tex);
+                tex = null;
+            }
+            //no texture? create a new one first
+            if (tex == null)
+            {
+                tex = new Texture2D(frame.Width, frame.Height, TextureFormat.RGBA32, false);
+                tex.wrapMode = TextureWrapMode.Clamp;
+            }
+            ///copy image data into the texture and apply
+            tex.LoadRawTextureData(frame.Buffer);
+            tex.Apply();
+        }
+
 
     private void InternalResetCall()
     {

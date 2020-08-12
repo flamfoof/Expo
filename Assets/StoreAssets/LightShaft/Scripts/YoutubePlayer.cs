@@ -2145,7 +2145,7 @@ public class YoutubePlayer : MonoBehaviour
         } catch(Exception e)
         {
             Debug.Log("video didn't load, retrying.");
-            Debug.LogError(e);
+            //Debug.LogError(e);
             StartCoroutine(webglvid(url));
         }
     }

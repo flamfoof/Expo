@@ -86,15 +86,15 @@ public class AudioCall : MonoBehaviourPunCallbacks
     
     private void Awake() {
         mMediaConfig = CreateMediaConfig();
-        mMediaConfig.Video = false;
-        mMediaConfigInUse = mMediaConfig;
+        mMediaConfigInUse = mMediaConfig;        
     }
 
     void Start()
     {
         scrollbar.value = 0;
 
-        StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
+        //StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
+        SetupVideoUi(ConnectionId.INVALID);
         UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
         
          //Disabling ICall Events
@@ -385,7 +385,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {                    
                     FrameUpdateEventArgs frameargs = e as FrameUpdateEventArgs;
                     UpdateFrame(frameargs.ConnectionId, frameargs.Frame);
-                    Log("FRAAAMED");
                     break;
                 }
 
@@ -430,6 +429,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         vd.uiObject = uVideoImage;
         vd.image = vd.uiObject.GetComponent<RawImage>();
         vd.image.texture = uNoImgTexture;
+        
         mVideoUiElements[id] = vd;
     }
 
@@ -457,6 +457,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 tex = new Texture2D(frame.Width, frame.Height, TextureFormat.RGBA32, false);
                 tex.wrapMode = TextureWrapMode.Clamp;
             }
+            //Debug.Log("Texturing");
             ///copy image data into the texture and apply
             tex.LoadRawTextureData(frame.Buffer);
             tex.Apply();

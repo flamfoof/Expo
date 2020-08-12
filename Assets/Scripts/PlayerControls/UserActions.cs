@@ -1,15 +1,14 @@
-using System.Collections;
+using Photon.Pun;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using Photon.Pun;
-using Photon.Realtime;
-using Random = UnityEngine.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Random = UnityEngine.Random;
 
 public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -52,27 +51,34 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private UIEffectsUtils uiEffects;
     public float sessionTimer = 0.0f;
     public float realSessionTimer = 0.0f;
-    
 
-    public float SessionTimer {
-        get{
-            if(photonView.IsMine)
+
+    public float SessionTimer
+    {
+        get
+        {
+            if (photonView.IsMine)
             {
                 return this.sessionTimer;
-            } else {
+            }
+            else
+            {
                 return this.realSessionTimer;
             }
         }
-        set {
-            if(photonView.IsMine)
+        set
+        {
+            if (photonView.IsMine)
             {
                 this.sessionTimer = value;
-            } else {
+            }
+            else
+            {
                 this.realSessionTimer = value;
             }
         }
     }
-    
+
     public List<string> objectsInteracted;
 
     GameObject bodyOrigin;
@@ -82,8 +88,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public int emoteAmount = 35;
 
     private bool isButtonHeld;
+    private bool isCommandUIOpen;
 
-    private void Awake() {
+    private void Awake()
+    {
         AttachControlsReference();
         playerController = GetComponent<FirstPersonAIO>();
         gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
@@ -99,10 +107,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionPrimary.started += context => Interact(context);
         actionPrimary.performed += context => Interact(context);
         actionPrimary.canceled += context => Interact(context);
-        actionSecondary.started += context => SecondaryButton(context);
-        actionSecondary.performed += context => SecondaryButton(context);
-        actionSecondary.canceled += context => SecondaryButton(context);
-        actionSprint.started += context => SprintButton(context);        
+
+        actionSprint.started += context => SprintButton(context);
         actionSprint.canceled += context => SprintButton(context);
         actionMenu.started += context => MenuButton(context);
         actionChat.started += context => ChatButton(context);
@@ -116,20 +122,21 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         //Debug.Log("Attaching anim");
         infoPopup.SetActive(false);   //Set the Popup inactive
         Invoke("AttachAnim", 1.0f);
-        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();     
+        IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
         commandUI = gameManager.commandUI.gameObject;
 
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
-            //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
-        
+        //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
+
         //Announce();
-        
+
     }
 
     /*
@@ -147,7 +154,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 */
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         actionPrimary.Enable();
         actionSecondary.Enable();
         actionLook.Enable();
@@ -156,10 +164,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         actionMenu.Enable();
         actionChat.Enable();
         //actionEmailBttn.Enable();
-        
+
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         actionPrimary.Disable();
         actionSecondary.Disable();
         actionLook.Disable();
@@ -173,25 +182,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         AttachControlsReference();
 
-        if(photonView.IsMine)
+        if (photonView.IsMine)
+        {
             sessionTimer += Time.deltaTime;
+        }
 
         //todo: disable if in VR
-        if(anim)
+        if (anim)
         {
             UpdateAnim();
         }
-        if(!disableServer)
+        if (!disableServer)
         {
-            if(photonView.IsMine)
+            if (photonView.IsMine)
             {
 
             }
-            else {
+            else
+            {
                 transform.position = Vector3.Lerp(transform.position, realPosition, lerpSpeed);
                 transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, lerpSpeed);
                 //Show the Popup if the hover on the player.
-                if(playerActionRay.playerfocusedObject)
+                if (playerActionRay.playerfocusedObject)
                 {
                     infoCanvasGroup.alpha = 1.0f;
                     infoPopup.SetActive(true);
@@ -199,9 +211,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 //Disable the Popup
                 else
                 {
-                    if(infoPopup.activeInHierarchy)
+                    if (infoPopup.activeInHierarchy)
                     {
-                        StartCoroutine(AlphaFadeOut(infoCanvasGroup.alpha,0,3.0f));
+                        StartCoroutine(AlphaFadeOut(infoCanvasGroup.alpha, 0, 3.0f));
                     }
                 }
             }
@@ -210,14 +222,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     //Fade Out the Info Popup Canvas 
-    IEnumerator AlphaFadeOut(float start,float end,float duration)
+    IEnumerator AlphaFadeOut(float start, float end, float duration)
     {
         StopCoroutine("AlphaFadeOut");
         float counter = 0f;
-        while(counter < duration)
+        while (counter < duration)
         {
             counter += Time.deltaTime;
-            infoCanvasGroup.alpha = Mathf.Lerp(start,end,counter/duration);
+            infoCanvasGroup.alpha = Mathf.Lerp(start, end, counter / duration);
             yield return null;
         }
     }
@@ -252,29 +264,30 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     private void Interact(InputAction.CallbackContext ctx)
-    {               
+    {
         //Debug.Log(ctx.phase);
-        if(!isAppFocused || isCommandRingOpen)
+        /*if (!isAppFocused || isCommandRingOpen)
         {
             return;
         }
 
-        if(isMenuOpen)
+        if (isMenuOpen)
         {
             return;
-        }
-        
+        }*/
+        print("interact happening with phase: " + ctx.phase);
         switch (ctx.phase)
-        {                        
+        {
             // For when button is held.
             // Time held to perform is managed by the ExpoControls in PlayerInputs folder
             case InputActionPhase.Performed:
                 if (ctx.interaction is SlowTapInteraction)
                 {
                     //StartCoroutine(HoldButtonPress((int)(context.duration)));  
-                    playerActionRay.UseInteractable(ctx.phase);
+                    //playerActionRay.UseInteractable(ctx.phase);
                     //Debug.Log("slowtap performed");
-                } else if(ctx.interaction is HoldInteraction)
+                }
+                else if (ctx.interaction is HoldInteraction)
                 {
                     //currently 0.2s hold for performed
                     //playerActionRay.UseInteractable(ctx.phase);
@@ -285,17 +298,22 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                     //If not held, then do this function
                     //something()
                 }
-                
-
-                isButtonHeld = false;
+                //isButtonHeld = false;
                 break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
-                if (ctx.interaction is SlowTapInteraction)
+                print("click: cmdUI " + isCommandUIOpen);
+                //isButtonHeld = true;
+                //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
+                if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen)
                 {
-                    isButtonHeld = true;
-                    playerActionRay.UseInteractable(ctx.phase);                      
-                
+                    print("Going in here");
+                    OpenCommandRing(true);
+                }
+                else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen)
+                {
+                    print("Going in there");
+                    ActivateCommandRing();
                 }
                 break;
 
@@ -303,12 +321,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             case InputActionPhase.Canceled:
                 if (ctx.interaction is SlowTapInteraction)
                 {
-                    isButtonHeld = false;
-                    playerActionRay.UseInteractable(ctx.phase);   
+
                 }
-                
+
                 //Debug.Log("Interact button pressed");
-                
                 break;
         }
     }
@@ -321,41 +337,22 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void SecondaryButton(InputAction.CallbackContext ctx)
     {
-        if(isMenuOpen)
+        if (isMenuOpen)
         {
             return;
         }
 
         switch (ctx.phase)
-        {            
+        {
             case InputActionPhase.Performed:
-                if (ctx.interaction is SlowTapInteraction)
-                {                    
-                    ActivateCommandRing();
-                    Debug.Log("slow tapped");
-                }
-                else
-                {
-                    //Something();
-                }
-                isButtonHeld = false;
                 break;
 
             case InputActionPhase.Started:
-                if (ctx.interaction is SlowTapInteraction)
-                {
-                    OpenCommandRing(true);
-                }
-                isButtonHeld = true;
-                //Emote();
+
+
                 break;
 
             case InputActionPhase.Canceled:
-                isButtonHeld = false;
-                if (ctx.interaction is SlowTapInteraction)
-                {                    
-                    OpenCommandRing(false);
-                }                
                 break;
         }
     }
@@ -363,9 +360,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void SprintButton(InputAction.CallbackContext ctx)
     {
         switch (ctx.phase)
-        {            
+        {
             case InputActionPhase.Performed:
-               // Debug.Log("Startiing");
                 break;
 
             case InputActionPhase.Started:
@@ -383,7 +379,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         switch (ctx.phase)
         {
-            case InputActionPhase.Performed:                
+            case InputActionPhase.Performed:
                 break;
 
             case InputActionPhase.Started:
@@ -399,7 +395,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         switch (ctx.phase)
         {
-            case InputActionPhase.Performed:                
+            case InputActionPhase.Performed:
                 break;
 
             case InputActionPhase.Started:
@@ -411,14 +407,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    
+
     public void TeleportButton(InputAction.CallbackContext ctx)
-    {   
+    {
         switch (ctx.phase)
         {
-            case InputActionPhase.Performed: 
+            case InputActionPhase.Performed:
                 //Or do it as a coroutine   
-                Teleport();      
+                Teleport();
                 break;
 
             case InputActionPhase.Started:
@@ -434,13 +430,18 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OpenCommandRing(bool toggle)
     {
-        if(toggle)
+        if (toggle)
         {
+            isCommandUIOpen = true;
             //UpdateControlLock(true, false);
-            commandUI.SetActive(true);            
+            commandUI.SetActive(true);
             isCommandRingOpen = toggle;
             //StartCoroutine(UnfocusApplicationCursor());
-        } else {
+        }
+        else
+        {
+            isCommandUIOpen = false;
+
             //UpdateControlLock(true, true);
             commandUI.SetActive(false);
             isCommandRingOpen = toggle;
@@ -451,43 +452,47 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public void ActivateCommandRing()
     {
         GameObject selectedButton = null;
-        if(EventSystem.current.currentSelectedGameObject)
+        if (EventSystem.current.currentSelectedGameObject)
         {
             selectedButton = EventSystem.current.currentSelectedGameObject;
-            if(selectedButton.GetComponent<CommandButton>())
+            if (selectedButton.GetComponent<CommandButton>())
+            {
                 EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            }
         }
         OpenCommandRing(false);
     }
 
     public void OpenMenu(bool toggle)
     {
-        if(toggle)
+        if (toggle)
         {
             UpdateControlLock(false, false);
             StartCoroutine(UnfocusApplicationCursor());
             playerUI.SetActive(toggle);
             isMenuOpen = toggle;
-            
-        } else {
+
+        }
+        else
+        {
             UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
             playerUI.SetActive(toggle);
             isMenuOpen = toggle;
-        }  
+        }
 
         //close chat if menu is open
-        if(isChatOpen)
+        if (isChatOpen)
         {
             rtc.webRTC.uMessageField.text = "";
-            OpenChat(false);      
+            OpenChat(false);
         }
-            
+
     }
 
     public void OpenChat(bool toggle)
-    {            
-        if(toggle)
+    {
+        if (toggle)
         {
             UpdateControlLock(false, true);
             StartCoroutine(UnfocusApplicationCursor());
@@ -495,16 +500,19 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.webRTC.uMessageField.text = "";
             rtc.webRTC.uMessageField.Select();
             rtc.webRTC.uMessageField.ActivateInputField();
-            if(isChatFading)
+            if (isChatFading)
             {
                 isChatFading = false;
             }
             StartCoroutine(FadeChat(true));
             isChatOpen = toggle;
-        } else {            
+        }
+        else
+        {
             UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
-            if (rtc.webRTC.uMessageField.text != "") {
+            if (rtc.webRTC.uMessageField.text != "")
+            {
                 rtc.webRTC.SendButtonPressed();
             }
             StartCoroutine(FadeChat(false));
@@ -524,7 +532,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
     public void Teleport()
     {
-        
+
     }
 
     public IEnumerator FadeChat(bool toggle)
@@ -532,45 +540,51 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         float timer = 0.0f;
         isChatFading = true;
 
-        if(toggle == false)
+        if (toggle == false)
         {
-            while(timer < chatFadeTimer)
+            while (timer < chatFadeTimer)
             {
                 yield return new WaitForEndOfFrame();
                 timer += Time.deltaTime;
-                if(!isChatFading)
+                if (!isChatFading)
+                {
                     break;
+                }
             }
         }
-        
-        if(isChatFading)
+
+        if (isChatFading)
         {
-            if(toggle)
+            if (toggle)
             {
-                if(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>().alpha != 1)
+                if (rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>().alpha != 1)
                 {
                     uiEffects.FadeInCanvasGroup(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>(), 2.0f);
                 }
-                    
-            } else {
-                if(!rtc.webRTC.lockChatVisibility)
+
+            }
+            else
+            {
+                if (!rtc.webRTC.lockChatVisibility)
+                {
                     uiEffects.FadeOutCanvasGroup(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>(), 1.0f);
-            }  
+                }
+            }
         }
-         
+
         isChatFading = false;
     }
 
-    
+
     public void OpenEmoteMenu(int emoteIndex)
     {
         //currently just emotes. Will replace with menu UI
-        if(emoteIndex == -1)
+        if (emoteIndex == -1)
         {
             Debug.Log("No emote slected");
             return;
         }
-        
+
         //Emote(emoteIndex);
         //sends a message to everyone that you are using emote
         photonView.RPC("Emote", RpcTarget.All, emoteIndex);
@@ -580,7 +594,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public void Emote(int emoteIndex)
     {
         StartCoroutine(RandomEmoteTime(emoteIndex));
-        
+
     }
 
     IEnumerator RandomEmoteTime(int index)
@@ -610,7 +624,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         Vector3 randPos;
         float x, y, z;
         int numEmotes = GetComponent<EmoteList>().emotesList.Count;
-        for(int i = 0; i < emoteAmount; i++)
+        for (int i = 0; i < emoteAmount; i++)
         {
             x = transform.position.x + Random.Range(-5.0f, 5.0f);
             y = transform.position.y + Random.Range(-5.0f, 5.0f);
@@ -618,7 +632,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             randPos = new Vector3(x, y, z);
             Instantiate(GetComponent<EmoteList>().emotesList[Random.Range(0, numEmotes)], randPos, Quaternion.identity);
             //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
-        }        
+        }
     }
 
     private IEnumerator HoldButtonPress()
@@ -631,12 +645,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         return this.playerInput;
     }
-    
+
     public InputAction GetActionMove()
     {
         return this.actionMove;
     }
-    
+
     public InputAction GetActionLook()
     {
         return this.actionLook;
@@ -645,7 +659,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public void AttachAnim()
     {
         anim = GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().anim;
-        if(anim)
+        if (anim)
         {
             //Debug.Log("Found the thing: " + anim.gameObject.name);
         }
@@ -671,7 +685,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         objectsInteracted.Add(interactedObject.name);
         hash.Add("InteractedList", objectsInteracted);
         //PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-    }   
+    }
 
     public void UpdateLoginTime()
     {
@@ -686,31 +700,33 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public IEnumerator RefocusApplicationCursor()
     {
         yield return new WaitForFixedUpdate();
-        if(!isMenuOpen && !isChatOpen)
+        if (!isMenuOpen && !isChatOpen)
         {
             UpdateControlLock(true, true);
-            Cursor.lockState = CursorLockMode.Locked; 
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        
+
     }
 
     public IEnumerator UnfocusApplicationCursor()
     {
         yield return new WaitForFixedUpdate();
 
-        Cursor.lockState = CursorLockMode.None; 
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    private void OnApplicationFocus(bool focusStatus) 
+    private void OnApplicationFocus(bool focusStatus)
     {
         isAppFocused = focusStatus;
-        if(!isAppFocused)
+        if (!isAppFocused)
         {
             StartCoroutine(UnfocusApplicationCursor());
             Debug.Log("Unfocused");
-        } else {
+        }
+        else
+        {
             StartCoroutine(RefocusApplicationCursor());
             Debug.Log("Focused");
         }
@@ -718,15 +734,19 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
         {
             //Debug.Log("Sending player position data + anim");
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(SessionTimer);
-            if(anim)
-                stream.SendNext(anim.GetFloat("speed"));     
-        } else {
+            if (anim)
+            {
+                stream.SendNext(anim.GetFloat("speed"));
+            }
+        }
+        else
+        {
             //Debug.Log("Receiving player position data + anim");
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
@@ -735,10 +755,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //anim.SetFloat("speed", (float)stream.ReceiveNext());
                 //Debug.Log("anim: " + anim.GetFloat("speed"));
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 //Debug.Log("Server doesn't have any info on anim class. ");
-            }                
+            }
         }
-                
+
     }
 }

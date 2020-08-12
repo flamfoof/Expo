@@ -91,12 +91,12 @@ public class InteractableRayIdentifier : MonoBehaviour
     
     }
 
-    public void UseInteractable(InputActionPhase phase)
+    public bool UseInteractable(InputActionPhase phase)
     {
         if(focusedObject)
-        {            
+        {
             //phase can be either performed, started, or cancelled.
-            if(focusedObject.GetComponent<Interactables>())
+            if (focusedObject.GetComponent<Interactables>())
             {
                 switch (phase)
                 {                        
@@ -114,10 +114,11 @@ public class InteractableRayIdentifier : MonoBehaviour
                         focusedObject.GetComponent<Interactables>().Perform(phase);
                         player.GetComponent<UserActions>().AddInteractedData(focusedObject);
                         break;
-                }                        
-            } 
-        } else {
-            Debug.Log("No valid object has been selected");
-        }            
+                }
+                return true;
+
+            }
+        }
+        return false;
     }
 }

@@ -1164,7 +1164,7 @@ PrefabInstance:
     - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: scene
-      value: StageDemo
+      value: MainConference
       objectReference: {fileID: 0}
     - target: {fileID: 3434404047063536232, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
@@ -1239,7 +1239,7 @@ PrefabInstance:
     - target: {fileID: 6006564260142226743, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.068
       objectReference: {fileID: 0}
     - target: {fileID: 6006564260142226743, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}

@@ -72,7 +72,7 @@ public class scr_Selector_Female : MonoBehaviour {
 
 
     // Function for picking suits
-    void pickSuit(int suitIndex)
+    public void pickSuit(int suitIndex)
     {
         if (type == 0) // 0 is trouser version
         {
@@ -141,12 +141,12 @@ public class scr_Selector_Female : MonoBehaviour {
 
 
     }
-   
-   
-    
+
+
+
 
     // Function for picking skins
-    void pickSkin(int skinIndex)
+    public void pickSkin(int skinIndex)
     {
 
         if (type == 0) // 0 is trouser version

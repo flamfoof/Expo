@@ -70,8 +70,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public bool isConference = true;
 
-    public GameObject uVideoLayout;
-    public GameObject uVideoPrefab;
+    public GameObject uVideoImage;
 
     public Texture2D uNoImgTexture;
 
@@ -422,9 +421,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         //create texture + ui element
         VideoData vd = new VideoData();
-        vd.uiObject = Instantiate(uVideoPrefab);
-        vd.uiObject.transform.SetParent(uVideoLayout.transform, false);
-        vd.image = vd.uiObject.GetComponentInChildren<RawImage>();
+        vd.uiObject = uVideoImage;
+        vd.image = vd.uiObject.GetComponent<RawImage>();
         vd.image.texture = uNoImgTexture;
         mVideoUiElements[id] = vd;
     }

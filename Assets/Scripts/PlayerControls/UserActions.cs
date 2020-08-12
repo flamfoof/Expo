@@ -87,7 +87,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public float emoteForce = 20.0f;
     public int emoteAmount = 35;
 
-    private bool isButtonHeld;
     private bool isCommandUIOpen;
 
     private void Awake()
@@ -265,70 +264,30 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Interact(InputAction.CallbackContext ctx)
     {
-        //Debug.Log(ctx.phase);
-        /*if (!isAppFocused || isCommandRingOpen)
-        {
-            return;
-        }
-
-        if (isMenuOpen)
-        {
-            return;
-        }*/
-        print("interact happening with phase: " + ctx.phase);
         switch (ctx.phase)
         {
-            // For when button is held.
-            // Time held to perform is managed by the ExpoControls in PlayerInputs folder
-            case InputActionPhase.Performed:
-                if (ctx.interaction is SlowTapInteraction)
-                {
-                    //StartCoroutine(HoldButtonPress((int)(context.duration)));  
-                    //playerActionRay.UseInteractable(ctx.phase);
-                    //Debug.Log("slowtap performed");
-                }
-                else if (ctx.interaction is HoldInteraction)
-                {
-                    //currently 0.2s hold for performed
-                    //playerActionRay.UseInteractable(ctx.phase);
-                    //Debug.Log("hold performed");
-                }
-                else
-                {
-                    //If not held, then do this function
-                    //something()
-                }
-                //isButtonHeld = false;
-                break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
-                if (ctx.interaction is TapInteraction)
+                if (ctx.interaction is SlowTapInteraction)
                 {
-
-                    print("click: cmdUI " + isCommandUIOpen);
-                    //isButtonHeld = true;
                     //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
                     if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen)
                     {
-                        print("Going in here");
                         OpenCommandRing(true);
                     }
                     else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen)
                     {
-                        print("Going in there");
                         ActivateCommandRing();
                     }
                 }
                 break;
 
-            // Checks if button has been let go before the held time (before it's fully performed)
-            case InputActionPhase.Canceled:
+                // Checks if button has been let go before the held time (before it's fully performed)
+                case InputActionPhase.Canceled:
                 if (ctx.interaction is SlowTapInteraction)
                 {
 
                 }
-
-                //Debug.Log("Interact button pressed");
                 break;
         }
     }
@@ -370,7 +329,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             case InputActionPhase.Started:
                 GetComponent<FirstPersonAIO>().sprintKey = true;
-                //Debug.Log("sprinting");
                 break;
 
             case InputActionPhase.Canceled:

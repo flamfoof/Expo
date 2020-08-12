@@ -302,7 +302,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
-                if (ctx.interaction is SlowTapInteraction)
+                if (ctx.interaction is TapInteraction)
                 {
 
                     print("click: cmdUI " + isCommandUIOpen);

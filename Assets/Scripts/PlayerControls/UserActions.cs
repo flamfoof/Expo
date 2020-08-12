@@ -302,18 +302,22 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             // Checks if button has been pressed
             case InputActionPhase.Started:
-                print("click: cmdUI " + isCommandUIOpen);
-                //isButtonHeld = true;
-                //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
-                if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen)
+                if (ctx.interaction is SlowTapInteraction)
                 {
-                    print("Going in here");
-                    OpenCommandRing(true);
-                }
-                else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen)
-                {
-                    print("Going in there");
-                    ActivateCommandRing();
+
+                    print("click: cmdUI " + isCommandUIOpen);
+                    //isButtonHeld = true;
+                    //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
+                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen)
+                    {
+                        print("Going in here");
+                        OpenCommandRing(true);
+                    }
+                    else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen)
+                    {
+                        print("Going in there");
+                        ActivateCommandRing();
+                    }
                 }
                 break;
 

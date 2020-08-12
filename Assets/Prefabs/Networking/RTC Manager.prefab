@@ -1913,6 +1913,8 @@ MonoBehaviour:
   lockChatVisibility: 0
   scrollbar: {fileID: 1229657444}
   isConference: 0
+  uVideoImage: {fileID: 0}
+  uNoImgTexture: {fileID: 2800000, guid: fc17e994006b23a439ccf1f468c1792e, type: 3}
 --- !u!114 &3633223461223209499
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -194,15 +194,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
             #endif 
         }
 
-        mediaConfig.Audio = true;
-        mediaConfig.Video = false;
-        mediaConfig.VideoDeviceName = null;
+        mediaConfig.Audio = audioOn;
+        mediaConfig.Video = videoOn;
+        if(ExampleGlobals.HasVideoPermission())
+        {
+            mediaConfig.Video = true;
+        }
+        
+        mediaConfig.VideoDeviceName = UnityCallFactory.Instance.GetDefaultVideoDevice();
 
         //This format is the only reliable format that works on all
         //platforms currently.
         mediaConfig.Format = FramePixelFormat.ABGR;
 
-        /* original lines
+        //original lines
         mediaConfig.MinWidth = 160;
         mediaConfig.MinHeight = 120;
         mediaConfig.MaxWidth = 1920;
@@ -212,15 +217,15 @@ public class AudioCall : MonoBehaviourPunCallbacks
         mediaConfig.IdealWidth = 160;
         mediaConfig.IdealHeight = 120;
         mediaConfig.IdealFrameRate = 30;
-        */
-
+        
+        /*
         mediaConfig.MinWidth = 0;
         mediaConfig.MinHeight = 0;
         mediaConfig.MaxWidth = 0;
         mediaConfig.MaxHeight = 0;
         mediaConfig.IdealWidth = 0;
         mediaConfig.IdealHeight = 0;
-        mediaConfig.IdealFrameRate = 30;
+        mediaConfig.IdealFrameRate = 30;*/
 
         return mediaConfig;
     }
@@ -380,6 +385,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {                    
                     FrameUpdateEventArgs frameargs = e as FrameUpdateEventArgs;
                     UpdateFrame(frameargs.ConnectionId, frameargs.Frame);
+                    Log("FRAAAMED");
                     break;
                 }
 

@@ -11,9 +11,9 @@ public class scr_Selector_Female : MonoBehaviour {
     private int pick = 0;
     private int count = 0;
     private int type = 0;
-    public List<GameObject> SuitTrousers;
-    public List<GameObject> SkinTrousers;
-    public List<GameObject> SuitSkirts;
+    public List<GameObject> Suit;
+    public List<GameObject> SkinSuit;
+    public List<GameObject> Skirts;
     public List<GameObject> SkinSkirts;
     private Renderer oRenderer;
     public int headSelected;
@@ -24,15 +24,12 @@ public class scr_Selector_Female : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
         // populate list based on tags
         foreach (Transform child in transform)
         {
-
-
             if (child.tag == "Female_SkinForTrousers")
                 {
-                    SkinTrousers.Add(child.gameObject);
+                    SkinSuit.Add(child.gameObject);
                     //Debug.Log(child + " added");
                 }
 
@@ -43,13 +40,13 @@ public class scr_Selector_Female : MonoBehaviour {
                 }
             if (child.tag == "Female_TrouserSuit")
             {
-                SuitTrousers.Add(child.gameObject);
+                Suit.Add(child.gameObject);
                 //Debug.Log(child + " added");
             }
 
             if (child.tag == "Female_SkirtSuit")
             {
-                SuitSkirts.Add(child.gameObject);
+                Skirts.Add(child.gameObject);
                 //Debug.Log(child + " added");
             }
 
@@ -78,7 +75,7 @@ public class scr_Selector_Female : MonoBehaviour {
         {
             // clear others
 
-            foreach (GameObject o in SuitSkirts)
+            foreach (GameObject o in Skirts)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
@@ -86,10 +83,10 @@ public class scr_Selector_Female : MonoBehaviour {
             //
 
 
-            pick = suitIndex;//Random.Range(0, SuitTrousers.Count);
+            pick = suitIndex;//Random.Range(0, Suit.Count);
             count = 0;
 
-            foreach (GameObject o in SuitTrousers)
+            foreach (GameObject o in Suit)
             {
 
                 if (count == pick)
@@ -112,17 +109,17 @@ public class scr_Selector_Female : MonoBehaviour {
             // clear others
 
 
-            foreach (GameObject o in SuitTrousers)
+            foreach (GameObject o in Suit)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
             }
                         //
 
-            pick = Random.Range(0, SuitSkirts.Count);
+            pick = Random.Range(0, Skirts.Count);
             count = 0;
 
-            foreach (GameObject o in SuitSkirts)
+            foreach (GameObject o in Skirts)
             {
 
                 if (count == pick)
@@ -159,11 +156,11 @@ public class scr_Selector_Female : MonoBehaviour {
                 oRenderer.enabled = false;
             }
 
-            pick = skinIndex;// Random.Range(0, SkinTrousers.Count);
+            pick = skinIndex;// Random.Range(0, SkinSuit.Count);
             
             count = 0;
 
-            foreach (GameObject o in SkinTrousers)
+            foreach (GameObject o in SkinSuit)
             {
 
                 if (count == pick)
@@ -184,7 +181,7 @@ public class scr_Selector_Female : MonoBehaviour {
         if (type == 1) // 1 is skirt version
         {
 
-            foreach (GameObject o in SkinTrousers)
+            foreach (GameObject o in SkinSuit)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;

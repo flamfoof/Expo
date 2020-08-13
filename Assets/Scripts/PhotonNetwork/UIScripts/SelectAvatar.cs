@@ -8,8 +8,12 @@ public class SelectAvatar : MonoBehaviour
     [SerializeField] private Button bodyNextBttn;
     [SerializeField] private Button headPreviousBttn;
     [SerializeField] private Button headNextBttn;
-    private int headCharacterCount;
-    private int bodyCharacterCount;
+    private int currentHeadCharacterCount;
+    private int currentBodyCharacterCount;
+    private int femaleHeadCharacterCount;
+    private int femaleBodyCharacterCount;
+    private int maleHeadCharacterCount;
+    private int maleBodyCharacterCount;
     private UIControlsDemo UIControls;
     public AssignPlayerAvatar AssignAvatar;
     AssignPlayerAvatar selectedAvatarType;
@@ -21,13 +25,19 @@ public class SelectAvatar : MonoBehaviour
 
     private void Awake()
     {
-
         UIControls = GameObject.FindObjectOfType<UIControlsDemo>();
     }
     private void Start()
     {
-        headCharacterCount = maleCharacteristics.Heads.Count;
-        bodyCharacterCount = maleCharacteristics.Suits.Count;
+        currentHeadCharacterCount = maleHeadCharacterCount = maleCharacteristics.Heads.Count;
+        currentBodyCharacterCount = maleHeadCharacterCount= maleCharacteristics.Suits.Count;
+
+        //getting character variation count before hiding female gameobject
+        femaleHeadCharacterCount = femaleCharacteristics.SkinSuit.Count;
+        femaleBodyCharacterCount = femaleCharacteristics.Suit.Count;
+
+        femaleCharacteristics.gameObject.SetActive(false);
+
     }
 
     public void SwitchAvatarGender(string avatarName)
@@ -35,30 +45,23 @@ public class SelectAvatar : MonoBehaviour
         avatarGender = avatarName;
         if (avatarGender == "male")
         {
-            bodyCharacterCount = maleCharacteristics.Suits.Count;
-            headCharacterCount = maleCharacteristics.Heads.Count;
+            currentBodyCharacterCount = maleHeadCharacterCount;
+            currentHeadCharacterCount = maleHeadCharacterCount;
 
             maleCharacteristics.gameObject.SetActive(true);
             femaleCharacteristics.gameObject.SetActive(false);
         }
         else
         {
+            currentBodyCharacterCount = femaleHeadCharacterCount;
+            currentHeadCharacterCount = femaleHeadCharacterCount;
+
             femaleCharacteristics.gameObject.SetActive(true);
             maleCharacteristics.gameObject.SetActive(false);
-            StartCoroutine("GetCharacterSize");
        }
         //pressing previous button to reset UI
 
         PreviousButtonClick(avatarGender);
-    }
-
-    IEnumerator GetCharacterSize()
-    {
-        yield return new WaitForSeconds(.1f);
-        bodyCharacterCount = femaleCharacteristics.SkinTrousers.Count;
-        headCharacterCount = femaleCharacteristics.SuitTrousers.Count;
-        print("Setting char size ** = head " + headCharacterCount + " body " + bodyCharacterCount);
-
     }
 
     private void OnEnable()
@@ -108,8 +111,8 @@ public class SelectAvatar : MonoBehaviour
 
     public void PreviousButtonClick(string characteristic)
     {
-        print("head index " + AssignAvatar.headIndex);
-        print("body index" + AssignAvatar.bodyIndex);
+
+        print("Setting up head #" + AssignAvatar.headIndex + "/" + currentHeadCharacterCount);
 
         if (characteristic == "head")
         {
@@ -149,12 +152,12 @@ public class SelectAvatar : MonoBehaviour
         {
 
             AssignAvatar.headIndex++;
-            print("Setting up head #" + AssignAvatar.headIndex + "/" + headCharacterCount);
+            print("Setting up head #" + AssignAvatar.headIndex + "/" + currentHeadCharacterCount);
 
-            if (AssignAvatar.headIndex >= headCharacterCount-1)
+            if (AssignAvatar.headIndex >= currentHeadCharacterCount-1)
             {
                 headNextBttn.interactable = false;
-                AssignAvatar.headIndex = headCharacterCount - 1;
+                AssignAvatar.headIndex = currentHeadCharacterCount - 1;
             }
             else
             {
@@ -166,9 +169,9 @@ public class SelectAvatar : MonoBehaviour
         else if (characteristic == "body")
         {
             AssignAvatar.bodyIndex++;
-            print("Setting up head #" + AssignAvatar.bodyIndex + "/" + bodyCharacterCount);
+            print("Setting up head #" + AssignAvatar.bodyIndex + "/" + currentBodyCharacterCount);
 
-            if (AssignAvatar.bodyIndex >= bodyCharacterCount - 1)
+            if (AssignAvatar.bodyIndex >= currentBodyCharacterCount - 1)
             {
                 bodyNextBttn.interactable = false;
             }

@@ -70,7 +70,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public bool isConference = true;
 
-    public GameObject uVideoImage;
+    public GameObject[] uVideoImage;
+    public List<int> idWithVideos;
 
     public Texture2D uNoImgTexture;
 
@@ -409,7 +410,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
     }
 
     private void OnNewCall(CallAcceptedEventArgs args)
-    {
+    {        
         SetupVideoUi(args.ConnectionId);
     }
 
@@ -426,7 +427,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         //create texture + ui element
         VideoData vd = new VideoData();
-        vd.uiObject = uVideoImage;
+        vd.uiObject = uVideoImage[0];
         vd.image = vd.uiObject.GetComponent<RawImage>();
         vd.image.texture = uNoImgTexture;
         
@@ -437,9 +438,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         if (mVideoUiElements.ContainsKey(id))
         {
+            if(idWithVideos.Count < uVideoImage.Length)
+            {
+                idWithVideos.Add(id.id);
+                mVideoUiElements[id].uiObject = uVideoImage[idWithVideos.IndexOf(id.id)];
+                mVideoUiElements[id].image = mVideoUiElements[id].uiObject.GetComponent<RawImage>();
+            }
             VideoData videoData = mVideoUiElements[id];
             UpdateTexture(ref videoData.texture, frame);
             videoData.image.texture = videoData.texture;
+            //Debug.Log("Rendering: " + id);
         }
     }
 
@@ -486,6 +494,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
             mRemoteUserId = ConnectionId.INVALID;
             Debug.Log("Destroying call!");
             mCall.CallEvent -= Call_CallEvent;
+            mVideoUiElements.Clear();
+            idWithVideos.Clear();
             mCall.Dispose();
             mCall = null;
             //call the garbage collector. This isn't needed but helps discovering

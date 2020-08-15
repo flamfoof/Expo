@@ -11,19 +11,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Exhibit.unity
     guid: 0c4cc89895b59734499dbc1cc0c7c199
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainConference.unity
     guid: e80390c5d5a475d4e98884b0639d1740
   - enabled: 1
     path: Assets/Scenes/TrainingRoom.unity
     guid: 07d7818c4f1f54c47bce6fe62ecc59ea
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Distillery.unity
     guid: b20d01c9ce15a374083608b6d4b30c52
   - enabled: 0
     path: Assets/Scenes/AudioChat.unity
     guid: 0738678bde3e9324ea8dd0745abc71ee
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TirgamesAssets/PBRStageEquipment/Scenes/StageDemo.unity
     guid: f84571bf102f58b4189d844932b47c17
   m_configObjects:

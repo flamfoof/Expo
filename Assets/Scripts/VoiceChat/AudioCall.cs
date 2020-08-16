@@ -206,6 +206,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
 
         Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
+        Debug.Log(userAllowPermissions.allowVideo);
         if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
         {
             Debug.Log("There exists a video thing and user allowed it.");

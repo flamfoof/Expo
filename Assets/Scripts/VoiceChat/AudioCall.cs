@@ -14,24 +14,24 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public string voiceID = "";
     public AudioCallUI audioCallUI;
 
-    public string uSignalingUrl = "ws://signaling.because-why-not.com/callapp";
+    public string uSignalingUrl = "ws://rtc-ignite-voice.herokuapp.com/conferenceapp";
 
-    public string uSecureSignalingUrl = "wss://signaling.because-why-not.com/callapp";
+    public string uSecureSignalingUrl = "wss://rtc-ignite-voice.herokuapp.com/conferenceapp";
 
 
     public bool uForceSecureSignaling = false;
 
-    public string uIceServer = "stun:stun.because-why-not.com:443";
+    public string uIceServer = "turn:numb.viagenie.ca";
 
     //
-    public string uIceServerUser = "";
-    public string uIceServerPassword = "";
+    public string uIceServerUser = "webrtc@live.com";
+    public string uIceServerPassword = "muazkh";
     public string uIceServer2 = "stun:stun.l.google.com:19302";
-    public string uIceServer3 = "stun:stun.l.google.com:19302";
-    public string uIceServer4 = "stun:stun.l.google.com:19302";
-    public string uIceServer5 = "stun:stun.l.google.com:19302";
-    public string uIceServer6 = "stun:stun.l.google.com:19302";
-    public string uIceServer7 = "stun:stun.l.google.com:19302";
+    public string uIceServer3 = "stun:stun.stunprotocol.org:3478";
+    public string uIceServer4 = "stun:stunserver.org:3478";
+    public string uIceServer5 = "stun:stun.yesss.at:3478";
+    public string uIceServer6 = "stun:stun1.l.google.com:19302";
+    public string uIceServer7 = "stun:stun.voiparound.com";
     
     public const int MAX_CODE_LENGTH = 256;
 
@@ -39,11 +39,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     private IMediaNetwork mMediaNetwork = null;
 
-
+    public UserPermissionCommunication userAllowPermissions;
 
     public bool audioOn = true;
+    public bool userAllowAudio = true;
     public bool videoOn = false;
-
+    public bool userAllowVideo = false;
     
     protected MediaConfig mMediaConfig;
 
@@ -87,12 +88,21 @@ public class AudioCall : MonoBehaviourPunCallbacks
     
     private void Awake() {
         mMediaConfig = CreateMediaConfig();
-        mMediaConfigInUse = mMediaConfig;        
+        mMediaConfigInUse = mMediaConfig;      
+        userAllowPermissions = GameObject.FindObjectOfType<UserPermissionCommunication>();  
     }
 
     void Start()
     {
         scrollbar.value = 0;
+
+        mMediaConfig = CreateMediaConfig();
+        mMediaConfigInUse = mMediaConfig;   
+
+        if(!userAllowPermissions)
+        {
+            userAllowPermissions = GameObject.FindObjectOfType<UserPermissionCommunication>();
+        }
 
         //StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
         SetupVideoUi(ConnectionId.INVALID);
@@ -106,8 +116,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             audioCallUI = GetComponent<AudioCallUI>();
         }
-        StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
-        UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
+        //StartCoroutine(ExampleGlobals.RequestPermissions(true, true));
+        //UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
     }
 
     void Update()
@@ -142,7 +152,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         
     }
 
-    //-----------------ICALL -------------------------
+    #region ICall
     
     protected virtual void OnCallFactoryReady()
     {
@@ -195,13 +205,20 @@ public class AudioCall : MonoBehaviourPunCallbacks
             #endif 
         }
 
-        mediaConfig.Audio = audioOn;
-        mediaConfig.Video = videoOn;
-        if(ExampleGlobals.HasVideoPermission())
+        Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
+        if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
         {
-            mediaConfig.Video = true;
+            Debug.Log("There exists a video thing and user allowed it.");
+            videoOn = true;     
         }
-        
+
+        mediaConfig.Audio = audioOn;
+        Debug.Log("Audio Perm is: " + mediaConfig.Audio);
+
+        mediaConfig.Video = videoOn;
+
+        Debug.Log("Video Perm is: " + mediaConfig.Video);
+
         mediaConfig.VideoDeviceName = UnityCallFactory.Instance.GetDefaultVideoDevice();
 
         //This format is the only reliable format that works on all
@@ -239,6 +256,10 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //this is what we need for multiple audio connections
         netConfig.IsConference = true;
 
+        //ExampleGlobals.RequestPermissions(true, true);
+
+        mMediaConfigInUse = CreateMediaConfig();
+
         Debug.Log("Creating call using NetworkConfig:" + netConfig);
         mCall = CreateCall(netConfig);
         if (mCall == null)
@@ -261,11 +282,13 @@ public class AudioCall : MonoBehaviourPunCallbacks
         Debug.Log("Call created!");
         mCall.CallEvent += Call_CallEvent;
 
+        Debug.Log("Creating deep clone");
 
 
         //make a deep clone to avoid confusion if settings are changed
         //at runtime. 
         mMediaConfigInUse = mMediaConfig.DeepClone();
+        Debug.Log("vid/aud perm: " + mMediaConfigInUse.Video + " " + mMediaConfigInUse.Audio);
 
         //try to pick a good default video device if the user wants to send video but
         //didn't bother to pick a specific device
@@ -472,7 +495,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
 
 
-    private void InternalResetCall()
+    public void InternalResetCall()
     {
         CleanupCall();
         if (mAutoRejoin)
@@ -553,9 +576,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
             return roomName;
         }
     }
-    //-----------------ICALL END----------------------
+    #endregion ICall
 
-    //-----------------MediaNetwork-------------------
+    #region MediaNetwork
     /*
     protected virtual void OnCallFactoryReady()
     {
@@ -784,7 +807,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 break;
         }
     }
-    //-----------------MediaNetwork END---------------
+    #endregion MediaNetwork
     
 
     /// <summary>
@@ -804,17 +827,22 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void SendMsg(string msg)
     {
         bool atBottomOfChat = false;
+
+        if(!ExampleGlobals.HasAudioPermission())
+        {
+            Debug.Log("Permission not granted");
+            return;
+        }
+
         if (String.IsNullOrEmpty(msg))
         {
             //never send null or empty messages. webrtc can't deal with that
             return;
         }        
-            
+
         Append(msg);
-        
+     
         mCall.Send(msg);
-
-
 
         //reset UI
         uMessageField.text = "";

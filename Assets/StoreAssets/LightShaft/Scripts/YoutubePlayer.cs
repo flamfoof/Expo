@@ -2080,48 +2080,54 @@ public class YoutubePlayer : MonoBehaviour
     YoutubeResultIds webGlResults;
     IEnumerator WebGlRequest(string videoID)
     {
-        UnityWebRequest request = UnityWebRequest.Get(serverURI + "" + videoID + "" + formatURI);
-        //request.SetRequestHeader("User-Agent", USER_AGENT);
-        yield return request.SendWebRequest();
-        startedPlayingWebgl = false;
-        webGlResults = new YoutubeResultIds();
-        Debug.Log(request.url);
-        var requestData = JSON.Parse(request.downloadHandler.text);
-        var videos = requestData["videos"][0]["formats"];
-        webGlResults.bestFormatWithAudioIncluded = requestData["videos"][0]["url"];
-        for (int counter = 0; counter < videos.Count; counter++)
+        try
         {
-            if (videos[counter]["format_id"] == "160")
+            UnityWebRequest request = UnityWebRequest.Get(serverURI + "" + videoID + "" + formatURI);
+            //request.SetRequestHeader("User-Agent", USER_AGENT);
+            yield return request.SendWebRequest();
+            startedPlayingWebgl = false;
+            webGlResults = new YoutubeResultIds();
+            Debug.Log(request.url);     
+            var requestData = JSON.Parse(request.downloadHandler.text);
+            var videos = requestData["videos"][0]["formats"];
+            webGlResults.bestFormatWithAudioIncluded = requestData["videos"][0]["url"];
+            for (int counter = 0; counter < videos.Count; counter++)
             {
-                webGlResults.lowQuality = videos[counter]["url"];
+                if (videos[counter]["format_id"] == "160")
+                {
+                    webGlResults.lowQuality = videos[counter]["url"];
+                }
+                else if (videos[counter]["format_id"] == "133")
+                {
+                    webGlResults.lowQuality = videos[counter]["url"];   //if have 240p quality overwrite the 144 quality as low quality.
+                }
+                else if (videos[counter]["format_id"] == "134")
+                {
+                    webGlResults.standardQuality = videos[counter]["url"];  //360p
+                }
+                else if (videos[counter]["format_id"] == "136")
+                {
+                    webGlResults.hdQuality = videos[counter]["url"];  //720p
+                }
+                else if (videos[counter]["format_id"] == "137")
+                {
+                    webGlResults.fullHdQuality = videos[counter]["url"];  //1080p
+                }
+                else if (videos[counter]["format_id"] == "266")
+                {
+                    webGlResults.ultraHdQuality = videos[counter]["url"];  //@2160p 4k
+                }
+                else if (videos[counter]["format_id"] == "139")
+                {
+                    webGlResults.audioUrl = videos[counter]["url"];  //AUDIO
+                }
             }
-            else if (videos[counter]["format_id"] == "133")
-            {
-                webGlResults.lowQuality = videos[counter]["url"];   //if have 240p quality overwrite the 144 quality as low quality.
-            }
-            else if (videos[counter]["format_id"] == "134")
-            {
-                webGlResults.standardQuality = videos[counter]["url"];  //360p
-            }
-            else if (videos[counter]["format_id"] == "136")
-            {
-                webGlResults.hdQuality = videos[counter]["url"];  //720p
-            }
-            else if (videos[counter]["format_id"] == "137")
-            {
-                webGlResults.fullHdQuality = videos[counter]["url"];  //1080p
-            }
-            else if (videos[counter]["format_id"] == "266")
-            {
-                webGlResults.ultraHdQuality = videos[counter]["url"];  //@2160p 4k
-            }
-            else if (videos[counter]["format_id"] == "139")
-            {
-                webGlResults.audioUrl = videos[counter]["url"];  //AUDIO
-            }
+            //quality selection will be implemented later for webgl, i recomend use the  webGlResults.bestFormatWithAudioIncluded
+            WebGlGetVideo(webGlResults.bestFormatWithAudioIncluded);
+        } finally{
+            Debug.Log("Video parse successful");
         }
-        //quality selection will be implemented later for webgl, i recomend use the  webGlResults.bestFormatWithAudioIncluded
-        WebGlGetVideo(webGlResults.bestFormatWithAudioIncluded);
+        
     }
 
 

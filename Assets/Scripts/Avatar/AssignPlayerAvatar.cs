@@ -290,6 +290,9 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
             case GenderList.genders.Male1:
                 targetPrefab = maleCharPrefab;
                 break;
+            case GenderList.genders.Female:
+                targetPrefab = femaleCharPrefab;
+                break;
             default:
                 targetPrefab = defaultPrefab;
                 break;

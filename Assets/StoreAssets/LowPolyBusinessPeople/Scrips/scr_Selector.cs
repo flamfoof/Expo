@@ -18,7 +18,7 @@ public class scr_Selector : MonoBehaviour
     {
         AvaInfo = GameObject.FindObjectOfType<AssignPlayerAvatar>();
         // populate list based on tags
-        foreach (Transform child in transform)
+        /*foreach (Transform child in transform)
         {
             if (child.tag == "MaleSuit")
             {
@@ -34,7 +34,7 @@ public class scr_Selector : MonoBehaviour
 
 
         }
-
+        */
         pickOneSuit(AvaInfo.bodyIndex);
         PickOneHead(AvaInfo.headIndex);
     }

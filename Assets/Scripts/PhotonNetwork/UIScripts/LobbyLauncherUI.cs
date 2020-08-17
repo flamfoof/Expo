@@ -141,8 +141,7 @@ public class LobbyLauncherUI : MonoBehaviour
         //assignPlayerAva.avatarIndex = UIControls.selectedAvatarIndex;
         //assignPlayerAva.headIndex = UIControls.selectedHeadIndex;
 
-        assignPlayerAva.Gender = GenderList.genders.Male1;
-        return GenderList.genders.Male1;
+        return assignPlayerAva.Gender;
     }
 
     //public GenderList.genders

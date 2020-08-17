@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectAvatar : MonoBehaviour
@@ -30,8 +29,9 @@ public class SelectAvatar : MonoBehaviour
     private void Start()
     {
         totalHeadCharacterCount = maleHeadCharacterCount = maleCharacteristics.Heads.Count;
-        totalBodyCharacterCount = maleHeadCharacterCount= maleCharacteristics.Suits.Count;
-
+        totalBodyCharacterCount = maleHeadCharacterCount = maleCharacteristics.Suits.Count;
+        print("male body count = " + maleCharacteristics.Heads.Count);
+        print("male body count = " + maleCharacteristics.Heads.Count);
         //getting character variation count before hiding female gameobject
         femaleHeadCharacterCount = femaleCharacteristics.SkinSuit.Count;
         femaleBodyCharacterCount = femaleCharacteristics.Suit.Count;
@@ -63,9 +63,13 @@ public class SelectAvatar : MonoBehaviour
 
             femaleCharacteristics.gameObject.SetActive(true);
             maleCharacteristics.gameObject.SetActive(false);
-       }
-        //pressing previous button to reset UI
-        PreviousButtonClick(avatarGender);
+        }
+
+        //reset index
+        AssignAvatar.headIndex = 1;
+        AssignAvatar.bodyIndex = 1;
+        EnableCharHead(AssignAvatar.headIndex);
+        EnableCharBody(AssignAvatar.bodyIndex);
     }
 
     private void OnEnable()
@@ -158,7 +162,7 @@ public class SelectAvatar : MonoBehaviour
         {
             AssignAvatar.headIndex++;
 
-            if (AssignAvatar.headIndex >= totalHeadCharacterCount-1)
+            if (AssignAvatar.headIndex >= totalHeadCharacterCount - 1)
             {
                 headNextBttn.interactable = false;
                 AssignAvatar.headIndex = totalHeadCharacterCount - 1;

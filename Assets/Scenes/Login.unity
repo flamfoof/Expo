@@ -504,6 +504,11 @@ PrefabInstance:
       propertyPath: AssignAvatar
       value: 
       objectReference: {fileID: 969778581}
+    - target: {fileID: 2857749407358293555, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: assignPlayerAva
+      value: 
+      objectReference: {fileID: 969778581}
     - target: {fileID: 5252003945651793588, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Name

@@ -491,7 +491,7 @@ MonoBehaviour:
   lerpSpeed: 0.1
   camera: {fileID: 20724644957976244}
   playerActionRay: {fileID: 9220169153553486127}
-  anim: {fileID: 0}
+  anim: {fileID: 8251211809601006042}
   playerName: {fileID: 7700156854495169686}
   playerOrganization: {fileID: 8570543854567576599}
   infoPopup: {fileID: 2771875661726662095}
@@ -1728,6 +1728,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 74134c157c5914b43b8e9a62c4e1b5b7, type: 2}
+    - target: {fileID: 2761047363770972742, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761047363770972742, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 201610020428325492}
     - target: {fileID: 2881534340456550908, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -1752,6 +1762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[0].Name
       value: speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936531507355710729, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4051137543624696739, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
@@ -1997,6 +2012,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93453024b790ed149ba60c5c9001f711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &8251211809601006042 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5111353437306322599, guid: 432f044a86e36bf4e9c88ee51c92647a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3777708314081351549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &201610020428325492 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3936531507355710729, guid: 432f044a86e36bf4e9c88ee51c92647a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3777708314081351549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2475301903173617132 stripped

@@ -77,7 +77,7 @@ public class AskVoicePermission : MonoBehaviour
         }
         
 
-        StartCoroutine(DisposeCall());
+        DisposeMCall();
     }
 
     public void ButtonVidPermissionRequest()
@@ -95,7 +95,7 @@ public class AskVoicePermission : MonoBehaviour
             PlayerPrefs.SetInt("AllowVideo", 0);
         }
 
-        StartCoroutine(DisposeCall());
+        DisposeMCall();
     }
 
 
@@ -105,9 +105,31 @@ public class AskVoicePermission : MonoBehaviour
         //setup the server
         return UnityCallFactory.Instance.Create(netConfig);
     }
+    
+    public void DisposeMCall()
+    {
+        mCall.Dispose();
+        mCall = null;
+        Debug.Log("Triggering garbage collection");
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        Debug.Log("Call destroyed");
+    }
 
     public IEnumerator DisposeCall()
     {
+        yield return new WaitForSeconds(0.2f);
+        mCall.Dispose();
+        mCall = null;
+        Debug.Log("Triggering garbage collection");
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        Debug.Log("Call destroyed");
+    }
+
+    public IEnumerator DisposeVidCall()
+    {
+        Debug.Log("Starting disposal vid");
         yield return new WaitForSeconds(0.2f);
         mCall.Dispose();
         mCall = null;
@@ -122,7 +144,7 @@ public class AskVoicePermission : MonoBehaviour
         Debug.Log("Calling factory success?")  ;
 
         mCall = CreateCall(netConfig);
-        mCall.Configure(mediaConfig);         
+        //mCall.Configure(mediaConfig);         
     }
 
 

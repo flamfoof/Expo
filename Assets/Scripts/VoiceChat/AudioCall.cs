@@ -73,10 +73,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public GameObject[] uVideoImage;
     public List<int> idWithVideos;
+    public List<ConnectionId> idConnectionVid;
+    public int videoCount = 0;
     public ConnectionId idSingleVideo;
     public bool firstJoinedVid = false;
 
     public Texture2D uNoImgTexture;
+
+    private bool forceVideoOff = true;
 
     private class VideoData
     {
@@ -91,7 +95,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
     private void Awake() {
         userAllowPermissions = UserPermissionCommunication.instance;
         mMediaConfig = CreateMediaConfig();
-        mMediaConfigInUse = mMediaConfig;              
+        mMediaConfigInUse = mMediaConfig;     
+        SetupVideoUiEmpty();         
     }
 
     void Start()
@@ -221,8 +226,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
         mediaConfig.Audio = audioOn;
         Debug.Log("Audio Perm is: " + mediaConfig.Audio);
-
-        mediaConfig.Video = videoOn;
+        if(forceVideoOff)
+        {
+            mediaConfig.Video = false;
+        } else 
+        {
+            mediaConfig.Video = videoOn;
+        }
+        
 
         Debug.Log("Video Perm is: " + mediaConfig.Video);
 
@@ -263,8 +274,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //this is what we need for multiple audio connections
         netConfig.IsConference = true;
 
-        //ExampleGlobals.RequestPermissions(true, true);
-
         Debug.Log("Creating call using NetworkConfig:" + netConfig);
         mCall = CreateCall(netConfig);
         if (mCall == null)
@@ -273,7 +282,15 @@ public class AudioCall : MonoBehaviourPunCallbacks
             return;
         }
 
-        mCall.LocalFrameEvents = mLocalFrameEvents;
+
+        if(videoOn)
+        {
+            mCall.LocalFrameEvents = mLocalFrameEvents;
+        } else 
+        {
+            mCall.LocalFrameEvents = false;
+        }
+        
         string[] devices = UnityCallFactory.Instance.GetVideoDevices();
         if (devices == null || devices.Length == 0)
         {
@@ -454,47 +471,73 @@ public class AudioCall : MonoBehaviourPunCallbacks
     private void SetupVideoUi(ConnectionId id)
     {
         //create texture + ui element
+        if(mVideoUiElements.ContainsKey(id))
+        {
+            return;
+        }
+    
         VideoData vd = new VideoData();
+        if(videoCount >= 3)
+        {
+            videoCount = 0;
+        }
         vd.uiObject = uVideoImage[0];
+        videoCount++;
         vd.image = vd.uiObject.GetComponent<RawImage>();
         vd.image.texture = uNoImgTexture;
         Debug.Log("Video element set: " + id.id);
         mVideoUiElements[id] = vd;
     }
 
+    private void SetupVideoUiEmpty()
+    {
+        for(int i = 0; i < uVideoImage.Length; i++)
+        {
+            uVideoImage[i].GetComponent<RawImage>().texture = uNoImgTexture;
+        }
+    }
+
     private void UpdateFrame(ConnectionId id, IFrame frame)
     {
         Debug.Log("Updated consideration id: " + id.id);
         if (mVideoUiElements.ContainsKey(id))
-        {
-            
-            if(idWithVideos.Count < uVideoImage.Length)
+        {          
+            /*  
+            if(idConnectionVid.Count < uVideoImage.Length && !idConnectionVid.Contains(id))
             {
-                idWithVideos.Add(id.id);
-                mVideoUiElements[id].uiObject = uVideoImage[idWithVideos.IndexOf(id.id)];
-                mVideoUiElements[id].image = mVideoUiElements[id].uiObject.GetComponent<RawImage>();
+                idConnectionVid.Add(id);
+                mVideoUiElements[id].uiObject = uVideoImage[idConnectionVid.Count];
+                mVideoUiElements[id].image = uVideoImage[idConnectionVid.Count].GetComponent<RawImage>();                
             }
 
-            /*
-            if(firstJoinedVid && id.id != -1)
-            {
-                idSingleVideo = id;
-                firstJoinedVid = true;
-                Debug.Log("Set video id: " + idSingleVideo);
-            }
-            */
-            
+            //for multiple videos
             VideoData videoData = mVideoUiElements[id];
             UpdateTexture(ref videoData.texture, frame);
             videoData.image.texture = videoData.texture;
             Debug.Log("Rendering: " + id);
-            
-            /*
-            VideoData videoData = mVideoUiElements[idSingleVideo];
-            UpdateTexture(ref videoData.texture, frame);
-            videoData.image.texture = videoData.texture;
-            Debug.Log("Rendering: " + id);
             */
+            
+            
+            //for single video, later on I can identify which player to use            
+            if(!firstJoinedVid)
+            {
+                idSingleVideo = id;
+                firstJoinedVid = true;
+                Debug.Log("Set video id: " + idSingleVideo);
+                //gets the first frame to render video
+                mVideoUiElements[idSingleVideo].uiObject = uVideoImage[0];
+                mVideoUiElements[idSingleVideo].image = uVideoImage[0].GetComponent<RawImage>();
+                mVideoUiElements[idSingleVideo].image.texture = uNoImgTexture;
+            }
+            if(id == idSingleVideo)
+            {
+                VideoData videoData = mVideoUiElements[idSingleVideo];
+                UpdateTexture(ref videoData.texture, frame);
+                videoData.image.texture = videoData.texture;
+                Debug.Log("Rendering: " + id);
+            }
+            
+            
         }
     }
 
@@ -537,12 +580,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         if (mCall != null)
         {
+            firstJoinedVid = false;
             mCallActive = false;
             mRemoteUserId = ConnectionId.INVALID;
             Debug.Log("Destroying call!");
             mCall.CallEvent -= Call_CallEvent;
             mVideoUiElements.Clear();
             idWithVideos.Clear();
+            idConnectionVid.Clear();
             mCall.Dispose();
             mCall = null;
             //call the garbage collector. This isn't needed but helps discovering
@@ -841,9 +886,37 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         //get the message written into the text field
         string msg = PhotonNetwork.NickName + ": " + uMessageField.text;
-        
+        char slash = (char)'/';
+        if(uMessageField.text[0] == slash)
+        {
+            Debug.Log("Chat command activated");
+            ChatCommand(uMessageField.text);
+            return;
+        }
+
         SendMsg(msg);
     }
+
+    public void ChatCommand(string msg)
+    {
+        switch(msg)
+        {
+            case "/video":
+                Debug.Log("Video'd");
+                if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "")
+                {
+                    videoOn = true;
+                    forceVideoOff = false;
+                }
+                    
+                userAllowPermissions.allowVideo = true;
+                InternalResetCall();
+                break;
+            default: 
+                break;
+        }
+    }
+
     /// <summary>
     /// Sends a message to the other end
     /// </summary>

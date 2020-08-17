@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 126657317}
   - component: {fileID: 126657316}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2334,7 +2334,7 @@ RectTransform:
   m_GameObject: {fileID: 408839485}
   m_LocalRotation: {x: 2.3283064e-10, y: 0.723566, z: 0.000000001193257, w: 0.69025517}
   m_LocalPosition: {x: 0, y: 0, z: 1668}
-  m_LocalScale: {x: 11.249414, y: 5.9086423, z: 9.779549}
+  m_LocalScale: {x: 11.249414, y: 4.3843307, z: 9.779549}
   m_Children: []
   m_Father: {fileID: 2068913205}
   m_RootOrder: 6
@@ -2363,7 +2363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 891847973342bb04e9c418fa02ca7dc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0313f5d7b454e2c43911d93cffac017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2602,7 +2602,7 @@ GameObject:
   - component: {fileID: 450189857}
   - component: {fileID: 450189856}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: Website
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2659,7 +2659,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Click Here for\nPenn Medicine \nWebsite."
+  m_Text: 'Click here
+
+    for more
+
+    information.'
 --- !u!222 &450189857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3178,7 +3182,7 @@ PrefabInstance:
     - target: {fileID: 4171097634788259539, guid: f4bc68d09afa4c841b90a220a9e1f0df,
         type: 3}
       propertyPath: linkURL
-      value: https://www.pennmedicine.org/
+      value: https://www.tgh.org/
       objectReference: {fileID: 0}
     - target: {fileID: 4171097634788259539, guid: f4bc68d09afa4c841b90a220a9e1f0df,
         type: 3}
@@ -4282,11 +4286,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428052, guid: f564e3a84239652439014d188381394f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.23486021
+      value: -0.2349
       objectReference: {fileID: 0}
     - target: {fileID: 428052, guid: f564e3a84239652439014d188381394f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.19258545
+      value: -0.1919
       objectReference: {fileID: 0}
     - target: {fileID: 428052, guid: f564e3a84239652439014d188381394f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6884,6 +6888,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1245564717}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1258183787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258183788}
+  - component: {fileID: 1258183790}
+  - component: {fileID: 1258183789}
+  m_Layer: 5
+  m_Name: slides (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1258183788
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258183787}
+  m_LocalRotation: {x: 2.3283064e-10, y: 0.723566, z: 0.000000001193257, w: 0.69025517}
+  m_LocalPosition: {x: 0, y: 0, z: 1668}
+  m_LocalScale: {x: 11.249414, y: 4.3843307, z: 9.779549}
+  m_Children: []
+  m_Father: {fileID: 2068913205}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 92.699005, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2407, y: -234}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1258183789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258183787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 096b1554749f0ec42bf4d47d9bdb841c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1258183790
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258183787}
+  m_CullTransparentMesh: 0
 --- !u!1 &1282701144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2606013746117383014, guid: 31275edd340f0f544aeaac3de8264375,
@@ -8311,7 +8389,7 @@ RectTransform:
   m_GameObject: {fileID: 1526354047}
   m_LocalRotation: {x: 2.3283064e-10, y: 0.723566, z: 0.000000001193257, w: 0.69025517}
   m_LocalPosition: {x: 0, y: 0, z: 1668}
-  m_LocalScale: {x: 11.249414, y: 5.9086423, z: 9.779549}
+  m_LocalScale: {x: 11.249414, y: 4.3843307, z: 9.779549}
   m_Children: []
   m_Father: {fileID: 2068913205}
   m_RootOrder: 5
@@ -8340,7 +8418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d58fb60d75581084a9fcff88df31e4be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53359d94f37270849a029369ce373d40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11372,7 +11450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2187040017520256143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 941254357}
@@ -11519,6 +11597,7 @@ MonoBehaviour:
   slides:
   - {fileID: 1526354047}
   - {fileID: 408839485}
+  - {fileID: 1258183787}
   slideCount: 0
   images: []
 --- !u!33 &6150142655323057322

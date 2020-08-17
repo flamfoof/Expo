@@ -25,6 +25,7 @@ public class scr_Selector_Female : MonoBehaviour {
     void Start()
     {
         // populate list based on tags
+        /*
         foreach (Transform child in transform)
         {
             if (child.tag == "Female_SkinForTrousers")
@@ -51,7 +52,7 @@ public class scr_Selector_Female : MonoBehaviour {
             }
 
 
-        }
+        }*/
         // Decide which type
         pickType(skirtOrPantsSelected);
         //pick a suit

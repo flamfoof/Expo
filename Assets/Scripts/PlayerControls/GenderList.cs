@@ -7,10 +7,7 @@ public class GenderList : MonoBehaviour
     public enum genders{
         None,
         Male1,
-        Male2,
-        Female1,
-        Female2,
-        NonBinary
+        Female
     };
 
     public genders gender;

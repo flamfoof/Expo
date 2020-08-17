@@ -6592,7 +6592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8203221898224031206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7662,6 +7662,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4755261321626027977}
     m_Modifications:
+    - target: {fileID: 3182964560882531476, guid: 86a35a604f4c25d47831a0d87de13d9b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7854397001692638958}
     - target: {fileID: 5835569214446924840, guid: 86a35a604f4c25d47831a0d87de13d9b,
         type: 3}
       propertyPath: m_Name
@@ -7725,12 +7730,12 @@ PrefabInstance:
     - target: {fileID: 9191855087648708103, guid: 86a35a604f4c25d47831a0d87de13d9b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 170
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9191855087648708103, guid: 86a35a604f4c25d47831a0d87de13d9b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9191855087648708103, guid: 86a35a604f4c25d47831a0d87de13d9b,
         type: 3}

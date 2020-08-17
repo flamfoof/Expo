@@ -8,8 +8,8 @@ public class SelectAvatar : MonoBehaviour
     [SerializeField] private Button bodyNextBttn;
     [SerializeField] private Button headPreviousBttn;
     [SerializeField] private Button headNextBttn;
-    private int currentHeadCharacterCount;
-    private int currentBodyCharacterCount;
+    private int totalHeadCharacterCount;
+    private int totalBodyCharacterCount;
     private int femaleHeadCharacterCount;
     private int femaleBodyCharacterCount;
     private int maleHeadCharacterCount;
@@ -29,38 +29,42 @@ public class SelectAvatar : MonoBehaviour
     }
     private void Start()
     {
-        currentHeadCharacterCount = maleHeadCharacterCount = maleCharacteristics.Heads.Count;
-        currentBodyCharacterCount = maleHeadCharacterCount= maleCharacteristics.Suits.Count;
+        totalHeadCharacterCount = maleHeadCharacterCount = maleCharacteristics.Heads.Count;
+        totalBodyCharacterCount = maleHeadCharacterCount= maleCharacteristics.Suits.Count;
 
         //getting character variation count before hiding female gameobject
         femaleHeadCharacterCount = femaleCharacteristics.SkinSuit.Count;
         femaleBodyCharacterCount = femaleCharacteristics.Suit.Count;
+        print("female body count = " + femaleBodyCharacterCount);
+        print("female body count = " + femaleHeadCharacterCount);
 
+        //not working, make move it down position wise and then move it back up after it fills all the characters and deactivate it before moving it up.
         femaleCharacteristics.gameObject.SetActive(false);
-
     }
 
     public void SwitchAvatarGender(string avatarName)
     {
         avatarGender = avatarName;
+
         if (avatarGender == "male")
         {
-            currentBodyCharacterCount = maleHeadCharacterCount;
-            currentHeadCharacterCount = maleHeadCharacterCount;
+            totalBodyCharacterCount = maleHeadCharacterCount;
+            totalHeadCharacterCount = maleHeadCharacterCount;
+            AssignAvatar.Gender = GenderList.genders.Male1;
 
             maleCharacteristics.gameObject.SetActive(true);
             femaleCharacteristics.gameObject.SetActive(false);
         }
         else
         {
-            currentBodyCharacterCount = femaleHeadCharacterCount;
-            currentHeadCharacterCount = femaleHeadCharacterCount;
+            totalBodyCharacterCount = femaleHeadCharacterCount;
+            totalHeadCharacterCount = femaleHeadCharacterCount;
+            AssignAvatar.Gender = GenderList.genders.Female;
 
             femaleCharacteristics.gameObject.SetActive(true);
             maleCharacteristics.gameObject.SetActive(false);
        }
         //pressing previous button to reset UI
-
         PreviousButtonClick(avatarGender);
     }
 
@@ -111,11 +115,9 @@ public class SelectAvatar : MonoBehaviour
 
     public void PreviousButtonClick(string characteristic)
     {
-
-        print("Setting up head #" + AssignAvatar.headIndex + "/" + currentHeadCharacterCount);
-
         if (characteristic == "head")
         {
+
             if (AssignAvatar.headIndex <= 1)
             {
                 headPreviousBttn.interactable = false;
@@ -127,6 +129,8 @@ public class SelectAvatar : MonoBehaviour
                 headPreviousBttn.interactable = true;
                 headNextBttn.interactable = true;
             }
+            print("Current asset: " + AssignAvatar.headIndex + "/" + totalHeadCharacterCount);
+
             EnableCharHead(AssignAvatar.headIndex);
         }
         else if (characteristic == "body")
@@ -142,6 +146,8 @@ public class SelectAvatar : MonoBehaviour
                 bodyPreviousBttn.interactable = true;
                 bodyNextBttn.interactable = true;
             }
+            print("Current asset: " + AssignAvatar.bodyIndex + "/" + totalBodyCharacterCount);
+
             EnableCharBody(AssignAvatar.bodyIndex);
         }
     }
@@ -150,28 +156,27 @@ public class SelectAvatar : MonoBehaviour
     {
         if (characteristic == "head")
         {
-
             AssignAvatar.headIndex++;
-            print("Setting up head #" + AssignAvatar.headIndex + "/" + currentHeadCharacterCount);
 
-            if (AssignAvatar.headIndex >= currentHeadCharacterCount-1)
+            if (AssignAvatar.headIndex >= totalHeadCharacterCount-1)
             {
                 headNextBttn.interactable = false;
-                AssignAvatar.headIndex = currentHeadCharacterCount - 1;
+                AssignAvatar.headIndex = totalHeadCharacterCount - 1;
             }
             else
             {
                 headPreviousBttn.interactable = true;
                 headNextBttn.interactable = true;
             }
+            print("Current asset: " + AssignAvatar.headIndex + "/" + totalHeadCharacterCount);
+
             EnableCharHead(AssignAvatar.headIndex);
         }
         else if (characteristic == "body")
         {
             AssignAvatar.bodyIndex++;
-            print("Setting up head #" + AssignAvatar.bodyIndex + "/" + currentBodyCharacterCount);
 
-            if (AssignAvatar.bodyIndex >= currentBodyCharacterCount - 1)
+            if (AssignAvatar.bodyIndex >= totalBodyCharacterCount - 1)
             {
                 bodyNextBttn.interactable = false;
             }
@@ -180,6 +185,8 @@ public class SelectAvatar : MonoBehaviour
                 bodyPreviousBttn.interactable = true;
                 bodyNextBttn.interactable = true;
             }
+            print("Current asset: " + AssignAvatar.bodyIndex + "/" + totalBodyCharacterCount);
+
             EnableCharBody(AssignAvatar.bodyIndex);
         }
     }

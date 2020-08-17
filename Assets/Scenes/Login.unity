@@ -296,6 +296,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &807655735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6612555860185686535, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749407078148979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1663164917
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +493,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808571836977988192, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -47.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386920559384788134, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -95.43698
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537004203337448851, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.750053
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083582056951891098, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 807655735}
+    - target: {fileID: 3083582056951891098, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937702420451021947, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -53.699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081246726076757288, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 807655735}
+    - target: {fileID: 5081246726076757288, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081246726076757288, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5252003945651793588, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Name

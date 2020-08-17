@@ -6,7 +6,18 @@ public class UserPermissionCommunication : MonoBehaviour
 {
     public bool allowMicrophone = false;
     public bool allowVideo = false;
+    public static UserPermissionCommunication instance;
 
+    private void Start() 
+    {
+        if(instance == null)
+        {
+            instance = this.gameObject.GetComponent<UserPermissionCommunication>();
+        } else if(this.gameObject != instance)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void SetMicrophone(bool status)
     {
         allowMicrophone = status;

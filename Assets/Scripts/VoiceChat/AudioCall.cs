@@ -73,6 +73,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
     public GameObject[] uVideoImage;
     public List<int> idWithVideos;
+    public ConnectionId idSingleVideo;
+    public bool firstJoinedVid = false;
 
     public Texture2D uNoImgTexture;
 
@@ -87,9 +89,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
     private Dictionary<ConnectionId, VideoData> mVideoUiElements = new Dictionary<ConnectionId, VideoData>();
     
     private void Awake() {
+        userAllowPermissions = UserPermissionCommunication.instance;
         mMediaConfig = CreateMediaConfig();
-        mMediaConfigInUse = mMediaConfig;      
-        userAllowPermissions = GameObject.FindObjectOfType<UserPermissionCommunication>();  
+        mMediaConfigInUse = mMediaConfig;              
     }
 
     void Start()
@@ -99,10 +101,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         mMediaConfig = CreateMediaConfig();
         mMediaConfigInUse = mMediaConfig;   
 
-        if(!userAllowPermissions)
-        {
-            userAllowPermissions = GameObject.FindObjectOfType<UserPermissionCommunication>();
-        }
+        userAllowPermissions = UserPermissionCommunication.instance;
+
 
         //StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
         SetupVideoUi(ConnectionId.INVALID);
@@ -206,12 +206,18 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
 
         Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
-        Debug.Log(userAllowPermissions.allowVideo);
-        if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
+        if(userAllowPermissions)
         {
-            Debug.Log("There exists a video thing and user allowed it.");
-            videoOn = true;     
+            Debug.Log("Video perm is defined: " + userAllowPermissions.allowVideo);
+
+            if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
+            {
+                Debug.Log("There exists a video thing and user allowed it.");
+                videoOn = true;     
+            }
         }
+        
+        
 
         mediaConfig.Audio = audioOn;
         Debug.Log("Audio Perm is: " + mediaConfig.Audio);
@@ -258,8 +264,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
         netConfig.IsConference = true;
 
         //ExampleGlobals.RequestPermissions(true, true);
-
-        mMediaConfigInUse = CreateMediaConfig();
 
         Debug.Log("Creating call using NetworkConfig:" + netConfig);
         mCall = CreateCall(netConfig);
@@ -454,24 +458,43 @@ public class AudioCall : MonoBehaviourPunCallbacks
         vd.uiObject = uVideoImage[0];
         vd.image = vd.uiObject.GetComponent<RawImage>();
         vd.image.texture = uNoImgTexture;
-        
+        Debug.Log("Video element set: " + id.id);
         mVideoUiElements[id] = vd;
     }
 
     private void UpdateFrame(ConnectionId id, IFrame frame)
     {
+        Debug.Log("Updated consideration id: " + id.id);
         if (mVideoUiElements.ContainsKey(id))
         {
+            
             if(idWithVideos.Count < uVideoImage.Length)
             {
                 idWithVideos.Add(id.id);
                 mVideoUiElements[id].uiObject = uVideoImage[idWithVideos.IndexOf(id.id)];
                 mVideoUiElements[id].image = mVideoUiElements[id].uiObject.GetComponent<RawImage>();
             }
+
+            /*
+            if(firstJoinedVid && id.id != -1)
+            {
+                idSingleVideo = id;
+                firstJoinedVid = true;
+                Debug.Log("Set video id: " + idSingleVideo);
+            }
+            */
+            
             VideoData videoData = mVideoUiElements[id];
             UpdateTexture(ref videoData.texture, frame);
             videoData.image.texture = videoData.texture;
-            //Debug.Log("Rendering: " + id);
+            Debug.Log("Rendering: " + id);
+            
+            /*
+            VideoData videoData = mVideoUiElements[idSingleVideo];
+            UpdateTexture(ref videoData.texture, frame);
+            videoData.image.texture = videoData.texture;
+            Debug.Log("Rendering: " + id);
+            */
         }
     }
 

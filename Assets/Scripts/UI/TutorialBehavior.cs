@@ -36,7 +36,7 @@ public class TutorialBehavior : MonoBehaviour
                 waitingforscreen = true;
                 NextTutorialScreen();
             }
-            if (Input.GetMouseButton(1) && currentScreen.name == "rightClickTutorialScreen")
+            if (Input.GetMouseButton(0) && currentScreen.name == "rightClickTutorialScreen")
             {
                 waitingforscreen = true;
                 NextTutorialScreen();
@@ -59,7 +59,7 @@ public class TutorialBehavior : MonoBehaviour
 
     IEnumerator WaitForNewUI()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         waitingforscreen = false;
         currentScreen = tutorialScreens[currentScreenNum];
         currentScreen.SetActive(true);

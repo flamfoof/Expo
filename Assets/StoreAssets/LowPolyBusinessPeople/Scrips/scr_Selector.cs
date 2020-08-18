@@ -69,6 +69,7 @@ public class scr_Selector : MonoBehaviour
     {
         pick = suitIndex;
         count = 0;
+        /*
         foreach (GameObject o in Suits)
         {
 
@@ -83,6 +84,20 @@ public class scr_Selector : MonoBehaviour
                 oRenderer.enabled = false;
             }
             count++;
+        }*/
+
+        for(int i = 0; i < Suits.Count; i++)
+        {
+            if (i == pick)
+            {
+                oRenderer = Suits[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = true;
+            }
+            else
+            {
+                oRenderer = Suits[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
+            }
         }
     }
 
@@ -117,7 +132,21 @@ public class scr_Selector : MonoBehaviour
         // now pick a head // the choice here is important to remeber so that we can choose hair styles that suit.
         pick = headIndex;
         count = 0;
+        for(int i = 0; i < Heads.Count; i++)
+        {
+            if (i == pick)
+            {
+                oRenderer = Heads[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = true;
+            }
+            else
+            {
+                oRenderer = Heads[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
+            }
+        }
 
+        /*
         foreach (GameObject o in Heads)
         {
 
@@ -132,7 +161,7 @@ public class scr_Selector : MonoBehaviour
                 oRenderer.enabled = false;
             }
             count++;
-        }
+        }*/
     }
 
     // Update is called once per frame

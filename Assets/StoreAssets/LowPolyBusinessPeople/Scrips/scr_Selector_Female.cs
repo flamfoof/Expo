@@ -75,18 +75,36 @@ public class scr_Selector_Female : MonoBehaviour {
         if (type == 0) // 0 is trouser version
         {
             // clear others
-
+            /*
             foreach (GameObject o in Skirts)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
+            }*/
+            
+            for(int i = 0; i < Skirts.Count; i++)
+            {
+                oRenderer = Skirts[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
             }
-            //
 
 
             pick = suitIndex;//Random.Range(0, Suit.Count);
             count = 0;
-
+            for(int i = 0; i < Suit.Count; i++)
+            {
+                if (i == pick)
+                {
+                    oRenderer = Suit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = true;
+                }
+                else
+                {
+                    oRenderer = Suit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = false;
+                }
+            }
+            /* //This makes it random in selection
             foreach (GameObject o in Suit)
             {
 
@@ -101,26 +119,43 @@ public class scr_Selector_Female : MonoBehaviour {
                     oRenderer.enabled = false;
                 }
                 count++;
-            }
+            }*/
+
         }
 
         if (type == 1) // 1 is skirt version
-        {
-
-            // clear others
-
-
-            foreach (GameObject o in Suit)
+        {            
+            /*
+            foreach (GameObject o in Skirts)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
+            }*/
+            
+            for(int i = 0; i < Skirts.Count; i++)
+            {
+                oRenderer = Skirts[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
             }
-                        //
+
 
             pick = Random.Range(0, Skirts.Count);
             count = 0;
-
-            foreach (GameObject o in Skirts)
+            for(int i = 0; i < Suit.Count; i++)
+            {
+                if (i == pick)
+                {
+                    oRenderer = Suit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = true;
+                }
+                else
+                {
+                    oRenderer = Suit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = false;
+                }
+            }
+            /* //This makes it random in selection
+            foreach (GameObject o in Suit)
             {
 
                 if (count == pick)
@@ -134,7 +169,7 @@ public class scr_Selector_Female : MonoBehaviour {
                     oRenderer.enabled = false;
                 }
                 count++;
-            }
+            }*/
         }
 
 
@@ -149,18 +184,37 @@ public class scr_Selector_Female : MonoBehaviour {
 
         if (type == 0) // 0 is trouser version
         {
+            for(int i = 0; i < SkinSkirts.Count; i++)
+            {
+                oRenderer = SkinSkirts[i].GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
+            }
 
-
+            /*
             foreach (GameObject o in SkinSkirts)
             {
                 oRenderer = o.GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
-            }
+            }*/
 
             pick = skinIndex;// Random.Range(0, SkinSuit.Count);
             
             count = 0;
-
+            for(int i = 0; i < SkinSuit.Count; i++)
+            {
+                if (i == pick)
+                {
+                    oRenderer = SkinSuit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = true;
+                }
+                else
+                {
+                    oRenderer = SkinSuit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = false;
+                }
+                count++;
+            }
+            /*
             foreach (GameObject o in SkinSuit)
             {
 
@@ -175,25 +229,44 @@ public class scr_Selector_Female : MonoBehaviour {
                     oRenderer.enabled = false;
                 }
                 count++;
-            }
+            }*/
 
         }
 
         if (type == 1) // 1 is skirt version
         {
-
-            foreach (GameObject o in SkinSuit)
+            for(int i = 0; i < SkinSkirts.Count; i++)
             {
-                oRenderer = o.GetComponentInChildren<Renderer>();
+                oRenderer = SkinSkirts[i].GetComponentInChildren<Renderer>();
                 oRenderer.enabled = false;
             }
 
-            // now pick a head // the choice here is important to remeber so that we can choose hair styles that suit.
-            pick = Random.Range(0, SkinSkirts.Count);
-
-            count = 0;
-
+            /*
             foreach (GameObject o in SkinSkirts)
+            {
+                oRenderer = o.GetComponentInChildren<Renderer>();
+                oRenderer.enabled = false;
+            }*/
+
+            pick = Random.Range(0, SkinSkirts.Count);
+            
+            count = 0;
+            for(int i = 0; i < SkinSuit.Count; i++)
+            {
+                if (i == pick)
+                {
+                    oRenderer = SkinSuit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = true;
+                }
+                else
+                {
+                    oRenderer = SkinSuit[i].GetComponentInChildren<Renderer>();
+                    oRenderer.enabled = false;
+                }
+                count++;
+            }
+            /*
+            foreach (GameObject o in SkinSuit)
             {
 
                 if (count == pick)
@@ -207,8 +280,7 @@ public class scr_Selector_Female : MonoBehaviour {
                     oRenderer.enabled = false;
                 }
                 count++;
-            }
-
+            }*/
         }
     }
 

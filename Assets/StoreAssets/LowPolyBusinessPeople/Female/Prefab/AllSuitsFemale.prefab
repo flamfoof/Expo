@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4433778896704686}
   - component: {fileID: 137979611690900130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_TanBlack
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4685584868424996}
   - component: {fileID: 137188903563212880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_WhiteBlonde
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4776473147182484}
   - component: {fileID: 137991489747607938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserSuit_redBeige
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4397031252132418}
   - component: {fileID: 137861357024720042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_SkirtCasual_bluePurple
   m_TagString: Female_SkirtSuit
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4216706274027064}
   - component: {fileID: 137561522341419896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserSuit_GreenBlue
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -823,7 +823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4009435403483592}
   - component: {fileID: 137524566741189594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_DkTanBlackBobbed
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -940,7 +940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4872256914669808}
   - component: {fileID: 137793771081676962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserCasual_BlueBlack
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -1227,7 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4336147292802752}
   - component: {fileID: 137248210176370786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserSuit_blueBalck
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -1421,7 +1421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4431941519435996}
   - component: {fileID: 137121710264894712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_TanBrown
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -1537,7 +1537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4443828287858448}
   - component: {fileID: 137265135421684662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserSuit_pinkBeige
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -1759,7 +1759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4841179910130456}
   - component: {fileID: 137418358206229382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_CreamBrown
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -1906,7 +1906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4830351302168022}
   - component: {fileID: 137952988051852730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserCasual_beige
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -2011,7 +2011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4137661959398796}
   - component: {fileID: 137915687629947054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_SkirtCasual_Greens
   m_TagString: Female_SkirtSuit
   m_Icon: {fileID: 0}
@@ -2140,7 +2140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4101568828302886}
   - component: {fileID: 137376752099856244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_DarkTanBlackShort
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -2350,7 +2350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197907711577640}
   - component: {fileID: 137246626711049208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserSuit_BlueWhite
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -2451,7 +2451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4216550163765112}
   - component: {fileID: 137064625402845140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_SoftTanLtBrown
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -2664,7 +2664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4500832379077314}
   - component: {fileID: 137472953975875648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_SkirtSuit_BlackPink
   m_TagString: Female_SkirtSuit
   m_Icon: {fileID: 0}
@@ -2762,7 +2762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4743975623526988}
   - component: {fileID: 137322147394939472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_LtTanBlonde
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -2940,7 +2940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4809100061779754}
   - component: {fileID: 137393467445756930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_BlackBobbed
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -3181,7 +3181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780040710220278}
   - component: {fileID: 137155532795446390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_DarkBlackShort
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -3298,7 +3298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4131800674587036}
   - component: {fileID: 137689281883527378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_SkirtSuit_LtBlueRed
   m_TagString: Female_SkirtSuit
   m_Icon: {fileID: 0}
@@ -3396,7 +3396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912169625107644}
   - component: {fileID: 137399721833811656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForSkirt_DarkBlack
   m_TagString: Female_SkinForSkirt
   m_Icon: {fileID: 0}
@@ -3513,7 +3513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247207189174664}
   - component: {fileID: 137103791659659976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_ForTrousers_WhiteBlack
   m_TagString: Female_SkinForTrousers
   m_Icon: {fileID: 0}
@@ -3629,7 +3629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806985354067606}
   - component: {fileID: 137638938444749030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_TrouserCasual_purple
   m_TagString: Female_TrouserSuit
   m_Icon: {fileID: 0}
@@ -4110,7 +4110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4946731088047736}
   - component: {fileID: 137866978825671832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Female_SkirtCasual_BeigeCream
   m_TagString: Female_SkirtSuit
   m_Icon: {fileID: 0}

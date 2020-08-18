@@ -2355,11 +2355,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.159
       objectReference: {fileID: 0}
-    - target: {fileID: 95147942436154114, guid: 64d444672c854794683605370e750f5d,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: dd09dc2c1fc23314e8cef6408e4c4b55, type: 2}
     - target: {fileID: 114866559164041680, guid: 64d444672c854794683605370e750f5d,
         type: 3}
       propertyPath: headSelected

@@ -45,6 +45,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public Camera camera;
     public InteractableRayIdentifier playerActionRay;
     public Animator anim;
+    public float animWalkSpeed;
     public TextMesh playerName;
     public TextMesh playerOrganization;
     public GameObject infoPopup; //For InfoPopUp
@@ -193,11 +194,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (!disableServer)
         {
-            if (photonView.IsMine)
-            {
-
-            }
-            else
+            if (!photonView.IsMine)
             {
                 transform.position = Vector3.Lerp(transform.position, realPosition, lerpSpeed);
                 transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, lerpSpeed);
@@ -274,6 +271,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                     if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
                     {
                         OpenCommandRing(true);
+                        photonView.RPC("ThinkAnimation", RpcTarget.All);
                     }
                     else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen && !isChatOpen)
                     {
@@ -556,7 +554,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public void Emote(int emoteIndex)
     {
         StartCoroutine(RandomEmoteTime(emoteIndex));
-
     }
 
     IEnumerator RandomEmoteTime(int index)
@@ -578,8 +575,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-
-
     [PunRPC]
     public void RandomEmote()
     {
@@ -595,6 +590,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             Instantiate(GetComponent<EmoteList>().emotesList[Random.Range(0, numEmotes)], randPos, Quaternion.identity);
             //Instantiate(GetComponent<EmoteList>().emotesList[0], randPos, Quaternion.identity);
         }
+    }
+
+    [PunRPC]
+    public void ThinkAnimation()
+    {
+        anim.SetTrigger("thinking");
     }
 
     private IEnumerator HoldButtonPress()
@@ -632,7 +633,15 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //add jump and other interactable animations here
 
         //Walk Conditions: speed > 1.0f
-        anim.SetFloat("speed", playerController.groundVelocity);
+        if(photonView.IsMine)
+        {
+            anim.SetFloat("speed", playerController.groundVelocity);
+            animWalkSpeed = anim.GetFloat("speed");        
+            
+        } else 
+        {
+            anim.SetFloat("speed", animWalkSpeed);
+        }
     }
 
     public void UpdateControlLock(bool move, bool look)
@@ -704,7 +713,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(SessionTimer);
             if (anim)
             {
-                stream.SendNext(anim.GetFloat("speed"));
+                //stream.SendNext(anim.GetFloat("speed"));
+                stream.SendNext(animWalkSpeed);
             }
         }
         else
@@ -715,8 +725,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             realSessionTimer = (float)stream.ReceiveNext();
             try
             {
+                animWalkSpeed = (float)stream.ReceiveNext();
                 //anim.SetFloat("speed", (float)stream.ReceiveNext());
-                //Debug.Log("anim: " + anim.GetFloat("speed"));
+                //Debug.Log("anim " + photonView.Owner.ActorNumber + " :" + anim.GetFloat("speed"));
             }
             catch (Exception e)
             {

@@ -488,10 +488,11 @@ MonoBehaviour:
   canMove: 1
   canLook: 1
   ping: 0
-  lerpSpeed: 0.1
+  lerpSpeed: 0.02
   camera: {fileID: 20724644957976244}
   playerActionRay: {fileID: 9220169153553486127}
   anim: {fileID: 8251211809601006042}
+  animWalkSpeed: 0
   playerName: {fileID: 7700156854495169686}
   playerOrganization: {fileID: 8570543854567576599}
   infoPopup: {fileID: 2771875661726662095}
@@ -1607,6 +1608,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 74134c157c5914b43b8e9a62c4e1b5b7, type: 2}
+    - target: {fileID: 181153146903271187, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 181153146903271187, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181153146903271187, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181153146903271187, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 181153146903271187, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].Name
+      value: thinking
+      objectReference: {fileID: 0}
     - target: {fileID: 216384441755713857, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name

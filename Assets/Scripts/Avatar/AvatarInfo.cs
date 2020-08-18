@@ -25,9 +25,12 @@ public class AvatarInfo : MonoBehaviour
     public SkinnedMeshRenderer meshHead;
     public SkinnedMeshRenderer meshUpperTeeth;
     public SkinnedMeshRenderer meshLowerTeeth;
+
+    public GameObject maleAvatar;
+    public GameObject femaleAvatar;
     public GameObject skeletonBase;
     public GameObject avatarRoot;
-    public int bodyIndex;
-    public int headIndex;
+    public int indexSuit;
+    public int indexHead;
     public scr_Selector CharacterPrefab;
 }

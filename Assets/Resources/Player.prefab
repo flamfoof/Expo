@@ -1736,7 +1736,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ObservedComponents.Array.data[1]
       value: 
-      objectReference: {fileID: 201610020428325492}
+      objectReference: {fileID: 0}
     - target: {fileID: 2881534340456550908, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -1977,11 +1977,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_LeftForeArm
       objectReference: {fileID: 0}
-    - target: {fileID: 9111836149972484593, guid: 432f044a86e36bf4e9c88ee51c92647a,
-        type: 3}
-      propertyPath: avatarRoot
-      value: 
-      objectReference: {fileID: 2475301903173617132}
     - target: {fileID: 9157037417081110344, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -2016,24 +2011,6 @@ MonoBehaviour:
 --- !u!95 &8251211809601006042 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5111353437306322599, guid: 432f044a86e36bf4e9c88ee51c92647a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3777708314081351549}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &201610020428325492 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3936531507355710729, guid: 432f044a86e36bf4e9c88ee51c92647a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3777708314081351549}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2475301903173617132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1600770479530496657, guid: 432f044a86e36bf4e9c88ee51c92647a,
     type: 3}
   m_PrefabInstance: {fileID: 3777708314081351549}
   m_PrefabAsset: {fileID: 0}

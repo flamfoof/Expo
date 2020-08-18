@@ -10,13 +10,16 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 {
     //the playerID in this case would just be the name for now
     private string playerID;
+    public static AssignPlayerAvatar instance;
     private GenderList.genders gender;
+    
     public GameObject maleCharPrefab;
     public GameObject femaleCharPrefab;
 
     public GameObject selectedPrefab;
     public GameObject defaultPrefab;
 
+    
     public int bodyIndex;
     public int headIndex;
 
@@ -42,12 +45,23 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     void Awake()
     {
         DontDestroyOnLoad(this);
-        this.selectedPrefab = defaultPrefab;        
+        
+        Gender = GenderList.genders.Male1;
+
+        if(instance != null)
+        {
+            Destroy(this.gameObject);
+        } else 
+        {
+            instance = this.gameObject.GetComponent<AssignPlayerAvatar>();
+        }
+
+        this.selectedPrefab = defaultPrefab;
     }
 
     private void Start() {
         playerAvatarInfo = defaultPrefab.GetComponent<AvatarInfo>();
-
+        Debug.Log(instance.name);
         //catch all if an avatar never loads
         //InvokeRepeating("RefreshAvatarList", 5.0f, 10.0f);
     }

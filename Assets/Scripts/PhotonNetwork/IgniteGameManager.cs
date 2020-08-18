@@ -79,6 +79,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
+
+                spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
@@ -87,8 +89,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(AnalyticsController.Instance)
         {
             AnalyticsController.Instance.ProfileInfoAnalytics();
-        }
-        
+        }        
     }
 
     void PrintRoomName()
@@ -105,7 +106,10 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
         PhotonView photonView = PhotonView.Get(changeAvatar.photonView);
         photonView.RPC("RefreshAvatarList", RpcTarget.AllBuffered);
+
     }
+
+
 
 
     public void RefreshOnPlayerSpawn()
@@ -115,8 +119,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(voiceManager)
             voiceManager.RefreshWebGLSpeakers();
         
-        RefreshAvatars();
-        Invoke("RefreshAvatars", 3.0f);
+        //RefreshAvatars();
+        //Invoke("RefreshAvatars", 3.0f);
     }
 
 

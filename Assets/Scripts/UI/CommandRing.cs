@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class CommandRing : MonoBehaviour
@@ -21,21 +19,26 @@ public class CommandRing : MonoBehaviour
     public float cancelDistance = 0.25f;
     public bool isMainCommand = true;
     public Button dummyButton;
-    
+
+    //tutorial
+    public GameObject[] tutorialElements;
 
     public float visualDistance = 5.0f;
 
     void Start()
     {
         gameManager = IgniteGameManager.IgniteInstance;
-        if(IgniteGameManager.localPlayer != null)
+        if (IgniteGameManager.localPlayer != null)
+        {
             player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
+        }
+
         this.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if(isEnable && isMainCommand)
+        if (isEnable && isMainCommand)
         {
             Vector3 diff;
             transform.LookAt(player.playerActionRay.transform);
@@ -59,27 +62,33 @@ public class CommandRing : MonoBehaviour
             Debug.Log((float)Vector3.Dot(mousePos.normalized, Input.mousePosition.normalized));
             Debug.Log("Mouse Pos: " + mousePosNorm);
             Debug.Log("New Mouse Pos: " + inputMouseNorm);*/
-        } else if (!isMainCommand)
+        }
+        else if (!isMainCommand)
         {
             return;
         }
     }
 
     void OnEnable()
-    {      
-        if(!player && IgniteGameManager.localPlayer != null)  
+    {
+        if (PlayerPrefs.GetInt("tutorialDone") == 0)
+        {
+            StartMenuTutorial();
+        }
+
+        if (!player && IgniteGameManager.localPlayer != null)
         {
             player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
-            
+
         }
-        if(isMainCommand && player)
+        if (isMainCommand && player)
         {
             transform.position = (player.playerActionRay.transform.forward * visualDistance) + player.playerActionRay.transform.position;
             offset = (player.playerActionRay.transform.forward * visualDistance);
             worldPos = (player.playerActionRay.transform.forward * visualDistance) + player.playerActionRay.transform.position;
             playerHeadRotation = player.playerActionRay.transform.rotation;
             isEnable = true;
-        }            
+        }
     }
 
     void Ondisable()
@@ -98,11 +107,12 @@ public class CommandRing : MonoBehaviour
         return distance;
     }
 
-    void RaycastWorldUI(){
+    void RaycastWorldUI()
+    {
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
         pointerData.position = Input.mousePosition;
 
-        #if UNITY_WEBGL
+#if UNITY_WEBGL
         //This is because the locked cursor is not always center on WebGL
         if(Cursor.lockState == CursorLockMode.Locked)
         {
@@ -110,7 +120,7 @@ public class CommandRing : MonoBehaviour
             pointerData.position = screenXY;
         }
         
-        #endif
+#endif
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
@@ -126,20 +136,41 @@ public class CommandRing : MonoBehaviour
                 results.Clear();
             }
         }     */
-        if(results.Count > 0)
+        if (results.Count > 0)
         {
-            if(results[0].gameObject.layer == LayerMask.NameToLayer("Interactables"))
+            if (results[0].gameObject.layer == LayerMask.NameToLayer("Interactables"))
             {
-                if(results[results.Count - 1].gameObject.GetComponent<CommandButton>())
+                if (results[results.Count - 1].gameObject.GetComponent<CommandButton>())
                 {
                     results[results.Count - 1].gameObject.GetComponent<CommandButton>().Hover();
-                } else {
+                }
+                else
+                {
                     dummyButton.Select();
                 }
             }
-            
-                
-        }
 
+
+        }
+    }
+
+    public void StartMenuTutorial()
+    {
+        foreach (GameObject g in tutorialElements)
+        {
+            g.SetActive(true);
+        }
+    }
+
+    public void FinishMenuTutorial()
+    {
+        if (PlayerPrefs.GetInt("tutorialDone") == 0)
+        {
+            foreach (GameObject g in tutorialElements)
+            {
+                g.SetActive(false);
+            }
+            GameObject.FindObjectOfType<TutorialBehavior>().MenuTutorialDone();
+        }
     }
 }

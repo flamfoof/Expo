@@ -13,6 +13,8 @@ public class Emote : MonoBehaviourPunCallbacks
     void Start()
     {
         Destroy(gameObject, duration);
+        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.position = gameObject.transform.position;
         rb = gameObject.GetComponent<Rigidbody>();
 
         StartEmojiEffects();
@@ -26,8 +28,8 @@ public class Emote : MonoBehaviourPunCallbacks
     }
     void StartEmojiEffects()
     {
-        float forceIntensity = Random.Range(3f, 50f);
-        Vector3 forceDirection = new Vector3(IgniteGameManager.localPlayer.transform.forward.x * Random.Range(-15, 15   ), IgniteGameManager.localPlayer.transform.forward.y * Random.Range(25, 50), IgniteGameManager.localPlayer.transform.forward.z * Random.Range(3, 9));
+        float forceIntensity = Random.Range(10f, 35f);
+        Vector3 forceDirection = new Vector3(IgniteGameManager.localPlayer.transform.forward.x * Random.Range(-15, 15), IgniteGameManager.localPlayer.transform.forward.y * Random.Range(50, 120), IgniteGameManager.localPlayer.transform.forward.z * Random.Range(1, 20));
 
         rb.AddForce(forceDirection * forceIntensity);
     }

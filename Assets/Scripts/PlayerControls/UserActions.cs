@@ -85,7 +85,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public bool disableServer = false;
 
     public float emoteForce = 20.0f;
-    public int emoteAmount = 35;
+    public int emoteAmount = 55;
 
     private bool isCommandUIOpen;
 
@@ -271,11 +271,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 if (ctx.interaction is SlowTapInteraction)
                 {
                     //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
-                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen)
+                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
                     {
                         OpenCommandRing(true);
                     }
-                    else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen)
+                    else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen && !isChatOpen)
                     {
                         ActivateCommandRing();
                     }
@@ -567,7 +567,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         for (int i = 0; i < emoteAmount; i++)
         {
             x = transform.position.x + Random.Range(-1.0f, 1.0f);
-            y = transform.position.y + Random.Range(1f, 8f);
+            y = transform.position.y + Random.Range(-1f, 2f);
             z = transform.position.z + Random.Range(-1.0f, 1.0f);
             randPos = new Vector3(x, y, z);
 

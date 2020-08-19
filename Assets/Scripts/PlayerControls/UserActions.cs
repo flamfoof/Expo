@@ -47,8 +47,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public Animator anim;
     public float animWalkSpeed;
     public GameObject selectedPlayer;
-    public Text playerName;
-    public Text playerOrganization;
+    public TextMesh playerName;
+    public TextMesh playerOrganization;
     public GameObject infoPopup; //For InfoPopUp
     private UIEffectsUtils uiEffects;
     public float sessionTimer = 0.0f;
@@ -126,14 +126,14 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     private void Start()
     {
         //Debug.Log("Attaching anim");
-        infoPopup.SetActive(false);   //Set the Popup inactive
+        //infoPopup.SetActive(false);   //Set the Popup inactive
         Invoke("AttachAnim", 1.0f);
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
         commandUI = gameManager.commandUI.gameObject;
         if(!photonView.IsMine)
         {
-            GetComponent<Rigidbody>().useGravity = false;
+            //GetComponent<Rigidbody>().useGravity = false;
         }
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
@@ -260,18 +260,26 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 if (ctx.interaction is SlowTapInteraction)
                 {
                     //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
+                    /*
                     if(playerActionRay.playerfocusedObject && !isCommandUIOpen && !isChatOpen)
                     {
-                        selectedPlayer = playerActionRay.playerfocusedObject;
-                        if(selectedPlayer.GetComponent<PlayerNameShow>().infoUIEnabled)
+                        try
                         {
-                            selectedPlayer.GetComponent<PlayerNameShow>().EnablePlayerButtonInfoUI();
-                        } else 
+                            selectedPlayer = playerActionRay.playerfocusedObject;
+                            if(selectedPlayer.GetComponent<PlayerNameShow>().infoUIEnabled)
+                            {
+                                selectedPlayer.GetComponent<PlayerNameShow>().EnablePlayerButtonInfoUI();
+                            } else 
+                            {
+                                selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+                            }
+                        } catch(Exception e)
                         {
-                            selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+                            Debug.Log("Problem with selecting player info");
                         }
-                    }
-                    else if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
+                        
+                    }*/
+                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
                     {
                         if(selectedPlayer)
                         {

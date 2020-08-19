@@ -32,6 +32,7 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
         {
             if(!listPV[i].IsMine)
             {
+                /*
                 float currentDistFromPlayer = CheckPlayerDistance(playerPV, listPV[i]);
                 float volumeTarget = 0.0f;
                 if(currentDistFromPlayer < minDistance)
@@ -45,10 +46,10 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
                     float topDistance = maxDistance - minDistance;
                     volumeTarget = currentDistFromPlayer / topDistance;
                     volumeTarget = Mathf.Abs(volumeTarget - 1.0f);
-                }
+                }*/
                 //Debug.Log("Volume of " + listPV[i].name + " is now: " + volumeTarget);
                 //SetVolumeLevels(volumeTarget, listPV[i].GetComponent<PlayerVoiceID>().id);                
-            }                
+            }
         }
     }
 

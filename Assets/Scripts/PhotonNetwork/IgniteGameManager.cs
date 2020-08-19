@@ -322,7 +322,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                         totalUniquePlayers = pv.OwnerActorNr;
                     if(analyticsBoard)
                     {
-                        analyticsBoard.GetComponent<BBBAnalytics>().UpdateAttendeesCount(pv.Owner.ActorNumber);
+                        analyticsBoard.GetComponent<BBBAnalytics>().UpdateAttendeesCount(totalUniquePlayers);
                     }
                     
                     if(AnalyticsController.Instance)

@@ -8015,6 +8015,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000015258789
+      objectReference: {fileID: 0}
     - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8038,11 +8042,6 @@ PrefabInstance:
     - target: {fileID: 1935277136, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
-        type: 3}
-      propertyPath: uVideoImage.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
@@ -8074,11 +8073,6 @@ PrefabInstance:
       propertyPath: uVideoImage.Array.data[5]
       value: 
       objectReference: {fileID: 521234243}
-    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
-        type: 3}
-      propertyPath: uNoImgTexture
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalPosition.x

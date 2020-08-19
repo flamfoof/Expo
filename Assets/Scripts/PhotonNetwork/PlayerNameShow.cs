@@ -32,6 +32,7 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     void Update()
     {
         transform.LookAt(localPlayer.transform, Vector3.up);
+        //transform.rotation.SetLookRotation(localPlayer.transform.position, Vector3.up);
 
         /*
         foreach(PhotonView pv in gm.GetPlayerList())

@@ -46,8 +46,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public InteractableRayIdentifier playerActionRay;
     public Animator anim;
     public float animWalkSpeed;
-    public TextMesh playerName;
-    public TextMesh playerOrganization;
+    public GameObject selectedPlayer;
+    public Text playerName;
+    public Text playerOrganization;
     public GameObject infoPopup; //For InfoPopUp
     private UIEffectsUtils uiEffects;
     public float sessionTimer = 0.0f;
@@ -202,6 +203,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 transform.position = Vector3.Lerp(transform.position, realPosition, lerpSpeed);
                 transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, lerpSpeed);
                 //Show the Popup if the hover on the player.
+                /*
                 if (playerActionRay.playerfocusedObject)
                 {
                     infoCanvasGroup.alpha = 1.0f;
@@ -214,23 +216,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                     {
                         StartCoroutine(AlphaFadeOut(infoCanvasGroup.alpha, 0, 3.0f));
                     }
-                }
+                }*/
             }
         }
         ping = PhotonNetwork.GetPing();
-    }
-
-    //Fade Out the Info Popup Canvas 
-    IEnumerator AlphaFadeOut(float start, float end, float duration)
-    {
-        StopCoroutine("AlphaFadeOut");
-        float counter = 0f;
-        while (counter < duration)
-        {
-            counter += Time.deltaTime;
-            infoCanvasGroup.alpha = Mathf.Lerp(start, end, counter / duration);
-            yield return null;
-        }
     }
 
     private void AttachControlsReference()
@@ -271,8 +260,24 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 if (ctx.interaction is SlowTapInteraction)
                 {
                     //if it doesn't touch anything it returns false which lets us pull the gameplay menu up
-                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
+                    if(playerActionRay.playerfocusedObject && !isCommandUIOpen && !isChatOpen)
                     {
+                        selectedPlayer = playerActionRay.playerfocusedObject;
+                        if(selectedPlayer.GetComponent<PlayerNameShow>().infoUIEnabled)
+                        {
+                            selectedPlayer.GetComponent<PlayerNameShow>().EnablePlayerButtonInfoUI();
+                        } else 
+                        {
+                            selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+                        }
+                    }
+                    else if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
+                    {
+                        if(selectedPlayer)
+                        {
+                            selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+                            selectedPlayer = null;
+                        }
                         OpenCommandRing(true);
                         photonView.RPC("ThinkAnimation", RpcTarget.All);
                     }
@@ -293,7 +298,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void EmailButton(InputAction.CallbackContext ctx)
+    public void EmailButton()
     {
         //After Click on the Info Button
         Application.OpenURL("mailto:" + PlayerPrefs.GetString("Email") + "?subject=" + "It was great meeting you today!" + "&body=" + "Sent from \n the We Ignite Platform");

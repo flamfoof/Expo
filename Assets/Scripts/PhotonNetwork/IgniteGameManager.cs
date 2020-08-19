@@ -313,11 +313,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 if(!uniquePlayersLogged.Contains(pv.OwnerActorNr))
                 {
                     //doesn't work, just take the highest actor number
-                    /*
-                    uniquePlayersLogged.Add(pv.OwnerActorNr);
+                    
+                    //uniquePlayersLogged.Add(pv.OwnerActorNr);
                     Debug.Log("Being logged is: " + pv.Owner.ActorNumber);
-                    totalUniquePlayers++;
-                    Debug.Log("Logged unique player: " + totalUniquePlayers);*/
+                    //totalUniquePlayers++;
+                    Debug.Log("Logged unique player: " + totalUniquePlayers);
                     if(totalUniquePlayers < pv.OwnerActorNr)
                         totalUniquePlayers = pv.OwnerActorNr;
                     if(analyticsBoard)

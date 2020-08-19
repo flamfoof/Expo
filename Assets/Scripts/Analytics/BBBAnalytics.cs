@@ -145,6 +145,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
                 }
             }
         }*/
+        Debug.Log("attendee count: " + attendees);
         attendees = playerID;
     }
 

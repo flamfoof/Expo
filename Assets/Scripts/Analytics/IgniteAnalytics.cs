@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class IgniteAnalytics : MonoBehaviourPunCallbacks
 {
-    
     public virtual void ClickedStats()
     {
 

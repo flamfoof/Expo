@@ -7,23 +7,33 @@ using Photon.Realtime;
 
 public class PlayerNameShow : MonoBehaviourPunCallbacks
 {
-    GameObject local;
+    GameObject localPlayer;
     IgniteGameManager gm;
+    public GameObject playerName;
+    public GameObject playerOrganization;
+    public GameObject infoUI;
+    public bool infoUIEnabled;
     int actorNumber; 
+
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.FindObjectOfType<IgniteGameManager>();
+        localPlayer = IgniteGameManager.localPlayer;
+        gm = IgniteGameManager.IgniteInstance;
+        
         foreach (PhotonView pv in gm.GetPlayerList())
         {
             //Show the name and organization from PlayerPrefs
             //pv.GetComponent<UserActions>().playerName.text = pv.Owner.NickName;
-            pv.GetComponent<UserActions>().playerOrganization.text = PlayerPrefs.GetString("Organization", "");
+            //pv.GetComponent<UserActions>().playerOrganization.text = PlayerPrefs.GetString("Organization", "");
         }
     }
 
     void Update()
     {
+        transform.LookAt(localPlayer.transform, Vector3.up);
+
+        /*
         foreach(PhotonView pv in gm.GetPlayerList())
         {
             if(!pv.IsMine)
@@ -38,6 +48,22 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
                     gm.RefreshPlayerList();
                 }
             }
-        }
+        }*/
+    }
+
+    public void EnablePlayerButtonInfoUI()
+    {
+        infoUI.SetActive(true);
+        infoUIEnabled = true;
+        playerName.SetActive(false);
+        playerOrganization.SetActive(false);
+    }
+
+    public void DisablePlayerButtonInfoUI()
+    {
+        infoUI.SetActive(false);
+        infoUIEnabled = false;
+        playerName.SetActive(true);
+        playerOrganization.SetActive(true);
     }
 }

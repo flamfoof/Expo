@@ -6,6 +6,16 @@ using UnityEngine.EventSystems;
 
 public class UIEffectsUtils : MonoBehaviour
 {
+    public static UIEffectsUtils instance;
+
+    void Start()
+    {
+        if(instance == null)
+        {
+            instance = this.gameObject.GetComponent<UIEffectsUtils>();
+        }
+    }
+
     public void FadeOutImage(Image image, float time)
     {
         StartCoroutine(FadeOut(image, time));
@@ -23,6 +33,15 @@ public class UIEffectsUtils : MonoBehaviour
         GameObject canvas = EventSystem.current.currentSelectedGameObject;
         Image image = canvas.GetComponent<Image>();
         StartCoroutine(FadeOut(image, time));
+    }
+
+    //button
+    public void FadeImageOnce(float time = 1.0f)
+    {
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        GameObject canvas = EventSystem.current.currentSelectedGameObject;
+        Image image = canvas.GetComponent<Image>();
+        StartCoroutine(FadeOnce(image, time));
     }
     
     public IEnumerator FadeOut(CanvasGroup canvas, float time)
@@ -147,6 +166,15 @@ public class UIEffectsUtils : MonoBehaviour
                 fadeMode = true;
             }
         }
+    }
+
+    public IEnumerator FadeOnce(Image image, float time)
+    {
+        yield return new WaitForFixedUpdate();
+
+        yield return StartCoroutine(FadeOut(image, time));
+    
+        yield return StartCoroutine(FadeIn(image, time));
     }
 
     public IEnumerator StopFadeRepeat(Image image, float time)

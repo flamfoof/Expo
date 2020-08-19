@@ -1603,6 +1603,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_HeadTop_End
       objectReference: {fileID: 0}
+    - target: {fileID: 91739730306988345, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 101439188924056873, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

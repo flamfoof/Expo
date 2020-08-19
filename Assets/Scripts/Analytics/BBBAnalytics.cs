@@ -8,11 +8,13 @@ using Photon.Realtime;
 public class BBBAnalytics : IgniteAnalytics, IPunObservable
 {
     public IgniteGameManager gameManager;
+    public static BBBAnalytics instance;
     public int attendees = 0;
     public int clicks = 0;
     public float avgSessionTime = 0;
     List<string> sessionNameList;
     List<float> sessionTimeList;
+    List<int> playersLogged;
 
     public Text attendeesText;
     public Text sessionText;
@@ -20,6 +22,13 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
     
     private void Start() 
     {
+        if(instance != null)
+        {
+            Destroy(this.gameObject);
+        } else 
+        {
+            instance = this.gameObject.GetComponent<BBBAnalytics>();            
+        }
         sessionNameList = new List<string>();
         sessionTimeList = new List<float>();
         if(!gameManager)
@@ -31,7 +40,7 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
 
     void FixedUpdate()
     {
-        UpdateAttendeesCount();
+        //UpdateAttendeesCount();
         UpdateAllTexts();
     }
 
@@ -121,24 +130,32 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
 
     
 
-    void UpdateAttendeesCount()
+    public void UpdateAttendeesCount(int playerID)
     {
+        /*
         if(gameManager)
         {
             if(PhotonNetwork.IsMasterClient)
             {
-                if(attendees != gameManager.totalUniquePlayers && attendees < gameManager.totalUniquePlayers)
+                if(attendees != gameManager.totalUniquePlayers)
                 {
                     //attendees++;
-                    photonView.RPC("AddPlayerCount", RpcTarget.AllBuffered);
+                    Debug.Log("Attendees: " + attendees + " game manager attendee: " + gameManager.totalUniquePlayers);
+                    photonView.RPC("AddPlayerCount", RpcTarget.AllBufferedViaServer, playerID);     
                 }
             }
-        }
+        }*/
+        attendees = playerID;
     }
 
     [PunRPC]
-    void AddPlayerCount()
+    void AddPlayerCount(int playerID)
     {
+        Debug.Log("Adding attendees: " + playerID);
+        if(!gameManager.uniquePlayersLogged.Contains(playerID))
+        {
+            gameManager.uniquePlayersLogged.Add(playerID);  
+        }
         attendees++;
     }
 

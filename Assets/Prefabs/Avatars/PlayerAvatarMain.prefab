@@ -151,8 +151,8 @@ MonoBehaviour:
   femaleAvatar: {fileID: 4699525323402572669}
   skeletonBase: {fileID: 5168125206396536049}
   avatarRoot: {fileID: 0}
-  bodyIndex: 0
-  headIndex: 0
+  indexSuit: 0
+  indexHead: 0
   CharacterPrefab: {fileID: 5054502045215759477}
 --- !u!1 &4663273506429000779
 GameObject:

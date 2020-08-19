@@ -130,7 +130,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
         commandUI = gameManager.commandUI.gameObject;
-
+        if(!photonView.IsMine)
+        {
+            GetComponent<Rigidbody>().useGravity = false;
+        }
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
         //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);

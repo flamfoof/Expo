@@ -15,7 +15,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public int playerVoiceID;
     public CommandRing commandUI;
     public List<PhotonView> playerList;
-    public List<string> uniquePlayersLogged;
+    public List<int> uniquePlayersLogged;
     public int totalUniquePlayers;
     static public GameObject localPlayer;
     public GameObject spawnLoc;
@@ -26,8 +26,14 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     private GameObject instance;
 
+    public IgniteAnalytics analyticsBoard;
+
     void Start()
     {
+        if(!analyticsBoard)
+        {
+            analyticsBoard = GameObject.FindObjectOfType<BBBAnalytics>();
+        }
         if(gameTesting)
         {
             Application.logMessageReceived += CustomLogger;
@@ -288,6 +294,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             if(pv.GetComponent<UserActions>())
             {
+                /*
                 if(!uniquePlayersLogged.Contains(pv.Owner.NickName))
                 {
                     uniquePlayersLogged.Add(pv.Owner.NickName);
@@ -302,7 +309,28 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                         }
                     }
                     
-                }  
+                } */
+                if(!uniquePlayersLogged.Contains(pv.OwnerActorNr))
+                {
+                    //doesn't work, just take the highest actor number
+                    /*
+                    uniquePlayersLogged.Add(pv.OwnerActorNr);
+                    Debug.Log("Being logged is: " + pv.Owner.ActorNumber);
+                    totalUniquePlayers++;
+                    Debug.Log("Logged unique player: " + totalUniquePlayers);*/
+                    if(totalUniquePlayers < pv.OwnerActorNr)
+                        totalUniquePlayers = pv.OwnerActorNr;
+                    if(analyticsBoard)
+                    {
+                        analyticsBoard.GetComponent<BBBAnalytics>().UpdateAttendeesCount(pv.Owner.ActorNumber);
+                    }
+                    
+                    if(AnalyticsController.Instance)
+                    {
+                        AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
+                    } 
+                }
+                
             }
                   
         }

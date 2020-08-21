@@ -460,7 +460,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //close chat if menu is open
         if (isChatOpen)
         {
-            rtc.webRTC.uMessageField.text = "";
+            rtc.webRTC.messageField.text = "";
             OpenChat(false);
         }
 
@@ -473,9 +473,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             UpdateControlLock(false, true);
             StartCoroutine(UnfocusApplicationCursor());
             rtc.sendMessage.SetActive(toggle);
-            rtc.webRTC.uMessageField.text = "";
-            rtc.webRTC.uMessageField.Select();
-            rtc.webRTC.uMessageField.ActivateInputField();
+            rtc.webRTC.messageField.text = "";
+            rtc.webRTC.messageField.Select();
+            rtc.webRTC.messageField.ActivateInputField();
             if (isChatFading)
             {
                 isChatFading = false;
@@ -487,7 +487,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         {
             UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
-            if (rtc.webRTC.uMessageField.text != "")
+            if (rtc.webRTC.messageField.text != "")
             {
                 rtc.webRTC.SendButtonPressed();
             }

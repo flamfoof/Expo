@@ -1910,18 +1910,18 @@ MonoBehaviour:
   userAllowAudio: 1
   videoOn: 0
   userAllowVideo: 0
-  uMessageField: {fileID: 4337185609708388612}
-  uOutput: {fileID: 799856776}
+  messageField: {fileID: 4337185609708388612}
+  textOutput: {fileID: 489434093}
   receiveTxt: {fileID: 2338516778931424323}
   lockChatVisibility: 0
   scrollbar: {fileID: 1229657444}
   isConference: 1
-  uVideoImage:
-  - {fileID: 0}
+  videoImage: []
   idWithVideos: 
+  connectedVoiceID: 
   videoCount: 0
   firstJoinedVid: 0
-  uNoImgTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}
+  noVidTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}
 --- !u!114 &3633223461223209499
 MonoBehaviour:
   m_ObjectHideFlags: 0

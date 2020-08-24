@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1564456713, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_AnchorMax.x
@@ -397,6 +397,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3446676702387309835, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendPlayerMessage
+      objectReference: {fileID: 0}
     - target: {fileID: 5808136504793770182, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: uSignalingUrl
@@ -406,16 +411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: uSecureSignalingUrl
       value: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
-        type: 3}
-      propertyPath: idWithVideos.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
-        type: 3}
-      propertyPath: videoImage.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}

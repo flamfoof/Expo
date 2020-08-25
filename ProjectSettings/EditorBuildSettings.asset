@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AudioChat.unity
     guid: 0738678bde3e9324ea8dd0745abc71ee
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TirgamesAssets/PBRStageEquipment/Scenes/StageDemo.unity
     guid: f84571bf102f58b4189d844932b47c17
   m_configObjects:

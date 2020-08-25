@@ -19,7 +19,9 @@ public class ISimpleLink : Interactables
             TimesUsed++;
             if(canClick)
             {
-                if(analytics)
+                canClick = !canClick;
+
+                if (analytics)
                 {
                     analytics.ClickedStats(linkURL);
                 }
@@ -31,7 +33,6 @@ public class ISimpleLink : Interactables
                 openWindow(linkURL);
                 #endif
 
-                canClick = !canClick;
             } else 
             {
                 canClick = !canClick;

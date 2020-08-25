@@ -103,12 +103,14 @@ public class AudioCall : MonoBehaviourPunCallbacks
         public int playerID;
         public int connectionId;
         public ConnectionId cID;
+        public bool forceReconnect;
     }
     
     SConnectionMapping thisConnectionMap = new SConnectionMapping();
     private Dictionary<ConnectionId, VideoData> mVideoUiElements = new Dictionary<ConnectionId, VideoData>();
     public Dictionary<ConnectionId, int> connectionMappingDict = new Dictionary<ConnectionId, int>();
     public Dictionary<int, ConnectionId> connectionMappingDictToUsers = new Dictionary<int, ConnectionId>();
+    public Dictionary<int, ConnectionId> connectionMappingDictToUsersBackUp = new Dictionary<int, ConnectionId>();
   
     private void Awake() {
         userAllowPermissions = UserPermissionCommunication.instance;
@@ -364,7 +366,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             netConfig.IceServers.Add(new IceServer(uIceServer2));
             Debug.Log("Connected to RTC: " + uIceServer2);
-        } else if (string.IsNullOrEmpty(uIceServer3) == false)
+        }/* else if (string.IsNullOrEmpty(uIceServer3) == false)
         {
             netConfig.IceServers.Add(new IceServer(uIceServer3));
             Debug.Log("Connected to RTC: " + uIceServer3);
@@ -384,7 +386,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             netConfig.IceServers.Add(new IceServer(uIceServer7));
             Debug.Log("Connected to RTC: " + uIceServer7);
-        }           
+        }           */
         
             
 
@@ -726,6 +728,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 netConfig.IceServers.Add(new IceServer(uIceServer2));
                 //Debug.Log("Connected to RTC: " + uIceServer2);
             } 
+            /*
             if (string.IsNullOrEmpty(uIceServer3) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer3));
@@ -759,7 +762,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
             else
             {
                 netConfig.SignalingUrl = uSignalingUrl;
-            }
+            }*/
 
             mediaNetwork = UnityCallFactory.Instance.CreateMediaNetwork(netConfig);
 
@@ -869,6 +872,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
     }
 
+    public void DisconnectPlayerVoice(ConnectionId cID)
+    {        
+
+        mediaNetwork.Disconnect(cID);
+    }
+
     public IEnumerator ReconnectToPlayerVoice(int playerActorID)
     {
         yield return new WaitForSeconds(mediaNetworkConnectionTime);
@@ -900,6 +909,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
             mediaNetwork = null;
             if(connectedVoiceID.Count > 0)
                 connectedVoiceID.Clear();
+            if(connectionIdList.Count > 0)
+                connectionIdList.Clear();
+            
             startedVoiceServer = false;
         }        
     }
@@ -1118,6 +1130,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
             isChatText = false;
             Log("Json SConnection Mapping output: " + connectionMapping.connectionId + " and player id is: " + connectionMapping.playerID);
             MapConnectionsToDictAdd(connectionMapping.playerID, evt.ConnectionId);
+            if(connectionMapping.forceReconnect)
+            {
+                Debug.Log("Force reconnecting");
+                /*
+                foreach(KeyValuePair<int, ConnectionId> kvp in connectionMappingDictToUsers)
+                {
+                    ConnectToPlayerVoice(kvp.Key);
+                }*/
+                ReconnectAllVoiceID();
+            }
         } catch (Exception e)
         {
             if(e != null)
@@ -1156,8 +1178,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void SendPlayerMessage(bool reliable = true)
     {
         string msg = PhotonNetwork.NickName + ": " + messageField.text;
-
-        if(msg[0] == (char)'/')
+        string cmd = messageField.text;
+        if(cmd[0] == (char)'/')
         {
             Debug.Log("Chat command activated");
             ChatCommand(messageField.text);
@@ -1173,10 +1195,10 @@ public class AudioCall : MonoBehaviourPunCallbacks
             Log("Sending message: " + msg);
             byte[] msgData = Encoding.UTF8.GetBytes(msg);
 
-            foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
+            foreach(KeyValuePair<int, ConnectionId> kvp in connectionMappingDictToUsers)
             {
-                Log("Sent to: " + kvp.Key.id);
-                mediaNetwork.SendData(kvp.Key, msgData, 0, msgData.Length, reliable);
+                Log("Sent to: " + kvp.Value.id);
+                mediaNetwork.SendData(kvp.Value, msgData, 0, msgData.Length, reliable);
             }
 
             /*
@@ -1277,30 +1299,64 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         connectionMappingDict.Add(connectionID, playerID);
         connectionMappingDictToUsers[playerID] = connectionID;
+
+        try
+        {
+            MapConnectionsToDictRefreshUnique();
+        } catch(Exception e)
+        {
+            Debug.Log("Unable to refresh connections due to: " + e);
+        }
+        
+
         foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
         {
-
             Debug.Log("<color=blue> After Adding, Connection id: " + kvp.Key + "    Player Id: " + kvp.Value +"</color>");
-        }        
+        }
     }
 
     public void MapConnectionsToDictRemove(ConnectionId connectionID)
     {
-        connectionMappingDictToUsers.Remove(connectionMappingDict[connectionID]);
-        connectionMappingDict.Remove(connectionID);
-        
+        if(connectionMappingDict.ContainsKey(connectionID))
+        {
+            if(connectionMappingDictToUsers.ContainsKey(connectionMappingDict[connectionID]))
+                connectionMappingDictToUsers.Remove(connectionMappingDict[connectionID]);
+            
+            connectionMappingDict.Remove(connectionID);
+        }
+
+        try
+        {
+            MapConnectionsToDictRefreshUnique();
+        } catch(Exception e)
+        {
+            Debug.Log("Unable to refresh connections due to: " + e);
+        }
+                
         foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
         {
             Debug.Log("<color=blue> After Removing, Connection id: " + kvp.Key + "    Player Id: " + kvp.Value +"</color>");
         }        
     }
-
+    
+    //removes any extra connections
+    public void MapConnectionsToDictRefreshUnique()
+    {
+        foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
+        {
+            if(connectionMappingDictToUsers[kvp.Value] != kvp.Key)
+            {
+                DisconnectPlayerVoice(kvp.Key);
+                Debug.Log("<color=yellow> Disconnecting duplicate Connection id: " + kvp.Key + "    with Player Id: " + kvp.Value +"</color>");
+            }            
+        }
+    }
 
     #endregion MediaNetwork
 
     private void Log(string txt)
     {
-        Debug.Log("Instance " + PhotonNetwork.LocalPlayer.NickName + ": " + txt);        
+        Debug.Log("Instance " + PhotonNetwork.LocalPlayer.NickName + ": " + txt);
     }
 
     public void SendButtonPressed()
@@ -1315,6 +1371,33 @@ public class AudioCall : MonoBehaviourPunCallbacks
         }
 
         SendMsg(msg);
+    }
+
+    public IEnumerator CustomVoiceReconnect()
+    {
+        byte[] msgData;
+        string json;
+        SConnectionMapping sCon = new SConnectionMapping();
+
+        sCon.cID = new ConnectionId(-5);
+        sCon.connectionId = -5;
+        sCon.forceReconnect = true;
+        sCon.playerID = PhotonNetwork.LocalPlayer.ActorNumber;
+        
+        yield return new WaitForSeconds(mediaNetworkConnectionTime);
+        ReconnectAllVoiceID();
+        yield return new WaitForSeconds(mediaNetworkConnectionTime/2);
+        json = JsonUtility.ToJson(sCon);
+        msgData = Encoding.UTF8.GetBytes(json);
+
+        //string msg = Encoding.UTF8.GetString(buffer.Buffer, 0, buffer.ContentLength);
+        //connectionMapping = JsonUtility.FromJson<SConnectionMapping>(msg);
+
+        foreach(KeyValuePair<int, ConnectionId> kvp in connectionMappingDictToUsers)
+        {
+            Log("Sent reset request to: " + kvp.Value.id);
+            mediaNetwork.SendData(kvp.Value, msgData, 0, msgData.Length, true);
+        }
     }
 
     public void ChatCommand(string msg)
@@ -1340,6 +1423,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                     mediaConfig = CreateMediaConfig();
                     mediaConfigUse = mediaConfig;
                     StartCoroutine(InitWebRTC(PhotonNetwork.LocalPlayer.ActorNumber));
+                    StartCoroutine(CustomVoiceReconnect());
                     userAllowPermissions.allowVideo = true;  
                 } else if(isICall)            
                 {
@@ -1376,6 +1460,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                     mediaConfig = CreateMediaConfig();
                     mediaConfigUse = mediaConfig;
                     StartCoroutine(InitWebRTC(PhotonNetwork.LocalPlayer.ActorNumber));
+                    StartCoroutine(CustomVoiceReconnect());
                     userAllowPermissions.allowVideo = false;  
                 } else if(isICall)
                 {
@@ -1399,6 +1484,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 mapping.connectionId = 69;
                 mapping.playerID = 420;
                 mapping.cID = new ConnectionId(420);
+                mapping.forceReconnect = false;
                 SendMessageString(mapping);
                 break;
             default:

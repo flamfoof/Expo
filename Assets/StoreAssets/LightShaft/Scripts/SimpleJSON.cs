@@ -360,24 +360,30 @@ namespace SimpleJSON
 
         static void ParseElement(JSONNode ctx, string token, string tokenName, bool quoted)
         {
-            if (quoted)
+            try
             {
-                ctx.Add(tokenName, token);
-                return;
-            }
-            string tmp = token.ToLower();
-            if (tmp == "false" || tmp == "true")
-                ctx.Add(tokenName, tmp == "true");
-            else if (tmp == "null")
-                ctx.Add(tokenName, null);
-            else
-            {
-                double val;
-                if (double.TryParse(token, out val))
-                    ctx.Add(tokenName, val);
-                else
+                if (quoted)
+                {
                     ctx.Add(tokenName, token);
+                    return;
+                }
+                string tmp = token.ToLower();
+                if (tmp == "false" || tmp == "true")
+                    ctx.Add(tokenName, tmp == "true");
+                else if (tmp == "null")
+                    ctx.Add(tokenName, null);
+                else
+                {
+                    double val;
+                    if (double.TryParse(token, out val))
+                        ctx.Add(tokenName, val);
+                    else
+                        ctx.Add(tokenName, token);
+                }
+            } catch(Exception e)
+            {                
             }
+            
         }
 
         public static JSONNode Parse(string aJSON)

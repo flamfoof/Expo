@@ -1254,12 +1254,12 @@ namespace Byn.Awrtc.Unity
             {
                 foreach (string splitMsg in SplitLongMsgs(s))
                 {
-                    logcall(splitMsg);
+                    //logcall(splitMsg);
                 }
             }
             else
             {
-                logcall(s);
+                //logcall(s);
             }
         }
 

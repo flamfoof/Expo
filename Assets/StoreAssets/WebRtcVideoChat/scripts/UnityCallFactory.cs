@@ -584,7 +584,7 @@ namespace Byn.Awrtc.Unity
         /// Initializes the singleton object itself. Will be called after
         /// the static init completed successfully. 
         /// </summary>
-        private void InitObj()
+        public void InitObj()
         {
             //TODO: at the moment we are missing the static init process
             //This should be called right after the all dynamic libraries
@@ -1071,7 +1071,7 @@ namespace Byn.Awrtc.Unity
                     mFactory = null;
                     Debug.Log(LOG_PREFIX + "destroyed.");
                 }
-                sInitState = InitState.Disposed;
+                sInitState = InitState.Uninitialized;
             }
         }
 

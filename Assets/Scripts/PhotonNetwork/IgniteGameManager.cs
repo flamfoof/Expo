@@ -68,7 +68,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
                 player = spawnedPlayer.GetPhotonView().Owner;
                 changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
-                Hashtable hash = new Hashtable();                 
+                Hashtable hash = new Hashtable();
 
 
                 spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
@@ -77,7 +77,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 spawnedPlayer.GetComponent<UserActions>().playerName.text = player.NickName;
                 if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
                 {
-                    localPlayer = spawnedPlayer;                    
+                    localPlayer = spawnedPlayer;
                 }
 
                 //ServerAvatarChange(spawnedPlayer);
@@ -86,7 +86,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
 
-                spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
+                //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
 
                 voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
             } else {
@@ -183,8 +183,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        if(voiceManager.webRTC)
-            voiceManager.webRTC.LeaveCall();
         PhotonNetwork.LeaveRoom();
     }
 

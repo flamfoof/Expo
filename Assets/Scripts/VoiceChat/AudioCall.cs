@@ -91,20 +91,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         userAllowPermissions = UserPermissionCommunication.instance;
         mediaConfig = CreateMediaConfig();
         mediaConfigUse = mediaConfig;   
-        if(mVideoUiElements.Count > 0)
-            SetupVideoUiEmpty();     
-        if(isICall)
-        {
-            //Disabling ICall Events
-            InvokeRepeating("GetRoomID", 1.0f, 1.0f);
-            //in case we have any UI we want to add in.
-            if(GetComponent<AudioCallUI>())
-            {
-                audioCallUI = GetComponent<AudioCallUI>();
-            }
-            StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
-            UnityCallFactory.EnsureInit(OnCallFactoryReadyICall, OnCallFactoryFailedICall);
-        }
+
         if(isMediaNetwork)
         {
             UnityCallFactory.EnsureInit(OnCallFactoryReadyMediaNetwork, OnCallFactoryFailedMediaNetwork);
@@ -119,7 +106,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         mediaConfigUse = mediaConfig; 
         userAllowPermissions = UserPermissionCommunication.instance;
         //StartCoroutine(ExampleGlobals.RequestPermissions(audioOn, videoOn));
-        SetupVideoUi(ConnectionId.INVALID);
+
         //in case we have any UI we want to add in.
         if(GetComponent<AudioCallUI>())
         {
@@ -229,388 +216,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
         mediaConfig.IdealFrameRate = 30;
         return mediaConfig;
     }
-    
-    #region ICall
-    protected virtual void OnCallFactoryReadyICall()
-    {
-        //set to warning for regular use
-        UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
-    }
-    protected virtual void OnCallFactoryFailedICall(string error)
-    {
-        string fullErrorMsg = typeof(CallApp).Name + " can't start. The " + typeof(UnityCallFactory).Name + " failed to initialize with following error: " + error;
-        Debug.LogError(fullErrorMsg);
-    }
-    void GetRoomID()
-    {
-        Debug.Log("Finding Voice Room ID...");
-        
-        if(voiceID == "")
-        {                                    
-            ConnectToRoom();
-        } else {
-            Debug.Log("Failed to find Voice ID");
-        }
-    }
-    public void ConnectToRoom()
-    {
-        voiceID = "Voice_" + PhotonNetwork.CurrentRoom.Name;
-        Debug.Log(voiceID);       
-        Debug.Log("Sucessfully found a room");
-        CancelInvoke("GetRoomID");
-        SetupCall();
-        Join(voiceID);
-    }
-    
-    public void SetupCall()
-    {
-        Debug.Log("Setting up ...");
-        NetworkConfig netConfig = CreateNetworkConfig();
-        //this is what we need for multiple audio connections
-        netConfig.IsConference = true;
-        Debug.Log("Creating call using NetworkConfig:" + netConfig);
-        iCall = CreateCall(netConfig);
-        if (iCall == null)
-        {
-            Debug.Log("Failed to create the call");
-            return;
-        }
-        if(videoOn)
-        {
-            iCall.LocalFrameEvents = localFrameEvents;
-        } else
-        {
-            iCall.LocalFrameEvents = false;
-        }
-        
-        string[] devices = UnityCallFactory.Instance.GetVideoDevices();
-        if (devices == null || devices.Length == 0)
-        {
-            Debug.Log("no device found or no device information available");
-        }
-        else
-        {
-            foreach (string s in devices)
-                Debug.Log("device found: " + s + " IsFrontFacing: " + UnityCallFactory.Instance.IsFrontFacing(s));
-        }
-        Debug.Log("Call created!");
-        iCall.CallEvent += Call_CallEvent;
-        Debug.Log("Creating deep clone");
-        //make a deep clone to avoid confusion if settings are changed
-        //at runtime.
-        mediaConfigUse = mediaConfig.DeepClone();
-        Debug.Log("vid/aud perm: " + mediaConfigUse.Video + " " + mediaConfigUse.Audio);
-        //try to pick a good default video device if the user wants to send video but
-        //didn't bother to pick a specific device
-        if (mediaConfigUse.Video && string.IsNullOrEmpty(mediaConfigUse.VideoDeviceName))
-        {
-            mediaConfigUse.VideoDeviceName = UnityCallFactory.Instance.GetDefaultVideoDevice();
-        }
-        Debug.Log("Configure call using MediaConfig: " + mediaConfigUse);
-        iCall.Configure(mediaConfigUse);
-        voiceID = CheckRoomLength(voiceID);
-        Debug.Log("Trying to listen on address " + voiceID);
-    }
-    protected virtual ICall CreateCall(NetworkConfig netConfig){
-        //setup the server
-        return UnityCallFactory.Instance.Create(netConfig);
-    }
-    public NetworkConfig CreateNetworkConfig()
-    {
-        NetworkConfig netConfig = new NetworkConfig();
-        
-        if (string.IsNullOrEmpty(uIceServer) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer, uIceServerUser, uIceServerPassword));
-            Debug.Log("Connected to RTC: " + uIceServer);
-        }
-        if (string.IsNullOrEmpty(uIceServer2) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer2));
-            Debug.Log("Connected to RTC: " + uIceServer2);
-        }/* else if (string.IsNullOrEmpty(uIceServer3) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer3));
-            Debug.Log("Connected to RTC: " + uIceServer3);
-        } else if (string.IsNullOrEmpty(uIceServer4) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer4));
-            Debug.Log("Connected to RTC: " + uIceServer4);
-        } else if (string.IsNullOrEmpty(uIceServer5) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer5));
-            Debug.Log("Connected to RTC: " + uIceServer5);
-        } else if (string.IsNullOrEmpty(uIceServer6) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer6));
-            Debug.Log("Connected to RTC: " + uIceServer6);
-        } else if (string.IsNullOrEmpty(uIceServer7) == false)
-        {
-            netConfig.IceServers.Add(new IceServer(uIceServer7));
-            Debug.Log("Connected to RTC: " + uIceServer7);
-        }           */
-        
-            
-        if (Application.platform == RuntimePlatform.WebGLPlayer || uForceSecureSignaling)
-        {
-            netConfig.SignalingUrl = uSecureSignalingUrl;
-        }
-        else
-        {
-            netConfig.SignalingUrl = uSignalingUrl;
-        }
-        if (netConfig.SignalingUrl == "")
-        {
-            throw new InvalidOperationException("set signaling url is empty");
-        }
-        return netConfig;
-    }
-    protected virtual void Call_CallEvent(object sender, CallEventArgs e)
-    {
-        switch (e.Type)
-        {
-            case CallEventType.CallAccepted:
-                //Outgoing call was successful or an incoming call arrived
-                remoteUserId = ((CallAcceptedEventArgs)e).ConnectionId;
-                OnNewCall(e as CallAcceptedEventArgs);
-                break;
-            case CallEventType.CallEnded:
-                //Call was ended / one of the users hung up -> reset the app
-                Debug.Log("Call ended");
-                InternalResetCall();
-                OnCallEnded(e as CallEndedEventArgs);
-                break;
-            case CallEventType.ListeningFailed:
-                /*
-                if(!isConference)
-                {
-                    iCall.Call(targetAddress);
-                } else {
-                    iCall.Listen(targetAddress);
-                }*/
-                iCall.Call(targetAddress);
-                    
-                
-                break;
-            case CallEventType.ConnectionFailed:
-                {
-                    ErrorEventArgs args = e as ErrorEventArgs;
-                    Debug.Log("Connection failed error: " + args.Info);
-                    InternalResetCall();
-                }
-                break;
-            case CallEventType.ConfigurationFailed:
-                {
-                    ErrorEventArgs args = e as ErrorEventArgs;
-                    Debug.Log("Configuration failed error: " + args.Info);
-                    InternalResetCall();
-                }
-                break;
-            case CallEventType.FrameUpdate:
-                {                  
-                    FrameUpdateEventArgs frameargs = e as FrameUpdateEventArgs;
-                    UpdateFrame(frameargs.ConnectionId, frameargs.Frame);
-                    break;
-                }
-            case CallEventType.Message:
-                {
-                    //text message received
-                    MessageEventArgs args = e as MessageEventArgs;
-                    Append(args.Content);
-                    //receiveTxt.text = args.Content;
-                    Debug.Log(args.Content);
-                    break;
-                }
-            case CallEventType.WaitForIncomingCall:
-                {
-                    //the chat app will wait for another app to connect via the same string
-                    WaitForIncomingCallEventArgs args = e as WaitForIncomingCallEventArgs;
-                    Debug.Log("Waiting for incoming call address: " + args.Address);
-                    break;
-                }
-        }
-    }
-    private void OnNewCall(CallAcceptedEventArgs args)
-    {      
-        SetupVideoUi(args.ConnectionId);
-    }
-    private void OnCallEnded(CallEndedEventArgs args)
-    {
-        VideoData data;
-        if (mVideoUiElements.TryGetValue(args.ConnectionId, out data))
-        {
-            mVideoUiElements.Remove(args.ConnectionId);
-        }
-    }
-    private void SetupVideoUi(ConnectionId id)
-    {
-        //create texture + ui element
-        VideoData vd = new VideoData();
-        if(videoCount >= 3)
-        {
-            videoCount = 0;
-        }
-        if(videoImage[0])
-        {
-            vd.uiObject = videoImage[0];
-            videoCount++;
-            vd.image = vd.uiObject.GetComponent<RawImage>();
-            vd.image.texture = noVidTexture;
-            Debug.Log("Video element set: " + id.id);
-            mVideoUiElements[id] = vd;
-        }
-        
-    }
-    private void SetupVideoUiEmpty()
-    {
-        for(int i = 0; i < videoImage.Length; i++)
-        {
-            videoImage[i].GetComponent<RawImage>().texture = noVidTexture;
-        }
-    }
-    private void UpdateFrame(ConnectionId id, IFrame frame)
-    {
-        //Debug.Log("Updated consideration id: " + id.id + " does it have it?: " + mVideoUiElements.ContainsKey(id));
-        if (mVideoUiElements.ContainsKey(id))
-        {        
-            /*
-            if(idConnectionVid.Count < videoImage.Length && !idConnectionVid.Contains(id))
-            {
-                idConnectionVid.Add(id);
-                mVideoUiElements[id].uiObject = videoImage[idConnectionVid.Count];
-                mVideoUiElements[id].image = videoImage[idConnectionVid.Count].GetComponent<RawImage>();              
-            }
-            //for multiple videos
-            VideoData videoData = mVideoUiElements[id];
-            UpdateTexture(ref videoData.texture, frame);
-            videoData.image.texture = videoData.texture;
-            Debug.Log("Rendering: " + id);
-            */
-            
-            
-            //for single video, later on I can identify which player to use          
-            if(!firstJoinedVid)
-            {
-                idSingleVideo = id;
-                firstJoinedVid = true;
-                //Debug.Log("Set video id: " + idSingleVideo);
-                //gets the first frame to render video
-                mVideoUiElements[id].uiObject = videoImage[0];
-                mVideoUiElements[id].image = videoImage[0].GetComponent<RawImage>();
-                mVideoUiElements[id].image.texture = noVidTexture;
-            }
-            VideoData videoData = mVideoUiElements[id];
-            UpdateTexture(ref videoData.texture, frame);
-            videoData.image.texture = videoData.texture;
-            //Debug.Log("Rendering: " + id);
-        
-            
-            
-        }
-    }
-    /*
-    private void UpdateTexture(ref Texture2D tex, IFrame frame)
-    {
-        //texture exists but has the wrong height /width? -> destroy it and set the value to null
-        if (tex != null && (tex.width != frame.Width || tex.height != frame.Height))
-        {
-            Texture2D.Destroy(tex);
-            tex = null;
-        }
-        //no texture? create a new one first
-        if (tex == null)
-        {
-            tex = new Texture2D(frame.Width, frame.Height, TextureFormat.RGBA32, false);
-            tex.wrapMode = TextureWrapMode.Clamp;
-        }
-        //Debug.Log("Texturing");
-        ///copy image data into the texture and apply
-        tex.LoadRawTextureData(frame.Buffer);
-        tex.Apply();
-    }
-    */
-    public void InternalResetCall()
-    {
-        CleanupCall();
-        if (autoRejoin)
-        {
-            TriggerRejoinTimer();
-        }
-    }
-    public void LeaveCall()
-    {
-        CleanupCall();
-    }
-    protected virtual void CleanupCall()
-    {
-        if (iCall != null)
-        {
-            firstJoinedVid = false;
-            iCallActive = false;
-            remoteUserId = ConnectionId.INVALID;
-            Debug.Log("Destroying call!");
-            iCall.CallEvent -= Call_CallEvent;
-            mVideoUiElements.Clear();
-            if(mVideoUiElements.Count > 0)
-                mVideoUiElements.Clear();
-            if(idWithVideos.Count > 0)
-                idWithVideos.Clear();
-            if(connectionIdList.Count > 0)
-                connectionIdList.Clear();
-            if(connectedVoiceID.Count > 0)
-                connectedVoiceID.Clear();
-            iCall.Dispose();
-            iCall = null;
-            //call the garbage collector. This isn't needed but helps discovering
-            //memory bugs early on.
-            Debug.Log("Triggering garbage collection");
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            Debug.Log("Call destroyed");
-        }
-    }
-    private void TriggerRejoinTimer()
-    {
-        Debug.Log("Restarting in " + rejoinTime + " seconds!");
-        autoRejoinCoroutine = CoroutineRejoin();
-        StartCoroutine(autoRejoinCoroutine);
-    }
-    private IEnumerator CoroutineRejoin()
-    {
-        yield return new WaitForSecondsRealtime(rejoinTime);
-        SetupCall();
-        InternalJoin();
-    }
-    private void InternalJoin()
-    {
-        if (iCallActive)
-        {
-            Debug.LogError("Join call failed. Call is already/still active");
-            return;
-        }
-        Debug.Log("Try listing on address: " + targetAddress);
-        if(IgniteGameManager.IgniteInstance.gameTesting)
-            SendMsg(PhotonNetwork.NickName + ": " + "Try listing on address: " + targetAddress);
-        iCallActive = true;
-        this.iCall.Listen(targetAddress);
-    }
-    public virtual void Join(string address)
-    {
-        if (address.Length > MAX_CODE_LENGTH)
-            throw new ArgumentException("Address can't be longer than " + MAX_CODE_LENGTH);
-        targetAddress = address;
-        InternalJoin();
-    }
-    public string CheckRoomLength(string roomName)
-    {
-        if(roomName.Length > MAX_CODE_LENGTH)
-        {
-            return roomName.Substring(0, CallApp.MAX_CODE_LENGTH);
-        } else {
-            return roomName;
-        }
-    }
-    #endregion ICall
     
     #region MediaNetwork
     protected virtual void OnCallFactoryReadyMediaNetwork()
@@ -932,7 +537,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 {
                     if(noTextureTimer > noVidWaitTime)
                     {
-                        videoImage[0].GetComponent<RawImage>().texture = noVidTexture;
+                        for(int i = 0; i < videoImage.Length; i++)
+                        {
+                            videoImage[i].GetComponent<RawImage>().texture = noVidTexture;
+                        }
+                        
                     } else
                     {
                         noTextureTimer += Time.fixedDeltaTime;
@@ -953,7 +562,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
             if (frame != null)
             {
                 UpdateTexture(ref videoTextureBuffer, frame);
-                videoImage[0].GetComponent<RawImage>().texture = videoTextureBuffer;
+                for(int i = 0; i < videoImage.Length; i++)
+                {
+                    videoImage[i].GetComponent<RawImage>().texture = videoTextureBuffer;
+                }
+                
             }
         }
     }
@@ -1431,23 +1044,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                     StartCoroutine(CustomVoiceReconnect(true));
                     MapConnectionsToDictRefreshUnique();
                     
-                } else if(isICall)           
-                {
-                    InternalResetCall();
-                    if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "")
-                    {
-                        videoOn = false;
-                        forceVideoOff = true;
-                        SetupVideoUi(ConnectionId.INVALID);
-                    } else
-                    {
-                        Debug.Log("There is no video output, unable to set up video connection");
-                    }
-                    mediaConfig = CreateMediaConfig();
-                    mediaConfigUse = mediaConfig; 
-                        
-                    userAllowPermissions.allowVideo = true; 
-                }
+                } 
                 break;
             case "/videooff":
                 Debug.Log("Video off'd");
@@ -1457,20 +1054,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
                     StartCoroutine(CustomVoiceReconnect());
                     MapConnectionsToDictRefreshUnique();
-                } else if(isICall)
-                {
-                    InternalResetCall();
-                    if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "")
-                    {
-                        videoOn = false;
-                        forceVideoOff = true;
-                        SetupVideoUi(ConnectionId.INVALID);
-                    }
-                    mediaConfig = CreateMediaConfig();
-                    mediaConfigUse = mediaConfig; 
-                        
-                    userAllowPermissions.allowVideo = false;  
-                }
+                } 
                 
                 break;
             case "/test":

@@ -450,12 +450,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
         {
             videoCount = 0;
         }
-        vd.uiObject = videoImage[0];
-        videoCount++;
-        vd.image = vd.uiObject.GetComponent<RawImage>();
-        vd.image.texture = noVidTexture;
-        Debug.Log("Video element set: " + id.id);
-        mVideoUiElements[id] = vd;
+        if(videoImage[0])
+        {
+            vd.uiObject = videoImage[0];
+            videoCount++;
+            vd.image = vd.uiObject.GetComponent<RawImage>();
+            vd.image.texture = noVidTexture;
+            Debug.Log("Video element set: " + id.id);
+            mVideoUiElements[id] = vd;
+        }
+        
     }
     private void SetupVideoUiEmpty()
     {

@@ -1073,6 +1073,8 @@ namespace Byn.Awrtc.Unity
                 }
                 sInitState = InitState.Uninitialized;
             }
+
+            Destroy(gameObject, 5.0f);
         }
 
 
@@ -1254,12 +1256,12 @@ namespace Byn.Awrtc.Unity
             {
                 foreach (string splitMsg in SplitLongMsgs(s))
                 {
-                    //logcall(splitMsg);
+                    logcall(splitMsg);
                 }
             }
             else
             {
-                //logcall(s);
+                logcall(s);
             }
         }
 

@@ -1329,6 +1329,9 @@ public class YoutubePlayer : MonoBehaviour
 
     IEnumerator WebRequest(string videoID)
     {
+        Debug.Log("YT Vid REQUEST");
+        try
+        {
         UnityWebRequest request = UnityWebRequest.Get(serverURI + "" + videoID + "" + formatURI);
         yield return request.SendWebRequest();
         newRequestResults = new YoutubeResultIds();
@@ -1398,6 +1401,11 @@ public class YoutubePlayer : MonoBehaviour
 #endif
         videoAreReadyToPlay = true;
         OnYoutubeUrlsLoaded();
+        } finally
+        {
+            Debug.Log("Request for URI successful");
+        }
+        Debug.Log("YT Vid REQUEST DONE");
     }
 
     private string ConvertToWebglUrl(string url)
@@ -2080,6 +2088,7 @@ public class YoutubePlayer : MonoBehaviour
     YoutubeResultIds webGlResults;
     IEnumerator WebGlRequest(string videoID)
     {
+        Debug.Log("YT Vid GET");
         try
         {
             UnityWebRequest request = UnityWebRequest.Get(serverURI + "" + videoID + "" + formatURI);
@@ -2127,7 +2136,7 @@ public class YoutubePlayer : MonoBehaviour
         } finally{
             Debug.Log("Video parse successful");
         }
-        
+        Debug.Log("YT Vid GET DONE");
     }
 
 
@@ -2135,6 +2144,7 @@ public class YoutubePlayer : MonoBehaviour
     //WEBGL only...
     public void WebGlGetVideo(string url)
     {
+        Debug.Log("Getting URL Player");
         try{
             logTest = "Getting Url Player";
             byte[] bytesToEncode = Encoding.UTF8.GetBytes(url);
@@ -2154,6 +2164,7 @@ public class YoutubePlayer : MonoBehaviour
             //Debug.LogError(e);
             StartCoroutine(webglvid(url));
         }
+        Debug.Log("Getting URL Player DONE");
     }
 
     public IEnumerator webglvid(string url)

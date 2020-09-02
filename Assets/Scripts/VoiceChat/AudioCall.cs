@@ -141,6 +141,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
             //This is the event handler via polling.
             //This needs to be called or the memory will fill up with unhanded events!
             NetworkEvent evt;
+
+#if UNITY_EDITOR
             if(mediaNetwork.Peek(out evt))
             {                
                 try
@@ -152,8 +154,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 } catch (Exception e)
                 {
                     Debug.Log("No reports");
-                }                
+                }                   
             }
+#endif
 
             while (mediaNetwork != null && mediaNetwork.Dequeue(out evt))
             {
@@ -175,6 +178,56 @@ public class AudioCall : MonoBehaviourPunCallbacks
             iCall.Update();
         }
         
+    }
+
+    public virtual MediaConfig CreateMediaConfig()
+    {
+        MediaConfig mediaConfig = new MediaConfig();
+        //testing echo cancellation (native only)
+        bool useEchoCancellation = false;
+        if(useEchoCancellation)
+        {
+            #if (!UNITY_WEBGL && !UNITY_WSA)
+            var nativeConfig = new Byn.Awrtc.Native.NativeMediaConfig();
+            nativeConfig.AudioOptions.echo_cancellation = true;
+            nativeConfig.AudioOptions.extended_filter_aec = true;
+            nativeConfig.AudioOptions.delay_agnostic_aec = true;
+            mediaConfig = nativeConfig;
+            #endif
+        }
+        //Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
+        if(userAllowPermissions)
+        {
+            //Debug.Log("Video perm is defined: " + userAllowPermissions.allowVideo);
+            if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
+            {
+                //Debug.Log("There exists a video thing and user allowed it.");
+                videoOn = true;   
+            }
+        }
+        
+        
+        mediaConfig.Audio = audioOn;
+        //Debug.Log("Audio Perm is: " + mediaConfig.Audio);
+        if(forceVideoOff)
+        {
+            mediaConfig.Video = false;
+        } else
+        {
+            mediaConfig.Video = videoOn;
+        }
+        
+        //Debug.Log("Video Perm is: " + mediaConfig.Video);
+        mediaConfig.VideoDeviceName = UnityCallFactory.Instance.GetDefaultVideoDevice();
+        mediaConfig.Format = FramePixelFormat.ABGR;
+        mediaConfig.MinWidth = 160;
+        mediaConfig.MinHeight = 120;
+        mediaConfig.MaxWidth = 1920;
+        mediaConfig.MaxHeight = 1080;
+        mediaConfig.IdealWidth = 160;
+        mediaConfig.IdealHeight = 120;
+        mediaConfig.IdealFrameRate = 30;
+        return mediaConfig;
     }
     
     #region ICall
@@ -208,55 +261,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
         SetupCall();
         Join(voiceID);
     }
-    public virtual MediaConfig CreateMediaConfig()
-    {
-        MediaConfig mediaConfig = new MediaConfig();
-        //testing echo cancellation (native only)
-        bool useEchoCancellation = false;
-        if(useEchoCancellation)
-        {
-            #if (!UNITY_WEBGL && !UNITY_WSA)
-            var nativeConfig = new Byn.Awrtc.Native.NativeMediaConfig();
-            nativeConfig.AudioOptions.echo_cancellation = true;
-            nativeConfig.AudioOptions.extended_filter_aec = true;
-            nativeConfig.AudioOptions.delay_agnostic_aec = true;
-            mediaConfig = nativeConfig;
-            #endif
-        }
-        Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
-        if(userAllowPermissions)
-        {
-            Debug.Log("Video perm is defined: " + userAllowPermissions.allowVideo);
-            if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
-            {
-                Debug.Log("There exists a video thing and user allowed it.");
-                videoOn = true;   
-            }
-        }
-        
-        
-        mediaConfig.Audio = audioOn;
-        Debug.Log("Audio Perm is: " + mediaConfig.Audio);
-        if(forceVideoOff)
-        {
-            mediaConfig.Video = false;
-        } else
-        {
-            mediaConfig.Video = videoOn;
-        }
-        
-        Debug.Log("Video Perm is: " + mediaConfig.Video);
-        mediaConfig.VideoDeviceName = UnityCallFactory.Instance.GetDefaultVideoDevice();
-        mediaConfig.Format = FramePixelFormat.ABGR;
-        mediaConfig.MinWidth = 160;
-        mediaConfig.MinHeight = 120;
-        mediaConfig.MaxWidth = 1920;
-        mediaConfig.MaxHeight = 1080;
-        mediaConfig.IdealWidth = 160;
-        mediaConfig.IdealHeight = 120;
-        mediaConfig.IdealFrameRate = 30;
-        return mediaConfig;
-    }
+    
     public void SetupCall()
     {
         Debug.Log("Setting up ...");
@@ -636,6 +641,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
             Debug.Log("PLAYER IS: " + targetAddress);
             localAddress = "Voice_" + PhotonNetwork.CurrentRoom.Name + "_User_" + PhotonNetwork.LocalPlayer.ActorNumber;
         }
+
         if (UnityCallFactory.Instance == null)
         {
             Debug.LogError("No access to webrtc. ");
@@ -646,8 +652,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
         } else
         {
             UnityCallFactory.Instance.RequestLogLevel(UnityCallFactory.LogLevel.Info);
+
             //Factory works. Prepare Peers
+
             NetworkConfig netConfig = new NetworkConfig();
+
             if (string.IsNullOrEmpty(uIceServer) == false)
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer, uIceServerUser, uIceServerPassword));
@@ -664,6 +673,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 netConfig.IceServers.Add(new IceServer(uIceServer3));
                 //Debug.Log("Connected to RTC: " + uIceServer3);
             }
+
             /*
             if (string.IsNullOrEmpty(uIceServer4) == false)
             {
@@ -684,8 +694,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
             {
                 netConfig.IceServers.Add(new IceServer(uIceServer7));
                 //Debug.Log("Connected to RTC: " + uIceServer7);
-            }
-            */
+            }*/
+            
+
             if (Application.platform == RuntimePlatform.WebGLPlayer || uForceSecureSignaling)
             {
                 netConfig.SignalingUrl = uSecureSignalingUrl;
@@ -694,21 +705,26 @@ public class AudioCall : MonoBehaviourPunCallbacks
             {
                 netConfig.SignalingUrl = uSignalingUrl;
             }
+
             mediaNetwork = UnityCallFactory.Instance.CreateMediaNetwork(netConfig);
-            
+            Debug.Log(videoOn);
+
             Debug.Log("Example vid dev is: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
             if(userAllowPermissions)
             {
                 Debug.Log("Video perm is defined: " + userAllowPermissions.allowVideo);
                 if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && userAllowPermissions.allowVideo)
                 {
-                    Debug.Log("There exists a video thing and user allowed it.");
+                    Debug.Log("There exists a video device and user allowed it.");
                     videoOn = true;   
                 }
             }
-            
+
+            Debug.Log(videoOn);
+
             mediaConfig.Audio = audioOn;
-            Debug.Log("Audio Perm is: " + mediaConfig.Audio);
+            //Debug.Log("Audio Perm is: " + mediaConfig.Audio);
+
             if(forceVideoOff)
             {
                 mediaConfig.Video = false;
@@ -717,17 +733,16 @@ public class AudioCall : MonoBehaviourPunCallbacks
             {
                 mediaConfig.Video = videoOn;
             }
-            
-            Debug.Log("Video Perm is: " + mediaConfig.Video);
+
+            Debug.Log(videoOn);
+            //Debug.Log("Video Perm is: " + mediaConfig.Video);
             
             if (videoOn || audioOn)
             {
                 //sender will broadcast audio and video
-                mediaConfig.Audio = audioOn;
-                mediaConfig.Video = videoOn;
                 if(!startedVoiceServer)
                 {
-                    Debug.Log("Accepting incoming connections on " + localAddress);
+                    Debug.Log("Accepting incoming connections on " + localAddress + " with audio: " + mediaConfig.Audio + " video: " + mediaConfig.Video);
                     mediaNetwork.Configure(mediaConfig);
                     mediaNetwork.StartServer(localAddress);
                     startedVoiceServer = true;
@@ -778,9 +793,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(mediaNetworkConnectionTime);
             //Debug.Log("Reconnecting automatically");
             if(mediaNetwork != null)
+            {
                 ReconnectAllVoiceID();  
+            }
+            //MapConnectionsToDictRefreshUnique();    
         }
-             
+            
     }
 
     public void ConnectToPlayerVoice(int playerActorID)
@@ -1254,10 +1272,11 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public void MapConnectionsToDictRemove(ConnectionId connectionID, bool forceRemove = false)
     {
         Dictionary<ConnectionId, int> tempKvp = new Dictionary<ConnectionId, int>();
+        int tempPlayerID = -1;
 
         if(connectionMappingDict.ContainsKey(connectionID))
         {
-            int tempPlayerID = connectionMappingDict[connectionID];
+            tempPlayerID = connectionMappingDict[connectionID];
             tempKvp[connectionID] = tempPlayerID;
             
             if(connectionMappingDictToUsers.ContainsKey(connectionMappingDict[connectionID]) && forceRemove)
@@ -1277,7 +1296,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
             Debug.Log("Unable to refresh connections due to: " + e);
         }
   
-        Debug.Log("<color=orange>Removed: </color> Connection ID: " + connectionID.id + "    Player ID: " + tempKvp[connectionID]);
+        Debug.Log("<color=orange>Removed: </color> Connection ID: " + connectionID.id + "    Player ID: " + tempPlayerID);
                 
         foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
         {
@@ -1290,14 +1309,26 @@ public class AudioCall : MonoBehaviourPunCallbacks
     {
         foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
         {
-            Debug.Log("Refreshing: " + kvp.Key.id);
-            Debug.Log("Refreshing: " + connectionMappingDictToUsers[kvp.Value]);
+            //Debug.Log("Refreshing: " + kvp.Key.id);
+            //Debug.Log("Refreshing: " + connectionMappingDictToUsers[kvp.Value]);
             if(connectionMappingDictToUsers[kvp.Value] != kvp.Key)
             {
                 DisconnectPlayerVoice(kvp.Key);
                 Debug.Log("<color=yellow> Disconnecting duplicate Connection id: " + kvp.Key + "    with Player Id: " + kvp.Value +"</color>");
-            }           
+            }     
+            
+                  
         }
+
+        if(connectionMappingDict.Count == 0)
+        {
+            Debug.Log("There is no longer any players in the dict");
+        }
+
+        foreach(KeyValuePair<ConnectionId, int> kvp in connectionMappingDict)
+        {
+            Debug.Log("<color=green> After Refreshing, Current is, Connection id: " + kvp.Key + "    Player Id: " + kvp.Value +"</color>");
+        }      
     }
     #endregion MediaNetwork
 
@@ -1329,41 +1360,48 @@ public class AudioCall : MonoBehaviourPunCallbacks
         sCon.playerID = PhotonNetwork.LocalPlayer.ActorNumber;
         
         
-        if(connectionMappingDict.Count > 0)
-        {
-            connectionMappingDict.Clear();
+        if(connectionMappingDictToUsers.Count > 0)
             connectionMappingDictToUsers.Clear();
-        }        
-        if(forceVideoOn)
-            forceVideoOff = false;
+    
 
-        yield return new WaitForSeconds(mediaNetworkConnectionTime/4);
-        
+        if(connectionMappingDict.Count > 0)
+            connectionMappingDict.Clear();  
+
+
+        yield return new WaitForSeconds(mediaNetworkConnectionTime/8);    
         UnityCallFactory.EnsureInit(OnCallFactoryReadyMediaNetwork, OnCallFactoryFailedMediaNetwork);
 
-        yield return new WaitForSeconds(mediaNetworkConnectionTime/3);
-        //need a bit of wait time to start the server
+        yield return new WaitForSeconds(mediaNetworkConnectionTime/4);
+        Debug.Log("allowed video: " + UnityCallFactory.Instance.GetDefaultVideoDevice());
+        Debug.Log("allowed video bool: " + forceVideoOn);
+        if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "" && forceVideoOn)
+        {
+            Debug.Log("Allowed video");
+            videoOn = true;
+            forceVideoOff = false;
+            userAllowPermissions.allowVideo = true; 
+        } else 
+        {
+            Debug.Log("Unallowed video");
+            videoOn = false;
+            forceVideoOff = true;
+            userAllowPermissions.allowVideo = false; 
+        }
+
         mediaConfig = CreateMediaConfig();
         mediaConfigUse = mediaConfig;
+        
+
+        /*
+        yield return new WaitForSeconds(mediaNetworkConnectionTime/3);
+        //need a bit of wait time to start the server
 
 
-        if(UnityCallFactory.Instance.GetDefaultVideoDevice() != "")
-        {
-            if(forceVideoOn)
-            {
-                videoOn = true;
-                forceVideoOff = false;
-            } else 
-            {
-                videoOn = false;
-                forceVideoOff = true;
-            }
-        }
         StartCoroutine(InitWebRTC(PhotonNetwork.LocalPlayer.ActorNumber));
-
+*/
         yield return new WaitForSeconds(mediaNetworkConnectionTime/4);
-
         ReconnectAllVoiceID();
+        
         yield return new WaitForSeconds(mediaNetworkConnectionTime/2);
         json = JsonUtility.ToJson(sCon);
         msgData = Encoding.UTF8.GetBytes(json);
@@ -1388,7 +1426,7 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
                     StartCoroutine(CustomVoiceReconnect(true));
                     MapConnectionsToDictRefreshUnique();
-                    userAllowPermissions.allowVideo = true; 
+                    
                 } else if(isICall)           
                 {
                     InternalResetCall();
@@ -1415,7 +1453,6 @@ public class AudioCall : MonoBehaviourPunCallbacks
 
                     StartCoroutine(CustomVoiceReconnect());
                     MapConnectionsToDictRefreshUnique();
-                    userAllowPermissions.allowVideo = false; 
                 } else if(isICall)
                 {
                     InternalResetCall();

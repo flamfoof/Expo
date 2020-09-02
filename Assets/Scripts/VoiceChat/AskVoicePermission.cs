@@ -141,8 +141,6 @@ public class AskVoicePermission : MonoBehaviour
 
     public void InitComms()
     { 
-        Debug.Log("Calling factory success?")  ;
-
         mCall = CreateCall(netConfig);
         //mCall.Configure(mediaConfig);         
     }

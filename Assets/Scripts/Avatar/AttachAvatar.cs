@@ -93,12 +93,10 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
             Debug.Log("Setting avatar meshes");
             if(selectorMale != null)
             {   
-                Debug.Log("Maling");
                 selectorMale.pickOneSuit(avatarInfo.indexSuit);
                 selectorMale.PickOneHead(avatarInfo.indexHead);
             } else if (selectorFemale != null)
             {
-                Debug.Log("Femaling");
                 selectorFemale.pickSuit(avatarInfo.indexSuit);
                 selectorFemale.pickSkin(avatarInfo.indexHead);
             }            

@@ -489,7 +489,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             StartCoroutine(RefocusApplicationCursor());
             if (rtc.webRTC.messageField.text != "")
             {
-                rtc.webRTC.SendButtonPressed();
+                //for ICall
+                //rtc.webRTC.SendButtonPressed();
+
+                //for Media Network
+                rtc.webRTC.SendPlayerMessage();
             }
             StartCoroutine(FadeChat(false));
             rtc.sendMessage.SetActive(toggle);

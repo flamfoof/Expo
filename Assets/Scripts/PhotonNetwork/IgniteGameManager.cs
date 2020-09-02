@@ -87,11 +87,12 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 player = spawnedPlayer.GetPhotonView().Owner;
 
                 spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
+
+                voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
-
         if(AnalyticsController.Instance)
         {
             AnalyticsController.Instance.ProfileInfoAnalytics();
@@ -132,8 +133,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("Player has entered the room " + newPlayer.NickName);
-
+        Debug.Log("<color=green>Player has entered the room: </color>" + newPlayer.NickName);
+        StartCoroutine(voiceManager.webRTC.ReconnectToPlayerVoice(newPlayer.ActorNumber));
+        voiceManager.webRTC.SendMsg(newPlayer.NickName + " has joined the room.");
+        voiceManager.webRTC.ReconnectAllVoiceID();
+        
         if(PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom

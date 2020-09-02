@@ -1133,7 +1133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941ce53f2c93d6e44be5a5e239644126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textOutputPrefab: {fileID: 0}
+  textOutputPrefab: {fileID: 5525981156073183871, guid: 7c023583fac03c0479799f8273c46bda,
+    type: 3}
 --- !u!225 &1411404269
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1768,15 +1769,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6478637238366009795}
-        m_MethodName: SendButtonPressed
-        m_Mode: 1
+        m_MethodName: SendString
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &6715458132555031630
 GameObject:
@@ -1910,18 +1911,20 @@ MonoBehaviour:
   userAllowAudio: 1
   videoOn: 0
   userAllowVideo: 0
-  uMessageField: {fileID: 4337185609708388612}
-  uOutput: {fileID: 799856776}
+  messageField: {fileID: 4337185609708388612}
+  textOutput: {fileID: 799856776}
   receiveTxt: {fileID: 2338516778931424323}
   lockChatVisibility: 0
   scrollbar: {fileID: 1229657444}
   isConference: 1
-  uVideoImage:
+  videoImage:
   - {fileID: 0}
   idWithVideos: 
+  connectedVoiceID: 
+  reconnectingVoiceCoroutine: 0
   videoCount: 0
   firstJoinedVid: 0
-  uNoImgTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}
+  noVidTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}
 --- !u!114 &3633223461223209499
 MonoBehaviour:
   m_ObjectHideFlags: 0

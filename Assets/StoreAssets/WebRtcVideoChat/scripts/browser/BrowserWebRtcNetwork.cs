@@ -405,7 +405,7 @@ namespace Byn.Awrtc.Browser
                 mConnections.Remove(evt.ConnectionId);
             }else if(evt.Type == NetEventType.ServerInitialized)
             {
-                mIsServer = true;
+                //mIsServer = true;
             }
             else if (evt.Type == NetEventType.ServerClosed || evt.Type == NetEventType.ServerInitFailed)
             {

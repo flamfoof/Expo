@@ -8,18 +8,18 @@ using Photon.Realtime;
 public class ISimplePresentation : Interactables, IPunObservable
 {
     public string linkURL;
-    public GameObject slides;
+    public GameObject[] slideWindows;
     int currentSlide = 0;
     public int slideCount = 0;
     public Sprite[] images;
     public Text text;
 
-    private void Start() 
+    private void Start()
     {
-        slideCount = images.Length;    
+        slideCount = images.Length;
         text.text = "1 / " + slideCount;
     }
-    
+
     public override void Perform(InputActionPhase phase)
     {
         if (phase == InputActionPhase.Started)
@@ -36,41 +36,53 @@ public class ISimplePresentation : Interactables, IPunObservable
         //have it before setting sprite, sprite is already at default
         currentSlide++;
 
-        if(currentSlide > slideCount - 1)
+        if (currentSlide > slideCount - 1)
         {
             currentSlide = 0;
-            slides.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+            foreach (GameObject g in slideWindows)
+            {
+                g.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+            }
             text.text = (currentSlide + 1) + " / " + slideCount;
             return;
         }
-                      
-        slides.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+        foreach (GameObject g in slideWindows)
+        {
+            g.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+        }
         text.text = (currentSlide + 1) + " / " + slideCount;
     }
 
     public void SetSlide(int slideNum)
     {
-        if(slideNum > slideCount - 1)
+        if (slideNum > slideCount - 1)
         {
             currentSlide = 0;
-            slides.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+            foreach (GameObject g in slideWindows)
+            {
+                g.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+            }
             text.text = (currentSlide + 1) + " / " + slideCount;
             return;
         }
-                      
-        slides.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+        foreach (GameObject g in slideWindows)
+        {
+            g.GetComponent<SpriteRenderer>().sprite = images[currentSlide];
+        }
         text.text = (slideNum + 1) + " / " + slideCount;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
         {
-            stream.SendNext(currentSlide);  
-        } else {
-            currentSlide = (int) stream.ReceiveNext();
+            stream.SendNext(currentSlide);
+        }
+        else
+        {
+            currentSlide = (int)stream.ReceiveNext();
             SetSlide(currentSlide);
         }
-                
+
     }
 }

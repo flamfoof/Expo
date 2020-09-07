@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Canvas
   - NoAmbient
+  - MaleHead
+  - MaleSuit
+  - Female_TrouserSuit
+  - Female_SkirtSuit
+  - Female_SkinForSkirt
+  - Female_SkinForTrousers
   layers:
   - Default
   - TransparentFX
@@ -19,9 +25,9 @@ TagManager:
   - Interactables
   - Emotes
   - NoAmbient
-  - 
-  - 
-  - 
+  - Distillery
+  - TrainingRoom
+  - Conference
   - 
   - 
   - 

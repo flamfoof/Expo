@@ -74,7 +74,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blue
-    second: {fileID: 2100000, guid: 3382cb8c62e0d8b4d8f95e1eabbbcedb, type: 2}
+    second: {fileID: 2100000, guid: 0868b040c65ad354097005609cb892af, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -152,8 +152,8 @@ ModelImporter:
     meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
-    secondaryUVHardAngle: 88
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 90
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:

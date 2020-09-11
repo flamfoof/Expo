@@ -17,16 +17,16 @@ public class SelectVoicePlatform : MonoBehaviour
         //for now we are moving towards WebRTC for crossplatform communication
         webRTCVoice.SetActive(true);
         
-        /*
+        
         #if UNITY_WEBGL
-        //webglVoice.SetActive(true);
+        webRTCVoice.SetActive(true);
         
         #else
-        //platformVoice.SetActive(true);
+        platformVoice.SetActive(true);
 
             
         #endif
-*/
+
     }
 
     // Update is called once per frame

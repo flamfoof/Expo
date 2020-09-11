@@ -17,7 +17,8 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
     void Start()
     {
         gameManager = IgniteGameManager.IgniteInstance;
-        audioCall = IgniteGameManager.voiceManager.webRTC;
+        if(IgniteGameManager.voiceManager)
+            audioCall = IgniteGameManager.voiceManager.webRTC;
         if(photonView.IsMine)
         {
             playerPV = photonView;

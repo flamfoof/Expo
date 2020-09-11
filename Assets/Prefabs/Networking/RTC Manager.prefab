@@ -1006,7 +1006,7 @@ RectTransform:
   - {fileID: 2272864774266892340}
   - {fileID: 8196876473488609274}
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1177,7 +1177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5626122721021716196
 MonoBehaviour:
@@ -1809,6 +1809,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1031669706400911587}
+  - {fileID: 7624709052679693597}
   - {fileID: 2724292074656920661}
   - {fileID: 2651697293166167715}
   m_Father: {fileID: 0}
@@ -1828,7 +1829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webglVoice: {fileID: 0}
   webRTCVoice: {fileID: 8218399313992025316}
-  platformVoice: {fileID: 0}
+  platformVoice: {fileID: 2294105796828630345}
 --- !u!114 &1681540966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1848,6 +1849,36 @@ MonoBehaviour:
   recordAtStart: 1
   minAudioDistance: 0
   maxAudioDistance: 15
+--- !u!1 &7020339071943490491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7624709052679693597}
+  m_Layer: 0
+  m_Name: PhotonPlatformComms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7624709052679693597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020339071943490491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6715458132555031625}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8218399313992025316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,14 +1927,14 @@ MonoBehaviour:
   audioCallUI: {fileID: 3633223461223209499}
   uSignalingUrl: ws://rtc-ignite-voice.herokuapp.com/conferenceapp
   uSecureSignalingUrl: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
-  uForceSecureSignaling: 0
-  uIceServer: turn:numb.viagenie.ca
-  uIceServerUser: webrtc@live.com
-  uIceServerPassword: muazkh
-  uIceServer2: stun:stun.l.google.com:19302
-  uIceServer3: stun:stun.stunprotocol.org:3478
-  uIceServer4: stun:stunserver.org:3478
-  uIceServer5: stun:stun.yesss.at:3478
+  uForceSecureSignaling: 1
+  uIceServer: turn:us-turn2.xirsys.com:80?transport=udp
+  uIceServerUser: _HFvv7GOYZnf-49QRAfSjKHBZYR2-sEu1C-tDH5h3HBpHkTq6ncCoLlhcAZLFjyUAAAAAF9YMS1ibGFibGFmb29m
+  uIceServerPassword: 9f4bcc14-f23c-11ea-b56c-0242ac140004
+  uIceServer2: stun:us-turn2.xirsys.com
+  uIceServer3: stun:stun.l.google.com:19302?transport=tcp
+  uIceServer4: stun:stunserver.org:3478?transport=tcp
+  uIceServer5: 
   uIceServer6: stun:stun1.l.google.com:19302
   uIceServer7: stun:stun.voiparound.com
   userAllowPermissions: {fileID: 0}
@@ -1911,6 +1942,7 @@ MonoBehaviour:
   userAllowAudio: 1
   videoOn: 0
   userAllowVideo: 0
+  startedVoiceServer: 0
   messageField: {fileID: 4337185609708388612}
   textOutput: {fileID: 799856776}
   receiveTxt: {fileID: 2338516778931424323}
@@ -1922,6 +1954,9 @@ MonoBehaviour:
   idWithVideos: 
   connectedVoiceID: 
   reconnectingVoiceCoroutine: 0
+  noVidWaitTime: 2
+  hasFrame: 0
+  noTextureTimer: 0
   videoCount: 0
   firstJoinedVid: 0
   noVidTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}

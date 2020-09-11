@@ -141,8 +141,10 @@ public class AskVoicePermission : MonoBehaviour
 
     public void InitComms()
     { 
+        #if UNITY_WEBGL
         mCall = CreateCall(netConfig);
         //mCall.Configure(mediaConfig);         
+        #endif
     }
 
 

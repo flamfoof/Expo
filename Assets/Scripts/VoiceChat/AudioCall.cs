@@ -87,7 +87,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public Dictionary<ConnectionId, int> connectionMappingDict = new Dictionary<ConnectionId, int>();
     public Dictionary<int, ConnectionId> connectionMappingDictToUsers = new Dictionary<int, ConnectionId>();
     public Dictionary<int, ConnectionId> connectionMappingDictToUsersBackUp = new Dictionary<int, ConnectionId>();
-        private void Awake() {
+    
+    #if UNITY_WEBGL
+    private void Awake() {
         userAllowPermissions = UserPermissionCommunication.instance;
         mediaConfig = CreateMediaConfig();
         mediaConfigUse = mediaConfig;   
@@ -99,6 +101,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         thisConnectionMap.playerID = PhotonNetwork.LocalPlayer.ActorNumber;
         thisConnectionMap.connectionId = -2;
     }
+    #endif
+    
     void Start()
     {
         scrollbar.value = 0;

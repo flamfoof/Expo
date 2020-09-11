@@ -12,7 +12,8 @@ public class PlayerVoiceID : MonoBehaviourPunCallbacks
     
     private void Start() {
         id = PhotonNetwork.LocalPlayer.ActorNumber;
-        remoteUserID = IgniteGameManager.voiceManager.webRTC.GetConnectionId();
+        if(IgniteGameManager.voiceManager)
+            remoteUserID = IgniteGameManager.voiceManager.webRTC.GetConnectionId();
         photonView.RPC("SetVoiceID", RpcTarget.AllBuffered, id);
     }
     

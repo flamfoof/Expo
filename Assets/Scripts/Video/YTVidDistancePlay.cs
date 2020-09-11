@@ -70,13 +70,6 @@ public class YTVidDistancePlay : MonoBehaviour
         }
     }
 
-    #if !UNITY_WEBGL
-    private void Awake() {
-        GetComponent<YoutubePlayer>().enabled = true;
-    }
-
-    #endif
-
     #if UNITY_WEBGL
 
     void CheckPlayerDistance()

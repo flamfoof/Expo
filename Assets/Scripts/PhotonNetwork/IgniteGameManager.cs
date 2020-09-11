@@ -87,8 +87,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 player = spawnedPlayer.GetPhotonView().Owner;
 
                 //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
-
-                voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
+                
+                if(voiceManager)
+                    voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }

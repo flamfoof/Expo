@@ -28,6 +28,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject playerUI;
     public GameObject commandUI;
     public CommunicationManager rtc;
+    public PhotonTextComms photonTextManager;
+    public PhotonVoiceComms photonVoiceManager;
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
     public bool isChatOpen = false;
@@ -97,6 +99,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         playerController = GetComponent<FirstPersonAIO>();
         gameManager = GameObject.FindObjectOfType<IgniteGameManager>();
         rtc = GameObject.FindObjectOfType<CommunicationManager>();
+        photonTextManager = GameObject.FindObjectOfType<PhotonTextComms>();
+        photonVoiceManager = GameObject.FindObjectOfType<PhotonVoiceComms>();
+
         //InvokeRepeating("UpdateLoginTime", 1.0f, 1.0f);
 
         //binds these buttons to the functions
@@ -493,7 +498,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 //rtc.webRTC.SendButtonPressed();
 
                 //for Media Network
+                #if UNITY_WEBGL
                 rtc.webRTC.SendPlayerMessage();
+                #elif !UNITY_WEBGL
+                photonTextManager.OnEnterSend();
+                #endif
+
             }
             StartCoroutine(FadeChat(false));
             rtc.sendMessage.SetActive(toggle);
@@ -545,7 +555,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                if (!rtc.webRTC.lockChatVisibility)
+                if (!rtc.GetComponent<VoiceSettings>().lockChatVisibility)
                 {
                     uiEffects.FadeOutCanvasGroup(rtc.webRTC.receiveTxt.GetComponent<CanvasGroup>(), 1.0f);
                 }

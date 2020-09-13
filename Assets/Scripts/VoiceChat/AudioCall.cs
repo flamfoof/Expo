@@ -1073,8 +1073,10 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 break;
         }  
     }
+
     public void SendMsg(string msg)
     {
+        #if UNITY_WEBGL
         bool atBottomOfChat = false;
         if(!ExampleGlobals.HasAudioPermission())
         {
@@ -1092,7 +1094,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //reset UI
         messageField.text = "";
         messageField.Select();
+        #endif
     }
+
     /// <summary>
     /// Adds a new message to the message view
     /// </summary>
@@ -1110,10 +1114,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
             Debug.Log("Chat: " + text);
         }
     }
+
     public void ToggleChatVisibility()
     {
         lockChatVisibility = !lockChatVisibility;
     }
+
     public void FloorChatIndexView()
     {
         bool atBottomOfChat = false;
@@ -1122,11 +1128,13 @@ public class AudioCall : MonoBehaviourPunCallbacks
         if(atBottomOfChat)
             StartCoroutine(SetScrollbar(3.0f));
     }
+    
     private IEnumerator SetScrollbar(float value)
     {
         yield return new WaitForSeconds(Time.deltaTime * value);
         scrollbar.value = 0;
     }
+
     public void SetMuteSelf(bool status)
     {
         if(isMediaNetwork)

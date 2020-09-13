@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Chat;
 using Photon.Realtime;
 using AuthenticationValues = Photon.Chat.AuthenticationValues;
@@ -11,16 +12,75 @@ using Photon.Pun;
 public class PhotonTextComms : MonoBehaviour, IChatClientListener
 {
     public ChatClient chatClient;
+	#if !PHOTON_UNITY_NETWORKING
+    [SerializeField]
+    #endif
+    protected internal ChatAppSettings chatAppSettings;
+
+	public InputField InputTextField;
+	public Text OutputTextField;
+	public Scrollbar scrollbar;
+	
+	public string selectedChannelName = "General";
 
     public string[] ChannelsToJoinOnConnect = {"General", "Whisper"};
 
     public int HistoryLengthToFetch = 5;
     
+	public void Start()
+	{
+		DontDestroyOnLoad(this.gameObject);
+
+        #if PHOTON_UNITY_NETWORKING
+        this.chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+        #endif
+
+        bool appIdPresent = !string.IsNullOrEmpty(this.chatAppSettings.AppId);
+
+		if (!appIdPresent)
+		{
+			Debug.LogError("You need to set the chat app ID in the PhotonServerSettings file in order to continue.");
+		}
+		if(PhotonNetwork.NickName == "")
+		{
+			#if UNITY_EDITOR
+			PhotonNetwork.NickName = "Testor12321";
+			#endif
+		}
+		Connect();
+	}
+
+	void Update()
+	{
+		if (this.chatClient != null)
+		{
+			this.chatClient.Service(); // make sure to call this regularly! it limits effort internally, so calling often is ok!
+		}
+	}
+
+	public void Connect()
+	{
+		Debug.Log("Connecting to photon chat");
+		this.chatClient = new ChatClient(this);
+
+        #if !UNITY_WEBGL
+        this.chatClient.UseBackgroundWorkerForSending = true;
+        #endif
+
+
+        this.chatClient.AuthValues = new AuthenticationValues(PhotonNetwork.NickName);
+		this.chatClient.ConnectUsingSettings(this.chatAppSettings);
+
+		Debug.Log("Connecting as: " + PhotonNetwork.NickName);
+
+	}
 
     public void OnConnected()
 	{
+		Debug.Log("Connected to chat!");
 		if (this.ChannelsToJoinOnConnect != null && this.ChannelsToJoinOnConnect.Length > 0)
 		{
+			Debug.Log("Subsc'd : " + ChannelsToJoinOnConnect);
 			this.chatClient.Subscribe(this.ChannelsToJoinOnConnect, this.HistoryLengthToFetch);
 		}
 
@@ -31,6 +91,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 
 	public void OnDisconnected()
 	{
+		Debug.Log("Disconnected from Chat");
 	    //this.ConnectingLabel.SetActive(false);
 	}
 
@@ -38,7 +99,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 	{
 		// use OnConnected() and OnDisconnected()
 		// this method might become more useful in the future, when more complex states are being used.
-
+		Debug.Log("Chat state changed to: " + state.ToString());
 		//this.StateText.text = state.ToString();
 	}
 
@@ -64,7 +125,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 			}
 		}*/
 
-        this.chatClient.PublishMessage(channels[0], "says 'hi'."); // you don't HAVE to send a msg on join but you could.
+        this.chatClient.PublishMessage(selectedChannelName, "says 'hi'."); // you don't HAVE to send a msg on join but you could.
 
 		Debug.Log("OnSubscribed: " + string.Join(", ", channels));
 
@@ -126,7 +187,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 
 	public void OnGetMessages(string channelName, string[] senders, object[] messages)
 	{
-
+		this.ShowChannel(this.selectedChannelName);
 	}
 
 	public void OnPrivateMessage(string sender, object message, string channelName)
@@ -177,6 +238,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 		}
 	}
 
+	//where texts get outputted
     public void ShowChannel(string channelName)
 	{
 		if (string.IsNullOrEmpty(channelName))
@@ -192,8 +254,62 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 			return;
 		}
 
-		Debug.Log("ShowChannel: " + channelName);
+		this.OutputTextField.text = channel.ToStringMessages();
 
-
+		//Debug.Log("ShowChannel: " + channelName);
 	}
+
+	private void SendChatMessage(string inputLine)
+	{
+		if (string.IsNullOrEmpty(inputLine))
+		{
+			return;
+		}
+
+		this.chatClient.PublishMessage(this.selectedChannelName, inputLine);
+	}
+
+	public void OnEnterSend()
+	{
+		if ((Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter)) && InputTextField != null)
+		{
+		    this.SendChatMessage(this.InputTextField.text);
+			this.InputTextField.text = "";
+		}
+	}
+
+	public void OnClickSend()
+	{
+		if (this.InputTextField != null)
+		{
+		    this.SendChatMessage(this.InputTextField.text);
+			this.InputTextField.text = "";
+		}
+	}
+
+	public void OnClickSend(string text)
+	{
+		if (this.InputTextField != null)
+		{
+		    this.SendChatMessage(text);
+			this.InputTextField.text = "";
+		}
+	}
+
+	public void FloorChatIndexView()
+    {
+        bool atBottomOfChat = false;
+        if(scrollbar.value <= 0.1)
+                atBottomOfChat = true;
+        if(atBottomOfChat)
+            StartCoroutine(SetScrollbar(3.0f));
+    }
+    
+    private IEnumerator SetScrollbar(float value)
+    {
+        yield return new WaitForSeconds(Time.deltaTime * value);
+        scrollbar.value = 0;
+    }
+
+
 }

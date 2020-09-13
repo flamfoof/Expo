@@ -485,6 +485,10 @@ PrefabInstance:
       propertyPath: m_ShowMaskGraphic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1274029397, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: lockChatVisibility
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1411404269, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_Alpha
       value: 0
@@ -586,6 +590,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Voice
       objectReference: {fileID: 0}
+    - target: {fileID: 6776445252089647778, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: platformVoice
+      value: 
+      objectReference: {fileID: 2136677095}
     - target: {fileID: 7299691753079298946, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_Text
@@ -897,4 +906,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3081814122960110889, guid: 31275edd340f0f544aeaac3de8264375,
     type: 3}
   m_PrefabInstance: {fileID: 2132959884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2136677095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7020339071943490491, guid: 7173d53e845a5cd45820172cc0777f90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1055132088}
   m_PrefabAsset: {fileID: 0}

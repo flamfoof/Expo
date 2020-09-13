@@ -25,7 +25,7 @@ public class VoiceSettings : MonoBehaviour
 
     public void OnClickSend()
 	{
-        if(GetComponent<SelectVoicePlatform>().webRTCVoice)
+        if(GetComponent<SelectVoicePlatform>().webRTCVoice.gameObject.activeSelf)
         {
             GetComponent<SelectVoicePlatform>().webRTCVoice.GetComponent<AudioCall>().SendButtonPressed();
         } else 

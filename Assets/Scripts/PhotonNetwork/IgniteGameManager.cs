@@ -135,9 +135,14 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("<color=green>Player has entered the room: </color>" + newPlayer.NickName);
-        StartCoroutine(voiceManager.webRTC.ReconnectToPlayerVoice(newPlayer.ActorNumber));
-        voiceManager.webRTC.SendMsg(newPlayer.NickName + " has joined the room.");
-        voiceManager.webRTC.ReconnectAllVoiceID();
+        
+        if(voiceManager.webRTC.gameObject.activeSelf)
+        {
+            StartCoroutine(voiceManager.webRTC.ReconnectToPlayerVoice(newPlayer.ActorNumber));
+            voiceManager.webRTC.SendMsg(newPlayer.NickName + " has joined the room.");
+            voiceManager.webRTC.ReconnectAllVoiceID();
+        }
+        
         
         if(PhotonNetwork.IsMasterClient)
         {

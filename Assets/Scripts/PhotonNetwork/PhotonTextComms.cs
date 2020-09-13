@@ -124,8 +124,11 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 
 			}
 		}*/
-
-        this.chatClient.PublishMessage(selectedChannelName, "says 'hi'."); // you don't HAVE to send a msg on join but you could.
+		if(channels[0] == selectedChannelName)
+		{
+			this.chatClient.PublishMessage(selectedChannelName, "has joined the room."); // you don't HAVE to send a msg on join but you could.
+		}
+        
 
 		Debug.Log("OnSubscribed: " + string.Join(", ", channels));
 

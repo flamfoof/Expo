@@ -222,15 +222,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2148854076483399780, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278049299220117399, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449891265737871571, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022010259442396774, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4463320774183644253, guid: 64d444672c854794683605370e750f5d,
         type: 3}
       propertyPath: m_Name
       value: eyeL
       objectReference: {fileID: 0}
+    - target: {fileID: 5475064662900479587, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155785541704957724, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6913498791652811698, guid: 64d444672c854794683605370e750f5d,
         type: 3}
       propertyPath: m_Name
       value: eyeR
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824019137701256932, guid: 64d444672c854794683605370e750f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d444672c854794683605370e750f5d, type: 3}

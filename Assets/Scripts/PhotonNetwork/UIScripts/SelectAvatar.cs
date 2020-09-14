@@ -51,6 +51,7 @@ public class SelectAvatar : MonoBehaviour
             totalBodyCharacterCount = maleHeadCharacterCount;
             totalHeadCharacterCount = maleHeadCharacterCount;
             AssignAvatar.Gender = GenderList.genders.Male1;
+            
 
             maleCharacteristics.gameObject.SetActive(true);
             femaleCharacteristics.gameObject.SetActive(false);

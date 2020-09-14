@@ -87,7 +87,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
     public Dictionary<ConnectionId, int> connectionMappingDict = new Dictionary<ConnectionId, int>();
     public Dictionary<int, ConnectionId> connectionMappingDictToUsers = new Dictionary<int, ConnectionId>();
     public Dictionary<int, ConnectionId> connectionMappingDictToUsersBackUp = new Dictionary<int, ConnectionId>();
-        private void Awake() {
+    
+    #if UNITY_WEBGL
+    private void Awake() {
         userAllowPermissions = UserPermissionCommunication.instance;
         mediaConfig = CreateMediaConfig();
         mediaConfigUse = mediaConfig;   
@@ -99,6 +101,8 @@ public class AudioCall : MonoBehaviourPunCallbacks
         thisConnectionMap.playerID = PhotonNetwork.LocalPlayer.ActorNumber;
         thisConnectionMap.connectionId = -2;
     }
+    #endif
+    
     void Start()
     {
         scrollbar.value = 0;
@@ -1069,8 +1073,10 @@ public class AudioCall : MonoBehaviourPunCallbacks
                 break;
         }  
     }
+
     public void SendMsg(string msg)
     {
+        #if UNITY_WEBGL
         bool atBottomOfChat = false;
         if(!ExampleGlobals.HasAudioPermission())
         {
@@ -1088,7 +1094,9 @@ public class AudioCall : MonoBehaviourPunCallbacks
         //reset UI
         messageField.text = "";
         messageField.Select();
+        #endif
     }
+
     /// <summary>
     /// Adds a new message to the message view
     /// </summary>
@@ -1106,10 +1114,12 @@ public class AudioCall : MonoBehaviourPunCallbacks
             Debug.Log("Chat: " + text);
         }
     }
+
     public void ToggleChatVisibility()
     {
         lockChatVisibility = !lockChatVisibility;
     }
+
     public void FloorChatIndexView()
     {
         bool atBottomOfChat = false;
@@ -1118,11 +1128,13 @@ public class AudioCall : MonoBehaviourPunCallbacks
         if(atBottomOfChat)
             StartCoroutine(SetScrollbar(3.0f));
     }
+    
     private IEnumerator SetScrollbar(float value)
     {
         yield return new WaitForSeconds(Time.deltaTime * value);
         scrollbar.value = 0;
     }
+
     public void SetMuteSelf(bool status)
     {
         if(isMediaNetwork)

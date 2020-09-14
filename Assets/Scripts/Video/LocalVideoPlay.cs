@@ -17,18 +17,25 @@ public class LocalVideoPlay : MonoBehaviour
 
     private void Start() {
         audio = GetComponent<AudioSource>();
+        yt = GetComponent<YoutubePlayer>();
+
         #if UNITY_WEBGL
         if(!audioOn)
         {
             audio.enabled = false;
             Debug.Log("Audio is off");
         }
-            
+        if(isLocal)
+        {
+            yt.enabled = false;
+            Debug.Log("Disabled");
+        }
+        /*
         yt = GetComponent<YoutubePlayer>();
 
         yt.videoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
         yt.videoPlayer.SetDirectAudioVolume(0, 0.0f);
-
+        */
         
         #endif
     }

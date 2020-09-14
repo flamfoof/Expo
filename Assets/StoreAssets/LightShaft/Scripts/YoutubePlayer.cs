@@ -2131,6 +2131,7 @@ public class YoutubePlayer : MonoBehaviour
                     webGlResults.audioUrl = videos[counter]["url"];  //AUDIO
                 }
             }
+            Debug.Log("Set video Options");
             //quality selection will be implemented later for webgl, i recomend use the  webGlResults.bestFormatWithAudioIncluded
             WebGlGetVideo(webGlResults.bestFormatWithAudioIncluded);
         } finally{
@@ -3237,7 +3238,7 @@ public class YoutubePlayer : MonoBehaviour
     public bool checkIfSync = false;
 }
 
-public static class Extensions
+public static class Extensionss
 {
     public static T[] Splice<T>(this T[] source, int start)
     {

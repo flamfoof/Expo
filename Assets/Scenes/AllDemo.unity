@@ -7312,14 +7312,57 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 799856772, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1253485739, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
       propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253485739, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411404269, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935277138, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943478824755943576, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943478824755943576, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943478824755943576, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.8773585
       objectReference: {fileID: 0}
     - target: {fileID: 5063427659900530138, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
@@ -7380,6 +7423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RTC Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299691753079298946, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7173d53e845a5cd45820172cc0777f90, type: 3}

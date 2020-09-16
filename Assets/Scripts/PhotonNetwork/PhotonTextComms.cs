@@ -26,9 +26,18 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
     public string[] ChannelsToJoinOnConnect = {"General", "Whisper"};
 
     public int HistoryLengthToFetch = 5;
+
+	public UIEffectsUtils uiEffects;
+
+	public GameObject parentComms;
+
+	bool isChatFading = false;
+	public float chatFadeTimer = 3.0f;
     
 	public void Start()
 	{
+		parentComms = transform.parent.gameObject;
+		Invoke("GrabUIEffects", 0.05f);
 		DontDestroyOnLoad(this.gameObject);
 
         #if PHOTON_UNITY_NETWORKING
@@ -56,6 +65,11 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 		{
 			this.chatClient.Service(); // make sure to call this regularly! it limits effort internally, so calling often is ok!
 		}
+	}
+
+	void GrabUIEffects()
+	{
+		uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
 	}
 
 	public void Connect()
@@ -249,6 +263,8 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 			return;
 		}
 
+		StartCoroutine(FadeChat(false));
+
 		ChatChannel channel = null;
 		bool found = this.chatClient.TryGetChannel(channelName, out channel);
 		if (!found)
@@ -256,6 +272,8 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 			Debug.Log("ShowChannel failed to find channel: " + channelName);
 			return;
 		}
+
+
 
 		this.OutputTextField.text = channel.ToStringMessages();
 
@@ -312,6 +330,33 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
     {
         yield return new WaitForSeconds(Time.deltaTime * value);
         scrollbar.value = 0;
+    }
+
+	public IEnumerator FadeChat(bool toggle)
+    {
+        float timer = 0.0f;
+        isChatFading = true;
+		
+        if (toggle == false)
+        {
+			Debug.Log("Fading in");
+			if(uiEffects)
+			{
+				Debug.Log("there exists");
+			}
+			uiEffects.FadeInCanvasGroup(parentComms.GetComponent<CommunicationManager>().receiveText.GetComponent<CanvasGroup>(), 0.5f);
+            while (timer < chatFadeTimer)
+            {
+                yield return new WaitForEndOfFrame();
+                timer += Time.deltaTime;
+                if (!isChatFading)
+                {
+                    break;
+                }
+            }
+			Debug.Log("Fading away");
+			uiEffects.FadeOutCanvasGroup(parentComms.GetComponent<CommunicationManager>().receiveText.GetComponent<CanvasGroup>(), 1.0f);
+        }
     }
 
 

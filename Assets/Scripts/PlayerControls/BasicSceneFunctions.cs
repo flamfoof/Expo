@@ -23,4 +23,10 @@ public class BasicSceneFunctions : MonoBehaviour
     {
         StartCoroutine(ExampleGlobals.RequestPermissions(true, false));
     }
+
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
 }

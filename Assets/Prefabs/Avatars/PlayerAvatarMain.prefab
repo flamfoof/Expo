@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8934026312660879196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720345367842817919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1772677ed4649338206d994f0018c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eyeTexture: {fileID: 2800000, guid: 7d12859a8f86fff4185153c20af749f7, type: 3}
-  eyeBlinkTexture: {fileID: 2800000, guid: c2fee67af3420476fa18f5aebf9ace4f, type: 3}
-  eyes:
-  - {fileID: 1750927014947698199}
-  - {fileID: 8812914221924694520}
 --- !u!1 &1942878367456618274
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,16 +205,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4463320774183644253, guid: 64d444672c854794683605370e750f5d,
-        type: 3}
-      propertyPath: m_Name
-      value: eyeL
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913498791652811698, guid: 64d444672c854794683605370e750f5d,
-        type: 3}
-      propertyPath: m_Name
-      value: eyeR
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d444672c854794683605370e750f5d, type: 3}
 --- !u!1 &5168827413884127953 stripped
@@ -267,24 +240,6 @@ MonoBehaviour:
 --- !u!1 &5168125206396536049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1682442374828372, guid: 64d444672c854794683605370e750f5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5169327883744269733}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &720345367842817919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5639080789330612954, guid: 64d444672c854794683605370e750f5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5169327883744269733}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1750927014947698199 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6913498791652811698, guid: 64d444672c854794683605370e750f5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5169327883744269733}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8812914221924694520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4463320774183644253, guid: 64d444672c854794683605370e750f5d,
     type: 3}
   m_PrefabInstance: {fileID: 5169327883744269733}
   m_PrefabAsset: {fileID: 0}

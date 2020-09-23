@@ -109,6 +109,13 @@ public class SelectAvatar : MonoBehaviour
     {
         if (avatarGender == "male")
         {
+            //check if we should pick light or dark facial features compared to skintone.
+            if(index > 2)
+            {
+                GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("light");
+            }
+            else GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("dark");
+
             maleCharacteristics.PickOneHead(index);
 
         }
@@ -134,8 +141,6 @@ public class SelectAvatar : MonoBehaviour
                 headPreviousBttn.interactable = true;
                 headNextBttn.interactable = true;
             }
-            print("Current asset: " + AssignAvatar.headIndex + "/" + totalHeadCharacterCount);
-
             EnableCharHead(AssignAvatar.headIndex);
         }
         else if (characteristic == "body")

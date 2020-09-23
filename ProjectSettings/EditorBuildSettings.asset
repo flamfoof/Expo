@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TirgamesAssets/PBRStageEquipment/Scenes/StageDemo.unity
     guid: f84571bf102f58b4189d844932b47c17
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AllDemo.unity
     guid: 851abcaf4e8714e238b918bf07c03107
   - enabled: 1

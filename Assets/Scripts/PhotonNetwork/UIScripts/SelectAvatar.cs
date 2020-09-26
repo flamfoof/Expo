@@ -121,6 +121,12 @@ public class SelectAvatar : MonoBehaviour
         }
         else
         {
+            if (index >1)
+            {
+                GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("light");
+            }
+            else GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("dark");
+
             femaleCharacteristics.pickSkin(index);
         }
     }

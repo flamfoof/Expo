@@ -308,6 +308,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e38fb23a2de5374ca59575e7fdd2f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1027198246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5800552262500337592, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749407078148979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1642083431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5800156047608928440, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2857749407078148979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1663164917
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +596,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5903499401587249944, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: SkinSuit.Array.data[2]
+      value: 
+      objectReference: {fileID: 1642083431}
+    - target: {fileID: 5903499401587249944, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: SkinSuit.Array.data[1]
+      value: 
+      objectReference: {fileID: 1027198246}
     - target: {fileID: 6006564260142226743, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -117,8 +117,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _LightBias: 1.02
-    - _LightScale: 8.53
+    - _LightBias: 0.06
+    - _LightScale: 0.7
     - _MainHighlightExponent: 262
     - _MainHighlightStrength: 0.696
     - _Maximum: 0.43

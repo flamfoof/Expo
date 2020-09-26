@@ -46,16 +46,25 @@ public class FacialAnimations : MonoBehaviour
             {
                 eye.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
             }
-            nose[0].GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0.8867924f, 0.6806311f, 0.5730687f));
+            Color lightSkin = new Color(0.8867924f, 0.6806311f, 0.5730687f);
+            nose[0].GetComponent<MeshRenderer>().material.SetColor("_Color", lightSkin);
+            nose[1].GetComponent<MeshRenderer>().material.SetColor("_Color", lightSkin);
+            nose[2].GetComponent<MeshRenderer>().material.SetColor("_Color", lightSkin);
 
         }
         else
         {
+            print("darkskin");
             foreach (GameObject eye in eyes)
             {
                 eye.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
             }
-            nose[0].GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0.6037736f, 0.3922901f, 0.2819509f));
+
+            Color darkSkin = new Color(0.5537736f, 0.3422901f, 0.2319509f);
+            //darken all the parts of the nose
+            nose[0].GetComponent<MeshRenderer>().material.SetColor("_Color", darkSkin);
+            nose[2].GetComponent<MeshRenderer>().material.SetColor("_Color", darkSkin);
+            nose[1].GetComponent<MeshRenderer>().material.SetColor("_Color", darkSkin);
 
         }
 

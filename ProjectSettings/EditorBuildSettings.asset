@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainConference.unity
     guid: e80390c5d5a475d4e98884b0639d1740
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TrainingRoom.unity
     guid: 07d7818c4f1f54c47bce6fe62ecc59ea
   - enabled: 0
@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AllDemo.unity
     guid: 851abcaf4e8714e238b918bf07c03107
-  - enabled: 1
+  - enabled: 0
     path: Assets/StoreAssets/Must Have Studio/Modular Realistic Hospital/Scenes/HospitalDemo.unity
     guid: 4521b28815914394482a1357dda7aea6
   m_configObjects:

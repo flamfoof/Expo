@@ -7,18 +7,20 @@ using Photon.Realtime;
 [RequireComponent(typeof(LobbyLauncherUI))]
 public class LobbyLauncher : MonoBehaviourPunCallbacks
 {
-     /******************************************************
-     * Refer to the Photon documentation and scripting API for official definitions and descriptions
-     * 
-     * Documentation: https://doc.photonengine.com/en-us/pun/current/getting-started/pun-intro
-     * Scripting API: https://doc-api.photonengine.com/en/pun/v2/index.html
-     * 
-     * If your Unity editor and standalone builds do not connect with each other but the multiple standalones
-     * do then try manually setting the FixedRegion in the PhotonServerSettings during the development of your project.
-     * https://doc.photonengine.com/en-us/realtime/current/connection-and-authentication/regions
-     *
-     * ******************************************************/
-    
+    /******************************************************
+    * Refer to the Photon documentation and scripting API for official definitions and descriptions
+    * 
+    * Documentation: https://doc.photonengine.com/en-us/pun/current/getting-started/pun-intro
+    * Scripting API: https://doc-api.photonengine.com/en/pun/v2/index.html
+    * 
+    * If your Unity editor and standalone builds do not connect with each other but the multiple standalones
+    * do then try manually setting the FixedRegion in the PhotonServerSettings during the development of your project.
+    * https://doc.photonengine.com/en-us/realtime/current/connection-and-authentication/regions
+    *
+    * ******************************************************/
+    public enum Rooms { HospitalDemo, Distillery, StageDemo, MainConference, TrainingRoom, AllDemo };
+    public Rooms currentRoom = Rooms.TrainingRoom;
+
     private LobbyLauncherUI lobbyUI;
     public string scene = "Exhibit";
     public string username;
@@ -173,14 +175,14 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         Debug.Log("<Color=Green>OnJoinedRoom</Color> with "+PhotonNetwork.CurrentRoom.PlayerCount+" Player(s)");
 
         Debug.Log("Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
-        Debug.Log("Loading scene: " + scene);
+        Debug.Log("Loading scene: " + currentRoom.ToString());
         //Only load if you are the first player, else 
         //PhotonNetwork.AutomaticallySyncScene to sync our instance scene.
         if(PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             //call the server to load the scene
             
-            PhotonNetwork.LoadLevel(scene);
+            PhotonNetwork.LoadLevel(currentRoom.ToString());
         }
     }
 

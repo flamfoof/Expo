@@ -136,7 +136,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         IgniteGameManager.IgniteInstance.RefreshOnPlayerSpawn();
         IgniteGameManager.IgniteInstance.RefreshUniquePlayer();
         commandUI = gameManager.commandUI.gameObject;
-        if(!photonView.IsMine)
+        if (!photonView.IsMine)
         {
             //GetComponent<Rigidbody>().useGravity = false;
         }
@@ -284,25 +284,27 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                         }
                         
                     }*/
-                    if (!playerActionRay.UseInteractable(ctx.phase) && !isCommandUIOpen && !isChatOpen)
+                    if (!playerActionRay.UseInteractable(ctx.phase) && !isChatOpen)
                     {
-                        if(selectedPlayer)
+                        if (!isCommandUIOpen)
                         {
-                            selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
-                            selectedPlayer = null;
+                            if (selectedPlayer)
+                            {
+                                selectedPlayer.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+                                selectedPlayer = null;
+                            }
+                            OpenCommandRing(true);
+                            photonView.RPC("ThinkAnimation", RpcTarget.All);
                         }
-                        OpenCommandRing(true);
-                        photonView.RPC("ThinkAnimation", RpcTarget.All);
+                        else ActivateCommandRing();
+
                     }
-                    else if (!playerActionRay.UseInteractable(ctx.phase) && isCommandUIOpen && !isChatOpen)
-                    {
-                        ActivateCommandRing();
-                    }
+
                 }
                 break;
 
-                // Checks if button has been let go before the held time (before it's fully performed)
-                case InputActionPhase.Canceled:
+            // Checks if button has been let go before the held time (before it's fully performed)
+            case InputActionPhase.Canceled:
                 if (ctx.interaction is SlowTapInteraction)
                 {
 
@@ -498,11 +500,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 //rtc.webRTC.SendButtonPressed();
 
                 //for Media Network
-                #if UNITY_WEBGL
+#if UNITY_WEBGL
                 rtc.webRTC.SendPlayerMessage();
-                #elif !UNITY_WEBGL
+#elif !UNITY_WEBGL
                 photonTextManager.OnEnterSend();
-                #endif
+#endif
 
             }
             StartCoroutine(FadeChat(false));
@@ -663,12 +665,13 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //add jump and other interactable animations here
 
         //Walk Conditions: speed > 1.0f
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             anim.SetFloat("speed", playerController.groundVelocity);
-            animWalkSpeed = anim.GetFloat("speed");        
-            
-        } else 
+            animWalkSpeed = anim.GetFloat("speed");
+
+        }
+        else
         {
             anim.SetFloat("speed", animWalkSpeed);
         }

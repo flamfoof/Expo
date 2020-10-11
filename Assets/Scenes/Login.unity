@@ -566,6 +566,11 @@ PrefabInstance:
       propertyPath: scene
       value: HospitalDemo
       objectReference: {fileID: 0}
+    - target: {fileID: 2857749407358293580, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: currentRoom
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3265729658194643289, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Layer

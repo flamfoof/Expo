@@ -18,7 +18,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
     * https://doc.photonengine.com/en-us/realtime/current/connection-and-authentication/regions
     *
     * ******************************************************/
-    public enum Rooms { HospitalDemo, Distillery, StageDemo, MainConference, TrainingRoom, AllDemo };
+    public enum Rooms { HospitalDemo, Distillery, StageDemo, MainConference, TrainingRoom, AllDemo, AtriumConference};
     public Rooms currentRoom = Rooms.TrainingRoom;
 
     private LobbyLauncherUI lobbyUI;

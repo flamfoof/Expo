@@ -27,9 +27,9 @@ public class LocalVideoPlay : MonoBehaviour
             Debug.Log("Audio is off");
         }
         #endif
-        if(isLocal)
+        if(!isLocal)
         {
-            yt.enabled = false;
+            yt.enabled = true;
             Debug.Log("Disabled");
         }
         /*

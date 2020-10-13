@@ -37,22 +37,23 @@ public class ISimpleVideo : Interactables, IPunObservable
         if (lvp.isLocal)
             playPauseUI.SetVisibility(!videoPlayer.playOnAwake, false);
         else
-            playPauseUI.SetVisibility(!ytPlayer.autoPlayOnStart, false);
+        {
+            playPauseUI.SetVisibility(ytPlayer.autoPlayOnStart, false);
+        }
     }
 
     public override void Perform(InputActionPhase phase)
     {
         if (phase == InputActionPhase.Started)
         {
-            //Debug.Log("InputActionPhase.Started Isimple");
             photonView.RPC("InteractVideo", RpcTarget.AllBuffered);
         }
     }
 
     [PunRPC][UsedImplicitly]
+    [ContextMenu("InteractVideo")]
     void InteractVideo()
     {
-        Debug.Log("InteractVideo RPC received");
         if (lvp.isLocal)
         {
             if (videoPlayer.isPlaying)
@@ -68,7 +69,13 @@ public class ISimpleVideo : Interactables, IPunObservable
         }
         else
         {
-            if (ytPlayer.isSyncing)
+            if (!ytPlayer.enabled)
+            {
+                videoPlayer.source = VideoSource.Url;
+                ytPlayer.enabled = true;
+            }
+
+            if (videoPlayer.isPlaying)
             {
                 playPauseUI.SetVisibility(true, false);
                 videoPlayer.Pause();

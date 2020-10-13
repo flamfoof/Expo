@@ -1908,7 +1908,7 @@ MonoBehaviour:
   youtubeUrls: []
   startFromSecond: 0
   startFromSecondTime: 0
-  autoPlayOnStart: 0
+  autoPlayOnStart: 1
   videoFormat: 0
   autoPlayOnEnable: 0
   playUsingInternalDevicePlayer: 0
@@ -1919,7 +1919,7 @@ MonoBehaviour:
   layout3d: 0
   videoControllerCanvas: {fileID: 1995527663379098}
   mainCamera: {fileID: 0}
-  loadingContent: {fileID: 1636367301325378}
+  loadingContent: {fileID: 0}
   OnYoutubeUrlAreReady:
     m_PersistentCalls:
       m_Calls: []

@@ -29,7 +29,7 @@ public class LocalVideoPlay : MonoBehaviour
         #endif
         if(!isLocal)
         {
-            yt.enabled = true;
+            //yt.enabled = true;
             Debug.Log("Disabled");
         }
         /*

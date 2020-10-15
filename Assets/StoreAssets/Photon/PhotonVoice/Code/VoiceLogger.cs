@@ -88,11 +88,11 @@ namespace Photon.Voice.Unity
             fmt = this.GetFormatString(fmt);
             if (this.context == null)
             {
-                Debug.LogFormat(fmt, args);
+                //Debug.LogFormat(fmt, args);
             }
             else
             {
-                Debug.LogFormat(this.context, fmt, args);
+                //Debug.LogFormat(this.context, fmt, args);
             }
         }
 

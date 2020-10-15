@@ -1045,10 +1045,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8883667742989409765}
     m_Modifications:
+    - target: {fileID: 1322314948035286574, guid: f2a939e99c773684c8f9e0c53b744a3f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 670de92bc1102474590a1522550b81c6,
+        type: 3}
     - target: {fileID: 1706803567512525455, guid: f2a939e99c773684c8f9e0c53b744a3f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1706803567512525455, guid: f2a939e99c773684c8f9e0c53b744a3f,
         type: 3}
@@ -1096,6 +1102,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a0b64f3b7c7e9884fad77731800a73b6,
         type: 3}
+    - target: {fileID: 1706803567512525455, guid: f2a939e99c773684c8f9e0c53b744a3f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6417258714480572827}
+    - target: {fileID: 1706803567512525455, guid: f2a939e99c773684c8f9e0c53b744a3f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2533452815039693397, guid: f2a939e99c773684c8f9e0c53b744a3f,
         type: 3}
       propertyPath: m_Name

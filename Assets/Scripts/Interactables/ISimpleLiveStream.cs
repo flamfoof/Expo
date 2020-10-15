@@ -12,6 +12,8 @@ public class ISimpleLiveStream : Interactables, IPunObservable
 
     bool checkTrigger = false;
 
+    public GameObject [] objectsToDisable;
+
     void Start()
     {
         callApp = GetComponent<CallAppUi>();
@@ -23,19 +25,7 @@ public class ISimpleLiveStream : Interactables, IPunObservable
     {
         if (phase == InputActionPhase.Started)
         {
-            Debug.Log("Call Perform");
-            checkTrigger = !checkTrigger;
-
-            if (checkTrigger)
-            {
-                Debug.Log("Call started");
-                callApp.SetupCallApp();
-            }
-            else
-            {
-                Debug.Log("Call ended");
-                callApp.ShutdownButtonPressed();
-            }
+            StartEndCall();
         }
     }
 
@@ -53,7 +43,22 @@ public class ISimpleLiveStream : Interactables, IPunObservable
         {
             Debug.Log("Call ended");
             callApp.ShutdownButtonPressed();
+        }
 
+        DisableObjects(!checkTrigger);
+    }
+
+    void DisableObjects(bool status)
+    {
+        if (objectsToDisable.Length == 0)
+            return;
+
+        for (int i = 0; i < objectsToDisable.Length; i++)
+        {
+            if (objectsToDisable[i] != null)
+            {
+                objectsToDisable[i].SetActive(status);
+            }
         }
     }
 

@@ -339,10 +339,10 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 		
         if (toggle == false)
         {
-			Debug.Log("Fading in");
+			//Debug.Log("Fading in");
 			if(uiEffects)
 			{
-				Debug.Log("there exists");
+				//Debug.Log("there exists");
 			}
 			uiEffects.FadeInCanvasGroup(parentComms.GetComponent<CommunicationManager>().receiveText.GetComponent<CanvasGroup>(), 0.5f);
             while (timer < chatFadeTimer)
@@ -354,7 +354,7 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
                     break;
                 }
             }
-			Debug.Log("Fading away");
+			//Debug.Log("Fading away");
 			uiEffects.FadeOutCanvasGroup(parentComms.GetComponent<CommunicationManager>().receiveText.GetComponent<CanvasGroup>(), 1.0f);
         }
     }

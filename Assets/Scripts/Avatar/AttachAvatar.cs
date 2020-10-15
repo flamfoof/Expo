@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class AttachAvatar : MonoBehaviourPunCallbacks
 {
@@ -48,27 +49,39 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
         if(photonView.IsMine)
         {
             
-
         } else 
         {
 
             //assigner.photonView.RPC("ChangeAvatar", RpcTarget.All, avatarInfo, assigner.playerAvatarInfo);
         }
-
-
-        
     }
 
     [PunRPC]
-    void SetPlayerCustomization(int actorNumber, GenderList.genders gender, int indexSuit, int indexHead)
+    void SetPlayerCustomization(int actorNumber)
     {
-        Debug.Log("Gameobject photon actor: " + photonView.gameObject.name);
+        Debug.Log("Setting actor customization for: " + actorNumber);
+        Player player = PhotonNetwork.CurrentRoom.GetPlayer(actorNumber);
+
+        if(player == null)
+        {
+            Debug.Log("Unable to set player customization for actor: " + actorNumber);
+            return;
+        }
+
+        Debug.Log("Gameobject photon actor: " + player.NickName + " is getting their avatar set");
+        List<PhotonView> pv = IgniteGameManager.IgniteInstance.playerList;
+        GenderList.genders gender = (GenderList.genders)((int)player.CustomProperties["AvatarGender"]);
+        avatarInfo.indexSuit = (int)player.CustomProperties["AvatarBodyIndex"];
+        avatarInfo.indexHead = (int)player.CustomProperties["AvatarHeadIndex"];
+        Debug.Log("Gameobject photon actor: " + player.NickName + " is set to head: " + avatarInfo.indexHead + "  body: " + avatarInfo.indexSuit);
+        
         if(photonView.Owner.ActorNumber == actorNumber)
         {
             Debug.Log("Actor number matches, now setting the avatars");
             GameObject selectedAvatar;
             scr_Selector selectorMale = null;
             scr_Selector_Female selectorFemale = null;
+            
 
             Debug.Log("Setting genders: " + gender.ToString());
             if(gender == GenderList.genders.Male1)
@@ -87,8 +100,7 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
             }
 
-            avatarInfo.indexSuit = indexSuit;
-            avatarInfo.indexHead = indexHead;
+            
 
             Debug.Log("Setting avatar meshes");
             if(selectorMale != null)
@@ -100,6 +112,56 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 selectorFemale.pickSuit(avatarInfo.indexSuit);
                 selectorFemale.pickSkin(avatarInfo.indexHead);
             }            
+        } else 
+        {
+            Debug.Log("Setting avatar for other client");
+
+            for(int i = 0; i < pv.Count; i++)
+            {
+                if(pv[i].OwnerActorNr == actorNumber)
+                {
+                    AttachAvatar currentPVAvatar = pv[i].GetComponent<AttachAvatar>();
+                    
+
+                    GameObject selectedAvatar;
+                    scr_Selector selectorMale = null;
+                    scr_Selector_Female selectorFemale = null;
+                    
+
+                    Debug.Log("Setting genders: " + gender.ToString());
+                    if(gender == GenderList.genders.Male1)
+                    {
+                        currentPVAvatar.avatarInfo.maleAvatar.SetActive(true);
+                        currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
+                        currentPVAvatar.avatarInfo.anim = avatarInfo.maleAvatar.GetComponent<Animator>();
+                        selectedAvatar = avatarInfo.maleAvatar;
+                        selectorMale = selectedAvatar.GetComponent<scr_Selector>();
+                    } else
+                    {
+                        currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
+                        currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
+                        currentPVAvatar.avatarInfo.anim = avatarInfo.femaleAvatar.GetComponent<Animator>();
+                        selectedAvatar = avatarInfo.femaleAvatar;
+                        selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
+                    }
+
+                    
+
+                    Debug.Log("Setting avatar meshes");
+                    if(selectorMale != null)
+                    {   
+                        selectorMale.pickOneSuit(avatarInfo.indexSuit);
+                        selectorMale.PickOneHead(avatarInfo.indexHead);
+                    } else if (selectorFemale != null)
+                    {
+                        selectorFemale.pickSuit(avatarInfo.indexSuit);
+                        selectorFemale.pickSkin(avatarInfo.indexHead);
+                    }            
+
+                    break;
+                }
+                
+            }    
         }
     }
 }

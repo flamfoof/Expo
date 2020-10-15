@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 [RequireComponent(typeof(LobbyLauncherUI))]
 public class LobbyLauncher : MonoBehaviourPunCallbacks
@@ -80,6 +81,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
 
         CheckIfValidUsername();
 
+        
+
         Debug.Log("You have signed in as: " + PhotonNetwork.NickName);
         //hide the button
         lobbyUI.UIControls.submitLoginButton.gameObject.SetActive(false);
@@ -132,6 +135,8 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         {
             LogFeedback("We are now connected to the " + PhotonNetwork.CloudRegion + " server!");
             Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " server!");
+            
+            UpdatePlayerAvatarIndex();
 
             PhotonNetwork.JoinRandomRoom();
         }
@@ -199,5 +204,14 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
             PhotonNetwork.NickName = nickname;
             return true;
         }
+    }
+
+    public void UpdatePlayerAvatarIndex()
+    {
+        Hashtable hash = new Hashtable();
+        hash.Add("AvatarHeadIndex", playerInfo.GetComponent<AssignPlayerAvatar>().headIndex);
+        hash.Add("AvatarBodyIndex", playerInfo.GetComponent<AssignPlayerAvatar>().bodyIndex);
+        hash.Add("AvatarGender", playerInfo.GetComponent<AssignPlayerAvatar>().Gender);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 }

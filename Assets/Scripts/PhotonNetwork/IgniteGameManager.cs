@@ -81,12 +81,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 }
 
                 //ServerAvatarChange(spawnedPlayer);
-                hash.Add("AvatarType", changeAvatar.Gender);
+                //hash.Add("AvatarType", changeAvatar.Gender);
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
 
-                //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
+                //In the AttachAvatar.cs
+                spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber);
                 
                 if(voiceManager)
                     voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
@@ -142,6 +143,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             voiceManager.webRTC.SendMsg(newPlayer.NickName + " has joined the room.");
             voiceManager.webRTC.ReconnectAllVoiceID();
         }
+        
         
         
         if(PhotonNetwork.IsMasterClient)

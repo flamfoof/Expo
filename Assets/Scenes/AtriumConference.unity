@@ -1301,6 +1301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: YoutubeAdvanced(use this) (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.377542
@@ -1420,7 +1424,7 @@ PrefabInstance:
     - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: youtubeUrl
-      value: https://www.youtube.com/watch?v=xeTZzdZK1Vs
+      value: https://www.youtube.com/watch?v=ew2a91fIDj8
       objectReference: {fileID: 0}
     - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
@@ -2999,11 +3003,26 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.6415094
       objectReference: {fileID: 0}
+    - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: microphoneType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: scrollbar
       value: 
       objectReference: {fileID: 1229657444}
+    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: uIceServer5
+      value: stun:us-turn2.xirsys.com
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: uIceServer2
+      value: stun:stun.l.google.com:19302?transport=tcp
+      objectReference: {fileID: 0}
     - target: {fileID: 6715458132555031625, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4937,6 +4956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: YoutubeAdvanced(use this)
       objectReference: {fileID: 0}
+    - target: {fileID: 1701608181382642, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4389680714450716, guid: 8923e8db48d76694585cfc5ddb4d57ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 82.3
@@ -5056,7 +5079,7 @@ PrefabInstance:
     - target: {fileID: 114179375918869224, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
       propertyPath: youtubeUrl
-      value: https://www.youtube.com/watch?v=xeTZzdZK1Vs
+      value: https://www.youtube.com/watch?v=ew2a91fIDj8
       objectReference: {fileID: 0}
     - target: {fileID: 328286099374850526, guid: 8923e8db48d76694585cfc5ddb4d57ed,
         type: 3}
@@ -8095,6 +8118,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938857522356450377, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938857522356450377, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938857522356450377, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.288
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b394027809c5d1b499b6826424a6d892, type: 3}

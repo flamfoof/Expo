@@ -74,14 +74,14 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
         avatarInfo.indexSuit = (int)player.CustomProperties["AvatarBodyIndex"];
         avatarInfo.indexHead = (int)player.CustomProperties["AvatarHeadIndex"];
         Debug.Log("Gameobject photon actor: " + player.NickName + " is set to head: " + avatarInfo.indexHead + "  body: " + avatarInfo.indexSuit);
+        scr_Selector selectorMale = null;
+        scr_Selector_Female selectorFemale = null;
+
         
         if(photonView.Owner.ActorNumber == actorNumber)
         {
             Debug.Log("Actor number matches, now setting the avatars");
-            GameObject selectedAvatar;
-            scr_Selector selectorMale = null;
-            scr_Selector_Female selectorFemale = null;
-            
+            GameObject selectedAvatar;            
 
             Debug.Log("Setting genders: " + gender.ToString());
             if(gender == GenderList.genders.Male1)
@@ -89,6 +89,7 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 avatarInfo.maleAvatar.SetActive(true);
                 avatarInfo.femaleAvatar.SetActive(false);
                 avatarInfo.anim = avatarInfo.maleAvatar.GetComponent<Animator>();
+                selectorMale = avatarInfo.maleAvatar.GetComponent<scr_Selector>();
                 selectedAvatar = avatarInfo.maleAvatar;
                 selectorMale = selectedAvatar.GetComponent<scr_Selector>();
             } else
@@ -96,6 +97,7 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 avatarInfo.maleAvatar.SetActive(false);
                 avatarInfo.femaleAvatar.SetActive(true);
                 avatarInfo.anim = avatarInfo.femaleAvatar.GetComponent<Animator>();
+                selectorFemale = avatarInfo.femaleAvatar.GetComponent<scr_Selector_Female>();
                 selectedAvatar = avatarInfo.femaleAvatar;
                 selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
             }
@@ -124,8 +126,7 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                     
 
                     GameObject selectedAvatar;
-                    scr_Selector selectorMale = null;
-                    scr_Selector_Female selectorFemale = null;
+                    
                     
 
                     Debug.Log("Setting genders: " + gender.ToString());
@@ -133,15 +134,15 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                     {
                         currentPVAvatar.avatarInfo.maleAvatar.SetActive(true);
                         currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
-                        currentPVAvatar.avatarInfo.anim = avatarInfo.maleAvatar.GetComponent<Animator>();
-                        selectedAvatar = avatarInfo.maleAvatar;
+                        currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
+                        selectedAvatar = currentPVAvatar.avatarInfo.maleAvatar;
                         selectorMale = selectedAvatar.GetComponent<scr_Selector>();
                     } else
                     {
                         currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
                         currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
-                        currentPVAvatar.avatarInfo.anim = avatarInfo.femaleAvatar.GetComponent<Animator>();
-                        selectedAvatar = avatarInfo.femaleAvatar;
+                        currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.femaleAvatar.GetComponent<Animator>();
+                        selectedAvatar = currentPVAvatar.avatarInfo.femaleAvatar;
                         selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
                     }
 

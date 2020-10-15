@@ -57,112 +57,78 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void SetPlayerCustomization(int actorNumber)
+    public void SetPlayerCustomization(int actorNumber)
+    {
+        StartCoroutine(SetPlayerCustomizationDelay(actorNumber, 1.5f));
+    }
+
+
+    public IEnumerator SetPlayerCustomizationDelay(int actorNumber, float delay)
     {
         Debug.Log("Setting actor customization for: " + actorNumber);
+        yield return new WaitForSeconds(delay);
         Player player = PhotonNetwork.CurrentRoom.GetPlayer(actorNumber);
 
         if(player == null)
         {
             Debug.Log("Unable to set player customization for actor: " + actorNumber);
-            return;
+            yield break;
         }
 
         Debug.Log("Gameobject photon actor: " + player.NickName + " is getting their avatar set");
         List<PhotonView> pv = IgniteGameManager.IgniteInstance.playerList;
         GenderList.genders gender = (GenderList.genders)((int)player.CustomProperties["AvatarGender"]);
-        avatarInfo.indexSuit = (int)player.CustomProperties["AvatarBodyIndex"];
-        avatarInfo.indexHead = (int)player.CustomProperties["AvatarHeadIndex"];
+        int indexSuit = (int)player.CustomProperties["AvatarBodyIndex"];
+        int indexHead = (int)player.CustomProperties["AvatarHeadIndex"];
         Debug.Log("Gameobject photon actor: " + player.NickName + " is set to head: " + avatarInfo.indexHead + "  body: " + avatarInfo.indexSuit);
         scr_Selector selectorMale = null;
         scr_Selector_Female selectorFemale = null;
 
-        
-        if(photonView.Owner.ActorNumber == actorNumber)
+        Debug.Log("Setting avatar for other client");
+        Debug.Log("Actor num: " + pv.Count);
+        for(int i = 0; i < pv.Count; i++)
         {
-            Debug.Log("Actor number matches, now setting the avatars");
-            GameObject selectedAvatar;            
-
-            Debug.Log("Setting genders: " + gender.ToString());
-            if(gender == GenderList.genders.Male1)
-            {
-                avatarInfo.maleAvatar.SetActive(true);
-                avatarInfo.femaleAvatar.SetActive(false);
-                avatarInfo.anim = avatarInfo.maleAvatar.GetComponent<Animator>();
-                selectorMale = avatarInfo.maleAvatar.GetComponent<scr_Selector>();
-                selectedAvatar = avatarInfo.maleAvatar;
-                selectorMale = selectedAvatar.GetComponent<scr_Selector>();
-            } else
-            {
-                avatarInfo.maleAvatar.SetActive(false);
-                avatarInfo.femaleAvatar.SetActive(true);
-                avatarInfo.anim = avatarInfo.femaleAvatar.GetComponent<Animator>();
-                selectorFemale = avatarInfo.femaleAvatar.GetComponent<scr_Selector_Female>();
-                selectedAvatar = avatarInfo.femaleAvatar;
-                selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
-            }
-
             
-
-            Debug.Log("Setting avatar meshes");
-            if(selectorMale != null)
-            {   
-                selectorMale.pickOneSuit(avatarInfo.indexSuit);
-                selectorMale.PickOneHead(avatarInfo.indexHead);
-            } else if (selectorFemale != null)
+            if(pv[i].OwnerActorNr == actorNumber)
             {
-                selectorFemale.pickSuit(avatarInfo.indexSuit);
-                selectorFemale.pickSkin(avatarInfo.indexHead);
-            }            
-        } else 
-        {
-            Debug.Log("Setting avatar for other client");
-
-            for(int i = 0; i < pv.Count; i++)
-            {
-                if(pv[i].OwnerActorNr == actorNumber)
-                {
-                    AttachAvatar currentPVAvatar = pv[i].GetComponent<AttachAvatar>();
-                    
-
-                    GameObject selectedAvatar;
-                    
-                    
-
-                    Debug.Log("Setting genders: " + gender.ToString());
-                    if(gender == GenderList.genders.Male1)
-                    {
-                        currentPVAvatar.avatarInfo.maleAvatar.SetActive(true);
-                        currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
-                        currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
-                        selectedAvatar = currentPVAvatar.avatarInfo.maleAvatar;
-                        selectorMale = selectedAvatar.GetComponent<scr_Selector>();
-                    } else
-                    {
-                        currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
-                        currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
-                        currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.femaleAvatar.GetComponent<Animator>();
-                        selectedAvatar = currentPVAvatar.avatarInfo.femaleAvatar;
-                        selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
-                    }
-
-                    
-
-                    Debug.Log("Setting avatar meshes");
-                    if(selectorMale != null)
-                    {   
-                        selectorMale.pickOneSuit(avatarInfo.indexSuit);
-                        selectorMale.PickOneHead(avatarInfo.indexHead);
-                    } else if (selectorFemale != null)
-                    {
-                        selectorFemale.pickSuit(avatarInfo.indexSuit);
-                        selectorFemale.pickSkin(avatarInfo.indexHead);
-                    }            
-
-                    break;
-                }
+                AttachAvatar currentPVAvatar = pv[i].GetComponent<AttachAvatar>();
                 
-            }    
+                GameObject selectedAvatar;                
+                
+                Debug.Log("Avatar pos: " + transform.position);
+                Debug.Log("Setting genders: " + gender.ToString());
+                if(gender == GenderList.genders.Male1)
+                {
+                    currentPVAvatar.avatarInfo.maleAvatar.SetActive(true);
+                    currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
+                    currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
+                    selectedAvatar = currentPVAvatar.avatarInfo.maleAvatar;
+                    selectorMale = selectedAvatar.GetComponent<scr_Selector>();
+                    Debug.Log("Maaale");
+                } else
+                {
+                    currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
+                    currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
+                    currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.femaleAvatar.GetComponent<Animator>();
+                    selectedAvatar = currentPVAvatar.avatarInfo.femaleAvatar;
+                    selectorFemale = selectedAvatar.GetComponent<scr_Selector_Female>();
+                }
+
+                
+
+                Debug.Log("Setting avatar meshes");
+                if(selectorMale != null)
+                {   
+                    selectorMale.pickOneSuit(indexSuit);
+                    selectorMale.PickOneHead(indexHead);
+                } else if (selectorFemale != null)
+                {
+                    selectorFemale.pickSuit(indexSuit);
+                    selectorFemale.pickSkin(indexHead);
+                }            
+
+                break;
+            }
         }
     }
 }

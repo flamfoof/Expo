@@ -522,7 +522,7 @@ MonoBehaviour:
   mouseSensitivity: 0.75
   fOVToMouseSensitivity: 0.475
   cameraSmoothing: 5
-  lockAndHideCursor: 1
+  lockAndHideCursor: 0
   playerCamera: {fileID: 20724644957976244}
   cameraOrigin: {fileID: 7151468985975787232}
   enableCameraShake: 1
@@ -675,11 +675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24aeead9324c784ba6cba803db61308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 2.1
-  height: 1.8
-  centerOffset: {x: 0, y: 0, z: 0}
+  distance: 4.02
+  height: 2.53
+  centerOffset: {x: 0, y: 1.98, z: 0}
   followOnStart: 1
-  smoothSpeed: 0.125
+  smoothSpeed: 3.37
 --- !u!114 &7439937327771559780
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,9 +27,11 @@ public class VoiceSettings : MonoBehaviour
 	{
         if(GetComponent<SelectVoicePlatform>().webRTCVoice.gameObject.activeSelf)
         {
+            Debug.Log("Ins to AudioCall");
             GetComponent<SelectVoicePlatform>().webRTCVoice.GetComponent<AudioCall>().SendButtonPressed();
         } else 
         {
+            Debug.Log("Ins to PhotonTextComms");
             GetComponent<SelectVoicePlatform>().platformVoice.GetComponent<PhotonTextComms>().OnClickSend();
         }
 		

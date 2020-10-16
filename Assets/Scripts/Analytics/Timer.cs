@@ -13,6 +13,9 @@ public class Timer : MonoBehaviour
     private float timerTime;
     private bool isRunning = false;
 
+    public delegate void SendAnalytics();
+    public static event SendAnalytics sendAnalytics;
+
     void Start()
     {
         TimerReset();
@@ -46,7 +49,6 @@ public class Timer : MonoBehaviour
         timerMinutes.text = timerSeconds.text = timerSeconds100.text = "00";
     }
 
-    // Update is called once per frame
     void Update()
     {
         timerTime = stopTime + (Time.time - startTime);
@@ -59,6 +61,19 @@ public class Timer : MonoBehaviour
             timerMinutes.text = (minutesInt < 10) ? "0" + minutesInt : minutesInt.ToString();
             timerSeconds.text = (secondsInt < 10) ? "0" + secondsInt : secondsInt.ToString();
             timerSeconds100.text = (seconds100Int < 10) ? "0" + seconds100Int : seconds100Int.ToString();
+
+            if (secondsInt >= 5)
+            {
+                TimerReset();
+                sendAnalytics?.Invoke();
+                TimerStart();
+            }
         }
+    }
+
+
+    public void TestDrive(string Value)
+    {
+        BBBAnalytics.instance.ClickedStats(Value);
     }
 }

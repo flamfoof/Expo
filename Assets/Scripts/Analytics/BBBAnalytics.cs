@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
 public class BBBAnalytics : IgniteAnalytics, IPunObservable
 {
@@ -16,6 +17,12 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
     List<float> sessionTimeList;
     List<int> playersLogged;
 
+    Dictionary<string, int> clickedVideos = new Dictionary<string, int>();
+    Dictionary<string, int> clickedWebLinks = new Dictionary<string, int>();
+    Dictionary<string, int> emojiUsed = new Dictionary<string, int>();
+    List<string> chatLog = new List<string>();
+
+
     public Text attendeesText;
     public Text sessionText;
     public Text clicksText;
@@ -27,15 +34,32 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
             Destroy(this.gameObject);
         } else 
         {
-            instance = this.gameObject.GetComponent<BBBAnalytics>();            
+            instance = this;            
         }
+
         sessionNameList = new List<string>();
         sessionTimeList = new List<float>();
         if(!gameManager)
             gameManager = IgniteGameManager.IgniteInstance;
 
         InvokeRepeating("UpdateAvgSessionTime", 1.0f, 1.0f);
-        InvokeRepeating("AnalyticsAvgTimeUpdate", 1.0f, 5.0f);
+        //InvokeRepeating("AnalyticsAvgTimeUpdate", 1.0f, 5.0f);
+    }
+
+
+    private void OnEnable()
+    {
+        Timer.sendAnalytics += DispatchAnalytics;
+    }
+
+    public void OnDisable()
+    {
+        Timer.sendAnalytics -= DispatchAnalytics;
+    }
+
+    private void DispatchAnalytics()
+    {
+        Debug.LogError("DispatchAnalytics");
     }
 
     void FixedUpdate()
@@ -44,18 +68,70 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         UpdateAllTexts();
     }
 
-    public override void ClickedStats(string url)
+    public override void ClickedVideo(string name)
     {
-        photonView.RPC("TriggeredEvent", RpcTarget.All);
-        Invoke("AnalyticsUpdateClicks", 0.5f);
+        if (clickedVideos.ContainsKey(name))
+        {
+            clickedVideos[name] += 1;
+
+            Debug.Log("Times Clicked " + clickedVideos[name]);
+        }
+        else
+        {
+            clickedVideos.Add(name, 1);
+            Debug.Log("Added new video");
+        }
     }
+
+    public override void EmojiUsed(string name)
+    {
+        if (emojiUsed.ContainsKey(name))
+        {
+            emojiUsed[name] += 1;
+
+            Debug.Log("Times Clicked " + emojiUsed[name]);
+        }
+        else
+        {
+            emojiUsed.Add(name, 1);
+            Debug.Log("Added new Emoji");
+        }
+    }
+    
+    public override void ClickedWeb(string url)
+    {
+        if (clickedWebLinks.ContainsKey(url))
+        {
+            clickedWebLinks[url] += 1;
+
+            Debug.Log("Times Clicked " + clickedWebLinks[url]);
+        }
+        else
+        {
+            clickedWebLinks.Add(name, 1);
+            Debug.Log("Added new link");
+        }
+    }
+
+    public override void AverageSessionLength()
+    {
+        Debug.Log(avgSessionTime);
+    }
+
+    public override void UpdateChatLog(string log)
+    {
+        chatLog.Add(log);
+    }
+
 
     void AnalyticsUpdateClicks(string url)
     {
-        if(AnalyticsController.Instance)
-        {
-            AnalyticsController.Instance.WebsiteClick(url);
-        }
+        //if(AnalyticsController.Instance)
+        //{
+        //    AnalyticsController.Instance.WebsiteClick(url);
+        //}
+
+
     }
 
     [PunRPC]
@@ -68,7 +144,6 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
     {
         float totalSessionTime = 0.0f;
         int totalPlayers = 0;
-        //Debug.Log("Updating sesion time");
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
             //Debug.Log("Starting this");
@@ -91,7 +166,6 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
                     sessionTimeList.Add(pv.GetComponent<UserActions>().SessionTimer);
                     totalSessionTime += pv.GetComponent<UserActions>().SessionTimer;
                     totalPlayers++;
-                    //Debug.Log("Added new player: " + pv.Owner.NickName + " to the list.");
                 }
             } 
         }
@@ -101,22 +175,6 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         } else {
             avgSessionTime = 0.0f;
         }
-
-
-        /* Trying to get info from network, not working
-        for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {   
-            string playerName = PhotonNetwork.PlayerList[i].ActorNumber.ToString();
-            if(sessionNameList.Contains(playerName))
-            {
-                int index = sessionNameList.IndexOf(playerName);
-                sessionTimeList[index] = (float)PhotonNetwork.PlayerList[i].CustomProperties["LoginTime"];
-                
-            } else {
-                sessionNameList.Add(PhotonNetwork.PlayerList[i].NickName);
-                sessionTimeList.Add((float)PhotonNetwork.PlayerList[i].CustomProperties["LoginTime"]);
-            }
-        }*/
     }
 
     void AnalyticsAvgTimeUpdate()
@@ -169,11 +227,11 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         } else {
             sessionTempText = System.Math.Round(avgSessionTime, 2) + "s";
         }
-        attendeesText.text = "Attendees: " + attendees;
+        //attendeesText.text = "Attendees: " + attendees;
         AnalyticsController.Instance.AttendesNumber(attendees);
-        sessionText.text = "Avg. Session Time: " + sessionTempText;
+        //sessionText.text = "Avg. Session Time: " + sessionTempText;
         AnalyticsController.Instance.AverageTimeSpent(avgSessionTime);
-        clicksText.text = "Web Clicks: " + clicks;
+        //clicksText.text = "Web Clicks: " + clicks;
     }
 
     //may not be necessary

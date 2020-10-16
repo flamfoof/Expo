@@ -289,7 +289,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 2
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743903104223250}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf1a5ad4f9ffb154ca7813fdad11017a, type: 3}
   m_Name: 
@@ -519,7 +519,7 @@ MonoBehaviour:
   enableCameraMovement: 1
   mouseInputInversion: 0
   verticalRotationRange: 170
-  mouseSensitivity: 0.58
+  mouseSensitivity: 0.75
   fOVToMouseSensitivity: 0.475
   cameraSmoothing: 5
   lockAndHideCursor: 0
@@ -532,9 +532,9 @@ MonoBehaviour:
   targetAngles: {x: 0, y: 0, z: 0}
   playerCanMove: 1
   walkByDefault: 1
-  walkSpeed: 4.46
+  walkSpeed: 5.42
   sprintKey: 0
-  sprintSpeed: 7.1
+  sprintSpeed: 7.7
   jumpPower: 3.03
   canJump: 1
   canHoldJump: 0
@@ -670,7 +670,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743903104223250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a24aeead9324c784ba6cba803db61308, type: 3}
   m_Name: 

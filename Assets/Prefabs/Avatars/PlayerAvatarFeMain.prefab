@@ -33,6 +33,9 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 0
     Name: speed
+  - Type: 9
+    SynchronizeType: 0
+    Name: thinking
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -51,6 +54,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
+  observableSearch: 0
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
@@ -116,6 +120,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
+  observableSearch: 0
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
@@ -176,10 +181,12 @@ MonoBehaviour:
   meshHead: {fileID: 6232647986651695962}
   meshUpperTeeth: {fileID: 2218396041518932008}
   meshLowerTeeth: {fileID: 7527679385628822910}
+  maleAvatar: {fileID: 0}
+  femaleAvatar: {fileID: 0}
   skeletonBase: {fileID: 0}
   avatarRoot: {fileID: 0}
-  bodyIndex: 0
-  headIndex: 0
+  indexSuit: 0
+  indexHead: 0
   CharacterPrefab: {fileID: 0}
 --- !u!1001 &714476190225624881
 PrefabInstance:
@@ -253,6 +260,36 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d8209daef9d24444a9ced52539189aca, type: 2}
+    - target: {fileID: 2692576565527371687, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166557945912398493, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244121008613228465, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304625282597829292, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360336442989479134, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418516415034711971, guid: 87ae290344b12df49a7b65e6ff46cd26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ae290344b12df49a7b65e6ff46cd26, type: 3}
 --- !u!1 &715147767493440309 stripped

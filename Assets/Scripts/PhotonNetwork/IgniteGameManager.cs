@@ -81,12 +81,14 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 }
 
                 //ServerAvatarChange(spawnedPlayer);
-                hash.Add("AvatarType", changeAvatar.Gender);
+                //hash.Add("AvatarType", changeAvatar.Gender);
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
                 player = spawnedPlayer.GetPhotonView().Owner;
 
-                //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber, changeAvatar.Gender, changeAvatar.bodyIndex, changeAvatar.headIndex);
+                //In the AttachAvatar.cs
+                //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber);
+                StartCoroutine(RefreshAvatars(2.0f));
                 
                 if(voiceManager)
                     voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
@@ -117,6 +119,33 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     }
 
+    void RefreshAvatar()
+    {
+        for(int i = 0; i < playerList.Count; i++)
+        {
+            AttachAvatar currentPVAvatar = playerList[i].GetComponent<AttachAvatar>();
+            GenderList.genders gender = (GenderList.genders)((int)playerList[i].Owner.CustomProperties["AvatarGender"]);
+            int indexSuit = (int)playerList[i].Owner.CustomProperties["AvatarBodyIndex"];
+            int indexHead = (int)playerList[i].Owner.CustomProperties["AvatarHeadIndex"];
+            Debug.Log("Avatar - head: " + indexHead + " body: " + indexSuit + " gender: " + gender);
+            
+            if(gender == GenderList.genders.Male1)
+            {
+                currentPVAvatar.avatarInfo.maleAvatar.SetActive(true);
+                currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
+                currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
+                currentPVAvatar.avatarInfo.maleAvatar.GetComponent<scr_Selector>().pickOneSuit(indexSuit);
+                //selectorMale.PickOneHead(avatarInfo.indexHead);
+            } else
+            {
+                currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
+                currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
+                currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.femaleAvatar.GetComponent<Animator>();
+                //selectorFemale.pickSuit(avatarInfo.indexSuit);
+                //selectorFemale.pickSkin(avatarInfo.indexHead);
+            }       
+        }
+    }
 
 
 
@@ -143,6 +172,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             voiceManager.webRTC.ReconnectAllVoiceID();
         }
         
+        StartCoroutine(RefreshAvatars(2.0f));
         
         if(PhotonNetwork.IsMasterClient)
         {
@@ -270,29 +300,18 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void RefreshAvatars()
+    public IEnumerator RefreshAvatars(float delay)
     {
         //update the meshes
         //sorry it's messy!                   
         int count = 0;
-                    
+        int actorNum;
+        yield return new WaitForSeconds(delay);
         
-        foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
-        {
-            Player pl = pv.Owner;
-            
-            if(pv.gameObject.GetComponent<UserActions>())
-            {
-                if( pv.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>().meshHead.sharedMesh == 
-                    changeAvatar.defaultPrefab.GetComponent<AvatarInfo>().meshHead.sharedMesh)
-                {
-                    Debug.Log(pv.Owner.NickName + " has selected their character: " + 
-                        (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);
-                    changeAvatar.ChangeAvatar(pv.gameObject.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), 
-                        (GenderList.genders)pv.Owner.CustomProperties["AvatarType"]);
-                }
-                count++;
-            }            
+        for(int i = 0; i < playerList.Count; i++)
+        {            
+            playerList[i].GetComponent<AttachAvatar>().SetPlayerCustomization(playerList[i].OwnerActorNr);
+
         }
     }
 

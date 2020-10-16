@@ -248,6 +248,7 @@ public class YoutubePlayer : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("Starting yt");
         if (playUsingInternalDevicePlayer)
             loadYoutubeUrlsOnly = true;
 
@@ -2673,8 +2674,8 @@ public class YoutubePlayer : MonoBehaviour
             {
                 if (!loadYoutubeUrlsOnly)
                 {
-                    Debug.Log("Resolver Exception!: " + e.Message);
-                    Debug.Log(Application.persistentDataPath);
+                    //Debug.Log("Resolver Exception!: " + e.Message);
+                    //Debug.Log(Application.persistentDataPath);
                     //string filePath = Application.persistentDataPath + "/log_download_exception_" + DateTime.Now.ToString("ddMMyyyyhhmmssffff") + ".txt";
                     //Debug.Log("DownloadUrl content saved to " + filePath);
                     WriteLog("log_download_exception","jsonForHtml: " + jsonForHtmlVersion);

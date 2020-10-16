@@ -95,7 +95,7 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                 
                 GameObject selectedAvatar;                
                 
-                Debug.Log("Avatar pos: " + transform.position);
+                //Debug.Log("Avatar pos: " + transform.position);
                 Debug.Log("Setting genders: " + gender.ToString());
                 if(gender == GenderList.genders.Male1)
                 {

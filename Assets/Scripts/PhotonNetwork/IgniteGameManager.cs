@@ -172,7 +172,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             voiceManager.webRTC.ReconnectAllVoiceID();
         }
         
-        
+        StartCoroutine(RefreshAvatars(2.0f));
         
         if(PhotonNetwork.IsMasterClient)
         {

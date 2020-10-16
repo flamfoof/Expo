@@ -138,7 +138,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         commandUI = gameManager.commandUI.gameObject;
         if (!photonView.IsMine)
         {
-            //GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<FirstPersonAIO>().enabled = false;
         }
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)

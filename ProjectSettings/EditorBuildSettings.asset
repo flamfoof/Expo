@@ -35,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AtriumConference.unity
     guid: b2bcec31c57494a10bcfdac2fa167127
+  - enabled: 0
+    path: Assets/StoreAssets/WebRtcVideoChat/menuscene.unity
+    guid: f1a1b24bb2cc09b409b9a18aec7a4984
+  - enabled: 0
+    path: Assets/StoreAssets/WebRtcVideoChat/callapp/callscene.unity
+    guid: b98ae981d63c0334794074d37f185f04
+  - enabled: 0
+    path: Assets/StoreAssets/WebRtcVideoChat/extra/VideoConferenceApp/conferencescene.unity
+    guid: bf281e1ce939a394c85ba2e0f289b07d
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 9d4987e3f08e71c44b6de977544869a2,
       type: 2}

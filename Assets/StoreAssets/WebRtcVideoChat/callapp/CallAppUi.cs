@@ -344,7 +344,7 @@ public class CallAppUi : MonoBehaviour
         return result;
     }
 
-    private void SetupCallApp()
+    public void SetupCallApp()
     {
         mApp.SetVideoDevice(GetSelectedVideoDevice());
         mApp.SetAudio(uAudioToggle.isOn);
@@ -360,7 +360,7 @@ public class CallAppUi : MonoBehaviour
         mApp.SetupCall();
         EnsureLength();
         Append("Trying to listen on address " + uRoomNameInputField.text);
-        mApp.Join(uRoomNameInputField.text);
+        mApp.Join("ignite");
     }
     
     public void ToggleSettings()

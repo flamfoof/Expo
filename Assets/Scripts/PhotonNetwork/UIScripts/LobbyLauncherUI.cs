@@ -185,7 +185,7 @@ public class LobbyLauncherUI : MonoBehaviour
         if((CheckName() || CheckEmail()) && CheckPassword())
         {
             UIControls.mainLogin.SetActive(false);
-            UIControls.worldSelect.SetActive(true);
+            UIControls.roleSelect.SetActive(true);
         }
     }
     public void CreateButtonClick()

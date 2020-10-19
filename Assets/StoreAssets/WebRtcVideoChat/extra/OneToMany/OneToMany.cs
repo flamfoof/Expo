@@ -115,7 +115,6 @@ namespace Byn.Unity.Examples
 
         public void StartStream()
         {
-            Debug.Log("Start Stream");
             StartCoroutine(ExampleGlobals.RequestPermissions());
             UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
             isInitialized = true;

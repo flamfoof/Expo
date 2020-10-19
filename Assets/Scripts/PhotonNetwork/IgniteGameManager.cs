@@ -106,10 +106,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             GetComponent<OneToMany>().StartStream();
         }
-        else
-        {
-            Debug.LogError("Not a presenter");
-        }
     }
 
     void PrintRoomName()

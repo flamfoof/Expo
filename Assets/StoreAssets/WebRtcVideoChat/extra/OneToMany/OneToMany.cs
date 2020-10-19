@@ -54,7 +54,9 @@ namespace Byn.Unity.Examples
         /// </summary>
         private readonly int RECEIVER_CONNECT_DELAY = 5;
 
+        [SerializeField]
         private string mSignalingServer = ExampleGlobals.Signaling;
+        [SerializeField]
         private string mStunServer = ExampleGlobals.StunUrl;
 
         /// <summary>
@@ -83,6 +85,8 @@ namespace Byn.Unity.Examples
         /// not send anything.
         /// </summary>
         public bool uSender = false;
+        public bool uDisableAudio = true;
+        [HideInInspector] public bool isInitialized = false;
 
         /// <summary>
         /// Will be used to show the texture received (or sent)
@@ -98,7 +102,8 @@ namespace Byn.Unity.Examples
         /// Static address shared with all other local instances of this app
         /// to connect them.
         /// </summary>
-        private static string sAddress = null;
+       
+        public string sAddress = null;
 
 
         /// <summary>
@@ -108,10 +113,12 @@ namespace Byn.Unity.Examples
 
 
 
-        protected virtual void Start()
+        public void StartStream()
         {
+            Debug.Log("Start Stream");
             StartCoroutine(ExampleGlobals.RequestPermissions());
             UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
+            isInitialized = true;
         }
 
         protected virtual void OnCallFactoryReady()
@@ -164,7 +171,7 @@ namespace Byn.Unity.Examples
                 if (uSender)
                 {
                     //sender will broadcast audio and video
-                    mMediaConfig.Audio = true;
+                    mMediaConfig.Audio = !uDisableAudio;
                     mMediaConfig.Video = true;
 
                     Debug.Log("Accepting incoming connections on " + sAddress);
@@ -304,6 +311,9 @@ namespace Byn.Unity.Examples
                     Log("Server ready for incoming connections. Address: " + evt.Info);
                     break;
                 case NetEventType.ServerInitFailed:
+                    ///// may be use for reinitializing the connection for multiple Usender
+                    //uSender = false;
+                    //Start();
                     Log("Server init failed");
                     break;
                 case NetEventType.ServerClosed:

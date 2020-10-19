@@ -4067,6 +4067,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Simple Live Streaming 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7415551745967847943, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7415551746384392253, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_Enabled
@@ -33155,11 +33160,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Simple Live Streaming 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7457567009657881522, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
-        type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 8fbc961fb3bb00c45894a8cf781628b8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4, type: 3}
 --- !u!23 &7537305500566883296

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TempCheckPassword : MonoBehaviour
 {
-    string password = "atrium2020";
+    string password = BaseStrings.password;
     [SerializeField] private InputField passwordInput;
     public UIControlsDemo UIControls;
 
@@ -22,12 +22,10 @@ public class TempCheckPassword : MonoBehaviour
             UIControls.characterSelect.SetActive(true);
             UIControls.roleSelect.SetActive(false);
         }
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CheckForPresenter(bool isPresenter)
     {
-        
+        SessionHandler.instance.SetPresenter(isPresenter);
     }
 }

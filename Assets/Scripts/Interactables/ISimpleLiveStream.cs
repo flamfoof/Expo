@@ -1,50 +1,42 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.Video;
-using UnityEngine.Assertions;
-using Photon.Voice;
 using Photon.Pun;
-using JetBrains.Annotations;
+using Byn.Unity.Examples;
+using UnityEngine.Assertions;
 
 public class ISimpleLiveStream : Interactables, IPunObservable
 {
-    CallAppUi callApp;
-
     bool checkTrigger = false;
+    OneToMany liveStream;
 
     public GameObject [] objectsToDisable;
 
-    void Start()
-    {
-        callApp = GetComponent<CallAppUi>();
 
-        Assert.IsNotNull(callApp);
+    private void Start()
+    {
+        liveStream = GetComponent<OneToMany>();
+
+        Assert.IsNotNull(liveStream);
     }
-    
+
     public override void Perform(InputActionPhase phase)
     {
         if (phase == InputActionPhase.Started)
         {
-            StartEndCall();
+            StartEndStream();
         }
     }
 
-    [ContextMenu("StartEndCall")]
-    void StartEndCall()
+    [ContextMenu("StartEndStream")]
+    void StartEndStream()
     {
         checkTrigger = !checkTrigger;
 
-        if (checkTrigger)
+        if (liveStream && !liveStream.isInitialized)
         {
-            Debug.Log("Call started");
-            callApp.SetupCallApp();
+            liveStream.StartStream();
         }
-        else
-        {
-            Debug.Log("Call ended");
-            callApp.ShutdownButtonPressed();
-        }
-
+        
         DisableObjects(!checkTrigger);
     }
 

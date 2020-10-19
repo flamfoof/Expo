@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-
+using Byn.Unity.Examples;
 
 public class IgniteGameManager : MonoBehaviourPunCallbacks
 {
@@ -96,10 +96,16 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
+
         if(AnalyticsController.Instance)
         {
             AnalyticsController.Instance.ProfileInfoAnalytics();
-        }        
+        }
+
+        if (SessionHandler.instance.CheckIfPresenter())
+        {
+            GetComponent<OneToMany>().StartStream();
+        }
     }
 
     void PrintRoomName()

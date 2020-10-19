@@ -17,10 +17,10 @@ MonoBehaviour:
     AppIdChat: 86375ea3-1b79-44a6-a8ba-7648e55dfdd6
     AppIdVoice: 6a6a8c45-b7d6-48f5-b790-c284a42a7c85
     AppVersion: 1.0
-    UseNameServer: 1
+    UseNameServer: 0
     FixedRegion: us
-    Server: 
-    Port: 0
+    Server: 185.169.197.142
+    Port: 5055
     ProxyServer: 
     Protocol: 0
     EnableProtocolFallback: 1

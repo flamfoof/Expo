@@ -173,4 +173,12 @@ public class CommandRing : MonoBehaviour
             GameObject.FindObjectOfType<TutorialBehavior>().MenuTutorialDone();
         }
     }
+
+    public void RaiseHand()
+    {
+        print(player.handRaise.name);
+        print("HAND RAISE");
+        player.handRaise.SetActive(true);
+
+    }
 }

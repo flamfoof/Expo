@@ -59,7 +59,10 @@ public class PlayerProximityVoice : MonoBehaviourPunCallbacks
         float distance = Vector3.Distance(thisPV.transform.position, otherPV.transform.position);
         return distance;
     }
-
+    
+    /// <summary>
+    /// Currently doesn't work. Sets volume of the target voice ID, meant for pseudo proximity voice.
+    /// </summary>
     void SetVolumeLevels(float volume, int voiceID)
     {
         audioCall.SetVolume(volume, voiceID);

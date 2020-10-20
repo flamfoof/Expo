@@ -30,6 +30,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        playerList = new List<PhotonView>();
+        IgniteInstance = this;
+
         if(!analyticsBoard)
         {
             analyticsBoard = GameObject.FindObjectOfType<BBBAnalytics>();
@@ -38,60 +41,23 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         {
             Application.logMessageReceived += CustomLogger;
         }
-
-        playerList = new List<PhotonView>();
-                
         if(!voiceManager)
         {
             voiceManager = GameObject.FindObjectOfType<CommunicationManager>();
         }
         
-           
-
-        IgniteInstance = this;
-
         if(!PhotonNetwork.IsConnected)
         {
-            SceneManager.LoadScene(sceneLogin);
-            
+            SceneManager.LoadScene(sceneLogin);            
             return;
         }
-
         if(!playerPrefab)
         {
             Debug.LogError("We need the player prefab in this game object");
         } else {
             if(!IgnitePlayerManager.LocalPlayerInstance)
             {
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                Player player;
-                GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
-                player = spawnedPlayer.GetPhotonView().Owner;
-                changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
-                Hashtable hash = new Hashtable();
-
-
-                spawnedPlayer.GetComponent<FirstPersonAIO>().enabled = true;
-                spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.SetActive(true);                
-                spawnedPlayer.GetComponent<FirstPersonAIO>().playerCamera.gameObject.transform.localPosition = spawnedPlayer.GetComponent<FirstPersonAIO>().cameraOrigin.transform.localPosition;
-                spawnedPlayer.GetComponent<UserActions>().playerName.text = player.NickName;
-                if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
-                {
-                    localPlayer = spawnedPlayer;
-                }
-
-                //ServerAvatarChange(spawnedPlayer);
-                //hash.Add("AvatarType", changeAvatar.Gender);
-
-                PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
-                player = spawnedPlayer.GetPhotonView().Owner;
-
-                //In the AttachAvatar.cs
-                //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber);
-                StartCoroutine(RefreshAvatars(2.0f));
-                
-                if(voiceManager)
-                    voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
+                SpawnPlayer();
             } else {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
@@ -108,24 +74,58 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void SpawnPlayer()
+    {
+        Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+        Player player;
+        GameObject spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnLoc.transform.position, spawnLoc.transform.rotation, 0);
+        player = spawnedPlayer.GetPhotonView().Owner;
+        changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
+        Hashtable hash = new Hashtable();
+        FirstPersonAIO FPAIO = spawnedPlayer.GetComponent<FirstPersonAIO>();
+
+        FPAIO.enabled = true;
+        FPAIO.playerCamera.gameObject.SetActive(true);                
+        FPAIO.playerCamera.gameObject.transform.localPosition = FPAIO.cameraOrigin.transform.localPosition;
+        spawnedPlayer.GetComponent<UserActions>().playerName.text = player.NickName;
+
+        if(spawnedPlayer.GetComponent<PhotonView>().IsMine)
+        {
+            localPlayer = spawnedPlayer;
+        }
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash); 
+        player = spawnedPlayer.GetPhotonView().Owner;
+
+        //In the AttachAvatar.cs
+        //spawnedPlayer.GetPhotonView().RPC("SetPlayerCustomization", RpcTarget.AllBuffered, player.ActorNumber);
+        StartCoroutine(RefreshAvatars(2.0f));
+        
+        #if UNITY_WEBGL
+        if(voiceManager)
+            voiceManager.webRTC.SendMsg(player.NickName + " has joined the room.");
+        #endif
+    }
+
+    /// <summary>
+    /// Called from UserAction. When Player prefab is spawned, force a refresh of the player list and WebRTC connections.
+    /// </summary>
+    public void RefreshOnPlayerSpawn()
+    {
+        RefreshPlayerList();
+
+        if(voiceManager)
+            voiceManager.RefreshWebGLSpeakers();        
+    }
+
     void PrintRoomName()
     {
-        Debug.Log("room name");
-        Debug.Log("Client state: " + PhotonNetwork.NetworkClientState.ToString());
-        Debug.Log("Server: " + PhotonNetwork.Server.ToString());
+        Debug.Log("Room - Client state: " + PhotonNetwork.NetworkClientState.ToString());
+        Debug.Log("Room - Server: " + PhotonNetwork.Server.ToString());
         Debug.Log(PhotonNetwork.CurrentRoom != null ? PhotonNetwork.CurrentRoom.Name : "Not Joined");
     }
 
-    //doesn't work. The player instantiates later than when joined room
-    void RPCRefreshAvatar()
-    {
-        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();        
-        PhotonView photonView = PhotonView.Get(changeAvatar.photonView);
-        photonView.RPC("RefreshAvatarList", RpcTarget.AllBuffered);
-
-    }
-
-    void RefreshAvatar()
+    void RefreshAllPlayerAvatar()
     {
         for(int i = 0; i < playerList.Count; i++)
         {
@@ -141,32 +141,16 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                 currentPVAvatar.avatarInfo.femaleAvatar.SetActive(false);
                 currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
                 currentPVAvatar.avatarInfo.maleAvatar.GetComponent<scr_Selector>().pickOneSuit(indexSuit);
-                //selectorMale.PickOneHead(avatarInfo.indexHead);
             } else
             {
                 currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);
                 currentPVAvatar.avatarInfo.femaleAvatar.SetActive(true);
                 currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.femaleAvatar.GetComponent<Animator>();
-                //selectorFemale.pickSuit(avatarInfo.indexSuit);
-                //selectorFemale.pickSkin(avatarInfo.indexHead);
             }       
         }
     }
 
-
-
-    public void RefreshOnPlayerSpawn()
-    {
-        RefreshPlayerList();
-
-        if(voiceManager)
-            voiceManager.RefreshWebGLSpeakers();
-        
-        //RefreshAvatars();
-        //Invoke("RefreshAvatars", 3.0f);
-    }
-
-
+    #region Photon Network Functions
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("<color=green>Player has entered the room: </color>" + newPlayer.NickName);
@@ -183,10 +167,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
-
-            //LoadExpo();
-        }
-        
+        }        
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -196,8 +177,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         if(PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
-            
-            //LoadExpo();
         }
         
         PhotonNetwork.DestroyPlayerObjects(otherPlayer);
@@ -213,7 +192,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         StartCoroutine(UnfocusApplicationCursor());
         SceneManager.LoadScene(sceneLogin);
     }
+    #endregion
 
+    /// <summary>
+    /// Changes the cursor state to Unfocused after next Fixed Update
+    /// </summary>
     public IEnumerator UnfocusApplicationCursor()
     {
         yield return new WaitForFixedUpdate();
@@ -222,29 +205,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         Cursor.visible = true;
     }
 
-
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
-
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
-
-    public void LoadExpo()
-    {
-        if(!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError( "PhotonNetwork : Trying to Load a level but we are not the master Client" );
-        }
-        
-        Debug.LogFormat( "PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount );
-
-        PhotonNetwork.LoadLevel(sceneMain);
-    }
-
+    /// <summary>
+    /// In case of incorrect players in the list, use this to find all the players in the room.
+    /// </summary>
     public void RefreshPlayerList()
     {
         playerList.Clear();
@@ -262,56 +225,19 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }        
     }
 
-
+    /// <summary>
+    /// Returns the list of current players in the Photon room.
+    /// </summary>
     public List<PhotonView> GetPlayerList()
     {
         return this.playerList;
     }
 
-    public void SetParent(Transform parent, Transform child)
-    {
-        child.SetParent(parent);
-    }
-
-    public void ServerAvatarChange(GameObject player)
-    {
-        AssignPlayerAvatar changeAvatar = GameObject.FindObjectOfType<AssignPlayerAvatar>();
-
-        if(player.GetComponent<PhotonView>().IsMine)
-        {            
-            Debug.Log(player.GetComponent<PhotonView>().Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-            changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-        } else{
-            int count = 0;
-            foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
-            {
-                Player pl = pv.Owner;
-                if(pl != null)
-                {
-                    if(player == pv.gameObject)
-                    {
-                        Debug.Log(pv.Owner.NickName + " has selected their character: " + (GenderList.genders)PhotonNetwork.LocalPlayer.CustomProperties["AvatarType"]);
-                        changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[count].CustomProperties["AvatarType"]);
-                        player.transform.name = pv.Owner.NickName;
-                    }
-                }
-                count++;
-            }
-            /*
-            for(int i = 0; i < PhotonNetwork.PlayerListOthers.; i++)
-            {
-                if(player == PhotonNetwork.PlayerListOthers[i].)
-                    changeAvatar.ChangeAvatar(player.GetComponent<AttachAvatar>().avatarBodyLocation.GetComponent<AvatarInfo>(), (GenderList.genders)PhotonNetwork.PlayerListOthers[i].CustomProperties["AvatarType"]);
-            }*/            
-        }
-    }
-
+    /// <summary>
+    /// Current solution to the avatars spawning with their current settings set by themselves.
+    /// </summary>
     public IEnumerator RefreshAvatars(float delay)
-    {
-        //update the meshes
-        //sorry it's messy!                   
-        int count = 0;
-        int actorNum;
+    {                 
         yield return new WaitForSeconds(delay);
         
         for(int i = 0; i < playerList.Count; i++)
@@ -321,6 +247,9 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    /// <summary>
+    /// Calculates the number of unique players in a room based on their Photon Nicknames. Called when new players enter.
+    /// </summary>
     public void RefreshUniquePlayer()
     {
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
@@ -362,18 +291,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                     {
                         AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
                     } 
-                }
-                
-            }
-                  
-        }
-    }
-
-    public void PrintPlayerStats()
-    {
-        for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            
+                }                
+            }                  
         }
     }
 
@@ -389,5 +308,15 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         
         //Debug.Log(stackTrace);
         //Debug.Log(type.ToString());
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
     }
 }

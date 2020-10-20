@@ -56,6 +56,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public float sessionTimer = 0.0f;
     public float realSessionTimer = 0.0f;
 
+    public GameObject handRaise;
 
     public float SessionTimer
     {

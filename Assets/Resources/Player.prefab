@@ -523,7 +523,7 @@ MonoBehaviour:
   mouseSensitivity: 0.75
   fOVToMouseSensitivity: 0.475
   cameraSmoothing: 5
-  lockAndHideCursor: 0
+  lockAndHideCursor: 1
   playerCamera: {fileID: 20724644957976244}
   cameraOrigin: {fileID: 7151468985975787232}
   enableCameraShake: 1

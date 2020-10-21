@@ -3255,12 +3255,17 @@ PrefabInstance:
     - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: voiceDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: unityMicrophoneDevice
       value: Microphone Array (Realtek(R) Audio)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: voiceDetectionThreshold
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5063427659900530138, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}

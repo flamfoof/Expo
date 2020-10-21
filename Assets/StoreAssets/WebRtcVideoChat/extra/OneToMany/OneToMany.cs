@@ -292,14 +292,16 @@ namespace Byn.Unity.Examples
 
                     mConnectionIds.Add(evt.ConnectionId);
                     Log("New connection id " + evt.ConnectionId);
+                    if (uSender) return;
                     gameObject.SendMessage("DisableObjects", false);
                     uVideoOutput.gameObject.SetActive(true);
                     retryingConnection = false;
 
                     break;
                 case NetEventType.ConnectionFailed:
-                    //call failed
+
                     Log("Outgoing connection failed no presenter found");
+                    if (uSender) return;
                     retryingConnection = false;
                     gameObject.SendMessage("SetStatusText" , "No presenter found! Tap to reconnect Or contact We-Ignite for support");
 
@@ -309,8 +311,8 @@ namespace Byn.Unity.Examples
                     if (mConnectionIds.Contains(evt.ConnectionId))
                     {
                         mConnectionIds.Remove(evt.ConnectionId);
-
                         Log("Connection disconnected");
+                        if (uSender)return;
                         uVideoOutput.gameObject.SetActive(false);
                         gameObject.SendMessage("DisableObjects", true);
                         gameObject.SendMessage("SetStatusText", "Connection disconnected! Tap again to retry when presenter is available");
@@ -321,9 +323,9 @@ namespace Byn.Unity.Examples
                     Log("Server ready for incoming connections. Address: " + evt.Info);
                     break;
                 case NetEventType.ServerInitFailed:
-                    ///// may be use for reinitializing the connection for multiple Usender
-                    //uSender = false;
+        
                     Log("Server init failed");
+                    if (uSender) return;
                     gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:

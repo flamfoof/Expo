@@ -102,6 +102,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         rtc = GameObject.FindObjectOfType<CommunicationManager>();
         photonTextManager = GameObject.FindObjectOfType<PhotonTextComms>();
         photonVoiceManager = GameObject.FindObjectOfType<PhotonVoiceComms>();
+        StartCoroutine(RefocusApplicationCursor());
 
         //InvokeRepeating("UpdateLoginTime", 1.0f, 1.0f);
 

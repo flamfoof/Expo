@@ -87,6 +87,7 @@ namespace Byn.Unity.Examples
         public bool uSender = false;
         public bool uDisableAudio = true;
         [HideInInspector] public bool isInitialized = false;
+        [HideInInspector] public bool retryingConnection = false;
 
         /// <summary>
         /// Will be used to show the texture received (or sent)
@@ -293,12 +294,14 @@ namespace Byn.Unity.Examples
                     Log("New connection id " + evt.ConnectionId);
                     gameObject.SendMessage("DisableObjects", false);
                     uVideoOutput.gameObject.SetActive(true);
+                    retryingConnection = false;
 
                     break;
                 case NetEventType.ConnectionFailed:
                     //call failed
                     Log("Outgoing connection failed no presenter found");
-                    gameObject.SendMessage("SetStatusText" , "Outgoing connection failed, No presenter found! Or contact We-Ignite for support");
+                    retryingConnection = false;
+                    gameObject.SendMessage("SetStatusText" , "No presenter found! Tap to reconnect Or contact We-Ignite for support");
 
                     break;
                 case NetEventType.Disconnected:

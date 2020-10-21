@@ -3,6 +3,8 @@ using UnityEngine;
 using Photon.Pun;
 using Byn.Unity.Examples;
 using UnityEngine.Assertions;
+using TMPro;
+using Byn.Awrtc;
 
 public class ISimpleLiveStream : Interactables, IPunObservable
 {
@@ -11,12 +13,19 @@ public class ISimpleLiveStream : Interactables, IPunObservable
 
     public GameObject [] objectsToDisable;
 
+    public TextMeshProUGUI Text;
 
     private void Start()
     {
         liveStream = GetComponent<OneToMany>();
 
         Assert.IsNotNull(liveStream);
+        Assert.IsNotNull(Text);
+    }
+
+    public void SetStatusText(string msg)
+    {
+        Text.text = msg;
     }
 
     public override void Perform(InputActionPhase phase)
@@ -35,12 +44,18 @@ public class ISimpleLiveStream : Interactables, IPunObservable
         if (liveStream && !liveStream.isInitialized)
         {
             liveStream.StartStream();
+            SetStatusText("Connecting to presenter please wait...");
+        }
+        else if (liveStream.networkEvent.Type == NetEventType.Disconnected)
+        {
+            liveStream.StartStream();
+            SetStatusText("Connecting to presenter please wait...");
         }
         
-        DisableObjects(!checkTrigger);
+        //DisableObjects(!checkTrigger);
     }
 
-    void DisableObjects(bool status)
+    public void DisableObjects(bool status)
     {
         if (objectsToDisable.Length == 0)
             return;

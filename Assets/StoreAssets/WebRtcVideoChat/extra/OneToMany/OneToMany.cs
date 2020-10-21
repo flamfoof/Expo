@@ -105,7 +105,8 @@ namespace Byn.Unity.Examples
        
         public string sAddress = null;
 
-
+        [HideInInspector]
+        public NetworkEvent networkEvent;
         /// <summary>
         /// Can be used to keep track of each connection. 
         /// </summary>
@@ -290,11 +291,15 @@ namespace Byn.Unity.Examples
 
                     mConnectionIds.Add(evt.ConnectionId);
                     Log("New connection id " + evt.ConnectionId);
+                    gameObject.SendMessage("DisableObjects", false);
+                    uVideoOutput.gameObject.SetActive(true);
 
                     break;
                 case NetEventType.ConnectionFailed:
                     //call failed
-                    Log("Outgoing connection failed");
+                    Log("Outgoing connection failed no presenter found");
+                    gameObject.SendMessage("SetStatusText" , "Outgoing connection failed, No presenter found! Or contact We-Ignite for support");
+
                     break;
                 case NetEventType.Disconnected:
 
@@ -303,6 +308,9 @@ namespace Byn.Unity.Examples
                         mConnectionIds.Remove(evt.ConnectionId);
 
                         Log("Connection disconnected");
+                        uVideoOutput.gameObject.SetActive(false);
+                        gameObject.SendMessage("DisableObjects", true);
+                        gameObject.SendMessage("SetStatusText", "Connection disconnected! Tap again to retry when presenter is available");
                     }
                     break;
                 case NetEventType.ServerInitialized:
@@ -312,13 +320,15 @@ namespace Byn.Unity.Examples
                 case NetEventType.ServerInitFailed:
                     ///// may be use for reinitializing the connection for multiple Usender
                     //uSender = false;
-                    //Start();
                     Log("Server init failed");
+                    gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:
                     Log("Server stopped");
                     break;
             }
+
+            networkEvent = evt;
         }
 
 

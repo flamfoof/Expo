@@ -179,6 +179,6 @@ public class CommandRing : MonoBehaviour
         print(player.handRaise.name);
         print("HAND RAISE");
         player.handRaise.SetActive(true);
-        player.OnHandRaise();
+
     }
 }

@@ -66,9 +66,18 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         infoUI.SetActive(true);
         infoUIEnabled = true;
         playerName.SetActive(false);
-        //playerOrganization.SetActive(false);
+        playerOrganization.SetActive(false);
     }
 
+    //public void DisablePlayerButtonInfoUI()
+    //{
+    //    infoUI.SetActive(false);
+    //    infoUIEnabled = false;
+    //    playerName.SetActive(true);
+    //    playerOrganization.SetActive(true);
+    //}
+
+    //stephen code
     public IEnumerator IEDisablePlayerButtonInfoUI()
     {
         yield return new WaitForSeconds(2.0f);
@@ -83,4 +92,5 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     {
         StartCoroutine(IEDisablePlayerButtonInfoUI());
     }
+    //stephen code end
 }

@@ -70,6 +70,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
         if (SessionHandler.instance.CheckIfPresenter())
         {
+            GetComponent<OneToMany>().sAddress = SessionHandler.instance.passAdress;
             GetComponent<OneToMany>().StartStream();
         }
     }

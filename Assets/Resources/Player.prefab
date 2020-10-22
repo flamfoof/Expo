@@ -1656,6 +1656,8 @@ MonoBehaviour:
   playerOrganization: {fileID: 5553261012264249882}
   infoUI: {fileID: 956930915456542247}
   infoUIEnabled: 0
+  speakerImage: {fileID: 0}
+  recorderImage: {fileID: 0}
 --- !u!1 &5553261012264249882
 GameObject:
   m_ObjectHideFlags: 0

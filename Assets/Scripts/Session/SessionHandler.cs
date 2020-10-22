@@ -5,8 +5,10 @@ using UnityEngine;
 public class SessionHandler : MonoBehaviour
 {
     public static SessionHandler instance { get; private set; }
+    public string passAdress = string.Empty;
 
     bool isPresenter = false;
+    
 
     void Awake()
     {

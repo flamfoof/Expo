@@ -19,6 +19,8 @@ public class ISimpleVideo : Interactables, IPunObservable
     VideoPlayer videoPlayer;
     YoutubePlayer ytPlayer;
 
+    bool isVideoPlaying;
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -58,9 +60,12 @@ public class ISimpleVideo : Interactables, IPunObservable
     [ContextMenu("InteractVideo")]
     void InteractVideo()
     {
+        isVideoPlaying = videoPlayer.isPlaying;
+        Debug.LogError("InteractVideo RPC Received" );
+
         if (lvp.isLocal)
         {
-            if (videoPlayer.isPlaying)
+            if (isVideoPlaying)
             {
                 playPauseUI.SetVisibility(true, false);
                 videoPlayer.Pause();
@@ -79,7 +84,7 @@ public class ISimpleVideo : Interactables, IPunObservable
                 ytPlayer.enabled = true;
             }
 
-            if (videoPlayer.isPlaying)
+            if (isVideoPlaying)
             {
                 playPauseUI.SetVisibility(true, false);
                 videoPlayer.Pause();
@@ -99,6 +104,13 @@ public class ISimpleVideo : Interactables, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
+        if (stream.IsWriting)
+        {
+            stream.SendNext(isVideoPlaying);
+        }
+        else
+        {
+            this.isVideoPlaying = (bool)stream.ReceiveNext();
+        }
     }
 }

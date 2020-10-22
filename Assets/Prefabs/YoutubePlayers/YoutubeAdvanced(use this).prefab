@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &77763327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77763326}
   m_LocalRotation: {x: 0.000000029802319, y: -0.16017976, z: 0.0000000372529, w: 0.98708785}
-  m_LocalPosition: {x: 0, y: 0, z: -298}
+  m_LocalPosition: {x: 0, y: 0, z: -114}
   m_LocalScale: {x: 0.42015004, y: 0.42015004, z: 0.42015004}
   m_Children: []
   m_Father: {fileID: 224907842417703490}
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -18.435001, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -649.5, y: -54}
+  m_AnchoredPosition: {x: -214, y: -54}
   m_SizeDelta: {x: 196.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &77763329
@@ -1983,14 +1983,14 @@ VideoPlayer:
   m_AspectRatio: 4
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 82278814088756274}
   m_DirectAudioVolumes:
-  - 0
+  - 0.421
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 01
+  m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
@@ -2009,18 +2009,18 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.687
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 256
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 0.1
+  Priority: 128
+  DopplerLevel: 5
+  MinDistance: 3
+  MaxDistance: 10.868378
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -3096,8 +3096,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 10}
-  m_SizeDelta: {x: 77.04956, y: 79.71927}
+  m_AnchoredPosition: {x: -4, y: 9}
+  m_SizeDelta: {x: 32.023148, y: 36.62171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5541895591204214438
 CanvasRenderer:

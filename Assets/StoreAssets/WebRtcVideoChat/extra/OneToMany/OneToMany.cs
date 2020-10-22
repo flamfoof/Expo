@@ -87,6 +87,7 @@ namespace Byn.Unity.Examples
         public bool uSender = false;
         public bool uDisableAudio = true;
         [HideInInspector] public bool isInitialized = false;
+        [HideInInspector] public bool retryingConnection = false;
 
         /// <summary>
         /// Will be used to show the texture received (or sent)
@@ -105,7 +106,8 @@ namespace Byn.Unity.Examples
        
         public string sAddress = null;
 
-
+        [HideInInspector]
+        public NetworkEvent networkEvent;
         /// <summary>
         /// Can be used to keep track of each connection. 
         /// </summary>
@@ -290,19 +292,30 @@ namespace Byn.Unity.Examples
 
                     mConnectionIds.Add(evt.ConnectionId);
                     Log("New connection id " + evt.ConnectionId);
+                    if (uSender) return;
+                    gameObject.SendMessage("DisableObjects", false);
+                    uVideoOutput.gameObject.SetActive(true);
+                    retryingConnection = false;
 
                     break;
                 case NetEventType.ConnectionFailed:
-                    //call failed
-                    Log("Outgoing connection failed");
+
+                    Log("Outgoing connection failed no presenter found");
+                    if (uSender) return;
+                    retryingConnection = false;
+                    gameObject.SendMessage("SetStatusText" , "No presenter found! Tap to reconnect Or contact We-Ignite for support");
+
                     break;
                 case NetEventType.Disconnected:
 
                     if (mConnectionIds.Contains(evt.ConnectionId))
                     {
                         mConnectionIds.Remove(evt.ConnectionId);
-
                         Log("Connection disconnected");
+                        if (uSender)return;
+                        uVideoOutput.gameObject.SetActive(false);
+                        gameObject.SendMessage("DisableObjects", true);
+                        gameObject.SendMessage("SetStatusText", "Connection disconnected! Tap again to retry when presenter is available");
                     }
                     break;
                 case NetEventType.ServerInitialized:
@@ -310,15 +323,17 @@ namespace Byn.Unity.Examples
                     Log("Server ready for incoming connections. Address: " + evt.Info);
                     break;
                 case NetEventType.ServerInitFailed:
-                    ///// may be use for reinitializing the connection for multiple Usender
-                    //uSender = false;
-                    //Start();
+        
                     Log("Server init failed");
+                    if (uSender) return;
+                    gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:
                     Log("Server stopped");
                     break;
             }
+
+            networkEvent = evt;
         }
 
 

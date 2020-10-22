@@ -61,7 +61,6 @@ public class ISimpleVideo : Interactables, IPunObservable
     void InteractVideo()
     {
         isVideoPlaying = videoPlayer.isPlaying;
-        Debug.LogError("InteractVideo RPC Received" );
 
         if (lvp.isLocal)
         {

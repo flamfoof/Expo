@@ -3266,7 +3266,7 @@ PrefabInstance:
     - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: voiceDetectionThreshold
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5063427659900530138, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
@@ -8730,6 +8730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IgniteGameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327607, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}

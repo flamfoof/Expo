@@ -23,7 +23,6 @@ public class PlayPauseUI : MonoBehaviour
     public void SetVisibility(bool show , bool playStatus = true)
     {
         coverImage.sprite = playStatus ? pause : play;
-        Debug.Log("SetVisibility " + show);
 
         if (UIObject == null)
         {

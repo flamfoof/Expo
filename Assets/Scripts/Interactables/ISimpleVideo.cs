@@ -10,8 +10,10 @@ public class ISimpleVideo : Interactables, IPunObservable
 {
     [SerializeField]
     LocalVideoPlay lvp;
-    [SerializeField]
-    PlayPauseUI playPauseUI;
+
+    [HideInInspector]
+    public PlayPauseUI playPauseUI;
+
 
     PhotonView photonView;
     VideoPlayer videoPlayer;
@@ -31,6 +33,8 @@ public class ISimpleVideo : Interactables, IPunObservable
 
         IntializeValues();
     }
+
+
 
     void IntializeValues()
     {
@@ -86,6 +90,11 @@ public class ISimpleVideo : Interactables, IPunObservable
                 videoPlayer.Play();
             }
         }
+    }
+
+    public bool PlayStatus()
+    {
+        return videoPlayer.isPlaying;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

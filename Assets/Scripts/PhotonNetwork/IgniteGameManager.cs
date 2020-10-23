@@ -73,6 +73,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
             GetComponent<OneToMany>().sAddress = SessionHandler.instance.passAdress;
             GetComponent<OneToMany>().StartStream();
         }
+
+        commandUI.EnableStreamBtns(SessionHandler.instance.CheckIfPresenter());
     }
 
     private void SpawnPlayer()

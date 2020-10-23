@@ -48,6 +48,13 @@ public class InteractableRayIdentifier : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             focusedObject = hit.collider.gameObject;
 
+            //Stephen   
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
+
             if (focusedObject.GetComponent<ISimpleVideo>())
             {
                 TempObject = focusedObject;
@@ -64,17 +71,34 @@ public class InteractableRayIdentifier : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             playerfocusedObject = hit.collider.gameObject;
+
+            playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().EnablePlayerButtonInfoUI();
+
             canvas.alpha = 1;
         }
         else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, floorMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             floorfocusedObject = hit.collider.gameObject;
+            //Stephen
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
             canvas.alpha = 1;
         }
         else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
+
+            //Stephen
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
+
             playerfocusedObject = null;
             floorfocusedObject = null;
             canvas.alpha = 0;

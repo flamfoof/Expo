@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -584,6 +585,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //sends a message to everyone that you are using emote
         photonView.RPC("Emote", RpcTarget.All, emoteIndex);
     }
+
+    //stephen code
+    public void HandRaiseClicked()
+    {
+        Debug.Log("Send hand raise");
+        photonView.RPC("RecvHandRaise", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
+    }
+
+    [PunRPC]
+    public void RecvHandRaise(int actorId)
+    {
+        Debug.Log("Recv hand raise -- " + actorId);
+
+        if(PhotonNetwork.LocalPlayer.ActorNumber != actorId)
+        {
+            for(int i = 0; i < PhotonNetwork.PlayerList.Length; i ++)
+            {
+                Debug.Log("--- check ----" + PhotonNetwork.PlayerList[i].ActorNumber);
+            }
+        }
+    }
+    //stephen code end
 
     [PunRPC]
     public void Emote(int emoteIndex)

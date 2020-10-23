@@ -585,6 +585,20 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         photonView.RPC("Emote", RpcTarget.All, emoteIndex);
     }
 
+    //stephen code
+    public void HandRaiseClicked()
+    {
+        Debug.Log("Send hand raise");
+        photonView.RPC("RecvHandRaise", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void RecvHandRaise()
+    {
+        Debug.Log("Recv hand raise");
+    }
+    //stephen code end
+
     [PunRPC]
     public void Emote(int emoteIndex)
     {

@@ -600,9 +600,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
         if(PhotonNetwork.LocalPlayer.ActorNumber != actorId)
         {
-            for(int i = 0; i < PhotonNetwork.PlayerList.Length; i ++)
+            for(int i = 0; i < gameManager.playerList.Count; i ++)
             {
-                Debug.Log("--- check ----" + PhotonNetwork.PlayerList[i].ActorNumber);
+                if(gameManager.playerList[i].Owner.ActorNumber == actorId)
+                {
+                    gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(true);
+                }
             }
         }
     }

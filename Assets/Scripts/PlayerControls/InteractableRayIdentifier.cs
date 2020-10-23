@@ -48,16 +48,13 @@ public class InteractableRayIdentifier : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             focusedObject = hit.collider.gameObject;
 
-<<<<<<< HEAD
-=======
-            //Stephen
+            //Stephen   
             if (playerfocusedObject != null)
             {
                 playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
             }
             //stephen end
 
->>>>>>> origin/ruler
             if (focusedObject.GetComponent<ISimpleVideo>())
             {
                 TempObject = focusedObject;

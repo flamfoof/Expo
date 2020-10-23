@@ -69,11 +69,28 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         playerOrganization.SetActive(false);
     }
 
-    public void DisablePlayerButtonInfoUI()
+    //public void DisablePlayerButtonInfoUI()
+    //{
+    //    infoUI.SetActive(false);
+    //    infoUIEnabled = false;
+    //    playerName.SetActive(true);
+    //    playerOrganization.SetActive(true);
+    //}
+
+    //stephen code
+    public IEnumerator IEDisablePlayerButtonInfoUI()
     {
+        yield return new WaitForSeconds(2.0f);
+
         infoUI.SetActive(false);
         infoUIEnabled = false;
         playerName.SetActive(true);
-        playerOrganization.SetActive(true);
+        //playerOrganization.SetActive(true);
     }
+
+    public void DisablePlayerButtonInfoUI()
+    {
+        StartCoroutine(IEDisablePlayerButtonInfoUI());
+    }
+    //stephen code end
 }

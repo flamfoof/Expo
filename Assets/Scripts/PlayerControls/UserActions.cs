@@ -482,6 +482,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         if (toggle)
         {
             UpdateControlLock(false, true);
+            OpenCommandRing(false);
             StartCoroutine(UnfocusApplicationCursor());
             rtc.sendMessage.SetActive(toggle);
             rtc.webRTC.messageField.text = "";
@@ -623,6 +624,29 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     }
     //stephen code end
 
+    
+    public void SetMuteAll(bool isMute)
+    {
+        //currently only mutes to false/off, so you can modify CommandMuteAll.cs later for toggle
+        photonView.RPC("RPCSetMuteAll", RpcTarget.All, isMute);
+    }
+
+    [PunRPC]
+    public void RPCSetMuteAll(bool isMute)
+    {
+        if(!SessionHandler.instance.CheckIfPresenter())
+        {
+            PhotonVoiceComms.instance.MuteSelf(isMute);
+            //hard coded for Unmute button
+            commandUI.GetComponent<CommandRing>().commands[1].SetActive(!isMute);
+            commandUI.GetComponent<CommandRing>().commands[1].GetComponent<CommandMute>().isTransmitting = !isMute;
+            //hard codd for mute button
+            commandUI.GetComponent<CommandRing>().commands[2].SetActive(isMute);
+            commandUI.GetComponent<CommandRing>().commands[2].GetComponent<CommandMute>().isTransmitting = isMute;
+
+        }
+    }
+
     [PunRPC]
     public void Emote(int emoteIndex)
     {
@@ -751,7 +775,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
     }
 
     public IEnumerator UnfocusApplicationCursor()

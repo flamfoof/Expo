@@ -27,4 +27,17 @@ public class PhotonVoiceComms : MonoBehaviour
     {
         photonRecorder.TransmitEnabled = isMute;
     }
+
+    public void MuteOther(int actorNum)
+    {
+        
+    }
+    
+    public void MuteAll(bool isMute)
+    {
+        if(!SessionHandler.instance.CheckIfPresenter())
+        {
+            photonRecorder.TransmitEnabled = isMute;
+        }
+    }    
 }

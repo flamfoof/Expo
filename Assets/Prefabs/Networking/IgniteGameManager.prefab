@@ -134,7 +134,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3516366016013513357}
+      - m_Target: {fileID: 3656525779594802757}
         m_MethodName: StartStopStream
         m_Mode: 6
         m_Arguments:
@@ -357,7 +357,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3516366016013513357}
+      - m_Target: {fileID: 470924377}
         m_MethodName: StartStopStream
         m_Mode: 6
         m_Arguments:

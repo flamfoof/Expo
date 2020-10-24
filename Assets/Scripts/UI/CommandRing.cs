@@ -193,8 +193,4 @@ public class CommandRing : MonoBehaviour
         player.HandRaiseClicked();
     }
 
-    public void StartStopStream(bool status)
-    {
-        gameManager.GetComponent<DestroyConnection>().StartEndStream(status);
-    }
 }

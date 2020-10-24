@@ -89,6 +89,8 @@ namespace Byn.Unity.Examples
         [HideInInspector] public bool isInitialized = false;
         [HideInInspector] public bool retryingConnection = false;
 
+        public Texture2D noCameraTexture;
+
         /// <summary>
         /// Will be used to show the texture received (or sent)
         /// </summary>
@@ -329,6 +331,7 @@ namespace Byn.Unity.Examples
                     gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:
+                    gameObject.SendMessage("SetStatusText", "Connection disconnected! Server stopped");
                     Log("Server stopped");
                     break;
             }
@@ -388,6 +391,20 @@ namespace Byn.Unity.Examples
             tex.LoadRawTextureData(frame.Buffer);
             tex.Apply();
             return newTextureCreated;
+        }
+
+        public void ShutDownServer()
+        {
+            mMediaNetwork.Dispose();
+            
+            UpdateTexture(null);
+
+            isInitialized = false;
+
+            if (noCameraTexture != null)
+            {
+                uVideoOutput.texture = noCameraTexture;
+            }
         }
     }
 }

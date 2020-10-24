@@ -23,6 +23,9 @@ public class CommandRing : MonoBehaviour
     //tutorial
     public GameObject[] tutorialElements;
 
+    public Button[] startEndStream_Btns;
+
+
     public float visualDistance = 5.0f;
 
     void Start()
@@ -154,6 +157,14 @@ public class CommandRing : MonoBehaviour
         }
     }
 
+    public void EnableStreamBtns(bool status)
+    {
+        for (int i = 0; i < startEndStream_Btns.Length; i++)
+        {
+            startEndStream_Btns[i].gameObject.SetActive(status);
+        }
+    }
+
     public void StartMenuTutorial()
     {
         foreach (GameObject g in tutorialElements)
@@ -180,5 +191,10 @@ public class CommandRing : MonoBehaviour
         print("HAND RAISE");
         player.handRaise.SetActive(true);
         player.HandRaiseClicked();
+    }
+
+    public void StartStopStream(bool status)
+    {
+        gameManager.GetComponent<DestroyConnection>().StartEndStream(status);
     }
 }

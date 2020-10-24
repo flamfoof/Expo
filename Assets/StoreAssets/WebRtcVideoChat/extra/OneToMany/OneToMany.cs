@@ -331,6 +331,7 @@ namespace Byn.Unity.Examples
                     gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:
+                    if (uSender) return;
                     gameObject.SendMessage("SetStatusText", "Connection disconnected! Server stopped");
                     Log("Server stopped");
                     break;

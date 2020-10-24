@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommandStream : CommandButton
 {
-    void Start()
+    public override void Click()
     {
         
     }

@@ -189,7 +189,14 @@ public class CommandRing : MonoBehaviour
     {
         print(player.handRaise.name);
         print("HAND RAISE");
-        player.handRaise.SetActive(true);
+        if(player.handRaise.activeSelf)
+        {
+            player.handRaise.SetActive(false);
+        }
+        else
+        {
+            player.handRaise.SetActive(true);
+        }
         player.HandRaiseClicked();
     }
 

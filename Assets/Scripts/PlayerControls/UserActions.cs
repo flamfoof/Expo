@@ -593,6 +593,11 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         photonView.RPC("RecvHandRaise", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
+    public void RaisedHandClicked()
+    {
+
+    }
+
     [PunRPC]
     public void RecvHandRaise(int actorId)
     {
@@ -600,9 +605,19 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
         if(PhotonNetwork.LocalPlayer.ActorNumber != actorId)
         {
-            for(int i = 0; i < PhotonNetwork.PlayerList.Length; i ++)
+            for(int i = 0; i < gameManager.playerList.Count; i ++)
             {
-                Debug.Log("--- check ----" + PhotonNetwork.PlayerList[i].ActorNumber);
+                if(gameManager.playerList[i].Owner.ActorNumber == actorId)
+                {
+                    if(gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.activeSelf)
+                    {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(true);
+                    }
+                }
             }
         }
     }

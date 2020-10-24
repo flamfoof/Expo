@@ -9,4 +9,8 @@ public class CommandStream : CommandButton
         
     }
 
+    public void StartStopStream(bool status)
+    {
+        IgniteGameManager.IgniteInstance.GetComponent<DestroyConnection>().StartEndStream(status);
+    }
 }

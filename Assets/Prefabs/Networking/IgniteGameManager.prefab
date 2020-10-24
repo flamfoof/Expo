@@ -134,7 +134,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3516366016013513357}
+      - m_Target: {fileID: 470924377}
         m_MethodName: StartStopStream
         m_Mode: 6
         m_Arguments:
@@ -357,7 +357,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3516366016013513357}
+      - m_Target: {fileID: 3656525779594802757}
         m_MethodName: StartStopStream
         m_Mode: 6
         m_Arguments:
@@ -871,6 +871,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4938857522159327607}
     m_Modifications:
+    - target: {fileID: 140611715448201889, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 261849572696019507, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}
       propertyPath: m_IgnoreReversedGraphics
@@ -890,6 +895,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299254226593976870, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1843774188406491686, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}

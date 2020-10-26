@@ -24,7 +24,6 @@ public class CommandRing : MonoBehaviour
     //tutorial
     public GameObject[] tutorialElements;
 
-
     public float visualDistance = 5.0f;
 
     void Start()
@@ -188,12 +187,14 @@ public class CommandRing : MonoBehaviour
     {
         print(player.handRaise.name);
         print("HAND RAISE");
-        if(player.handRaise.activeSelf)
+        if(player.isHandRaised)
         {
+            player.isHandRaised = false;
             player.handRaise.SetActive(false);
         }
         else
         {
+            player.isHandRaised = true;
             player.handRaise.SetActive(true);
         }
         player.HandRaiseClicked();

@@ -58,6 +58,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public float realSessionTimer = 0.0f;
 
     public GameObject handRaise;
+    public bool isHandRaised = false;
 
     public float SessionTimer
     {
@@ -129,6 +130,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         infoCanvasGroup = GetComponent<CanvasGroup>();
         commandUI = gameManager.commandUI.gameObject;
         uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
+
+        isHandRaised = false;
     }
 
     private void Start()
@@ -590,7 +593,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     //stephen code
     public void HandRaiseClicked()
     {
-        Debug.Log("Send hand raise");
         photonView.RPC("RecvHandRaise", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
@@ -599,11 +601,21 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public void UpdateHandState()
+    {
+        if(isHandRaised)
+        {
+            gameManager.handStateObj.SetActive(true);
+        }
+        else
+        {
+            gameManager.handStateObj.SetActive(false);
+        }
+    }
+
     [PunRPC]
     public void RecvHandRaise(int actorId)
     {
-        Debug.Log("Recv hand raise -- " + actorId);
-
         if(PhotonNetwork.LocalPlayer.ActorNumber != actorId)
         {
             for(int i = 0; i < gameManager.playerList.Count; i ++)
@@ -612,14 +624,21 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     if(gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.activeSelf)
                     {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().isHandRaised = false;
                         gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(false);
                     }
                     else
                     {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().isHandRaised = true;
                         gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(true);
                     }
                 }
             }
+        }
+        else
+        {
+            
+            UpdateHandState();
         }
     }
     //stephen code end

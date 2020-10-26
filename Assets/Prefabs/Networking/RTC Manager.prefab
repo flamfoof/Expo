@@ -1989,7 +1989,7 @@ MonoBehaviour:
   HistoryLengthToFetch: 5
   uiEffects: {fileID: 0}
   parentComms: {fileID: 0}
-  chatFadeTimer: 3
+  chatFadeTimer: 5
 --- !u!114 &2601420816828500363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,7 +2019,7 @@ MonoBehaviour:
   voiceDetection: 0
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Mic in at front panel (Pink) (Realtek(R) Audio)
+  unityMicrophoneDevice: Microphone (High Definition Audio Device)
   photonMicrophoneDeviceId: 0
   interestGroup: 0
   debugEchoMode: 0

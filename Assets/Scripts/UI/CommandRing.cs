@@ -10,6 +10,7 @@ public class CommandRing : MonoBehaviour
     public GameObject[] commands;
     public GameObject cancel;
     public IgniteGameManager gameManager;
+    public Button[] startEndStream_Btns;
     public UserActions player;
     public Quaternion playerHeadRotation;
     public Vector3 worldPos;
@@ -22,6 +23,7 @@ public class CommandRing : MonoBehaviour
 
     //tutorial
     public GameObject[] tutorialElements;
+
 
     public float visualDistance = 5.0f;
 
@@ -154,6 +156,14 @@ public class CommandRing : MonoBehaviour
         }
     }
 
+    public void EnableStreamBtns(bool status)
+    {
+        for (int i = 0; i < startEndStream_Btns.Length; i++)
+        {
+            startEndStream_Btns[i].gameObject.SetActive(status);
+        }
+    }
+
     public void StartMenuTutorial()
     {
         foreach (GameObject g in tutorialElements)
@@ -188,4 +198,5 @@ public class CommandRing : MonoBehaviour
         }
         player.HandRaiseClicked();
     }
+
 }

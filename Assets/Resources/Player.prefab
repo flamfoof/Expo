@@ -602,7 +602,7 @@ MonoBehaviour:
   isAppFocused: 1
   isMenuOpen: 0
   isChatOpen: 0
-  chatFadeTimer: 3
+  chatFadeTimer: 5
   isChatFading: 0
   isCommandRingOpen: 0
   canMove: 1
@@ -620,6 +620,7 @@ MonoBehaviour:
   sessionTimer: 0
   realSessionTimer: 0
   handRaise: {fileID: 5722500453887658693}
+  isHandRaised: 0
   objectsInteracted: []
   disableServer: 0
   emoteForce: 20

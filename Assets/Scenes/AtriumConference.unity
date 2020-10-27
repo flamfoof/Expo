@@ -3267,6 +3267,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5672570408266120978, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: chatFadeTimer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: videoImage.Array.size

@@ -28,6 +28,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public IgniteAnalytics analyticsBoard;
 
+    public GameObject handStateObj;
+
     void Start()
     {
         playerList = new List<PhotonView>();

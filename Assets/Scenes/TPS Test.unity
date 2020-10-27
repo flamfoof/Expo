@@ -122,6 +122,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 93b541823d5a41846b2149912e8057e6, type: 2}
+--- !u!95 &91595112 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 5ef11af662b6e674881a3e21e9a64677,
+    type: 3}
+  m_PrefabInstance: {fileID: 266499345}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &266499345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,7 +303,7 @@ GameObject:
   - component: {fileID: 523417696}
   - component: {fileID: 523417695}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player TPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +354,7 @@ MonoBehaviour:
   cameraOffset: {x: 6.09, y: 5.24, z: 1}
   targetIndicatorPrefab: {fileID: 6003922938570993101, guid: 0ac80d45cbb23cf42a2e39c66206d5cc,
     type: 3}
-  Anim: {fileID: 0}
+  Anim: {fileID: 91595112}
 --- !u!195 &523417696
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -359,11 +365,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -574,15 +580,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.409096
+      value: 51.98
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.206084
+      value: 5.21
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.95
+      value: 87.29
       objectReference: {fileID: 0}
     - target: {fileID: 4448068258976056, guid: 2e62f5703e5f8d2488a5e1bc8433be41, type: 3}
       propertyPath: m_LocalRotation.x
@@ -625,6 +631,11 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458702707017812683, guid: 2e62f5703e5f8d2488a5e1bc8433be41,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3830577007509843524, guid: 2e62f5703e5f8d2488a5e1bc8433be41,
         type: 3}

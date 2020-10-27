@@ -31,15 +31,7 @@ public class MobileCharacterController : MonoBehaviour
 
     void Update()
     {
-
-        if (agent.isStopped)
-        {
-            Debug.Log("On the point");
-        }
-        else
-        {
-            Debug.Log("Moving to the point");
-        }
+        HandleAnimation();
 
 #if (UNITY_ANDROID || UNITY_IOS || UNITY_WP8 || UNITY_WP8_1) && !UNITY_EDITOR
             //Handle mobile touch input
@@ -79,6 +71,27 @@ public class MobileCharacterController : MonoBehaviour
             {
                 targetObject.transform.position = agent.destination;
                 targetObject.SetActive(true);
+            }
+        }
+    }
+
+    void HandleAnimation()
+    {
+        if (agent.remainingDistance <= .5f)
+        {
+            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+            {
+                Anim.StopPlayback();
+                Anim.SetFloat("speed", 0f);
+                Anim.SetTrigger("thinking");
+            }
+        }
+        else
+        {
+            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Thinking"))
+            {
+                Anim.StopPlayback();
+                Anim.SetFloat("speed", agent.speed * 20);
             }
         }
     }

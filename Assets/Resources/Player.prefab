@@ -602,7 +602,7 @@ MonoBehaviour:
   isAppFocused: 1
   isMenuOpen: 0
   isChatOpen: 0
-  chatFadeTimer: 3
+  chatFadeTimer: 5
   isChatFading: 0
   isCommandRingOpen: 0
   canMove: 1
@@ -620,6 +620,7 @@ MonoBehaviour:
   sessionTimer: 0
   realSessionTimer: 0
   handRaise: {fileID: 5722500453887658693}
+  isHandRaised: 0
   objectsInteracted: []
   disableServer: 0
   emoteForce: 20
@@ -1305,7 +1306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.6, y: -23.7}
+  m_AnchoredPosition: {x: -27.599976, y: -23.700012}
   m_SizeDelta: {x: 26.064331, y: 26.01358}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &140357601719995489
@@ -2062,7 +2063,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894374597795951463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8450551044412348472}
+        m_MethodName: RaisedHandClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6879394163279120089
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,8 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     public IgniteAnalytics analyticsBoard;
 
+    public GameObject handStateObj;
+
     void Start()
     {
         playerList = new List<PhotonView>();
@@ -70,8 +72,11 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
         if (SessionHandler.instance.CheckIfPresenter())
         {
+            GetComponent<OneToMany>().sAddress = SessionHandler.instance.passAdress;
             GetComponent<OneToMany>().StartStream();
         }
+
+        commandUI.EnableStreamBtns(SessionHandler.instance.CheckIfPresenter());
     }
 
     private void SpawnPlayer()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommandMute : CommandButton
 {
-    private bool isTransmitting = true;
+    public bool isTransmitting = true;
     
     public override void Click()
     {

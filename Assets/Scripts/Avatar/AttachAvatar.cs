@@ -104,7 +104,6 @@ public class AttachAvatar : MonoBehaviourPunCallbacks
                     currentPVAvatar.avatarInfo.anim = currentPVAvatar.avatarInfo.maleAvatar.GetComponent<Animator>();
                     selectedAvatar = currentPVAvatar.avatarInfo.maleAvatar;
                     selectorMale = selectedAvatar.GetComponent<scr_Selector>();
-                    Debug.Log("Maaale");
                 } else
                 {
                     currentPVAvatar.avatarInfo.maleAvatar.SetActive(false);

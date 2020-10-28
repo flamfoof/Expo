@@ -27,6 +27,8 @@ public class MobileCharacterController : MonoBehaviour
             targetObject = Instantiate(targetIndicatorPrefab, Vector3.zero, Quaternion.identity) as GameObject;
             targetObject.SetActive(false);
         }
+
+        Anim.SetTrigger("thinking");
     }
 
     void Update()

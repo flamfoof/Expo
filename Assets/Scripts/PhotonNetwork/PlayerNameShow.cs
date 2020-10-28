@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Voice.PUN;
+using UnityEngine.UI;
 using Photon.Realtime;
 
 public class PlayerNameShow : MonoBehaviourPunCallbacks
 {
     GameObject localPlayer;
+    PhotonVoiceView photonVoiceView;
     IgniteGameManager gm;
     public GameObject playerName;
     public GameObject playerOrganization;
     public GameObject infoUI;
     public bool infoUIEnabled;
+    public Image speakerImage;
+    public Image recorderImage;
     int actorNumber; 
 
     // Start is called before the first frame update
@@ -20,7 +25,8 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     {
         localPlayer = IgniteGameManager.localPlayer;
         gm = IgniteGameManager.IgniteInstance;
-        
+        photonVoiceView = GetComponentInParent<PhotonVoiceView>();
+
         foreach (PhotonView pv in gm.GetPlayerList())
         {
             //Show the name and organization from PlayerPrefs
@@ -50,6 +56,9 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
                 }
             }
         }*/
+
+        speakerImage.enabled = photonVoiceView.IsSpeaking;
+        recorderImage.enabled = photonVoiceView.IsRecording;
     }
 
     public void EnablePlayerButtonInfoUI()
@@ -60,11 +69,28 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         playerOrganization.SetActive(false);
     }
 
-    public void DisablePlayerButtonInfoUI()
+    //public void DisablePlayerButtonInfoUI()
+    //{
+    //    infoUI.SetActive(false);
+    //    infoUIEnabled = false;
+    //    playerName.SetActive(true);
+    //    playerOrganization.SetActive(true);
+    //}
+
+    //stephen code
+    public IEnumerator IEDisablePlayerButtonInfoUI()
     {
+        yield return new WaitForSeconds(2.0f);
+
         infoUI.SetActive(false);
         infoUIEnabled = false;
         playerName.SetActive(true);
-        playerOrganization.SetActive(true);
+        //playerOrganization.SetActive(true);
     }
+
+    public void DisablePlayerButtonInfoUI()
+    {
+        StartCoroutine(IEDisablePlayerButtonInfoUI());
+    }
+    //stephen code end
 }

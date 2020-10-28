@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CommandMute : CommandButton
 {
-    public bool isMuteButton = false;
+    public bool isTransmitting = true;
     
     public override void Click()
     {
-        IgniteGameManager.voiceManager.webRTC.GetComponent<AudioCall>().SetMuteSelf(isMuteButton);
+        //IgniteGameManager.voiceManager.webRTC.GetComponent<AudioCall>().SetMuteSelf(isMuteButton);
+        isTransmitting = !isTransmitting;
+        PhotonVoiceComms.instance.MuteSelf(isTransmitting);
     }
 }

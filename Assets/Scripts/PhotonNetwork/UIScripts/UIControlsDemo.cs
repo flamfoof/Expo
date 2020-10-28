@@ -9,7 +9,7 @@ public class UIControlsDemo : MonoBehaviour
     public GameObject mainLogin;
     public GameObject signUp;
     public GameObject characterSelect;
-    public GameObject worldSelect;
+    public GameObject roleSelect;
 
     public Text feedbackText;
     public GameObject loadingIcon;

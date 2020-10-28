@@ -20,6 +20,8 @@ public class InteractableRayIdentifier : MonoBehaviour
     public int layerMask = 1 << 9 | 1 << 5;
     private RaycastHit[] hits;
 
+    GameObject TempObject;
+    bool videoInFocus = false;
 
     void Start()
     {
@@ -44,8 +46,22 @@ public class InteractableRayIdentifier : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            //Debug.Log("Did Hit: " + hit.collider.name);
             focusedObject = hit.collider.gameObject;
+
+            //Stephen   
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
+
+            if (focusedObject.GetComponent<ISimpleVideo>())
+            {
+                TempObject = focusedObject;
+                TempObject.GetComponent<ISimpleVideo>().playPauseUI.SetVisibility(true , TempObject.GetComponent<ISimpleVideo>().PlayStatus());
+                videoInFocus = true;
+            }
+
             playerfocusedObject = null;
             canvas.alpha = 1;
         }
@@ -55,20 +71,44 @@ public class InteractableRayIdentifier : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             playerfocusedObject = hit.collider.gameObject;
+
+            playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().EnablePlayerButtonInfoUI();
+
             canvas.alpha = 1;
         }
         else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, floorMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             floorfocusedObject = hit.collider.gameObject;
+            //Stephen
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
             canvas.alpha = 1;
         }
         else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
+
+            //Stephen
+            if (playerfocusedObject != null)
+            {
+                playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
+            }
+            //stephen end
+
             playerfocusedObject = null;
             floorfocusedObject = null;
             canvas.alpha = 0;
+
+            if (TempObject != null && TempObject.GetComponent<ISimpleVideo>() && videoInFocus)
+            {   
+                videoInFocus = false;
+                TempObject.GetComponent<ISimpleVideo>().playPauseUI.SetVisibility(false, TempObject.GetComponent<ISimpleVideo>().PlayStatus());
+            }
+
             //Debug.Log("Did not Hit");
         }
         /*
@@ -98,6 +138,7 @@ public class InteractableRayIdentifier : MonoBehaviour
             //phase can be either performed, started, or cancelled.
             if (focusedObject.GetComponent<Interactables>())
             {
+
                 switch (phase)
                 {                        
                     case InputActionPhase.Performed:
@@ -115,6 +156,7 @@ public class InteractableRayIdentifier : MonoBehaviour
                         player.GetComponent<UserActions>().AddInteractedData(focusedObject);
                         break;
                 }
+
                 return true;
 
             }

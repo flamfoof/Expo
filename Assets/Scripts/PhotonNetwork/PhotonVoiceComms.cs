@@ -1,18 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Voice.Unity;
+using UnityEngine.Assertions;
 using UnityEngine;
 
 public class PhotonVoiceComms : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static PhotonVoiceComms instance;
+    private Recorder photonRecorder;
+
+
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
+    {
+        photonRecorder = GetComponent<Recorder>();
+
+        Assert.IsNotNull(photonRecorder);
+    }
+
+    public void MuteSelf(bool isMute)
+    {
+        photonRecorder.TransmitEnabled = isMute;
+    }
+
+    public void MuteOther(int actorNum)
     {
         
     }
+    
+    public void MuteAll(bool isMute)
+    {
+        if(!SessionHandler.instance.CheckIfPresenter())
+        {
+            photonRecorder.TransmitEnabled = isMute;
+        }
+    }    
 }

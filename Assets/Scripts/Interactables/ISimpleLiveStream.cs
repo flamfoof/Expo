@@ -1,54 +1,69 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.Video;
-using UnityEngine.Assertions;
-using Photon.Voice;
 using Photon.Pun;
-using JetBrains.Annotations;
+using Byn.Unity.Examples;
+using UnityEngine.Assertions;
+using TMPro;
+using Byn.Awrtc;
 
 public class ISimpleLiveStream : Interactables, IPunObservable
 {
-    CallAppUi callApp;
-
     bool checkTrigger = false;
+    OneToMany liveStream;
 
     public GameObject [] objectsToDisable;
 
-    void Start()
-    {
-        callApp = GetComponent<CallAppUi>();
+    public TextMeshProUGUI Text;
 
-        Assert.IsNotNull(callApp);
+    private void Start()
+    {
+        liveStream = GetComponent<OneToMany>();
+
+        Assert.IsNotNull(liveStream);
+        Assert.IsNotNull(Text);
     }
-    
+
+    public void SetStatusText(string msg)
+    {
+        Text.text = msg;
+    }
+
     public override void Perform(InputActionPhase phase)
     {
         if (phase == InputActionPhase.Started)
         {
-            StartEndCall();
+            StartEndStream();
         }
     }
 
-    [ContextMenu("StartEndCall")]
-    void StartEndCall()
+    [ContextMenu("StartEndStream")]
+    void StartEndStream()
     {
         checkTrigger = !checkTrigger;
 
-        if (checkTrigger)
+        if (liveStream && !liveStream.isInitialized)
         {
-            Debug.Log("Call started");
-            callApp.SetupCallApp();
+            ConnectStream();
         }
-        else
+        else if (liveStream.networkEvent.Type == NetEventType.Disconnected && !liveStream.retryingConnection)
         {
-            Debug.Log("Call ended");
-            callApp.ShutdownButtonPressed();
+            liveStream.retryingConnection = true;
+            ConnectStream();
         }
-
-        DisableObjects(!checkTrigger);
+        else if (liveStream.networkEvent.Type == NetEventType.ConnectionFailed && !liveStream.retryingConnection)
+        {
+            liveStream.retryingConnection = true;
+            ConnectStream();
+        }
     }
 
-    void DisableObjects(bool status)
+    void ConnectStream()
+    {
+        liveStream.StartStream();
+        SetStatusText("Connecting to presenter please wait...");
+    }
+
+    public void DisableObjects(bool status)
     {
         if (objectsToDisable.Length == 0)
             return;

@@ -54,7 +54,9 @@ namespace Byn.Unity.Examples
         /// </summary>
         private readonly int RECEIVER_CONNECT_DELAY = 5;
 
+        [SerializeField]
         private string mSignalingServer = ExampleGlobals.Signaling;
+        [SerializeField]
         private string mStunServer = ExampleGlobals.StunUrl;
 
         /// <summary>
@@ -83,6 +85,11 @@ namespace Byn.Unity.Examples
         /// not send anything.
         /// </summary>
         public bool uSender = false;
+        public bool uDisableAudio = true;
+        [HideInInspector] public bool isInitialized = false;
+        [HideInInspector] public bool retryingConnection = false;
+
+        public Texture2D noCameraTexture;
 
         /// <summary>
         /// Will be used to show the texture received (or sent)
@@ -98,9 +105,11 @@ namespace Byn.Unity.Examples
         /// Static address shared with all other local instances of this app
         /// to connect them.
         /// </summary>
-        private static string sAddress = null;
+       
+        public string sAddress = null;
 
-
+        [HideInInspector]
+        public NetworkEvent networkEvent;
         /// <summary>
         /// Can be used to keep track of each connection. 
         /// </summary>
@@ -108,10 +117,11 @@ namespace Byn.Unity.Examples
 
 
 
-        protected virtual void Start()
+        public void StartStream()
         {
             StartCoroutine(ExampleGlobals.RequestPermissions());
             UnityCallFactory.EnsureInit(OnCallFactoryReady, OnCallFactoryFailed);
+            isInitialized = true;
         }
 
         protected virtual void OnCallFactoryReady()
@@ -164,7 +174,7 @@ namespace Byn.Unity.Examples
                 if (uSender)
                 {
                     //sender will broadcast audio and video
-                    mMediaConfig.Audio = true;
+                    mMediaConfig.Audio = !uDisableAudio;
                     mMediaConfig.Video = true;
 
                     Debug.Log("Accepting incoming connections on " + sAddress);
@@ -284,19 +294,30 @@ namespace Byn.Unity.Examples
 
                     mConnectionIds.Add(evt.ConnectionId);
                     Log("New connection id " + evt.ConnectionId);
+                    if (uSender) return;
+                    gameObject.SendMessage("DisableObjects", false);
+                    uVideoOutput.gameObject.SetActive(true);
+                    retryingConnection = false;
 
                     break;
                 case NetEventType.ConnectionFailed:
-                    //call failed
-                    Log("Outgoing connection failed");
+
+                    Log("Outgoing connection failed no presenter found");
+                    if (uSender) return;
+                    retryingConnection = false;
+                    gameObject.SendMessage("SetStatusText" , "No presenter found! Tap to reconnect Or contact We-Ignite for support");
+
                     break;
                 case NetEventType.Disconnected:
 
                     if (mConnectionIds.Contains(evt.ConnectionId))
                     {
                         mConnectionIds.Remove(evt.ConnectionId);
-
                         Log("Connection disconnected");
+                        if (uSender)return;
+                        uVideoOutput.gameObject.SetActive(false);
+                        gameObject.SendMessage("DisableObjects", true);
+                        gameObject.SendMessage("SetStatusText", "Connection disconnected! Tap again to retry when presenter is available");
                     }
                     break;
                 case NetEventType.ServerInitialized:
@@ -304,12 +325,19 @@ namespace Byn.Unity.Examples
                     Log("Server ready for incoming connections. Address: " + evt.Info);
                     break;
                 case NetEventType.ServerInitFailed:
+        
                     Log("Server init failed");
+                    if (uSender) return;
+                    gameObject.SendMessage("SetStatusText", "Error connecting to Presenter, please ensure webcam is available or contact We Ignite for support");
                     break;
                 case NetEventType.ServerClosed:
+                    if (uSender) return;
+                    gameObject.SendMessage("SetStatusText", "Connection disconnected! Server stopped");
                     Log("Server stopped");
                     break;
             }
+
+            networkEvent = evt;
         }
 
 
@@ -364,6 +392,20 @@ namespace Byn.Unity.Examples
             tex.LoadRawTextureData(frame.Buffer);
             tex.Apply();
             return newTextureCreated;
+        }
+
+        public void ShutDownServer()
+        {
+            mMediaNetwork.Dispose();
+            
+            UpdateTexture(null);
+
+            isInitialized = false;
+
+            if (noCameraTexture != null)
+            {
+                uVideoOutput.texture = noCameraTexture;
+            }
         }
     }
 }

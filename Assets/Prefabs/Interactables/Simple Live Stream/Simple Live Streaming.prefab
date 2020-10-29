@@ -480,6 +480,7 @@ MonoBehaviour:
   canAttach: 0
   objectsToDisable:
   - {fileID: 7415551746384392255}
+  Text: {fileID: 0}
 --- !u!65 &7417345763635024524
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -505,10 +506,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a720c22aeda7954f8aff18730ff2082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSignalingServer: ws://rtc-ignite-voice.herokuapp.com/conferenceapp
+  mSignalingServer: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
   mStunServer: stun:us-turn2.xirsys.com
   uSender: 0
   uDisableAudio: 1
   isInitialized: 0
+  retryingConnection: 0
+  noCameraTexture: {fileID: 2800000, guid: c137dcc7ffe17c84ca618bc3e2abf73c, type: 3}
   uVideoOutput: {fileID: 7456917234697836284}
   sAddress: atrium2020

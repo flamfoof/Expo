@@ -2993,12 +2993,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf8b334e443c41f49b7434f28b12c48e, type: 3}
---- !u!1 &356382177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8398364166846554210, guid: b394027809c5d1b499b6826424a6d892,
-    type: 3}
-  m_PrefabInstance: {fileID: 968898929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &367909151
 GameObject:
   m_ObjectHideFlags: 0
@@ -3266,12 +3260,17 @@ PrefabInstance:
     - target: {fileID: 2480155066989266404, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: voiceDetectionThreshold
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5063427659900530138, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672570408266120978, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: chatFadeTimer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6478637238366009795, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
@@ -4345,12 +4344,22 @@ PrefabInstance:
     - target: {fileID: 1766568570761209105, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: sAddress
-      value: atrium2020
+      value: atrium2021
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766568570761209105, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
+        type: 3}
+      propertyPath: uSender
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766568570761209105, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
+        type: 3}
+      propertyPath: mSignalingServer
+      value: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 24
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -4360,7 +4369,7 @@ PrefabInstance:
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -4386,6 +4395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_enableWordWrapping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
+        type: 3}
+      propertyPath: m_text
+      value: Tap to connect presenter B
       objectReference: {fileID: 0}
     - target: {fileID: 3948345232418463606, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -4455,7 +4469,7 @@ PrefabInstance:
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 55.15
+      value: 55.152
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -4500,12 +4514,12 @@ PrefabInstance:
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 48.16
+      value: 48.161
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.4
+      value: 2.269
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -8716,16 +8730,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4614943399908325560, guid: b394027809c5d1b499b6826424a6d892,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 356382177}
-    - target: {fileID: 4614943399908325560, guid: b394027809c5d1b499b6826424a6d892,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
     - target: {fileID: 4938857522159327601, guid: b394027809c5d1b499b6826424a6d892,
         type: 3}
       propertyPath: m_Name
@@ -19548,7 +19552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &404558904643423043
 GameObject:
   m_ObjectHideFlags: 0
@@ -19783,7 +19787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &796151098696285466
 Transform:
   m_ObjectHideFlags: 0
@@ -19852,7 +19856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &843333893085458034
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20032,7 +20036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1265007349127537670
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21163,7 +21167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &3088295651620909111
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23103,7 +23107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6104842091086122945
 GameObject:
   m_ObjectHideFlags: 0
@@ -23121,7 +23125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6177671859051586450
 GameObject:
   m_ObjectHideFlags: 0
@@ -23512,7 +23516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &6828019188785748093
 Animator:
   serializedVersion: 3
@@ -34914,7 +34918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &7198484548990316718
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35094,25 +35098,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1766568570761209105, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
-        type: 3}
-      propertyPath: uSender
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_text
-      value: Tap to connect to stream
+      value: Tap to connect presenter A
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_fontSize
-      value: 0.55
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 24
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -35122,7 +35121,7 @@ PrefabInstance:
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -35147,7 +35146,7 @@ PrefabInstance:
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1873132544687047736, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -35207,7 +35206,7 @@ PrefabInstance:
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.48
+      value: 54.51
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -35252,12 +35251,12 @@ PrefabInstance:
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 62.94
+      value: 62.96
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.36
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 7415551745967847939, guid: 055b7ac4cb4dfe141b9f002d7bdfd7a4,
         type: 3}
@@ -35439,7 +35438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &7754208780529551258
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35496,7 +35495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &7818783599326816466
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35568,7 +35567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7969557650703781866
 Transform:
   m_ObjectHideFlags: 0
@@ -35887,7 +35886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8510606679575035189
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36095,7 +36094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &9050860085870669715
 GameObject:
   m_ObjectHideFlags: 0
@@ -36178,4 +36177,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0

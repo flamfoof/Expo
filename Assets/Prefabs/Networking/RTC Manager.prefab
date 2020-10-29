@@ -1055,7 +1055,7 @@ RectTransform:
   - {fileID: 2272864774266892340}
   - {fileID: 8196876473488609274}
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1246,7 +1246,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6715458132555031625}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5626122721021716196
 MonoBehaviour:
@@ -1880,6 +1880,7 @@ Transform:
   m_Children:
   - {fileID: 1031669706400911587}
   - {fileID: 7624709052679693597}
+  - {fileID: 6642804452017969559}
   - {fileID: 2724292074656920661}
   - {fileID: 2651697293166167715}
   m_Father: {fileID: 0}
@@ -1986,6 +1987,9 @@ MonoBehaviour:
   - General
   - Whisper
   HistoryLengthToFetch: 5
+  uiEffects: {fileID: 0}
+  parentComms: {fileID: 0}
+  chatFadeTimer: 5
 --- !u!114 &2601420816828500363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,7 +2019,7 @@ MonoBehaviour:
   voiceDetection: 0
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Mic in at front panel (Pink) (Realtek(R) Audio)
+  unityMicrophoneDevice: Microphone (High Definition Audio Device)
   photonMicrophoneDeviceId: 0
   interestGroup: 0
   debugEchoMode: 0
@@ -2137,8 +2141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8712593fdcb644892ea1ff8b4bdd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceID: 
-  audioCallUI: {fileID: 3633223461223209499}
   uSignalingUrl: ws://rtc-ignite-voice.herokuapp.com/conferenceapp
   uSecureSignalingUrl: wss://rtc-ignite-voice.herokuapp.com/conferenceapp
   uForceSecureSignaling: 1
@@ -2147,32 +2149,30 @@ MonoBehaviour:
   uIceServerPassword: 9f4bcc14-f23c-11ea-b56c-0242ac140004
   uIceServer2: stun:us-turn2.xirsys.com
   uIceServer3: stun:stun.l.google.com:19302?transport=tcp
-  uIceServer4: stun:stunserver.org:3478?transport=tcp
-  uIceServer5: 
-  uIceServer6: stun:stun1.l.google.com:19302
-  uIceServer7: stun:stun.voiparound.com
-  userAllowPermissions: {fileID: 0}
-  audioOn: 1
+  voiceID: 
+  idWithVideos: 
+  connectedVoiceID: 
+  videoCount: 0
+  noVidWaitTime: 2
+  noTextureTimer: 0
   userAllowAudio: 1
+  audioOn: 1
   videoOn: 0
   userAllowVideo: 0
   startedVoiceServer: 0
-  messageField: {fileID: 4337185609708388612}
-  textOutput: {fileID: 799856776}
-  receiveTxt: {fileID: 2338516778931424323}
   lockChatVisibility: 0
-  scrollbar: {fileID: 1229657444}
   isConference: 1
+  reconnectingVoiceCoroutine: 0
+  hasFrame: 0
+  firstJoinedVid: 0
+  receiveTxt: {fileID: 2338516778931424323}
   videoImage:
   - {fileID: 0}
-  idWithVideos: 
-  connectedVoiceID: 
-  reconnectingVoiceCoroutine: 0
-  noVidWaitTime: 2
-  hasFrame: 0
-  noTextureTimer: 0
-  videoCount: 0
-  firstJoinedVid: 0
+  textOutput: {fileID: 799856776}
+  messageField: {fileID: 4337185609708388612}
+  scrollbar: {fileID: 1229657444}
+  audioCallUI: {fileID: 3633223461223209499}
+  userAllowPermissions: {fileID: 0}
   noVidTexture: {fileID: 2800000, guid: b70028edb0bf3f94ebb14a96fdff3b13, type: 3}
 --- !u!114 &3633223461223209499
 MonoBehaviour:
@@ -2264,3 +2264,70 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!1001 &6642804452018122907
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6715458132555031625}
+    m_Modifications:
+    - target: {fileID: 102228, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_Name
+      value: DissonanceSetup
+      objectReference: {fileID: 0}
+    - target: {fileID: 102228, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6165357
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0614929
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.446854
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+--- !u!4 &6642804452017969559 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797,
+    type: 3}
+  m_PrefabInstance: {fileID: 6642804452018122907}
+  m_PrefabAsset: {fileID: 0}

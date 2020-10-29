@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -57,6 +58,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public float realSessionTimer = 0.0f;
 
     public GameObject handRaise;
+    public bool isHandRaised = false;
 
     public float SessionTimer
     {
@@ -128,6 +130,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         infoCanvasGroup = GetComponent<CanvasGroup>();
         commandUI = gameManager.commandUI.gameObject;
         uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
+
+        isHandRaised = false;
     }
 
     private void Start()
@@ -481,6 +485,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         if (toggle)
         {
             UpdateControlLock(false, true);
+            OpenCommandRing(false);
             StartCoroutine(UnfocusApplicationCursor());
             rtc.sendMessage.SetActive(toggle);
             rtc.webRTC.messageField.text = "";
@@ -583,6 +588,82 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         //Emote(emoteIndex);
         //sends a message to everyone that you are using emote
         photonView.RPC("Emote", RpcTarget.All, emoteIndex);
+    }
+
+    //stephen code
+    public void HandRaiseClicked()
+    {
+        photonView.RPC("RecvHandRaise", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
+    }
+
+    public void RaisedHandClicked()
+    {
+
+    }
+
+    public void UpdateHandState()
+    {
+        if(isHandRaised)
+        {
+            gameManager.handStateObj.SetActive(true);
+        }
+        else
+        {
+            gameManager.handStateObj.SetActive(false);
+        }
+    }
+
+    [PunRPC]
+    public void RecvHandRaise(int actorId)
+    {
+        if(PhotonNetwork.LocalPlayer.ActorNumber != actorId)
+        {
+            for(int i = 0; i < gameManager.playerList.Count; i ++)
+            {
+                if(gameManager.playerList[i].Owner.ActorNumber == actorId)
+                {
+                    if(gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.activeSelf)
+                    {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().isHandRaised = false;
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().isHandRaised = true;
+                        gameManager.playerList[i].gameObject.GetComponent<UserActions>().handRaise.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+        else
+        {
+            
+            UpdateHandState();
+        }
+    }
+    //stephen code end
+
+    
+    public void SetMuteAll(bool isMute)
+    {
+        //currently only mutes to false/off, so you can modify CommandMuteAll.cs later for toggle
+        photonView.RPC("RPCSetMuteAll", RpcTarget.All, isMute);
+    }
+
+    [PunRPC]
+    public void RPCSetMuteAll(bool isMute)
+    {
+        if(!SessionHandler.instance.CheckIfPresenter())
+        {
+            PhotonVoiceComms.instance.MuteSelf(isMute);
+            //hard coded for Unmute button
+            commandUI.GetComponent<CommandRing>().commands[1].SetActive(!isMute);
+            commandUI.GetComponent<CommandRing>().commands[1].GetComponent<CommandMute>().isTransmitting = !isMute;
+            //hard codd for mute button
+            commandUI.GetComponent<CommandRing>().commands[2].SetActive(isMute);
+            commandUI.GetComponent<CommandRing>().commands[2].GetComponent<CommandMute>().isTransmitting = isMute;
+
+        }
     }
 
     [PunRPC]
@@ -713,7 +794,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
     }
 
     public IEnumerator UnfocusApplicationCursor()

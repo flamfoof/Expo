@@ -32,4 +32,9 @@ public class TempCheckPassword : MonoBehaviour
     {
         SessionHandler.instance.SetPresenter(isPresenter);
     }
+
+    public void CheckForStaff(bool isStaff)
+    {
+        SessionHandler.instance.SetStaff(isStaff);
+    }
 }

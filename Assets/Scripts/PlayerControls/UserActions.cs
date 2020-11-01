@@ -653,7 +653,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void RPCSetMuteAll(bool isMute)
     {
-        if(!SessionHandler.instance.CheckIfPresenter())
+        bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
+        if(!admin)
         {
             PhotonVoiceComms.instance.MuteSelf(isMute);
             //hard coded for Unmute button

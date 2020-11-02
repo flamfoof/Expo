@@ -598,7 +598,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void RaisedHandClicked()
     {
-
+        Debug.Log("clicked");
     }
 
     public void UpdateHandState()

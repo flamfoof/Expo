@@ -5,6 +5,7 @@ using UnityEngine;
 public class CommandMobileOpen : MonoBehaviour
 {
     public GameObject commandButtonList;
+    public GameObject commandRingUI;
     public GameObject parent;
     public bool toggleMenu = false;
 
@@ -13,6 +14,11 @@ public class CommandMobileOpen : MonoBehaviour
 //#if !UNITY_IOS || !UNITY_ANDROID || !UNITY_EDITOR
         //parent.SetActive(false);
 //#endif
+
+//#if !UNITY_IOS || !UNITY_ANDROID
+        commandRingUI.SetActive(true);
+//#endif
+
     }
 
     public void OpenCommandsMobile()

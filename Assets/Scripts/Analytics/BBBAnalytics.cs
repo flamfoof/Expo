@@ -6,7 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 
-public class BBBAnalytics : IgniteAnalytics, IPunObservable
+public class BBBAnalytics : IgniteAnalytics
 {
     public IgniteGameManager gameManager;
     public static BBBAnalytics instance;
@@ -146,12 +146,12 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
         int totalPlayers = 0;
         foreach(PhotonView pv in GameObject.FindObjectsOfType(typeof(PhotonView)))
         {
-            //Debug.Log("Starting this");
-            //Debug.Log(pv.name);
+
             if(pv.gameObject)
             {
                 //Debug.Log("still alive");
             }
+
             if(pv.GetComponent<UserActions>())
             {
                 if(sessionNameList.Contains(pv.Owner.NickName))
@@ -228,21 +228,9 @@ public class BBBAnalytics : IgniteAnalytics, IPunObservable
             sessionTempText = System.Math.Round(avgSessionTime, 2) + "s";
         }
         //attendeesText.text = "Attendees: " + attendees;
-        AnalyticsController.Instance.AttendesNumber(attendees);
+        //AnalyticsController.Instance.AttendesNumber(attendees);
         //sessionText.text = "Avg. Session Time: " + sessionTempText;
-        AnalyticsController.Instance.AverageTimeSpent(avgSessionTime);
+        //AnalyticsController.Instance.AverageTimeSpent(avgSessionTime);
         //clicksText.text = "Web Clicks: " + clicks;
-    }
-
-    //may not be necessary
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(clicks);  
-        } else {
-            clicks = (int) stream.ReceiveNext();
-        }
-                
     }
 }

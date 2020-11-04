@@ -1,0 +1,13 @@
+Converting script [1 / 1]	[\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs]
+	Fragments : 4
+		[ 0] : Line:  339	Other mod.	[Cursor.lockState]
+		[ 1] : Line:  339	Other mod.	[Cursor.visible]
+		[ 2] : Line:  491	InputMethod   GetAxis             	("Horizontal")
+		[ 3] : Line:  492	InputMethod   GetAxis             	("Vertical")
+
+
+1 scripts modified!
+Overwriting actual scripts...
+	[0 / 1] from  [D:/Unity projects 2020/Clients/WeIgnite/CF2-Data/Script-Backups/2020-11-04-13-28\Assets-After/\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs] to [D:/Unity projects 2020/Clients/WeIgnite/Assets/\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs]
+
+Overwriting COMPLETED!

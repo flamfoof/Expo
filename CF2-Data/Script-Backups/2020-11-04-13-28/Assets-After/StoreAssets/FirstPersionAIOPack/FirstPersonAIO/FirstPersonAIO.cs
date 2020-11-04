@@ -415,8 +415,7 @@ public class FirstPersonAIO : MonoBehaviour {
     private void FixedUpdate(){
 
         #region Look Settings - FixedUpdate
-        //XYInput = actionLook.ReadValue<Vector2>();
-        XYInput = new Vector2(ControlFreak2.CF2Input.GetAxis("Mouse X") , ControlFreak2.CF2Input.GetAxis("Mouse Y"));
+        XYInput = actionLook.ReadValue<Vector2>();
         #endregion
 
         #region Movement Settings - FixedUpdate

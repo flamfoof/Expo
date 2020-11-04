@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1a5ad4f9ffb154ca7813fdad11017a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableCameraMovement: 0
+  enableCameraMovement: 1
   mouseInputInversion: 0
   verticalRotationRange: 170
   mouseSensitivity: 0.75
@@ -2709,6 +2709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024525620312132741, guid: 86bc5b22872dfa54ebb931f87e0dfbf2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3901798292514658105, guid: 86bc5b22872dfa54ebb931f87e0dfbf2,
         type: 3}

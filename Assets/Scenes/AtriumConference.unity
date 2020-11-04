@@ -3327,6 +3327,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1388525181790623663, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388525181790623663, guid: 7173d53e845a5cd45820172cc0777f90,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1943478824755943576, guid: 7173d53e845a5cd45820172cc0777f90,
         type: 3}
       propertyPath: m_Color.r
@@ -22864,6 +22874,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4642866914280601587, guid: 677b7c50a47496342b8cb2862d110fd2,
+        type: 3}
+      propertyPath: touchSmoothing
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4642866914700056969, guid: 677b7c50a47496342b8cb2862d110fd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22923,6 +22938,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MobileControls
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642866914963675583, guid: 677b7c50a47496342b8cb2862d110fd2,
+        type: 3}
+      propertyPath: touchSmoothing
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642866914963675583, guid: 677b7c50a47496342b8cb2862d110fd2,
+        type: 3}
+      propertyPath: originSmoothTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677b7c50a47496342b8cb2862d110fd2, type: 3}

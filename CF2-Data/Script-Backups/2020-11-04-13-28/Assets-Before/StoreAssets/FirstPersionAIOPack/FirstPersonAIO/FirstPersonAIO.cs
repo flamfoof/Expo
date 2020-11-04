@@ -336,7 +336,7 @@ public class FirstPersonAIO : MonoBehaviour {
         }
 
         cameraStartingPosition = playerCamera.transform.localPosition;
-        if(lockAndHideCursor) { ControlFreak2.CFCursor.lockState = CursorLockMode.Locked; ControlFreak2.CFCursor.visible = false; }
+        if(lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
         baseCamFOV = playerCamera.fieldOfView;
         #endregion
 
@@ -415,8 +415,7 @@ public class FirstPersonAIO : MonoBehaviour {
     private void FixedUpdate(){
 
         #region Look Settings - FixedUpdate
-        //XYInput = actionLook.ReadValue<Vector2>();
-        XYInput = new Vector2(ControlFreak2.CF2Input.GetAxis("Mouse X") , ControlFreak2.CF2Input.GetAxis("Mouse Y"));
+        XYInput = actionLook.ReadValue<Vector2>();
         #endregion
 
         #region Movement Settings - FixedUpdate
@@ -489,8 +488,8 @@ public class FirstPersonAIO : MonoBehaviour {
                 Debug.DrawRay(transform.position, MoveDirection,Color.red,0,false);
         #endregion
 
-        float horizontalInput = ControlFreak2.CF2Input.GetAxis("Horizontal");
-        float verticalInput = ControlFreak2.CF2Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
         inputXY = new Vector2(horizontalInput, verticalInput);
         //inputXY = actionMove.ReadValue<Vector2>();
         if (inputXY.magnitude > 1) 

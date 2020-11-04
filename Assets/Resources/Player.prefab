@@ -579,7 +579,7 @@ MonoBehaviour:
     m_ActionId: 9c976c1f-eb80-4265-b6a6-9c92a32f6998
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
   isAppFocused: 1
   isMenuOpen: 0
   isChatOpen: 0
-  isMobile: 0
+  isMobile: 1
   chatFadeTimer: 5
   isChatFading: 0
   isCommandRingOpen: 0
@@ -2709,6 +2709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024525620312132741, guid: 86bc5b22872dfa54ebb931f87e0dfbf2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3901798292514658105, guid: 86bc5b22872dfa54ebb931f87e0dfbf2,
         type: 3}

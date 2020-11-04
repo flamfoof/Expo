@@ -34,6 +34,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
     public bool isChatOpen = false;
+    public bool isMobile = false;
     public float chatFadeTimer = 3.0f;
     public bool isChatFading = false;
     public bool isCommandRingOpen = false;
@@ -147,6 +148,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<FirstPersonAIO>().enabled = false;
         }
+#if UNITY_IOS || UNITY_ANDROID
+        isMobile = true;
+#endif
         //cutting off webgl micrphone setting for now
         //if(photonView.IsMine)
         //gameManager.SetParent(this.transform, gameManager.voiceManager.listener.transform);
@@ -420,6 +424,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OpenCommandRing(bool toggle)
     {
+        if(isMobile)
+            return;
+
         if (toggle)
         {
             isCommandUIOpen = true;
@@ -653,7 +660,8 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void RPCSetMuteAll(bool isMute)
     {
-        if(!SessionHandler.instance.CheckIfPresenter())
+        bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
+        if(!admin)
         {
             PhotonVoiceComms.instance.MuteSelf(isMute);
             //hard coded for Unmute button

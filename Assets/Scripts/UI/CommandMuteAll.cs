@@ -6,10 +6,12 @@ public class CommandMuteAll : CommandButton
 {
     private bool isTransmitting = false;
 
-    private void Start()
+    private void Awake()
     {
-        if(!SessionHandler.instance.CheckIfPresenter())
+        bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
+        if(!admin)
         {
+            Debug.Log("Not a " + SessionHandler.instance.CheckIfPresenter() + " or a " + SessionHandler.instance.CheckIfStaff());
             gameObject.SetActive(false);
         }
     }

@@ -27,7 +27,9 @@ public class TutorialBehavior : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-
+#if UNITY_IOS || UNITY_ANDROID
+        gameObject.SetActive(false);
+#endif
         currentScreen = tutorialScreens[currentScreenNum];
     }
 

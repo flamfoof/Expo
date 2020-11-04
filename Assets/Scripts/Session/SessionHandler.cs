@@ -8,6 +8,7 @@ public class SessionHandler : MonoBehaviour
     public string passAdress = string.Empty;
 
     bool isPresenter = false;
+    bool isStaff = false;
     
 
     void Awake()
@@ -31,4 +32,13 @@ public class SessionHandler : MonoBehaviour
         this.isPresenter = isPresenter;
     }
 
+    public bool CheckIfStaff()
+    {
+        return isStaff;
+    }
+
+    public void SetStaff(bool isStaff)
+    {
+        this.isStaff = isStaff;
+    }
 }

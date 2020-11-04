@@ -486,12 +486,16 @@ public class FirstPersonAIO : MonoBehaviour {
                     }
                 }
                 Debug.DrawRay(transform.position, MoveDirection,Color.red,0,false);
-            #endregion
-            
-        //float horizontalInput = Input.GetAxis("Horizontal");
-        //float verticalInput = Input.GetAxis("Vertical");
-        inputXY = actionMove.ReadValue<Vector2>();
-        if(inputXY.magnitude > 1) { inputXY.Normalize(); }
+        #endregion
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        inputXY = new Vector2(horizontalInput, verticalInput);
+        //inputXY = actionMove.ReadValue<Vector2>();
+        if (inputXY.magnitude > 1) 
+        { 
+            inputXY.Normalize(); 
+        }
 
             #region Jump
             yVelocity = fps_Rigidbody.velocity.y;

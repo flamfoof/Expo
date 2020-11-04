@@ -579,7 +579,7 @@ MonoBehaviour:
     m_ActionId: 9c976c1f-eb80-4265-b6a6-9c92a32f6998
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
   isAppFocused: 1
   isMenuOpen: 0
   isChatOpen: 0
-  isMobile: 0
+  isMobile: 1
   chatFadeTimer: 5
   isChatFading: 0
   isCommandRingOpen: 0
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1a5ad4f9ffb154ca7813fdad11017a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableCameraMovement: 1
+  enableCameraMovement: 0
   mouseInputInversion: 0
   verticalRotationRange: 170
   mouseSensitivity: 0.75

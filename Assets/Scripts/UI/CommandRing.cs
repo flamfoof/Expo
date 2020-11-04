@@ -17,12 +17,14 @@ public class CommandRing : MonoBehaviour
     public Vector3 mousePos;
     public Vector3 offset;
     public bool isEnable;
+    public bool isMobile = false;
     public float cancelDistance = 0.25f;
     public bool isMainCommand = true;
     public Button dummyButton;
 
     //tutorial
     public GameObject[] tutorialElements;
+
 
     public float visualDistance = 5.0f;
 
@@ -35,11 +37,15 @@ public class CommandRing : MonoBehaviour
         }
 
         this.gameObject.SetActive(false);
+        
+#if UNITY_IOS || UNITY_ANDROID
+        isMobile = true;
+#endif
     }
 
     void Update()
     {
-        if (isEnable && isMainCommand)
+        if (isEnable && isMainCommand && !isMobile)
         {
             Vector3 diff;
             transform.LookAt(player.playerActionRay.transform);

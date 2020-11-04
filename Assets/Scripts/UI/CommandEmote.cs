@@ -6,9 +6,26 @@ using UnityEngine.UI;
 public class CommandEmote : CommandButton
 {
     int emoteIndex = -1;
+    bool isMobile = false;
+
+    private void Start() 
+    {
+#if UNITY_IOS || UNITY_ANDROID
+        isMobile = true;
+#endif
+    }
+
     public override void Click()
     {
-        SetEmotePlay(emoteIndex);        
+        if(!isMobile)
+        {
+            SetEmotePlay(emoteIndex);        
+        } else 
+        {
+            GetComponent<Button>().Select();
+            ShowChildrenButton();
+        }
+        
     }
 
     public override void Hover()

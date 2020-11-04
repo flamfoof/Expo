@@ -81,7 +81,6 @@ ExportedObj/
 /Assets/Plugins/signin.bat.meta
 /Assets/Plugins/cookie
 /Assets/Plugins/cookie.meta
-/Assets/Plugins/*
 /Assets/Editor/*
 
 # Other files to avoid pushing

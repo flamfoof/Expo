@@ -94,7 +94,7 @@ public class APIHandler : MonoBehaviour
         FormData.Add(new MultipartFormDataSection("action_email", accessEmail));
         FormData.Add(new MultipartFormDataSection("action_type", accessDate));
         FormData.Add(new MultipartFormDataSection("action_data", accessHorainicio));
-        FormData.Add(new MultipartFormDataSection("action_date", accessHorainicio));
+        FormData.Add(new MultipartFormDataSection("action_date", accessHorafin));
 
 
         UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/action", FormData);

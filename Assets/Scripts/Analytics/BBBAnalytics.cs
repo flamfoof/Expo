@@ -17,9 +17,9 @@ public class BBBAnalytics : IgniteAnalytics
     List<float> sessionTimeList;
     List<int> playersLogged;
 
-    Dictionary<string, int> clickedVideos = new Dictionary<string, int>();
-    Dictionary<string, int> clickedWebLinks = new Dictionary<string, int>();
-    Dictionary<string, int> emojiUsed = new Dictionary<string, int>();
+    Dictionary<string, string> clickedVideos = new Dictionary<string, string>();
+    Dictionary<string, string> clickedWebLinks = new Dictionary<string, string>();
+    Dictionary<string, string> emojiUsed = new Dictionary<string, string>();
     List<string> chatLog = new List<string>();
 
 
@@ -69,47 +69,20 @@ public class BBBAnalytics : IgniteAnalytics
 
     public override void ClickedVideo(string name)
     {
-        if (clickedVideos.ContainsKey(name))
-        {
-            clickedVideos[name] += 1;
-
-            Debug.Log("Times Clicked " + clickedVideos[name]);
-        }
-        else
-        {
-            clickedVideos.Add(name, 1);
-            Debug.Log("Added new video");
-        }
+        clickedVideos.Add(name, DateTime.UtcNow.ToString());
+        Debug.Log("Added new video");
     }
 
     public override void EmojiUsed(string name)
     {
-        if (emojiUsed.ContainsKey(name))
-        {
-            emojiUsed[name] += 1;
-
-            Debug.Log("Times Clicked " + emojiUsed[name]);
-        }
-        else
-        {
-            emojiUsed.Add(name, 1);
-            Debug.Log("Added new Emoji");
-        }
+        emojiUsed.Add(name, DateTime.UtcNow.ToString());
+        Debug.Log("Added new Emoji");
     }
     
     public override void ClickedWeb(string url)
     {
-        if (clickedWebLinks.ContainsKey(url))
-        {
-            clickedWebLinks[url] += 1;
-
-            Debug.Log("Times Clicked " + clickedWebLinks[url]);
-        }
-        else
-        {
-            clickedWebLinks.Add(name, 1);
-            Debug.Log("Added new link");
-        }
+        clickedWebLinks.Add(name, DateTime.UtcNow.ToString());
+        Debug.Log("Added new link");
     }
 
     public override void AverageSessionLength()

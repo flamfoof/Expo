@@ -64,7 +64,6 @@ public class BBBAnalytics : IgniteAnalytics
 
     void FixedUpdate()
     {
-        //UpdateAttendeesCount();
         UpdateAllTexts();
     }
 

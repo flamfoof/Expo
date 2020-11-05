@@ -513,7 +513,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007057356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2556127aee71600478398ba19441e9aa, type: 3}
   m_Name: 
@@ -614,11 +614,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007057356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24835f47d2d04f84ebf30bff11b29638, type: 3}
+  m_Script: {fileID: 11500000, guid: a46ea0da29d67b84bae025557653eb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  attendees: 0
+  clicks: 0
+  avgSessionTime: 0
+  attendeesText: {fileID: 0}
+  sessionText: {fileID: 0}
+  clicksText: {fileID: 0}
 --- !u!1 &1160473486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,16 +1293,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589668077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46ea0da29d67b84bae025557653eb5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1611c52eaa339f645a0cce43a1bcdbef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  attendees: 0
-  clicks: 0
-  avgSessionTime: 0
-  attendeesText: {fileID: 0}
-  sessionText: {fileID: 0}
-  clicksText: {fileID: 0}
 --- !u!1 &1669758644
 GameObject:
   m_ObjectHideFlags: 0

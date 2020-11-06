@@ -21,9 +21,9 @@ public class ISimpleLink : Interactables
                 
                 canClick = !canClick;
 
-                if (IgniteAnalytics.instance)
+                if (BBBAnalytics.instance)
                 {
-                    IgniteAnalytics.instance.ClickedWeb(linkURL);
+                    BBBAnalytics.instance.ClickedWeb(linkURL);
                 }
 
                 //Application.OpenURL(linkURL);

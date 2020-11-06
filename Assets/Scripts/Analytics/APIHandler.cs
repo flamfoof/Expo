@@ -79,7 +79,7 @@ public class APIHandler : MonoBehaviour
         }
         else
         {
-            /// success
+            Debug.Log("Access anlytics were synced");
         }
     }
 
@@ -92,7 +92,7 @@ public class APIHandler : MonoBehaviour
         FormData.Add(new MultipartFormDataSection("action_data", actionDate));
 
 
-        UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/action", FormData);
+        UnityWebRequest www = UnityWebRequest.Post("http://weignite.it/api/project/" + projectId + "/action", FormData);
 
         byte[] bytesToEncode = Encoding.UTF8.GetBytes("project_accesstoken" + ":" + accessToken);
 
@@ -107,7 +107,7 @@ public class APIHandler : MonoBehaviour
         }
         else
         {
-            /// success
+            Debug.Log("Action anlytics were synced, data " + www.downloadHandler.text);
         }
     }   
 

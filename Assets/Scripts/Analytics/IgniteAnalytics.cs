@@ -5,17 +5,17 @@ using Photon.Pun;
 
 public class IgniteAnalytics : MonoBehaviourPunCallbacks
 {
-    public static IgniteAnalytics instance;
+    //public static IgniteAnalytics instance;
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        //if (instance != null)
+        //{
+        //    DestroyImmediate(gameObject);
+        //    return;
+        //}
+        //instance = this;
+        //DontDestroyOnLoad(gameObject);
     }
 
     public virtual void ClickedStats()

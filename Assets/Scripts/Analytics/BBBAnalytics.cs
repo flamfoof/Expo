@@ -8,10 +8,11 @@ using System;
 using UnityEngine.Assertions;
 using System.Linq;
 
-public class BBBAnalytics : IgniteAnalytics
+public class BBBAnalytics : MonoBehaviour
 {
-    public IgniteGameManager gameManager;
     public static BBBAnalytics instance;
+
+    public IgniteGameManager gameManager;
     public int attendees = 0;
     public int clicks = 0;
     public float avgSessionTime = 0;
@@ -33,6 +34,15 @@ public class BBBAnalytics : IgniteAnalytics
 
     private void Awake()
     {
+
+        if (instance != null)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         apiHandler = GetComponent<APIHandler>();
         Assert.IsNotNull(apiHandler);
     }
@@ -66,8 +76,8 @@ public class BBBAnalytics : IgniteAnalytics
         {
             for (int i = 0; i < clickedVideos.Count; i++)
             {
-                Debug.Log("Looping dictionary clickedVideos " + PlayerPrefs.GetString("Name") + "Data0 " + clickedVideos.ElementAt(i).Key
-                    + "Date " + clickedVideos.ElementAt(i).Value);
+                //Debug.Log("Looping dictionary clickedVideos " + PlayerPrefs.GetString("Name") + "Data " + clickedVideos.ElementAt(i).Key
+                //    + "Date " + clickedVideos.ElementAt(i).Value);
                 await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedVideos.ElementAt(i).Key, clickedVideos.ElementAt(i).Value);
             }
         }
@@ -76,9 +86,9 @@ public class BBBAnalytics : IgniteAnalytics
         {
             for (int i = 0; i < clickedWebLinks.Count; i++)
             {
-                Debug.Log("Looping dictionary clickedWebLinks " + PlayerPrefs.GetString("Name") + "Data0 " + clickedWebLinks.ElementAt(i).Key
-                    + "Date " + clickedWebLinks.ElementAt(i).Value);
-                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedWebLinks.ElementAt(i).Key, clickedWebLinks.ElementAt(i).Value);
+                //Debug.Log("Looping dictionary clickedWebLinks " + PlayerPrefs.GetString("Name") + "Data " + clickedWebLinks.ElementAt(i).Key
+                //    + "Date " + clickedWebLinks.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "link_click", clickedWebLinks.ElementAt(i).Key, clickedWebLinks.ElementAt(i).Value);
             }
         }
 
@@ -86,14 +96,20 @@ public class BBBAnalytics : IgniteAnalytics
         {
             for (int i = 0; i < emojiUsed.Count; i++)
             {
-                Debug.Log("Looping dictionary emojiUsed " + PlayerPrefs.GetString("Name") + "Data0 " + emojiUsed.ElementAt(i).Key
-                    + "Date " + emojiUsed.ElementAt(i).Value);
-                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", emojiUsed.ElementAt(i).Key, emojiUsed.ElementAt(i).Value);
+                //Debug.Log("Looping dictionary emojiUsed " + PlayerPrefs.GetString("Name") + "Data " + emojiUsed.ElementAt(i).Key
+                //    + "Date " + emojiUsed.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "emoji_used", emojiUsed.ElementAt(i).Key, emojiUsed.ElementAt(i).Value);
             }
         }
 
-        Debug.Log("DispatchAnalytics");
+        ResetDictionaries();
+    }
 
+    void ResetDictionaries()
+    {
+        clickedVideos.Clear();
+        clickedWebLinks.Clear();
+        emojiUsed.Clear();
     }
 
     void FixedUpdate()
@@ -101,30 +117,27 @@ public class BBBAnalytics : IgniteAnalytics
         UpdateAllTexts();
     }
 
-    public override void ClickedVideo(string name)
+    public void ClickedVideo(string name)
     {
         clickedVideos.Add(name, DateTime.UtcNow.ToString());
-        Debug.Log("Added new video " + name);
     }
 
-    public override void EmojiUsed(string name)
+    public void EmojiUsed(string name)
     {
         emojiUsed.Add(name, DateTime.UtcNow.ToString());
-        Debug.Log("Added new Emoji " + name);
     }
     
-    public override void ClickedWeb(string url)
+    public void ClickedWeb(string url)
     {
         clickedWebLinks.Add(url, DateTime.UtcNow.ToString());
-        Debug.Log("Added new link " + url);
     }
 
-    public override void AverageSessionLength()
+    public void AverageSessionLength()
     {
         Debug.Log(avgSessionTime);
     }
 
-    public override void UpdateChatLog(string log)
+    public void UpdateChatLog(string log)
     {
         chatLog.Add(log);
     }

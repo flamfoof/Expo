@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class ISimpleLink : Interactables
 {
     public string linkURL;
-    public IgniteAnalytics analytics;
     public bool isSlide = false;
     public bool canClick = true;
     [DllImport("__Internal")]
@@ -22,9 +21,9 @@ public class ISimpleLink : Interactables
                 
                 canClick = !canClick;
 
-                if (analytics)
+                if (IgniteAnalytics.instance)
                 {
-                    analytics.ClickedStats(linkURL);
+                    IgniteAnalytics.instance.ClickedWeb(linkURL);
                 }
 
                 //Application.OpenURL(linkURL);

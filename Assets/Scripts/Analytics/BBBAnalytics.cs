@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using UnityEngine.Assertions;
+using System.Linq;
 
 public class BBBAnalytics : IgniteAnalytics
 {
@@ -17,6 +19,8 @@ public class BBBAnalytics : IgniteAnalytics
     List<float> sessionTimeList;
     List<int> playersLogged;
 
+    private APIHandler apiHandler;
+
     Dictionary<string, string> clickedVideos = new Dictionary<string, string>();
     Dictionary<string, string> clickedWebLinks = new Dictionary<string, string>();
     Dictionary<string, string> emojiUsed = new Dictionary<string, string>();
@@ -26,17 +30,15 @@ public class BBBAnalytics : IgniteAnalytics
     public Text attendeesText;
     public Text sessionText;
     public Text clicksText;
-    
+
+    private void Awake()
+    {
+        apiHandler = GetComponent<APIHandler>();
+        Assert.IsNotNull(apiHandler);
+    }
+
     private void Start() 
     {
-        if(instance != null)
-        {
-            Destroy(this.gameObject);
-        } else 
-        {
-            instance = this;            
-        }
-
         sessionNameList = new List<string>();
         sessionTimeList = new List<float>();
         if(!gameManager)
@@ -57,9 +59,41 @@ public class BBBAnalytics : IgniteAnalytics
         Timer.sendAnalytics -= DispatchAnalytics;
     }
 
-    private void DispatchAnalytics()
+    [ContextMenu("DispatchAnalytics")]
+    async void DispatchAnalytics()
     {
-        Debug.LogError("DispatchAnalytics");
+        if (clickedVideos.Count > 0)
+        {
+            for (int i = 0; i < clickedVideos.Count; i++)
+            {
+                Debug.Log("Looping dictionary clickedVideos " + PlayerPrefs.GetString("Name") + "Data0 " + clickedVideos.ElementAt(i).Key
+                    + "Date " + clickedVideos.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedVideos.ElementAt(i).Key, clickedVideos.ElementAt(i).Value);
+            }
+        }
+
+        if (clickedWebLinks.Count > 0)
+        {
+            for (int i = 0; i < clickedWebLinks.Count; i++)
+            {
+                Debug.Log("Looping dictionary clickedWebLinks " + PlayerPrefs.GetString("Name") + "Data0 " + clickedWebLinks.ElementAt(i).Key
+                    + "Date " + clickedWebLinks.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedWebLinks.ElementAt(i).Key, clickedWebLinks.ElementAt(i).Value);
+            }
+        }
+
+        if (emojiUsed.Count > 0)
+        {
+            for (int i = 0; i < emojiUsed.Count; i++)
+            {
+                Debug.Log("Looping dictionary emojiUsed " + PlayerPrefs.GetString("Name") + "Data0 " + emojiUsed.ElementAt(i).Key
+                    + "Date " + emojiUsed.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", emojiUsed.ElementAt(i).Key, emojiUsed.ElementAt(i).Value);
+            }
+        }
+
+        Debug.Log("DispatchAnalytics");
+
     }
 
     void FixedUpdate()
@@ -70,19 +104,19 @@ public class BBBAnalytics : IgniteAnalytics
     public override void ClickedVideo(string name)
     {
         clickedVideos.Add(name, DateTime.UtcNow.ToString());
-        Debug.Log("Added new video");
+        Debug.Log("Added new video " + name);
     }
 
     public override void EmojiUsed(string name)
     {
         emojiUsed.Add(name, DateTime.UtcNow.ToString());
-        Debug.Log("Added new Emoji");
+        Debug.Log("Added new Emoji " + name);
     }
     
     public override void ClickedWeb(string url)
     {
-        clickedWebLinks.Add(name, DateTime.UtcNow.ToString());
-        Debug.Log("Added new link");
+        clickedWebLinks.Add(url, DateTime.UtcNow.ToString());
+        Debug.Log("Added new link " + url);
     }
 
     public override void AverageSessionLength()

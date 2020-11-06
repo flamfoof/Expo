@@ -5,6 +5,19 @@ using Photon.Pun;
 
 public class IgniteAnalytics : MonoBehaviourPunCallbacks
 {
+    public static IgniteAnalytics instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     public virtual void ClickedStats()
     {
 
@@ -28,7 +41,7 @@ public class IgniteAnalytics : MonoBehaviourPunCallbacks
 
     public virtual void ClickedWeb(string url)
     {
-
+        Debug.Log("Caleled ClickedWeb parent");
     }
 
     public virtual void EmojiUsed(string name)

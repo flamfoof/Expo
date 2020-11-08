@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommandMuteAll : CommandButton
 {
-    private bool isTransmitting = false;
+    public bool isTransmitting = false;
 
     private void Awake()
     {
@@ -19,6 +19,6 @@ public class CommandMuteAll : CommandButton
     public override void Click()
     {
         Debug.Log("muting all: " + isTransmitting);
-        IgniteGameManager.localPlayer.GetComponent<UserActions>().SetMuteAll(isTransmitting);
+        IgniteGameManager.localPlayer.GetComponent<UserActions>().SetMuteAll(!isTransmitting);
     }
 }

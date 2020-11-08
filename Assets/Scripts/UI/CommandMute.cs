@@ -9,7 +9,8 @@ public class CommandMute : CommandButton
     public override void Click()
     {
         //IgniteGameManager.voiceManager.webRTC.GetComponent<AudioCall>().SetMuteSelf(isMuteButton);
-        isTransmitting = !isTransmitting;
-        DissonanceVoiceComms.instance.MuteSelf(isTransmitting);
+        //isTransmitting = !isTransmitting;
+        //Debug.Log("Muting: " + isTransmitting);
+        DissonanceVoiceComms.instance.MuteSelf(!isTransmitting);
     }
 }

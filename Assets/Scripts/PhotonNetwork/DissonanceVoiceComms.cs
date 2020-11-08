@@ -27,11 +27,7 @@ public class DissonanceVoiceComms : MonoBehaviour
 
     public void MuteSelf(bool isMute)
     {
-        if(dissonanceRecorder)
-        {
-            dissonanceRecorder.IsMuted = isMute;
-        }
-        
+        dissonanceRecorder.IsMuted = !isMute;
     }
 
     public void MuteOther(int actorNum)
@@ -43,7 +39,7 @@ public class DissonanceVoiceComms : MonoBehaviour
     {
         if(!SessionHandler.instance.CheckIfPresenter())
         {
-            dissonanceRecorder.IsMuted = isMute;
+            dissonanceRecorder.IsMuted = !isMute;
         }
     }    
 }

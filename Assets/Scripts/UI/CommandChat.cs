@@ -10,4 +10,9 @@ public class CommandChat : CommandButton
     {
         IgniteGameManager.localPlayer.GetComponent<UserActions>().OpenChat(true);
     }
+
+    public void Click(bool isOpen)
+    {
+        IgniteGameManager.localPlayer.GetComponent<UserActions>().OpenChat(isOpen);
+    }
 }

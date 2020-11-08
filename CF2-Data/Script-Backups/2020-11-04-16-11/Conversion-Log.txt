@@ -1,0 +1,11 @@
+Converting script [1 / 1]	[\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs]
+	Fragments : 2
+		[ 0] : Line:  419	InputMethod   GetAxis             	("Mouse X")
+		[ 1] : Line:  419	InputMethod   GetAxis             	("Mouse Y")
+
+
+1 scripts modified!
+Overwriting actual scripts...
+	[0 / 1] from  [D:/Unity projects 2020/Clients/WeIgnite/CF2-Data/Script-Backups/2020-11-04-16-11\Assets-After/\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs] to [D:/Unity projects 2020/Clients/WeIgnite/Assets/\StoreAssets\FirstPersionAIOPack\FirstPersonAIO\FirstPersonAIO.cs]
+
+Overwriting COMPLETED!

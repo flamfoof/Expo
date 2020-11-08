@@ -11,6 +11,7 @@ public class SelectVoicePlatform : MonoBehaviour
     public GameObject webglVoice;
     public GameObject webRTCVoice;
     public GameObject platformVoice;
+    public GameObject dissonanceVoice;
 
     void Awake()
     {
@@ -22,8 +23,9 @@ public class SelectVoicePlatform : MonoBehaviour
         webRTCVoice.SetActive(true);
         platformVoice.SetActive(false);
         #else
-        platformVoice.SetActive(true);
+        platformVoice.SetActive(false);
         webRTCVoice.SetActive(false);
+        dissonanceVoice.SetActive(true);
             
         #endif
 

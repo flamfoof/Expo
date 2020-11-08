@@ -15,8 +15,8 @@ MonoBehaviour:
   _quality: 1
   _frameSize: 1
   _forwardErrorCorrection: 1
-  _denoiseAmount: 2
-  _vadSensitivity: 1
+  _denoiseAmount: 0
+  _vadSensitivity: 0
   _aecAmount: 0
   _aecDelayAgnostic: 1
   _aecExtendedFilter: 1

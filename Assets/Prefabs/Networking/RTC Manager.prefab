@@ -1901,6 +1901,7 @@ MonoBehaviour:
   webglVoice: {fileID: 0}
   webRTCVoice: {fileID: 8218399313992025316}
   platformVoice: {fileID: 7020339071943490491}
+  dissonanceVoice: {fileID: 6642804452018225103}
 --- !u!114 &1681540966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,10 +2276,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DissonanceSetup
       objectReference: {fileID: 0}
-    - target: {fileID: 102228, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.6165357
@@ -2325,6 +2322,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
+--- !u!1 &6642804452018225103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 102228, guid: cc2b9f84f04070441acc55fd0b9f8797,
+    type: 3}
+  m_PrefabInstance: {fileID: 6642804452018122907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6642804452017969559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420108, guid: cc2b9f84f04070441acc55fd0b9f8797,

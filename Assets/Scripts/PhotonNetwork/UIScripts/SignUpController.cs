@@ -160,16 +160,24 @@ public class SignUpController : MonoBehaviour
     }
     private void RefreshText()
     {
-        nameField.text = "";
-        emailField.text = "";
-        passwordField.text = "";
-        confirmPasswordField.text = "";
-        nameFeedbackTxt.text = "";
-        emailFeedbackTxt.text = "";
-        passwordFeedbackTxt.text = "";
-        confirmPasswordFeedbackTxt.text = "";
-        organizationFeedbackTxt.text = "";
-        organizationField.text = "";
+        try
+        {
+            nameField.text = "";
+            emailField.text = "";
+            passwordField.text = "";
+            confirmPasswordField.text = "";
+            nameFeedbackTxt.text = "";
+            emailFeedbackTxt.text = "";
+            passwordFeedbackTxt.text = "";
+            confirmPasswordFeedbackTxt.text = "";
+            organizationFeedbackTxt.text = "";
+            organizationField.text = "";
+        } 
+        catch (Exception e)
+        {
+            Debug.LogError("The text fields game objects weren't set");
+        }
+        
     }
     #endregion
 

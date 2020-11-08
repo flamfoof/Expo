@@ -2020,7 +2020,7 @@ MonoBehaviour:
   voiceDetection: 0
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (High Definition Audio Device)
+  unityMicrophoneDevice: Mic in at front panel (Pink) (Realtek(R) Audio)
   photonMicrophoneDeviceId: 0
   interestGroup: 0
   debugEchoMode: 0
@@ -2320,7 +2320,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6534699452212162226, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
 --- !u!1 &6642804452018225103 stripped
 GameObject:

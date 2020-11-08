@@ -935,9 +935,9 @@ MonoBehaviour:
   _mode: 1
   _muted: 0
   _playerId: 
-  _useTrigger: 1
+  _useTrigger: 0
   _roomName: 
-  _priority: -2
+  _priority: 0
 --- !u!114 &9112333320197706851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ SphereCollider:
   m_GameObject: {fileID: 1743903104223250}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}

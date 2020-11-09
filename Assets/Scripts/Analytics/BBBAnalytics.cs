@@ -93,7 +93,7 @@ public class BBBAnalytics : MonoBehaviour
             {
                 //Debug.Log("Looping dictionary clickedVideos " + PlayerPrefs.GetString("Name") + "Data " + clickedVideos.ElementAt(i).Key
                 //    + "Date " + clickedVideos.ElementAt(i).Value);
-                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedVideos.ElementAt(i).Key, clickedVideos.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "video_click", clickedVideos.ElementAt(i).Value, clickedVideos.ElementAt(i).Key);
             }
         }
 
@@ -103,7 +103,7 @@ public class BBBAnalytics : MonoBehaviour
             {
                 //Debug.Log("Looping dictionary clickedWebLinks " + PlayerPrefs.GetString("Name") + "Data " + clickedWebLinks.ElementAt(i).Key
                 //    + "Date " + clickedWebLinks.ElementAt(i).Value);
-                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "link_click", clickedWebLinks.ElementAt(i).Key, clickedWebLinks.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "link_click", clickedWebLinks.ElementAt(i).Value, clickedWebLinks.ElementAt(i).Key);
             }
         }
 
@@ -113,7 +113,7 @@ public class BBBAnalytics : MonoBehaviour
             {
                 //Debug.Log("Looping dictionary emojiUsed " + PlayerPrefs.GetString("Name") + "Data " + emojiUsed.ElementAt(i).Key
                 //    + "Date " + emojiUsed.ElementAt(i).Value);
-                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "emoji_used", emojiUsed.ElementAt(i).Key, emojiUsed.ElementAt(i).Value);
+                await apiHandler.Actions(PlayerPrefs.GetString("Name"), "emoji_used", emojiUsed.ElementAt(i).Value, emojiUsed.ElementAt(i).Key);
             }
         }
 
@@ -147,17 +147,17 @@ public class BBBAnalytics : MonoBehaviour
 
     public void ClickedVideo(string name)
     {
-        clickedVideos.Add(name, DateTime.UtcNow.ToString());
+        clickedVideos.Add(DateTime.UtcNow.ToString(), name);
     }
 
     public void EmojiUsed(string name)
     {
-        emojiUsed.Add(name, DateTime.UtcNow.ToString());
+        emojiUsed.Add(DateTime.UtcNow.ToString(), name);
     }
     
     public void ClickedWeb(string url)
     {
-        clickedWebLinks.Add(url, DateTime.UtcNow.ToString());
+        clickedWebLinks.Add(DateTime.UtcNow.ToString(), url);
     }
 
     public void AverageSessionLength()

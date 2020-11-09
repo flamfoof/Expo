@@ -6,6 +6,8 @@ using Byn.Awrtc;
 
 public class PlayerProximityVoice : MonoBehaviourPunCallbacks
 {
+    //This script is intended for WebGL development since it doesn't support
+    //3D spatial volume
     IgniteGameManager gameManager;
     AudioCall audioCall;
     public float minDistance = 3.0f;

@@ -16,6 +16,7 @@ public class BBBAnalytics : MonoBehaviour
     public int attendees = 0;
     public int clicks = 0;
     public float avgSessionTime = 0;
+    public string sessionStartTime;
     List<string> sessionNameList;
     List<float> sessionTimeList;
     List<int> playersLogged;
@@ -45,6 +46,8 @@ public class BBBAnalytics : MonoBehaviour
 
         apiHandler = GetComponent<APIHandler>();
         Assert.IsNotNull(apiHandler);
+
+        sessionStartTime = GetCurrentTime();
     }
 
     private void Start() 
@@ -56,6 +59,18 @@ public class BBBAnalytics : MonoBehaviour
 
         InvokeRepeating("UpdateAvgSessionTime", 1.0f, 1.0f);
         //InvokeRepeating("AnalyticsAvgTimeUpdate", 1.0f, 5.0f);
+    }
+
+    public string GetCurrentTime()
+    {
+        string[] data = DateTime.UtcNow.ToString().Split(' ');
+        return data[1] + data[2];
+    }
+
+    public string GetCurrentDate()
+    {
+        string[] data = DateTime.UtcNow.ToString().Split(' ');
+        return data[0];
     }
 
 
@@ -115,6 +130,19 @@ public class BBBAnalytics : MonoBehaviour
     void FixedUpdate()
     {
         UpdateAllTexts();
+    }
+
+    public async void EndSession(Action callback)
+    {
+        await apiHandler.Access(PlayerPrefs.GetString("Name"), GetCurrentDate() , sessionStartTime , GetCurrentTime());
+
+        callback?.Invoke();
+    }
+
+
+    private async void OnApplicationQuit()
+    {
+        await apiHandler.Access(PlayerPrefs.GetString("Name"), GetCurrentDate(), sessionStartTime, GetCurrentTime());
     }
 
     public void ClickedVideo(string name)

@@ -55,13 +55,13 @@ public class APIHandler : MonoBehaviour
         }
     }
 
-    public async Task Access(string accessEmail, string accessDate, string accessHorainicio, string accessHorafin)
+    public async Task Access(string accessEmail, string accessDate, string sessionStart, string sessionEnd)
     {
         List<IMultipartFormSection> FormData = new List<IMultipartFormSection>();
         FormData.Add(new MultipartFormDataSection("access_email", accessEmail));
         FormData.Add(new MultipartFormDataSection("access_date", accessDate));
-        FormData.Add(new MultipartFormDataSection("access_horainicio", accessHorainicio));
-        FormData.Add(new MultipartFormDataSection("access_horafin", accessHorafin));
+        FormData.Add(new MultipartFormDataSection("access_horainicio", sessionStart));
+        FormData.Add(new MultipartFormDataSection("access_horafin", sessionEnd));
 
 
         UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/access", FormData);
@@ -79,7 +79,7 @@ public class APIHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log("Access anlytics were synced");
+            Debug.Log("Access anlytics were synced " + www.downloadHandler.text);
         }
     }
 
@@ -109,6 +109,5 @@ public class APIHandler : MonoBehaviour
         {
             Debug.Log("Action anlytics were synced, data " + www.downloadHandler.text);
         }
-    }   
-
+    }
 }

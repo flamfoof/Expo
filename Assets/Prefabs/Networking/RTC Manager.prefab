@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0.09803922}
+  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0.09803922}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2140,7 +2140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1031669706400911587
 Transform:
   m_ObjectHideFlags: 0
@@ -2192,8 +2192,7 @@ MonoBehaviour:
   hasFrame: 0
   firstJoinedVid: 0
   receiveTxt: {fileID: 2338516778931424323}
-  videoImage:
-  - {fileID: 0}
+  videoImage: []
   textOutput: {fileID: 799856776}
   messageField: {fileID: 4337185609708388612}
   scrollbar: {fileID: 1229657444}

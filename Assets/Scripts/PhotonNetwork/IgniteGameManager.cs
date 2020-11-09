@@ -25,9 +25,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public bool gameTesting = false;
 
     private GameObject instance;
-
-    public IgniteAnalytics analyticsBoard;
-
     public GameObject handStateObj;
 
     void Start()
@@ -35,10 +32,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         playerList = new List<PhotonView>();
         IgniteInstance = this;
 
-        if(!analyticsBoard)
-        {
-            analyticsBoard = GameObject.FindObjectOfType<BBBAnalytics>();
-        }
         if(gameTesting)
         {
             Application.logMessageReceived += CustomLogger;
@@ -287,15 +280,16 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
                     Debug.Log("Logged unique player: " + totalUniquePlayers);
                     if(totalUniquePlayers < pv.OwnerActorNr)
                         totalUniquePlayers = pv.OwnerActorNr;
-                    if(analyticsBoard)
+
+                    if(BBBAnalytics.instance)
                     {
-                        analyticsBoard.GetComponent<BBBAnalytics>().UpdateAttendeesCount(totalUniquePlayers);
+                        BBBAnalytics.instance.UpdateAttendeesCount(totalUniquePlayers);
                     }
                     
-                    if(AnalyticsController.Instance)
-                    {
-                        AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
-                    } 
+                    //if(AnalyticsController.Instance)
+                    //{
+                    //    AnalyticsController.Instance.AttendesNumber(totalUniquePlayers);
+                    //} 
                 }                
             }                  
         }

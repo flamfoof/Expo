@@ -26,7 +26,11 @@ public class BasicSceneFunctions : MonoBehaviour
 
     public void ExitApp()
     {
-        Application.Quit();
+        BBBAnalytics.instance.EndSession(() => {
+            Debug.Log("Applicaiton Quit was called");
+            Application.Quit();
+        });
+        
     }
 
 }

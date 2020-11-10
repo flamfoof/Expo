@@ -52,6 +52,19 @@ public class ISimpleVideo : Interactables, IPunObservable
     {
         if (phase == InputActionPhase.Started)
         {
+            if (BBBAnalytics.instance)
+            {
+                if (videoPlayer.source == VideoSource.VideoClip)
+                {
+                    BBBAnalytics.instance.ClickedVideo(videoPlayer.clip.name);
+                }
+                else
+                {
+                    BBBAnalytics.instance.ClickedVideo(videoPlayer.url);
+                }
+            }
+
+
             photonView.RPC("InteractVideo", RpcTarget.AllBuffered);
         }
     }

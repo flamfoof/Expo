@@ -35,10 +35,6 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
         playerList = new List<PhotonView>();
         IgniteInstance = this;
 
-        if(!analyticsBoard)
-        {
-            analyticsBoard = GameObject.FindObjectOfType<BBBAnalytics>();
-        }
         if(gameTesting)
         {
             Application.logMessageReceived += CustomLogger;

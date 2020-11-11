@@ -51,9 +51,10 @@ public class UIAudioBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_state.IsSpeaking)
+        if(_state != null)
         {
-            GetComponent<Image>().enabled = true;
+            if(_state.IsSpeaking)
+                GetComponent<Image>().enabled = true;
         } else {
             GetComponent<Image>().enabled = false;
         }

@@ -3584,7 +3584,7 @@ PrefabInstance:
     - target: {fileID: 329239584891520079, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: viewIdField
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 366781810204231206, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
@@ -3624,7 +3624,7 @@ PrefabInstance:
     - target: {fileID: 1621969691312838054, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: viewIdField
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1782422752908195477, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
@@ -3917,6 +3917,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 665550735}
+    - target: {fileID: 6153986922414965878, guid: 178b7249da4692848ab3f10f8bc0b5ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6547788824225850171, guid: 178b7249da4692848ab3f10f8bc0b5ac,
         type: 3}
       propertyPath: m_Enabled

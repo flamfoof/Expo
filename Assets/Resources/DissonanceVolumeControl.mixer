@@ -81,6 +81,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
+  - {fileID: 9052398228447962585}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -177,6 +178,20 @@ AudioMixerEffectController:
   m_EffectID: b6a76426bd65c7a45b5cca4251d26352
   m_EffectName: Send
   m_MixLevel: ba814f24d4ead8b47ab29d60c640c1fa
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &9052398228447962585
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a3bc075d80a00474aa865b60cd2258d0
+  m_EffectName: Dissonance Echo Cancellation
+  m_MixLevel: fa57bd8d54e245e4688be2e24f0a5a9a
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0

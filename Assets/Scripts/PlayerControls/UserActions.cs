@@ -663,7 +663,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
         if(!admin)
         {
-            PhotonVoiceComms.instance.MuteSelf(isMute);
+            DissonanceVoiceComms.instance.MuteSelf(isMute);
             //hard coded for Unmute button
             commandUI.GetComponent<CommandRing>().commands[1].SetActive(!isMute);
             commandUI.GetComponent<CommandRing>().commands[1].GetComponent<CommandMute>().isTransmitting = !isMute;

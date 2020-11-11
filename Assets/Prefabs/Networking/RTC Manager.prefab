@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 198.8, y: 57.100006}
+  m_AnchoredPosition: {x: 328, y: 57.100006}
   m_SizeDelta: {x: 52.33, y: 44.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736198098
@@ -738,10 +738,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chat Visible
+  m_Text: Chat Stay Visible
 --- !u!1 &1332120360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1135,6 +1135,7 @@ GameObject:
   - component: {fileID: 489434093}
   - component: {fileID: 1411404269}
   - component: {fileID: 768931005}
+  - component: {fileID: 7295562529169232577}
   m_Layer: 5
   m_Name: ReceiveText
   m_TagString: Untagged
@@ -1159,8 +1160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -201.5, y: -90.5}
-  m_SizeDelta: {x: -447, y: -295}
+  m_AnchoredPosition: {x: -274, y: -69}
+  m_SizeDelta: {x: -634.97003, y: -295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5069842901306909277
 CanvasRenderer:
@@ -1216,6 +1217,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &7295562529169232577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2338516778931424323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc6f574f0bdf0248add72b00b61ef0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3003230807819300068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2272864774266892340}
   - component: {fileID: 3876996609402604670}
+  - component: {fileID: 4608134882841783569}
   m_Layer: 5
   m_Name: SendMessage
   m_TagString: Untagged
@@ -1493,7 +1507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -228, y: -196}
+  m_AnchoredPosition: {x: -387, y: -196}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3876996609402604670
@@ -1504,6 +1518,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5063427659900530138}
   m_CullTransparentMesh: 0
+--- !u!114 &4608134882841783569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063427659900530138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f66272952c5974aa8151a5aac3b8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendButton: {fileID: 6581907358593465058}
 --- !u!1 &5451083201704859290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,8 +1568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 40}
+  m_AnchoredPosition: {x: 112, y: 0}
+  m_SizeDelta: {x: 350, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7295762729207765239
 CanvasRenderer:
@@ -1702,7 +1729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0.09803922}
+  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0.09803922}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1754,8 +1781,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 251, y: -1}
-  m_SizeDelta: {x: 160, y: 40}
+  m_AnchoredPosition: {x: 328, y: -1}
+  m_SizeDelta: {x: 53.965057, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3069509742797033538
 CanvasRenderer:
@@ -1847,6 +1874,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5063427659900530138}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6715458132555031630
 GameObject:
@@ -2010,17 +2048,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7020339071943490491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   logLevel: 3
   ignoreGlobalLogLevel: 0
-  voiceDetection: 0
-  voiceDetectionThreshold: 0.01
+  voiceDetection: 1
+  voiceDetectionThreshold: 0.1
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (High Definition Audio Device)
+  unityMicrophoneDevice: Mic in at front panel (Pink) (Realtek(R) Audio)
   photonMicrophoneDeviceId: 0
   interestGroup: 0
   debugEchoMode: 0
@@ -2115,7 +2153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1031669706400911587
 Transform:
   m_ObjectHideFlags: 0
@@ -2167,8 +2205,7 @@ MonoBehaviour:
   hasFrame: 0
   firstJoinedVid: 0
   receiveTxt: {fileID: 2338516778931424323}
-  videoImage:
-  - {fileID: 0}
+  videoImage: []
   textOutput: {fileID: 799856776}
   messageField: {fileID: 4337185609708388612}
   scrollbar: {fileID: 1229657444}
@@ -2320,7 +2357,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6534699452212162226, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cc2b9f84f04070441acc55fd0b9f8797, type: 3}
 --- !u!1 &6642804452018225103 stripped
 GameObject:

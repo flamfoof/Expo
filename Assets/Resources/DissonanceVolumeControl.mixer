@@ -16,21 +16,26 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 5935499688365889329}
   - {fileID: 6738314553317694102}
+  - {fileID: -7230557849577529639}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &-5852014661275238520
+--- !u!244 &-7230557849577529639
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 44a4f99058fdb054b8ef6ca1bae14a7c
-  m_EffectName: Dissonance Echo Cancellation
-  m_MixLevel: bdc1a4702fdd8f54884e72258711591a
-  m_Parameters: []
+  m_EffectID: 31cfba9fd4f6d864d8642ff02e3cf92e
+  m_EffectName: Lowpass
+  m_MixLevel: 9e8c9ff8862af7448a517b4acd78d717
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: f3a8153412679b0438936c3dc34d93f6
+  - m_ParameterName: Resonance
+    m_GUID: 21651ca2c82f0e340bb04455dd5ce143
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -50,7 +55,6 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 613814040559470419}
   - {fileID: 4309009024188531355}
-  - {fileID: -5852014661275238520}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -125,6 +129,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 60961c750aa7ff8489bf010a9ccf712d
   m_FloatValues:
+    f3a8153412679b0438936c3dc34d93f6: 4000
     65110bd75c42fcc4f8ae19e95307d501: 0
   m_TransitionOverrides: {}
 --- !u!244 &613814040559470419

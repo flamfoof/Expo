@@ -36,14 +36,13 @@ public class CommandEmote : CommandButton
 
     public void SetEmotePlay(int index)
     {
-        if (BBBAnalytics.instance)
-        {
-            BBBAnalytics.instance.EmojiUsed(GetComponentInParent<EmoteList>().emotesList[index].name);
-        }
-
-
         this.emoteIndex = index;
         IgniteGameManager.localPlayer.GetComponent<UserActions>().OpenEmoteMenu(emoteIndex);
+
+        if (BBBAnalytics.instance)
+        {
+            BBBAnalytics.instance.EmojiUsed(IgniteGameManager.localPlayer.GetComponent<EmoteList>().emotesList[index].name);
+        }
         HideChildrenButton();
     }
 

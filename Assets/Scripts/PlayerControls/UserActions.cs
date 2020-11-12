@@ -796,12 +796,12 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public IEnumerator RefocusApplicationCursor()
     {
         yield return new WaitForFixedUpdate();
-        //if (!isMenuOpen && !isChatOpen)
-        //{
-        //    UpdateControlLock(true, true);
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //    Cursor.visible = false;
-        //}
+        if (!isMenuOpen && !isChatOpen)
+        {
+            UpdateControlLock(true, true);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     public IEnumerator UnfocusApplicationCursor()

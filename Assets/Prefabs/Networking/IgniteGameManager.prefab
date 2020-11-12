@@ -583,7 +583,6 @@ MonoBehaviour:
   sceneLogin: Login
   sceneMain: MainConference
   gameTesting: 0
-  analyticsBoard: {fileID: 0}
   handStateObj: {fileID: 7897151226439677765}
 --- !u!114 &1422133561
 MonoBehaviour:
@@ -1318,16 +1317,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5373333842908094669, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 4478146855474858740}
-    - target: {fileID: 5373333842908094669, guid: 991b8460bce4b9f448d903865d5ab0ae,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Click
-      objectReference: {fileID: 0}
-    - target: {fileID: 5373333842908094669, guid: 991b8460bce4b9f448d903865d5ab0ae,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -1455,6 +1444,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263073835584822046, guid: 991b8460bce4b9f448d903865d5ab0ae,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7447984890498155009, guid: 991b8460bce4b9f448d903865d5ab0ae,
         type: 3}

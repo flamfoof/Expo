@@ -59,6 +59,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public float realSessionTimer = 0.0f;
 
     public GameObject handRaise;
+    public GameObject mutedIcon;
     public bool isHandRaised = false;
 
     public float SessionTimer
@@ -115,24 +116,28 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         // Performed - When the button has been pushed and held for the corresponding amount of 
         //             time in the controller configs
         // Canceled - When button has been let go before it has been performed^
-        actionPrimary.started += context => Interact(context);
-        actionPrimary.performed += context => Interact(context);
-        actionPrimary.canceled += context => Interact(context);
+        if(GetComponent<PhotonView>().IsMine)
+        {
+            actionPrimary.started += context => Interact(context);
+            actionPrimary.performed += context => Interact(context);
+            actionPrimary.canceled += context => Interact(context);
 
-        actionSprint.started += context => SprintButton(context);
-        actionSprint.canceled += context => SprintButton(context);
-        actionMenu.started += context => MenuButton(context);
-        actionChat.started += context => ChatButton(context);
-        actionTeleport.started += context => TeleportButton(context);
-        actionTeleport.performed += context => TeleportButton(context);
-        actionTeleport.canceled += context => TeleportButton(context);
-        //actionEmailBttn.started += context => EmailButton(context);
-        //actionEmailBttn.canceled += context => EmailButton(context);
-        infoCanvasGroup = GetComponent<CanvasGroup>();
-        commandUI = gameManager.commandUI.gameObject;
-        uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
+            actionSprint.started += context => SprintButton(context);
+            actionSprint.canceled += context => SprintButton(context);
+            actionMenu.started += context => MenuButton(context);
+            actionChat.started += context => ChatButton(context);
+            actionTeleport.started += context => TeleportButton(context);
+            actionTeleport.performed += context => TeleportButton(context);
+            actionTeleport.canceled += context => TeleportButton(context);
+            //actionEmailBttn.started += context => EmailButton(context);
+            //actionEmailBttn.canceled += context => EmailButton(context);
+            infoCanvasGroup = GetComponent<CanvasGroup>();
+            commandUI = gameManager.commandUI.gameObject;
+            uiEffects = IgniteGameManager.IgniteInstance.GetComponent<UIEffectsUtils>();
 
-        isHandRaised = false;
+            isHandRaised = false;
+        }
+        
     }
 
     private void Start()
@@ -271,6 +276,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     {
         switch (ctx.phase)
         {
+            
             // Checks if button has been pressed
             case InputActionPhase.Started:
                 if (ctx.interaction is SlowTapInteraction)
@@ -308,7 +314,6 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                             photonView.RPC("ThinkAnimation", RpcTarget.All);
                         }
                         else ActivateCommandRing();
-
                     }
 
                 }
@@ -610,6 +615,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void UpdateHandState()
     {
+        Debug.Log(isHandRaised);
         if(isHandRaised)
         {
             gameManager.handStateObj.SetActive(true);
@@ -670,7 +676,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             //hard codd for mute button
             commandUI.GetComponent<CommandRing>().commands[2].SetActive(isMute);
             commandUI.GetComponent<CommandRing>().commands[2].GetComponent<CommandMute>().isTransmitting = isMute;
-
+            IgniteGameManager.IgniteInstance.mutedStateObj.SetActive(isMute);
         }
     }
 

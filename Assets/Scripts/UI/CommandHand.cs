@@ -5,20 +5,27 @@ using UnityEngine.UI;
 
 public class CommandHand : CommandButton
 {
-    //public override void Click()
-    //{
-    //    IgniteGameManager.IgniteInstance.HandButtonCliked();
-    //}
+    UserActions player;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Click()
     {
-        
+        //print(player.handRaise.name);
+        print("HAND RAISE: " + player.isHandRaised);
+        if(player.isHandRaised)
+        {
+            player.isHandRaised = false;
+            player.handRaise.SetActive(false);
+        }
+        else
+        {
+            player.isHandRaised = true;
+            player.handRaise.SetActive(true);
+        }
+        player.HandRaiseClicked();
     }
 }

@@ -26,6 +26,7 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
 
     private GameObject instance;
     public GameObject handStateObj;
+    public GameObject mutedStateObj;
 
     void Start()
     {

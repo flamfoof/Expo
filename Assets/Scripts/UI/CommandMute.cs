@@ -8,7 +8,7 @@ public class CommandMute : CommandButton
     
     public override void Click()
     {
-        DissonanceVoiceComms.instance.MuteSelf(!isTransmitting);
-        IgniteGameManager.IgniteInstance.mutedStateObj.SetActive(isTransmitting);
+        //DissonanceVoiceComms.instance.MuteSelf(!isTransmitting);
+        IgniteGameManager.IgniteInstance.mutedStateObj.SetActive(true);
     }
 }

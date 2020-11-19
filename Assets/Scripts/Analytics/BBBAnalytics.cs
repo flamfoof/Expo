@@ -63,13 +63,13 @@ public class BBBAnalytics : MonoBehaviour
 
     public string GetCurrentTime()
     {
-        string[] data = DateTime.UtcNow.ToString().Split(' ');
-        return data[1] + data[2];
+        string[] data = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss").Split(' ');
+        return data[1];
     }
 
     public string GetCurrentDate()
     {
-        string[] data = DateTime.UtcNow.ToString().Split(' ');
+        string[] data = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss").Split(' ');
         return data[0];
     }
 
@@ -147,17 +147,17 @@ public class BBBAnalytics : MonoBehaviour
 
     public void ClickedVideo(string name)
     {
-        clickedVideos.Add(DateTime.UtcNow.ToString(), name);
+        clickedVideos.Add(GetCurrentDate() + " " + GetCurrentTime(), name);
     }
 
     public void EmojiUsed(string name)
     {
-        emojiUsed.Add(DateTime.UtcNow.ToString(), name);
+        emojiUsed.Add(GetCurrentDate() + " " + GetCurrentTime(), name);
     }
     
     public void ClickedWeb(string url)
     {
-        clickedWebLinks.Add(DateTime.UtcNow.ToString(), url);
+        clickedWebLinks.Add(GetCurrentDate() + " " + GetCurrentTime(), url);
     }
 
     public void AverageSessionLength()

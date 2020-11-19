@@ -63,7 +63,6 @@ public class APIHandler : MonoBehaviour
         FormData.Add(new MultipartFormDataSection("access_horainicio", sessionStart));
         FormData.Add(new MultipartFormDataSection("access_horafin", sessionEnd));
 
-
         UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/access", FormData);
 
         byte[] bytesToEncode = Encoding.UTF8.GetBytes("project_accesstoken" + ":" + accessToken);
@@ -90,7 +89,6 @@ public class APIHandler : MonoBehaviour
         FormData.Add(new MultipartFormDataSection("action_type", actionType));
         FormData.Add(new MultipartFormDataSection("action_data", actionData));
         FormData.Add(new MultipartFormDataSection("action_data", actionDate));
-
 
         UnityWebRequest www = UnityWebRequest.Post("http://weignite.it/api/project/" + projectId + "/action", FormData);
 

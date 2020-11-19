@@ -17,6 +17,7 @@ public class SelectAvatar : MonoBehaviour
     public AssignPlayerAvatar AssignAvatar;
     AssignPlayerAvatar selectedAvatarType;
 
+    public bool staff = false;
     public scr_Selector maleCharacteristics;
     public scr_Selector_Female femaleCharacteristics;
 
@@ -51,10 +52,21 @@ public class SelectAvatar : MonoBehaviour
             totalBodyCharacterCount = maleHeadCharacterCount;
             totalHeadCharacterCount = maleHeadCharacterCount;
             AssignAvatar.Gender = GenderList.genders.Male1;
-            
+
 
             maleCharacteristics.gameObject.SetActive(true);
             femaleCharacteristics.gameObject.SetActive(false);
+
+            if (staff)
+            {
+                AssignAvatar.bodyIndex = 2;
+
+            }
+            else
+            {
+                AssignAvatar.bodyIndex = 1;
+
+            }
         }
         else
         {
@@ -64,11 +76,22 @@ public class SelectAvatar : MonoBehaviour
 
             femaleCharacteristics.gameObject.SetActive(true);
             maleCharacteristics.gameObject.SetActive(false);
+
+            if (staff)
+            {
+                AssignAvatar.bodyIndex = 1;
+
+            }
+            else
+            {
+                AssignAvatar.bodyIndex = 2;
+
+            }
         }
 
         //reset index
+
         AssignAvatar.headIndex = 1;
-        AssignAvatar.bodyIndex = 1;
         EnableCharHead(AssignAvatar.headIndex);
         EnableCharBody(AssignAvatar.bodyIndex);
     }
@@ -110,7 +133,7 @@ public class SelectAvatar : MonoBehaviour
         if (avatarGender == "male")
         {
             //check if we should pick light or dark facial features compared to skintone.
-            if(index > 2)
+            if (index > 2)
             {
                 GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("light");
             }
@@ -121,7 +144,7 @@ public class SelectAvatar : MonoBehaviour
         }
         else
         {
-            if (index >1)
+            if (index > 1)
             {
                 GameObject.FindObjectOfType<FacialAnimations>().UpdateCharacterFace("light");
             }
@@ -151,18 +174,24 @@ public class SelectAvatar : MonoBehaviour
         }
         else if (characteristic == "body")
         {
-            if (AssignAvatar.bodyIndex <= 0)
+            //staff doesn't change body type so they always have teal shirt
+            if (!staff)
             {
-                bodyPreviousBttn.interactable = false;
-            }
-            else
-            {
-                AssignAvatar.bodyIndex--;
+                if (AssignAvatar.bodyIndex <= 0)
+                {
+                    bodyPreviousBttn.interactable = false;
+                }
+                else
+                {
+                    print("Staff true? " + !staff);
 
-                bodyPreviousBttn.interactable = true;
-                bodyNextBttn.interactable = true;
+                    AssignAvatar.bodyIndex--;
+
+                    bodyPreviousBttn.interactable = true;
+                    bodyNextBttn.interactable = true;
+                }
             }
-            print("Current asset: " + AssignAvatar.bodyIndex + "/" + totalBodyCharacterCount);
+            print(" back.. Current asset: " + AssignAvatar.bodyIndex + "/" + totalBodyCharacterCount);
 
             EnableCharBody(AssignAvatar.bodyIndex);
         }
@@ -190,20 +219,25 @@ public class SelectAvatar : MonoBehaviour
         }
         else if (characteristic == "body")
         {
-            AssignAvatar.bodyIndex++;
+            //staff doesn't change body type so they always have teal shirt
+            if (!staff)
+            {
+                AssignAvatar.bodyIndex++;
 
-            if (AssignAvatar.bodyIndex >= totalBodyCharacterCount - 1)
-            {
-                bodyNextBttn.interactable = false;
-            }
-            else
-            {
-                bodyPreviousBttn.interactable = true;
-                bodyNextBttn.interactable = true;
+                if (AssignAvatar.bodyIndex >= totalBodyCharacterCount - 1)
+                {
+                    bodyNextBttn.interactable = false;
+                }
+                else
+                {
+                    bodyPreviousBttn.interactable = true;
+                    bodyNextBttn.interactable = true;
+                }
+                EnableCharBody(AssignAvatar.bodyIndex);
+
             }
             print("Current asset: " + AssignAvatar.bodyIndex + "/" + totalBodyCharacterCount);
 
-            EnableCharBody(AssignAvatar.bodyIndex);
         }
     }
 }

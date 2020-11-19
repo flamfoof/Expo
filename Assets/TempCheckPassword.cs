@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TempCheckPassword : MonoBehaviour
 {
+    public SelectAvatar selAvatar;
     string password1 = BaseStrings.password1;
     string password2 = BaseStrings.password2;
 
@@ -23,6 +24,7 @@ public class TempCheckPassword : MonoBehaviour
         if(passwordInput.text == password1 || passwordInput.text == password2)
         {
             SessionHandler.instance.passAdress = passwordInput.text;
+            selAvatar.staff = true;
             UIControls.characterSelect.SetActive(true);
             UIControls.roleSelect.SetActive(false);
         }

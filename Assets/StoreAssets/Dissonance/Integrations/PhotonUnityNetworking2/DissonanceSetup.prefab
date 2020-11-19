@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 420108}
   - component: {fileID: 11495240}
   - component: {fileID: 11480852}
-  - component: {fileID: 6534699452212162226}
+  - component: {fileID: 7120879581999896439}
   m_Layer: 0
   m_Name: DissonanceSetup
   m_TagString: Untagged
@@ -71,7 +71,7 @@ MonoBehaviour:
   EventCodeToServer: 173
   EventCodeToClient: 174
   SerializationCode: 231
---- !u!114 &6534699452212162226
+--- !u!114 &7120879581999896439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,6 +80,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 102228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d3b5a7439295a4fbf3b6a1e0d07755, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d5377c4697c82448826a0b8b6af1192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

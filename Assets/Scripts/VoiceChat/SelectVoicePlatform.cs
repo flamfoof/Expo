@@ -23,7 +23,7 @@ public class SelectVoicePlatform : MonoBehaviour
         webRTCVoice.SetActive(true);
         platformVoice.SetActive(false);
         #else
-        platformVoice.SetActive(false);
+        platformVoice.SetActive(true);
         webRTCVoice.SetActive(false);
         dissonanceVoice.SetActive(true);
             

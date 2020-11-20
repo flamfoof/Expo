@@ -61,12 +61,11 @@ public class SelectAvatar : MonoBehaviour
             {
                 AssignAvatar.bodyIndex = 2;
 
-            }
-            else
+            } else if (!staff && AssignAvatar.bodyIndex == 2)
             {
-                AssignAvatar.bodyIndex = 1;
-
+                AssignAvatar.bodyIndex++;
             }
+        
         }
         else
         {
@@ -81,12 +80,12 @@ public class SelectAvatar : MonoBehaviour
             {
                 AssignAvatar.bodyIndex = 1;
 
-            }
-            else
+            }  else if (!staff && AssignAvatar.bodyIndex == 1)
             {
-                AssignAvatar.bodyIndex = 2;
-
+                Debug.Log("not staff!");
+                AssignAvatar.bodyIndex = 0;
             }
+
         }
 
         //reset index
@@ -100,7 +99,12 @@ public class SelectAvatar : MonoBehaviour
     {
         EnableCharHead(AssignAvatar.headIndex);
         EnableCharBody(AssignAvatar.bodyIndex);
-
+        staff = SessionHandler.instance.CheckIfStaff() || SessionHandler.instance.CheckIfPresenter();
+        if(staff)
+        {
+            AssignAvatar.bodyIndex = 2;
+            EnableCharBody(AssignAvatar.bodyIndex);
+        }
         if (AssignAvatar.headIndex == 0)
         {
             headPreviousBttn.interactable = false;
@@ -184,8 +188,15 @@ public class SelectAvatar : MonoBehaviour
                 else
                 {
                     print("Staff true? " + !staff);
-
+                    
                     AssignAvatar.bodyIndex--;
+                    if(avatarGender == "male" && AssignAvatar.bodyIndex == 2)
+                    {
+                        AssignAvatar.bodyIndex--;
+                    } else if(avatarGender == "female" && AssignAvatar.bodyIndex == 1)
+                    {
+                        AssignAvatar.bodyIndex--;
+                    }
 
                     bodyPreviousBttn.interactable = true;
                     bodyNextBttn.interactable = true;
@@ -230,6 +241,14 @@ public class SelectAvatar : MonoBehaviour
                 }
                 else
                 {
+                    if(avatarGender == "male" && AssignAvatar.bodyIndex == 2)
+                    {
+                        AssignAvatar.bodyIndex++;
+                    } else if(avatarGender == "female" && AssignAvatar.bodyIndex == 1)
+                    {
+                        //Shouldn't ever reach this case
+                        AssignAvatar.bodyIndex++;
+                    }
                     bodyPreviousBttn.interactable = true;
                     bodyNextBttn.interactable = true;
                 }

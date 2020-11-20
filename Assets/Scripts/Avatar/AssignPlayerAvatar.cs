@@ -25,6 +25,7 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
 
     [Header("These variables are for customizing characters (later feature)")]
     public AvatarInfo playerAvatarInfo;
+    public string profilePicLink = "";
 
     /*
     public List<Hats> hats;
@@ -60,8 +61,22 @@ public class AssignPlayerAvatar : MonoBehaviourPunCallbacks
     }
 
     private void Start() {
+        string profilePic = PlayerPrefs.GetString("ProfilePic", "");
         playerAvatarInfo = defaultPrefab.GetComponent<AvatarInfo>();
         Debug.Log(instance.name);
+        if(profilePicLink != "")
+        {
+            Debug.Log("Profile pic exists as: " + profilePicLink);
+            if(profilePic == "")
+            {
+                profilePicLink = profilePic;
+                Debug.Log("Profile pic is now: " + profilePic);
+                //load image from local or download from online
+            }
+        } else 
+        {
+            Debug.Log("There is no profile picture set");
+        }
         //catch all if an avatar never loads
         //InvokeRepeating("RefreshAvatarList", 5.0f, 10.0f);
     }

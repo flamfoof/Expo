@@ -24,7 +24,7 @@ public class TempCheckPassword : MonoBehaviour
         if(passwordInput.text == password1 || passwordInput.text == password2)
         {
             SessionHandler.instance.passAdress = passwordInput.text;
-            selAvatar.staff = true;
+            //selAvatar.staff = true;
             UIControls.characterSelect.SetActive(true);
             UIControls.roleSelect.SetActive(false);
         }

@@ -13,6 +13,7 @@ public class UIAudioBehavior : MonoBehaviour
     private IDissonancePlayer _player;
     private VoicePlayerState _state;
     private float _intensity;
+    public float voiceSensitivity = 0.01f;
 
     DissonanceComms dissonanceComms;
 
@@ -51,9 +52,10 @@ public class UIAudioBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Speaking state: " + _state.Amplitude);
         if(_state != null)
         {
-            if(_state.IsSpeaking)
+            if(_state.IsSpeaking && _state.Amplitude >= voiceSensitivity)
                 GetComponent<Image>().enabled = true;
         } else {
             GetComponent<Image>().enabled = false;

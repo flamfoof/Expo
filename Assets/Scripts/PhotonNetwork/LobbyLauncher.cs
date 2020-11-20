@@ -212,6 +212,7 @@ public class LobbyLauncher : MonoBehaviourPunCallbacks
         hash.Add("AvatarHeadIndex", playerInfo.GetComponent<AssignPlayerAvatar>().headIndex);
         hash.Add("AvatarBodyIndex", playerInfo.GetComponent<AssignPlayerAvatar>().bodyIndex);
         hash.Add("AvatarGender", playerInfo.GetComponent<AssignPlayerAvatar>().Gender);
+        hash.Add("ProfilePicLink", playerInfo.GetComponent<AssignPlayerAvatar>().profilePicLink);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 }

@@ -58,10 +58,15 @@ public class APIHandler : MonoBehaviour
     public async Task Access(string accessEmail, string accessDate, string sessionStart, string sessionEnd)
     {
         List<IMultipartFormSection> FormData = new List<IMultipartFormSection>();
-        FormData.Add(new MultipartFormDataSection("access_email", accessEmail));
-        FormData.Add(new MultipartFormDataSection("access_date", accessDate));
-        FormData.Add(new MultipartFormDataSection("access_horainicio", sessionStart));
-        FormData.Add(new MultipartFormDataSection("access_horafin", sessionEnd));
+
+        AccessInsert accessData = new AccessInsert { 
+            access_email = accessEmail,
+            access_date = accessDate,
+            access_horainicio = sessionStart,
+            access_horafin = sessionEnd
+        };
+
+        byte[] rawJson = Encoding.UTF8.GetBytes(JsonUtility.ToJson(accessData));
 
         UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/access", FormData);
 
@@ -69,6 +74,7 @@ public class APIHandler : MonoBehaviour
 
         www.SetRequestHeader("Content-Type", "application/json");
         www.SetRequestHeader("Authorization", "Basic '." + Convert.ToBase64String(bytesToEncode));
+        www.uploadHandler = new UploadHandlerRaw(rawJson);
 
         await www.SendWebRequest();
 
@@ -85,17 +91,23 @@ public class APIHandler : MonoBehaviour
     public async Task Actions(string accessEmail, string actionType, string actionData, string actionDate)
     {
         List<IMultipartFormSection> FormData = new List<IMultipartFormSection>();
-        FormData.Add(new MultipartFormDataSection("action_email", accessEmail));
-        FormData.Add(new MultipartFormDataSection("action_type", actionType));
-        FormData.Add(new MultipartFormDataSection("action_data", actionData));
-        FormData.Add(new MultipartFormDataSection("action_data", actionDate));
 
-        UnityWebRequest www = UnityWebRequest.Post("http://weignite.it/api/project/" + projectId + "/action", FormData);
+        ActionInsert actionsData = new ActionInsert {
+            action_email = accessEmail,
+            action_type = actionType,
+            action_data = actionData,
+            action_date = actionDate
+        };
+
+        byte[] rawJson = Encoding.UTF8.GetBytes(JsonUtility.ToJson(actionsData));
+
+        UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/action", FormData);
 
         byte[] bytesToEncode = Encoding.UTF8.GetBytes("project_accesstoken" + ":" + accessToken);
 
         www.SetRequestHeader("Content-Type", "application/json");
         www.SetRequestHeader("Authorization", "Basic '." + Convert.ToBase64String(bytesToEncode));
+        www.uploadHandler = new UploadHandlerRaw(rawJson);
 
         await www.SendWebRequest();
 
@@ -108,4 +120,4 @@ public class APIHandler : MonoBehaviour
             Debug.Log("Action anlytics were synced, data " + www.downloadHandler.text);
         }
     }
-}
+}               

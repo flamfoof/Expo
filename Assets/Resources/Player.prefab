@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1743903104223250}
+  voiceSensitivity: 0.01
 --- !u!1 &1129895495175522
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +643,7 @@ MonoBehaviour:
   realSessionTimer: 0
   handRaise: {fileID: 5722500453887658693}
   mutedIcon: {fileID: 2743261255414411947}
-  IsHandRaised: 0
+  isHandRaised: 0
   objectsInteracted: []
   disableServer: 0
   emoteForce: 20

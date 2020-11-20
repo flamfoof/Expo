@@ -9,6 +9,12 @@ using UnityEngine.Networking;
 public class ImageUploader : MonoBehaviour
 {
     static public ImageUploader share;
+    public Button connectButton;
+    public Button selectFileButton;
+    public Button uploadButton;
+    public Text finishItText;
+    FileStream fileStream;
+
 
     private void Awake()
     {
@@ -42,9 +48,20 @@ public class ImageUploader : MonoBehaviour
         Debug.Log(upload.downloadHandler.text);    // display whether Server got the File
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectFile()
     {
-        
+        fileStream = new FileStream("Path here", FileMode.Open);
+        //upload
+        //set image
+        connectButton.interactable = false;
+        finishItText.gameObject.SetActive(true);
+        uploadButton.interactable = true;
+    }
+
+    public void Upload()
+    {
+        connectButton.interactable = true;
+        finishItText.gameObject.SetActive(false);
+        uploadButton.interactable = false;
     }
 }

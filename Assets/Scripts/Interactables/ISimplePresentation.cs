@@ -26,7 +26,8 @@ public class ISimplePresentation : Interactables, IPunObservable
         {
 
             //NextSlide();
-            GetComponent<PhotonView>().RPC("NextSlide", RpcTarget.AllBuffered);
+            if(SessionHandler.instance.CheckIfPresenter())
+                GetComponent<PhotonView>().RPC("NextSlide", RpcTarget.AllBuffered);
         }
     }
 
@@ -39,6 +40,7 @@ public class ISimplePresentation : Interactables, IPunObservable
         if (currentSlide > slideCount - 1)
         {
             currentSlide = 0;
+            
             foreach (GameObject g in slideWindows)
             {
                 g.GetComponent<SpriteRenderer>().sprite = images[currentSlide];

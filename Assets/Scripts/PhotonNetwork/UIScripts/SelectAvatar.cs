@@ -82,7 +82,8 @@ public class SelectAvatar : MonoBehaviour
 
             }  else if (!staff && AssignAvatar.bodyIndex == 1)
             {
-                AssignAvatar.bodyIndex++;
+                Debug.Log("not staff!");
+                AssignAvatar.bodyIndex = 0;
             }
 
         }
@@ -98,7 +99,12 @@ public class SelectAvatar : MonoBehaviour
     {
         EnableCharHead(AssignAvatar.headIndex);
         EnableCharBody(AssignAvatar.bodyIndex);
-
+        staff = SessionHandler.instance.CheckIfStaff() || SessionHandler.instance.CheckIfPresenter();
+        if(staff)
+        {
+            AssignAvatar.bodyIndex = 2;
+            EnableCharBody(AssignAvatar.bodyIndex);
+        }
         if (AssignAvatar.headIndex == 0)
         {
             headPreviousBttn.interactable = false;
@@ -189,7 +195,7 @@ public class SelectAvatar : MonoBehaviour
                         AssignAvatar.bodyIndex--;
                     } else if(avatarGender == "female" && AssignAvatar.bodyIndex == 1)
                     {
-                        AssignAvatar.bodyIndex++;
+                        AssignAvatar.bodyIndex--;
                     }
 
                     bodyPreviousBttn.interactable = true;

@@ -3346,6 +3346,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_RightToeBase
       objectReference: {fileID: 0}
+    - target: {fileID: 3290791576549789324, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346323851932989076, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546144738012809581, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3576209065667802782, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -3471,6 +3486,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15.008
       objectReference: {fileID: 0}
+    - target: {fileID: 4659307042432759109, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: bodySelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699525323402572669, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4926084980347602317, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -3491,6 +3516,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: male_Neck
       objectReference: {fileID: 0}
+    - target: {fileID: 5168827413884127953, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372531949000489045, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5589670357128003306, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
       propertyPath: m_Name
@@ -3505,6 +3540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: male_LeftFoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996305155778627202, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6135557447297022453, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}
@@ -3525,6 +3565,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: male_RightLeg
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439980645683247333, guid: 432f044a86e36bf4e9c88ee51c92647a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6930239168067009968, guid: 432f044a86e36bf4e9c88ee51c92647a,
         type: 3}

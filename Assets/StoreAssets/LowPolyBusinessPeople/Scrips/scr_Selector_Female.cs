@@ -53,6 +53,11 @@ public class scr_Selector_Female : MonoBehaviour {
 
 
         }*/
+
+        if(SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff())
+        {
+            headSelected = 1;
+        }
         // Decide which type
         pickType(skirtOrPantsSelected);
         //pick a suit

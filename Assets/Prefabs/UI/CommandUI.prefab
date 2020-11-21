@@ -1508,11 +1508,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnChat
       objectReference: {fileID: 0}
-    - target: {fileID: 7505407122540802970, guid: 2d594565999affe41becb2a158ffbde3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8250955658406280032, guid: 2d594565999affe41becb2a158ffbde3,
         type: 3}
       propertyPath: m_Sprite
@@ -2446,11 +2441,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chat
       objectReference: {fileID: 0}
-    - target: {fileID: 340764964144128931, guid: 4feafa44e2f44614c8191f7edf844f5c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1528213678193644477, guid: 4feafa44e2f44614c8191f7edf844f5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2555,11 +2545,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2276578959950132373, guid: 4feafa44e2f44614c8191f7edf844f5c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2276578959950132373, guid: 4feafa44e2f44614c8191f7edf844f5c,
         type: 3}

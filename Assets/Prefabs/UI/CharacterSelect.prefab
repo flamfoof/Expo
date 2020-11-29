@@ -968,6 +968,7 @@ MonoBehaviour:
   headPreviousBttn: {fileID: 7216443182930759821}
   headNextBttn: {fileID: 7216443183948516113}
   AssignAvatar: {fileID: 0}
+  staff: 0
   maleCharacteristics: {fileID: 4761749152603454807}
   femaleCharacteristics: {fileID: 4763376853147508389}
 --- !u!1 &4219094330113065826

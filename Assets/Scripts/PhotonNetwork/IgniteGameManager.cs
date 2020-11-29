@@ -28,6 +28,13 @@ public class IgniteGameManager : MonoBehaviourPunCallbacks
     public GameObject handStateObj;
     public GameObject mutedStateObj;
 
+    public string serverProfileURL = "https://www.weignite.it/profile/images/uploaded_images/";
+
+    void Awake()
+    {
+        localPlayer = this.gameObject;
+    }
+
     void Start()
     {
         playerList = new List<PhotonView>();

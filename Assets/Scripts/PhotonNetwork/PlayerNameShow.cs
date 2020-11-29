@@ -5,6 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Voice.PUN;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using Photon.Realtime;
 
 public class PlayerNameShow : MonoBehaviourPunCallbacks
@@ -18,6 +19,8 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     public bool infoUIEnabled;
     public Image speakerImage;
     public Image recorderImage;
+    public RawImage profilePic;
+    public bool startedRetrievingPic = false;
     int actorNumber; 
 
     // Start is called before the first frame update
@@ -67,6 +70,7 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
         infoUIEnabled = true;
         playerName.SetActive(false);
         playerOrganization.SetActive(false);
+        DisplayProfileImage();
     }
 
     //public void DisablePlayerButtonInfoUI()
@@ -80,7 +84,7 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     //stephen code
     public IEnumerator IEDisablePlayerButtonInfoUI()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(8.0f);
 
         infoUI.SetActive(false);
         infoUIEnabled = false;
@@ -89,8 +93,41 @@ public class PlayerNameShow : MonoBehaviourPunCallbacks
     }
 
     public void DisablePlayerButtonInfoUI()
-    {
+    {        
         StartCoroutine(IEDisablePlayerButtonInfoUI());
     }
     //stephen code end
+
+    public void DisplayProfileImage()
+    {
+        if(!startedRetrievingPic)
+        {
+            startedRetrievingPic = true;
+            Debug.Log("Starting to diplay profile");
+            StartCoroutine(RetrieveProfilePic());
+        }        
+    }
+
+    IEnumerator RetrieveProfilePic()
+    {
+        Debug.Log("Started www for profile");
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(IgniteGameManager.IgniteInstance.serverProfileURL + 
+                                                                playerName.GetComponent<TextMesh>().text + 
+                                                                ".jpg");
+        Debug.Log(IgniteGameManager.IgniteInstance.serverProfileURL + 
+                                                                playerName.GetComponent<TextMesh>().text + 
+                                                                ".jpg");
+
+        yield return www.SendWebRequest();
+
+        if(www.isNetworkError || www.isHttpError) {
+            Debug.Log(www.error);
+            startedRetrievingPic = false;
+        }
+        else {
+            Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            profilePic.texture = myTexture;
+        }
+
+    }
 }

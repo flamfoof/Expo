@@ -12,7 +12,7 @@ public class ISimpleLink : Interactables
     
     public override void Perform(InputActionPhase phase)
     {
-        print("**PHASE " +phase);
+        //print("**PHASE " +phase);
         if(phase == InputActionPhase.Started)
         {
             TimesUsed++;
@@ -25,7 +25,7 @@ public class ISimpleLink : Interactables
                 {
                     BBBAnalytics.instance.ClickedWeb(linkURL);
                 }
-
+                Debug.Log("Opening link");
                 //Application.OpenURL(linkURL);
                 #if UNITY_EDITOR
                 Application.OpenURL(linkURL);

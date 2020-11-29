@@ -6,7 +6,7 @@ public class CommandMuteAll : CommandButton
 {
     public bool isTransmitting = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
         if(!admin)

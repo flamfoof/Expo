@@ -7,7 +7,7 @@ public class CommandHand : CommandButton
 {
     UserActions player;
 
-    public void Start()
+    public void OnEnable()
     {
         player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
     }

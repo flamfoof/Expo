@@ -157,7 +157,13 @@ public class BBBAnalytics : MonoBehaviour
     
     public void ClickedWeb(string url)
     {
-        clickedWebLinks.Add(GetCurrentDate() + " " + GetCurrentTime(), url);
+        try{
+            clickedWebLinks.Add(GetCurrentDate() + " " + GetCurrentTime(), url);
+        } catch(Exception e)
+        {
+            Debug.Log(e);
+        }
+        
     }
 
     public void AverageSessionLength()

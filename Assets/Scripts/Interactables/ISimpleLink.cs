@@ -29,8 +29,10 @@ public class ISimpleLink : Interactables
                 //Application.OpenURL(linkURL);
                 #if UNITY_EDITOR
                 Application.OpenURL(linkURL);
-                #else //maybe else if for webgl
+                #elif UNITY_WEBGL //maybe else if for webgl
                 openWindow(linkURL);
+                #else 
+                Application.OpenURL(linkURL);
                 #endif
 
             } else 

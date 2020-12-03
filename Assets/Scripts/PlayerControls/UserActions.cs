@@ -492,6 +492,23 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public void OpenPrivateMessagePanel(bool toggle)
+    {
+        if (toggle)
+        {
+            UpdateControlLock(false, false);
+            StartCoroutine(UnfocusApplicationCursor());
+            OpenCommandRing(false);
+        }
+        else
+        {
+            UpdateControlLock(true, true);
+            StartCoroutine(RefocusApplicationCursor());
+        }
+
+        ChatMasenger.Instance.OnMainChatBtnClick();
+    }
+
     public void OpenChat(bool toggle)
     {
         if (toggle)

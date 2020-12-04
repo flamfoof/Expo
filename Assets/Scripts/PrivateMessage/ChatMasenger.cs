@@ -48,6 +48,10 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
 
     [HideInInspector] public GameObject currentScreen;
 
+    [Header("Audio")]
+
+    public AudioSource MsgNotification;
+
     public void Awake()
     {
         if(Instance==null)
@@ -95,12 +99,13 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
 
     public void OnClickSend()
     {
-        if (this.messageToSend != null)
+        if (this.messageToSend.text != "")
         {
             chatClient.SendPrivateMessage(ReciverPlayer.text, messageToSend.text);
             this.messageToSend.text = "";
         }
     }
+
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
@@ -147,6 +152,7 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         if (!ChatPanel.activeInHierarchy)
         {
             CountFromList();
+            MsgNotification.Play();
         }
 
         txt.transform.localScale = Vector3.one;
@@ -260,6 +266,10 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         if (chatClient != null)
         {
             chatClient.Service();
+        }
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            OnClickSend();
         }
     }
 

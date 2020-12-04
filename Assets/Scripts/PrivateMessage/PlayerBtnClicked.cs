@@ -20,6 +20,7 @@ public class PlayerBtnClicked : MonoBehaviour
         ChatMasenger.Instance.PrivateChatPanel.SetActive(true);
         CurrentPlayerScreen = ChatMasenger.Instance.currentScreen = MsgScreensParent.transform.Find(playerName).gameObject;
         GetChildWithName(CurrentPlayerScreen, playerName);
+        ChatMasenger.Instance.messageToSend.Select();
     }
     public void GetChildWithName(GameObject currentPlayerScreen, string playerName)
     {

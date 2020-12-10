@@ -34,6 +34,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
     public bool isAppFocused = true;
     public bool isMenuOpen = false;
     public bool isChatOpen = false;
+    public bool isPrivateChatOpen = false;
     public bool isMobile = false;
     public float chatFadeTimer = 3.0f;
     public bool isChatFading = false;
@@ -274,6 +275,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Interact(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        LEFT CLICK
+        */
         switch (ctx.phase)
         {
             
@@ -303,7 +307,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
                     }*/
                     if (!playerActionRay.UseInteractable(ctx.phase) && !isChatOpen)
                     {
-                        if (!isCommandUIOpen)
+                        if (!isCommandUIOpen )
                         {
                             if (selectedPlayer)
                             {
@@ -337,6 +341,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void SecondaryButton(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        RIGHT CLICK
+        */
         if (isMenuOpen)
         {
             return;
@@ -359,6 +366,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void SprintButton(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        SHIFT
+        */
         switch (ctx.phase)
         {
             case InputActionPhase.Performed:
@@ -376,6 +386,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void MenuButton(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        ESC
+        TAB
+        */
         switch (ctx.phase)
         {
             case InputActionPhase.Performed:
@@ -392,6 +406,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ChatButton(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        ENTER
+        */
         switch (ctx.phase)
         {
             case InputActionPhase.Performed:
@@ -399,6 +416,10 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
             case InputActionPhase.Started:
                 OpenChat(!isChatOpen);
+                if(isPrivateChatOpen)
+                {
+                    ChatMasenger.Instance.OnClickSend();
+                } 
                 break;
 
             case InputActionPhase.Canceled:
@@ -409,6 +430,9 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TeleportButton(InputAction.CallbackContext ctx)
     {
+        /* INPUTS
+        UNDECIDED
+        */
         switch (ctx.phase)
         {
             case InputActionPhase.Performed:
@@ -429,8 +453,15 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OpenCommandRing(bool toggle)
     {
-        if(isMobile)
+        /* INPUTS
+        LEFT CLICK ON EMPTY SPACE
+        */
+        
+        if(isMobile || Cursor.lockState == CursorLockMode.None)
+        {
             return;
+        }
+            
 
         if (toggle)
         {
@@ -489,28 +520,42 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             rtc.webRTC.messageField.text = "";
             OpenChat(false);
         }
+        if (isPrivateChatOpen)
+        {
+            OpenPrivateMessagePanel(false);
+        }
 
     }
 
     public void OpenPrivateMessagePanel(bool toggle)
     {
+        Debug.Log("private opened");
         if (toggle)
         {
             UpdateControlLock(false, false);
             StartCoroutine(UnfocusApplicationCursor());
+            isPrivateChatOpen = true;
             OpenCommandRing(false);
         }
         else
         {
             UpdateControlLock(true, true);
             StartCoroutine(RefocusApplicationCursor());
+            isPrivateChatOpen = false;
+            OpenCommandRing(false);
         }
 
-        ChatMasenger.Instance.OnMainChatBtnClick();
+        ChatMasenger.Instance.OnMainChatBtnClick(toggle);
     }
 
     public void OpenChat(bool toggle)
     {
+        if(isPrivateChatOpen)
+        {
+            Debug.Log("Private chat is opened, can't open general chat");
+            return;
+        }
+
         if (toggle)
         {
             UpdateControlLock(false, true);
@@ -550,7 +595,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //You can rename these functions or type as you wish
+
     public void TeleportIndicator()
     {
         //Transform the Player to the Raycast Position
@@ -559,6 +604,7 @@ public class UserActions : MonoBehaviourPunCallbacks, IPunObservable
             this.transform.localPosition = playerActionRay.floorfocusedObject.transform.localPosition;
         }
     }
+
     public void Teleport()
     {
 

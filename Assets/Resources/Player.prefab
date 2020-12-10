@@ -623,6 +623,7 @@ MonoBehaviour:
   isAppFocused: 1
   isMenuOpen: 0
   isChatOpen: 0
+  isPrivateChatOpen: 0
   isMobile: 0
   chatFadeTimer: 5
   isChatFading: 0

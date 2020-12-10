@@ -10,6 +10,11 @@ public class CommandButton : MonoBehaviour
 
     }
 
+    public virtual void Click(bool setToggle)
+    {
+
+    }
+
     public virtual void Hover()
     {
         GetComponent<Button>().Select();

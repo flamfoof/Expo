@@ -105,6 +105,7 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         {
             chatClient.SendPrivateMessage(ReciverPlayer.text, messageToSend.text);
             this.messageToSend.text = "";
+            messageToSend.ActivateInputField();
         }
     }
 
@@ -222,18 +223,18 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         }
     }
 
-    public void OnMainChatBtnClick()
+    public void OnMainChatBtnClick(bool toggle)
     {
-        if (ChatPanel.activeInHierarchy)
+        if (toggle)
+        {
+            MainChatBtnImg.gameObject.SetActive(false);
+            ChatPanel.SetActive(true);
+        }
+        else
         {
             ChatPanel.SetActive(false);
             PrivateChatPanel.SetActive(false);
             CountFromList();
-        }
-        else
-        {
-            MainChatBtnImg.gameObject.SetActive(false);
-            ChatPanel.SetActive(true);
         }
     }
 

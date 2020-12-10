@@ -31,11 +31,17 @@ public class PhotonTextComms : MonoBehaviour, IChatClientListener
 
 	public GameObject parentComms;
 
+	public static GameObject photonTextComms;
+
 	bool isChatFading = false;
 	public float chatFadeTimer = 3.0f;
 
 	public void Start()
 	{
+		if(photonTextComms == null)
+		{
+			photonTextComms = this.gameObject;
+		}
 		parentComms = transform.parent.gameObject;
 		Invoke("GrabUIEffects", 0.05f);
 		DontDestroyOnLoad(this.gameObject);

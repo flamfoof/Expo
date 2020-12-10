@@ -14,7 +14,7 @@ public class ChatInteractableToggle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(canvasGroup.alpha < 5.0f)
+        if(canvasGroup.alpha < .5f)
         {
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;

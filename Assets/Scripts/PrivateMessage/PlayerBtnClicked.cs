@@ -10,7 +10,10 @@ public class PlayerBtnClicked : MonoBehaviour
     public GameObject MsgScreensParent;
     public Text PlayerBtnCountText;
     public Image PlayerBtnCountImage;
-
+    private void Start()
+    {
+        MsgScreensParent = ChatMasenger.Instance.ButonContent;
+    }
     public void OnPlayerBtnClick()
     {
         this.PlayerBtnCountText.text = 0.ToString();

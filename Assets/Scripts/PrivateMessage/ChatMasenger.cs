@@ -40,6 +40,8 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
 
     public Text PlayerMsgPrefab;
     public GameObject PlayerPrefab;
+    public Transform BtnContent;
+    public GameObject ButonContent;
 
     [Header("Lists")]
 
@@ -106,6 +108,15 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         }
     }
 
+    public void SendDirectMsg(string name)
+    {
+        ReciverPlayer.text = name;
+        ChatPanel.SetActive(true);
+        PrivateChatPanel.SetActive(true);
+        currentScreen = MsgScreen.transform.Find(name).gameObject;
+        GetChildWithName(currentScreen, name);
+        messageToSend.Select();
+    }
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
@@ -136,16 +147,29 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         {
             if (sender == PlayersNamesList[i])
             {
-                int num = 0;
-                num = int.Parse(PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountText.text);
-                num++;
-                PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountText.text = num.ToString();
-                if (num > 0)
+                if (sender == PlayersNamesList[i])
                 {
-                    PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountImage.gameObject.SetActive(true);
+                    if (currentScreen == null)
+                    {
+                        currentScreen = MsgScreen.transform.GetChild(0).gameObject;
+                    }
+                    if (sender == currentScreen.name && currentScreen.activeInHierarchy)
+                    {
+                        Debug.Log("Don't Send Notification");
+                    }
+                    else
+                    {
+                        int num = 0;
+                        num = int.Parse(PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountText.text);
+                        num++;
+                        PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountText.text = num.ToString();
+                        if (num > 0)
+                        {
+                            PlayersBtnList[i].GetComponent<PlayerBtnClicked>().PlayerBtnCountImage.gameObject.SetActive(true);
+                        }
+                        num = 0;
+                    }
                 }
-                num = 0;
-                //Destroy(PlayerBtnClicked.instance.MsgScreensParent.transform.Find(user));
             }
         }
 
@@ -182,8 +206,8 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
             {
                 if (UserName != item)
                 {
-                    GameObject Playerbtn = (GameObject)Instantiate(this.PlayerPrefab);
-                    Playerbtn.transform.SetParent(this.PlayerPrefab.transform.parent, false);
+                    GameObject Playerbtn = Instantiate(this.PlayerPrefab);
+                    Playerbtn.transform.SetParent(BtnContent, false);
                     Playerbtn.GetComponent<PlayerBtnClicked>().playerName = item.ToString();
                     Playerbtn.GetComponentInChildren<Text>().text = item.ToString();
                     PlayersBtnList.Add(Playerbtn);
@@ -249,7 +273,7 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
         if (found)
         {
             GameObject Playerbtn = (GameObject)Instantiate(this.PlayerPrefab);
-            Playerbtn.transform.SetParent(this.PlayerPrefab.transform.parent, false);
+            Playerbtn.transform.SetParent(BtnContent, false);
             Playerbtn.gameObject.transform.GetChild(0).GetComponent<Text>().text = user.ToString();
             Playerbtn.SetActive(true);
             PlayersBtnList.Add(Playerbtn);
@@ -285,6 +309,7 @@ public class ChatMasenger : MonoBehaviour, IChatClientListener
                 GameObject BtnToDestroy = PlayersBtnList[i];
                 PlayersBtnList.RemoveAt(i);
                 Destroy(BtnToDestroy);
+                Destroy(MsgScreen.transform.Find(user).gameObject);
             }
         }
     }

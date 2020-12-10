@@ -44,23 +44,26 @@ public class ISimpleLiveStream : Interactables, IPunObservable
         if (liveStream && !liveStream.isInitialized)
         {
             ConnectStream();
+            SetStatusText("");
         }
         else if (liveStream.networkEvent.Type == NetEventType.Disconnected && !liveStream.retryingConnection)
         {
             liveStream.retryingConnection = true;
             ConnectStream();
+            SetStatusText("Connecting to presenter please wait...");
         }
         else if (liveStream.networkEvent.Type == NetEventType.ConnectionFailed && !liveStream.retryingConnection)
         {
             liveStream.retryingConnection = true;
             ConnectStream();
+            SetStatusText("Connecting to presenter please wait...");
         }
     }
 
     void ConnectStream()
     {
         liveStream.StartStream();
-        SetStatusText("Connecting to presenter please wait...");
+        
     }
 
     public void DisableObjects(bool status)

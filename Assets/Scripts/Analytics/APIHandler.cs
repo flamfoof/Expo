@@ -14,6 +14,8 @@ public class APIHandler : MonoBehaviour
     [SerializeField]
     private LoginResponse loginResponse = new LoginResponse();
 
+    [SerializeField]
+    private AuthenticateUser authenticaitonResponse = new AuthenticateUser();
 
     async void Start()
     {
@@ -51,6 +53,61 @@ public class APIHandler : MonoBehaviour
             else
             {
                 return string.Empty;
+            }
+        }
+    }
+
+    public async Task<string> AuthenticateUser(string email , string password)
+    {
+        List<IMultipartFormSection> FormData = new List<IMultipartFormSection>();
+
+        AuthenticateInsert authenticateData = new AuthenticateInsert
+        {
+            user_email = email,
+            user_password = Convert.ToBase64String(Encoding.UTF8.GetBytes(password)),
+        };
+
+        byte[] rawJson = Encoding.UTF8.GetBytes(JsonUtility.ToJson(authenticateData));
+
+        UnityWebRequest www = UnityWebRequest.Post("https://weignite.it/api/project/" + projectId + "/login/user", FormData);
+
+        byte[] bytesToEncode = Encoding.UTF8.GetBytes("project_secretkey" + ":" + secretKey);
+
+        www.SetRequestHeader("Content-Type", "application/json");
+        www.SetRequestHeader("Authorization", "Basic '." + Convert.ToBase64String(bytesToEncode));
+        www.uploadHandler = new UploadHandlerRaw(rawJson);
+
+        await www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError("Authentication Error : " + www.error);
+            return null;
+        }
+        else
+        {
+            authenticaitonResponse = JsonUtility.FromJson<AuthenticateUser>(www.downloadHandler.text);
+
+            if (authenticaitonResponse.status == 200)
+            {
+                Debug.Log("Authentication Success");
+                return "Logged in Successfully";
+            }
+            else
+            {
+                switch (authenticaitonResponse.code)
+                {
+                    case "abc166":
+                        Debug.Log("No User Found");
+                        return "No User Found";
+
+                    case "abc181":
+                        Debug.Log("Incorrect Password");
+                        return "Incorrect Password";
+
+                    default:
+                        return "Please check your connection";
+                }
             }
         }
     }

@@ -25,10 +25,45 @@ public class AccessInsert
 }
 
 [Serializable]
+public class AuthenticateInsert
+{
+    public string user_email;
+    public string user_password;
+}
+
+[Serializable]
 public class ActionInsert
 {
     public string action_email;
     public string action_type;
     public string action_data;
     public string action_date;
+}
+
+/// <summary>
+//    User Authentication
+/// </summary>
+
+[Serializable]
+public class User
+{
+    public string FirstName;
+    public string LastName;
+    public string image;
+    public string email;
+}
+
+[Serializable]
+public class Messages
+{
+    public string userStatus;
+    public User user; 
+    }
+
+[Serializable]
+public class AuthenticateUser
+{
+    public int status;
+    public string code;
+    public Messages messages;
 }

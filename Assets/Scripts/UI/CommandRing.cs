@@ -192,7 +192,7 @@ public class CommandRing : MonoBehaviour
     public void RaiseHand()
     {
         //print(player.handRaise.name);
-        print("HAND RAISE");
+        print("HAND RAISE: " + player.isHandRaised);
         if(player.isHandRaised)
         {
             player.isHandRaised = false;

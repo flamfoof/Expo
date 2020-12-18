@@ -624,7 +624,7 @@ MonoBehaviour:
   canAttach: 0
   objectsToDisable:
   - {fileID: 7415551746384392255}
-  Text: {fileID: 0}
+  Text: {fileID: 1873132544687047736}
 --- !u!65 &7417345763635024524
 BoxCollider:
   m_ObjectHideFlags: 0

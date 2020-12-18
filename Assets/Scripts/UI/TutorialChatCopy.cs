@@ -27,15 +27,21 @@ public class TutorialChatCopy : MonoBehaviour
         {
             Destroy(chatInstance);
         }
+
         chatInstance = Instantiate(chatView);
         chatInstance.transform.SetParent(this.transform);
-        chatInstance.GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
+        SetDefaultCanvas();
         chatInstance.transform.localScale = new Vector3(scale, scale, scale);
         chatInstance.transform.localRotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+                
+        Invoke("SetChatToBottom", 0.05f);
+    }
+
+    private void SetDefaultCanvas()
+    {
+        chatInstance.GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
         chatInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasX, canvasY);
         chatInstance.GetComponent<CanvasGroup>().alpha = 1.0f;
-        
-        Invoke("SetChatToBottom", 0.05f);
     }
 
     void SetChatToBottom()

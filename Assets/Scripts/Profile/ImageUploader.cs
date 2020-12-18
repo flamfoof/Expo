@@ -49,8 +49,6 @@ public class ImageUploader : MonoBehaviour
             Debug.Log(upload.error);
         else
             Debug.Log("Uploaded Successfully");
-
-        Debug.Log(upload.downloadHandler.text);    // display whether Server got the File
     }
 
     public void UploadImage()
@@ -128,8 +126,6 @@ public class ImageUploader : MonoBehaviour
     public void SelectFile()
     {
         fileStream = new FileStream("Path here", FileMode.Open);
-        //upload
-        //set image
         connectButton.interactable = false;
         finishItText.gameObject.SetActive(true);
         uploadButton.interactable = true;

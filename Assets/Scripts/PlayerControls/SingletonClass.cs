@@ -44,13 +44,13 @@ namespace WeIgnite
         {
             if (Instance == null)
             {
-                Debug.Log(instanceName + " Instance Missing. Creating new Instance of " + instanceName + ".");
+                //Debug.Log(instanceName + " Instance Missing. Creating new Instance of " + instanceName + ".");
                 instance = this as T;
-                Debug.Log(instanceName + " Instance created successfully!:).");
+                //Debug.Log(instanceName + " Instance created successfully!:).");
             }
             else if (Instance != this)
             {
-                Debug.Log(instanceName + " already exists!...");
+                //Debug.Log(instanceName + " already exists!...");
                 if (this.gameObject)
                     Destroy(this.gameObject);
                 return;

@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/* Class for standard image effects
+Fade in/out for UI
+Fade repeatedly for in/out
+*/
+
 public class UIEffectsUtils : MonoBehaviour
 {
     public static UIEffectsUtils instance;

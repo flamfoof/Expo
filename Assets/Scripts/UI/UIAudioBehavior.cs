@@ -19,14 +19,8 @@ public class UIAudioBehavior : MonoBehaviour
 
     void Start()
     {
-        if(!player.GetComponent<PhotonView>().IsMine)
-        {
-            //gameObject.SetActive(false);
-        }
-
        dissonanceComms = GameObject.FindObjectOfType<DissonanceComms>();
 
-       //_state = dissonanceComms.FindPlayer(dissonanceComms.LocalPlayerName);
        _player = player.GetComponent<IDissonancePlayer>();
 
        StartCoroutine(FindPlayerState());

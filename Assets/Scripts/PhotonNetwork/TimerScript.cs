@@ -14,6 +14,7 @@ namespace WeIgnite
         {
             StartTimer();
         }
+
         void Update()
         {
             if (canStart)
@@ -23,11 +24,13 @@ namespace WeIgnite
                 string min = ((int)(timeSpent % 3600) / 60).ToString("00");
                 string sec = (timeSpent % 60).ToString("00");
             }
-        }// END OF UPDATE FUNCTION
+        }
+
         public void StartTimer()
         {
             canStart = true;
         }
+        
         public void StopTimer()
         {
             canStart = false;

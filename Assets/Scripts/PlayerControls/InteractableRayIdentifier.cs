@@ -41,6 +41,7 @@ public class InteractableRayIdentifier : MonoBehaviour
         //Get the player Mask
         LayerMask playerMask = LayerMask.GetMask("Player");
         LayerMask floorMask = LayerMask.GetMask("Floor");
+
         // Does the ray intersect any objects excluding the player layer
         // The draw rays are more for VR if we get that set up
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
@@ -80,24 +81,23 @@ public class InteractableRayIdentifier : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             floorfocusedObject = hit.collider.gameObject;
-            //Stephen
+
             if (playerfocusedObject != null)
             {
                 playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
             }
-            //stephen end
+
             canvas.alpha = 1;
         }
         else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.white);
             focusedObject = null;
 
-            //Stephen
             if (playerfocusedObject != null)
             {
                 playerfocusedObject.GetComponent<UserActions>().infoPopup.GetComponent<PlayerNameShow>().DisablePlayerButtonInfoUI();
             }
-            //stephen end
+
 
             playerfocusedObject = null;
             floorfocusedObject = null;
@@ -111,12 +111,18 @@ public class InteractableRayIdentifier : MonoBehaviour
 
             //Debug.Log("Did not Hit");
         }
-        /*
-        //hits = Physics.RaycastAll(transform.position, transform.forward, 100.0f);
+
+        //DebugSelectedTarget();
+    
+    }
+
+    public void DebugSelectedTarget()
+    {
+        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0f);
         if (hits.Length > 0)
         {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            //Debug.Log("Did Hit: " + hit.collider.name);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit: " + hit.collider.name);
             //focusedObject = hits[0].collider.gameObject;
             
             for(int i = 0; i < hits.Length; i++)
@@ -126,9 +132,8 @@ public class InteractableRayIdentifier : MonoBehaviour
         } else {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             focusedObject = null;
-            //Debug.Log("Did not Hit");
-        }*/
-    
+            Debug.Log("Did not Hit");
+        }
     }
 
     public bool UseInteractable(InputActionPhase phase)

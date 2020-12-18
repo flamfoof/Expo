@@ -15,6 +15,4 @@ public class CommandPrivateChat : CommandButton
         toggle = setToggle;
         IgniteGameManager.localPlayer.GetComponent<UserActions>().OpenPrivateMessagePanel(setToggle);
     }
-
-
 }

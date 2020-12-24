@@ -7,8 +7,10 @@ public class ISimpleLink : Interactables
     public string linkURL;
     public bool isSlide = false;
     public bool canClick = true;
+#if !UNITY_ANDROID && !UNITY_IOS
     [DllImport("__Internal")]
 	private static extern void openWindow(string url);
+#endif
     
     public override void Perform(InputActionPhase phase)
     {
@@ -27,13 +29,13 @@ public class ISimpleLink : Interactables
                 }
                 Debug.Log("Opening link");
                 //Application.OpenURL(linkURL);
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 Application.OpenURL(linkURL);
-                #elif UNITY_WEBGL //maybe else if for webgl
+#elif UNITY_WEBGL //maybe else if for webgl
                 openWindow(linkURL);
-                #else 
+#else 
                 Application.OpenURL(linkURL);
-                #endif
+#endif
 
             } else 
             {

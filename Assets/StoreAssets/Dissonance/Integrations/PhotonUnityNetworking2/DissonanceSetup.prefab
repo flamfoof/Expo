@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 420108}
   - component: {fileID: 11495240}
   - component: {fileID: 11480852}
-  - component: {fileID: 7120879581999896439}
   m_Layer: 0
   m_Name: DissonanceSetup
   m_TagString: Untagged
@@ -50,8 +49,7 @@ MonoBehaviour:
   _isDeafened: 0
   _oneMinusBaseRemoteVoiceVolume: 0
   _playbackPrefab: {fileID: 0}
-  _playbackPrefab2: {fileID: 1000010352696724, guid: 41bbbf1a8ee37a3479d8c133579965e3,
-    type: 3}
+  _playbackPrefab2: {fileID: 0}
   _micName: 
   _playerPriority: 0
   _tokens:
@@ -71,15 +69,3 @@ MonoBehaviour:
   EventCodeToServer: 173
   EventCodeToClient: 174
   SerializationCode: 231
---- !u!114 &7120879581999896439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d5377c4697c82448826a0b8b6af1192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

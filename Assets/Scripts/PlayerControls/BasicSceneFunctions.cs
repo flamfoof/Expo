@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 public class BasicSceneFunctions : MonoBehaviour
 {
     public AudioMixer mixer;
+    public string mixerGroupName = "masterVol";
     
     public void ChangeScene(string scene)
     {
@@ -33,9 +34,9 @@ public class BasicSceneFunctions : MonoBehaviour
         });
         
     }
-
+    
     public void SetLevel(float sliderValue) {
-        mixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(mixer.SetFloat(mixerGroupName, Mathf.Log10(sliderValue) * 20));
     }
 
 }

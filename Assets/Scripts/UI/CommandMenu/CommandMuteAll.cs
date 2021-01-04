@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CommandMuteAll : CommandButton
 {
@@ -8,11 +9,14 @@ public class CommandMuteAll : CommandButton
 
     private void OnEnable()
     {
-        bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
-        if(!admin)
+        if(PhotonNetwork.IsConnected)
         {
-            Debug.Log("Not a " + SessionHandler.instance.CheckIfPresenter() + " or a " + SessionHandler.instance.CheckIfStaff());
-            gameObject.SetActive(false);
+            bool admin = SessionHandler.instance.CheckIfPresenter() || SessionHandler.instance.CheckIfStaff() ? true : false;
+            if(!admin)
+            {
+                Debug.Log("Not a " + SessionHandler.instance.CheckIfPresenter() + " or a " + SessionHandler.instance.CheckIfStaff());
+                gameObject.SetActive(false);
+            }
         }
     }
 

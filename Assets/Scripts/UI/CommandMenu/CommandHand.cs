@@ -5,15 +5,9 @@ using UnityEngine.UI;
 
 public class CommandHand : CommandButton
 {
-    UserActions player;
-
-    public void OnEnable()
-    {
-        player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
-    }
-
     public override void Click()
     {
+        UserActions player = IgniteGameManager.localPlayer.GetComponent<UserActions>();
         //print(player.handRaise.name);
         print("HAND RAISE: " + player.isHandRaised);
         if(player.isHandRaised)
